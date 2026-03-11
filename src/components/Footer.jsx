@@ -777,8 +777,8 @@ export default function Footer() {
                 <ContactCard
                   icon={MapPin}
                   label="Location"
-                  value="India (Remote-first)"
-                  sub="Serving worldwide"
+                  value="
+S.no.50, Madhuban Banglow, Jagdamba Bhawan Marg, opposite Sunshine Hills Lane to Bloom Field School, Shree Siddhivinayak Meera, Undri, Pune, Maharashtra 411060"
                 />
               </div>
             </div>

@@ -66,6 +66,12 @@ const MobileDrawer = ({ mobileOpen, handleNavClick, navLinks }) => {
                 </div>
                 <span className="text-[16px] font-medium font-outfit">+91 1234 567 890</span>
               </a>
+              <a href="https://maps.google.com/?q=Payivva+Technologies+opc+Pvt+Ltd,+Undri,+Pune" target="_blank" rel="noopener noreferrer" className="flex items-center gap-5 text-gray-600 hover:text-[#D4AF37] transition-colors group">
+                <div className="w-11 h-11 rounded-full border border-gray-100 flex items-center justify-center group-hover:bg-[#D4AF37]/5 group-hover:border-[#D4AF37]/20 transition-all">
+                  <MapPin size={20} />
+                </div>
+                <span className="text-[14px] font-medium font-outfit leading-snug">Bungalow No: 50, Hissa No: 1, Ravi Vihar Society, Undri, Pune - 411060</span>
+              </a>
             </div>
 
             <div className="flex gap-5">

@@ -37,9 +37,9 @@ const contactInfo = [
   {
     icon: MapPin,
     label: 'Office',
-    value: 'India',
-    href: 'https://maps.google.com/?q=India',
-    description: 'Remote-first, serving clients worldwide',
+    value: 'Undri, Pune',
+    href: 'https://maps.google.com/?q=Payivva+Technologies+opc+Pvt+Ltd,+Undri,+Pune',
+    description: 'Bungalow No: 50, Hissa No: 1, Ravi Vihar Society, Pune - 411060',
   },
 ];
 
@@ -335,7 +335,7 @@ export default function Contact() {
             }}>
               <iframe
                 title="PAYIVVA Office Location"
-                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15000!2d80.2707!3d13.0827!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1700000000000"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3785.0519093538437!2d73.912077!3d18.435952099999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2eb5e0a802bc7%3A0xfddfe2bb2e402d54!2sPayivva%20Technologies%20opc%20Pvt%20Ltd!5e0!3m2!1sen!2sin!4v1773222845128!5m2!1sen!2sin"
                 width="100%" height="100%"
                 style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg)', display: 'block' }}
                 allowFullScreen loading="lazy"

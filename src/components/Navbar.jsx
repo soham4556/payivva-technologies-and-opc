@@ -120,11 +120,21 @@ export default function Navbar() {
           border-bottom: 1px solid rgba(0,0,0,0.08);
         }
 
+        .mobile-drawer-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(255, 255, 255, 0.85);
+          backdrop-filter: blur(25px) saturate(160%);
+          z-index: 40;
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                      visibility 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-        .mobile-drawer {
-          background: white;
-          border: 1px solid rgba(0,0,0,0.08);
-          box-shadow: 0 20px 60px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,1);
+        .mobile-drawer-overlay.is-open {
+          opacity: 1;
+          visibility: visible;
         }
 
         .nav-link-text {
@@ -135,17 +145,25 @@ export default function Navbar() {
           content: attr(data-text);
           position: absolute;
           inset: 0;
-          background: none; /* Removed gradient */
+          background: none;
           -webkit-background-clip: unset;
           -webkit-text-fill-color: unset;
           background-clip: text;
-          color: #D4AF37; /* Gold for subtle interactive feedback */
+          color: #D4AF37;
           opacity: 0;
           transition: opacity 0.25s ease;
         }
         .nav-link-text.is-active::before,
         a:hover .nav-link-text::before {
           opacity: 1;
+        }
+
+        /* ── Hamburger Icon Animations ── */
+        .hamburger-line {
+          transform-origin: center;
+          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                      opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                      stroke-dashoffset 0.4s ease;
         }
       `}</style>
 
@@ -199,39 +217,34 @@ export default function Navbar() {
 
                 <button
                   onClick={() => setMobileOpen(!mobileOpen)}
-                  className="lg:hidden relative p-2.5 rounded-[10px] transition-all duration-300 focus:outline-none"
-                  style={{
-                    background: mobileOpen
-                      ? "rgba(0,0,0,0.04)"
-                      : "rgba(0,0,0,0.02)",
-                    border: "1px solid rgba(0,0,0,0.08)",
-                    color: mobileOpen ? "#1A1A1A" : "#0A0A0A",
-                  }}
+                  className="lg:hidden relative z-[100] p-2 rounded-xl transition-all duration-300 focus:outline-none"
                   aria-label={mobileOpen ? "Close menu" : "Open menu"}
                   aria-expanded={mobileOpen}
                   aria-controls="mobile-menu"
                 >
-                  <span
-                    style={{
-                      display: "block",
-                      transition: "transform 0.3s, opacity 0.3s",
-                      transform: mobileOpen ? "rotate(90deg)" : "rotate(0deg)",
-                    }}
-                  >
-                    {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-                  </span>
+                  <div className="w-6 h-6 flex flex-col justify-center items-center gap-1.5">
+                    <span 
+                      className={`w-5 h-0.5 bg-black transition-all duration-300 ${mobileOpen ? "rotate-45 translate-y-2 !bg-[#D4AF37]" : ""}`}
+                    />
+                    <span 
+                      className={`w-5 h-0.5 bg-black transition-all duration-300 ${mobileOpen ? "opacity-0" : ""}`}
+                    />
+                    <span 
+                      className={`w-5 h-0.5 bg-black transition-all duration-300 ${mobileOpen ? "-rotate-45 -translate-y-2 !bg-[#D4AF37]" : ""}`}
+                    />
+                  </div>
                 </button>
               </div>
             </div>
           </div>
-
-          <MobileDrawer
-            mobileOpen={mobileOpen}
-            handleNavClick={handleNavClick}
-            navLinks={navLinks}
-          />
         </nav>
       </header>
+
+      <MobileDrawer
+        mobileOpen={mobileOpen}
+        handleNavClick={handleNavClick}
+        navLinks={navLinks}
+      />
     </>
   );
 }

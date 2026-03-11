@@ -8,31 +8,31 @@ const NavLink = ({ to, label, mobile, onClick }) => {
         to={to}
         onClick={onClick}
         className={({ isActive }) =>
-          `flex items-center justify-between px-6 py-3.5 text-[15px] font-medium transition-all duration-250 ${
-            isActive ? "active-mobile-link" : ""
+          `group flex items-center justify-between py-3 text-xl font-medium transition-all duration-300 ${
+            isActive ? "text-[#D4AF37]" : "text-gray-900"
           }`
         }
-        style={({ isActive }) => ({
-          color: isActive ? "#D4AF37" : "#0A0A0A",
-          background: isActive ? "rgba(0,0,0,0.02)" : "transparent",
-          borderLeft: isActive ? "2px solid #D4AF37" : "2px solid transparent",
-          letterSpacing: "0.05em",
-        })}
       >
-        <span
-          className="logo-font text-xs tracking-widest uppercase"
-          style={{ fontFamily: "inherit" }}
-        >
-          {label}
-        </span>
-        {({ isActive }) =>
-          isActive && (
-            <span
-              className="w-2 h-2 rounded-full"
-              style={{ background: "#D4AF37" }}
+        {({ isActive }) => (
+          <>
+            <div className="flex flex-col">
+              <span className="logo-font tracking-[0.05em]">
+                {label}
+              </span>
+              <div 
+                className={`h-px bg-[#D4AF37] transition-all duration-500 ${
+                  isActive ? "w-12 mt-2" : "w-0 mt-2 opacity-0 group-hover:w-8 group-hover:opacity-50"
+                }`}
+              />
+            </div>
+            
+            <div 
+              className={`w-1.5 h-1.5 rounded-full bg-[#D4AF37] transition-all duration-500 transform ${
+                isActive ? "scale-100 opacity-100" : "scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-30"
+              }`}
             />
-          )
-        }
+          </>
+        )}
       </RouterNavLink>
     );
   }

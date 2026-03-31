@@ -168,16 +168,16 @@ function IconBox({ hovered, size, iconSize }) {
         height: `${size}px`,
         flexShrink: 0,
         borderRadius: "14px",
-        background: hovered ? "rgba(212,175,55,.15)" : "rgba(212,175,55,.07)",
-        border: "1px solid rgba(212,175,55,.25)",
+        background: hovered ? "rgba(16,185,129,.15)" : "rgba(16,185,129,.07)",
+        border: "1px solid rgba(16,185,129,.25)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         transition: "all .3s ease",
-        boxShadow: hovered ? "0 0 18px rgba(212,175,55,.2)" : "none",
+        boxShadow: hovered ? "0 0 18px rgba(16,185,129,.2)" : "none",
       }}
     >
-      <Briefcase color="#D4AF37" size={iconSize} />
+      <Briefcase color="#10b981" size={iconSize} />
     </div>
   );
 }
@@ -210,14 +210,14 @@ function TitleBadge({ job, fontSize }) {
             alignItems: "center",
             gap: "3px",
             padding: "3px 9px",
-            background: "linear-gradient(135deg,#D4AF37,#F0D060)",
-            color: "#000",
+            background: "linear-gradient(135deg,#10b981,#22d3ee)",
+            color: "#0f172a",
             fontSize: "9px",
             fontWeight: 800,
             borderRadius: "20px",
             letterSpacing: ".5px",
             textTransform: "uppercase",
-            boxShadow: "0 0 10px rgba(212,175,55,.5)",
+            boxShadow: "0 0 10px rgba(16,185,129,.5)",
             whiteSpace: "nowrap",
           }}
         >
@@ -242,15 +242,15 @@ function JobCard({ job, index }) {
       onMouseLeave={() => setHovered(false)}
       style={{
         background: hovered
-          ? "linear-gradient(135deg,rgba(212,175,55,.08),rgba(255,255,255,.03))"
+          ? "linear-gradient(135deg,rgba(16,185,129,.08),rgba(255,255,255,.03))"
           : "linear-gradient(135deg,rgba(255,255,255,.03),rgba(255,255,255,.01))",
-        border: `1px solid ${hovered ? "rgba(212,175,55,.4)" : "rgba(255,255,255,.06)"}`,
+        border: `1px solid ${hovered ? "rgba(16,185,129,.4)" : "rgba(255,255,255,.06)"}`,
         borderRadius: "20px",
         padding: isMobile ? "18px" : "26px",
         transition: "all .4s cubic-bezier(.23,1,.32,1)",
         transform: hovered ? "translateY(-3px)" : "translateY(0)",
         boxShadow: hovered
-          ? "0 20px 60px rgba(212,175,55,.12)"
+          ? "0 20px 60px rgba(16,185,129,.12)"
           : "0 4px 20px rgba(0,0,0,.3)",
         backdropFilter: "blur(10px)",
         position: "relative",
@@ -266,7 +266,7 @@ function JobCard({ job, index }) {
           right: 0,
           height: "1px",
           background: hovered
-            ? "linear-gradient(90deg,transparent,rgba(212,175,55,.8),transparent)"
+            ? "linear-gradient(90deg,transparent,rgba(16,185,129,.8),transparent)"
             : "linear-gradient(90deg,transparent,rgba(255,255,255,.05),transparent)",
           transition: "all .4s ease",
         }}
@@ -328,10 +328,10 @@ function JobCard({ job, index }) {
               style={{
                 fontSize: "11px",
                 padding: "4px 9px",
-                background: "rgba(212,175,55,.08)",
-                border: "1px solid rgba(212,175,55,.2)",
+                background: "rgba(16,185,129,.08)",
+                border: "1px solid rgba(16,185,129,.2)",
                 borderRadius: "8px",
-                color: "rgba(212,175,55,.85)",
+                color: "rgba(16,185,129,.85)",
                 fontWeight: 600,
               }}
             >
@@ -372,9 +372,9 @@ function JobCard({ job, index }) {
                     padding: "4px 11px",
                     fontSize: "11px",
                     borderRadius: "20px",
-                    background: "rgba(212,175,55,.08)",
-                    color: "#D4AF37",
-                    border: "1px solid rgba(212,175,55,.25)",
+                    background: "rgba(16,185,129,.08)",
+                    color: "#10b981",
+                    border: "1px solid rgba(16,185,129,.25)",
                     fontWeight: 600,
                   }}
                 >
@@ -401,7 +401,7 @@ function JobCard({ job, index }) {
                 justifyContent: isMobile ? "center" : "flex-start",
                 gap: "5px",
                 color: expanded
-                  ? "rgba(212,175,55,.85)"
+                  ? "rgba(16,185,129,.85)"
                   : "rgba(255,255,255,.35)",
                 fontSize: "12px",
                 fontWeight: 500,
@@ -437,9 +437,9 @@ function JobCard({ job, index }) {
                 gap: "6px",
                 padding: "9px 18px",
                 background: applyHov
-                  ? "linear-gradient(135deg,#F0D060,#D4AF37)"
-                  : "linear-gradient(135deg,#D4AF37,#BF9520)",
-                color: "#000",
+                  ? "linear-gradient(135deg,#22d3ee,#10b981)"
+                  : "linear-gradient(135deg,#10b981,#047857)",
+                color: "#0f172a",
                 fontSize: "11px",
                 fontWeight: 800,
                 borderRadius: "10px",
@@ -447,7 +447,7 @@ function JobCard({ job, index }) {
                 cursor: "pointer",
                 transition: "all .3s cubic-bezier(.23,1,.32,1)",
                 boxShadow: applyHov
-                  ? "0 0 22px rgba(212,175,55,.6)"
+                  ? "0 0 22px rgba(16,185,129,.6)"
                   : "0 4px 12px rgba(0,0,0,.2)",
                 transform: applyHov ? "scale(1.04)" : "scale(1)",
                 letterSpacing: ".3px",
@@ -474,15 +474,15 @@ function InternCard({ intern }) {
       onMouseLeave={() => setHovered(false)}
       style={{
         background: hovered
-          ? "linear-gradient(160deg,rgba(212,175,55,.1),rgba(212,175,55,.02))"
+          ? "linear-gradient(160deg,rgba(16,185,129,.1),rgba(16,185,129,.02))"
           : "linear-gradient(160deg,rgba(255,255,255,.04),rgba(255,255,255,.01))",
-        border: `1px solid ${hovered ? "rgba(212,175,55,.35)" : "rgba(255,255,255,.07)"}`,
+        border: `1px solid ${hovered ? "rgba(16,185,129,.35)" : "rgba(255,255,255,.07)"}`,
         borderRadius: "20px",
         padding: "24px",
         transition: "all .4s cubic-bezier(.23,1,.32,1)",
         transform: hovered ? "translateY(-4px)" : "translateY(0)",
         boxShadow: hovered
-          ? "0 24px 60px rgba(212,175,55,.1)"
+          ? "0 24px 60px rgba(16,185,129,.1)"
           : "0 4px 20px rgba(0,0,0,.25)",
         position: "relative",
         overflow: "hidden",
@@ -499,7 +499,7 @@ function InternCard({ intern }) {
           width: "60px",
           height: "60px",
           background:
-            "radial-gradient(circle at top right,rgba(212,175,55,.12),transparent)",
+            "radial-gradient(circle at top right,rgba(16,185,129,.12),transparent)",
           borderRadius: "0 20px 0 60px",
           opacity: hovered ? 1 : 0.5,
           transition: "opacity .4s",
@@ -510,7 +510,7 @@ function InternCard({ intern }) {
           fontSize: "28px",
           marginBottom: "12px",
           filter: hovered
-            ? "drop-shadow(0 0 10px rgba(212,175,55,.5))"
+            ? "drop-shadow(0 0 10px rgba(16,185,129,.5))"
             : "none",
           transform: hovered ? "scale(1.1)" : "scale(1)",
           display: "inline-block",
@@ -543,11 +543,11 @@ function InternCard({ intern }) {
             alignItems: "center",
             gap: "4px",
             fontSize: "11px",
-            color: "#D4AF37",
+            color: "#10b981",
             fontWeight: 600,
             padding: "4px 9px",
-            background: "rgba(212,175,55,.08)",
-            border: "1px solid rgba(212,175,55,.2)",
+            background: "rgba(16,185,129,.08)",
+            border: "1px solid rgba(16,185,129,.2)",
             borderRadius: "8px",
           }}
         >
@@ -556,11 +556,11 @@ function InternCard({ intern }) {
         <span
           style={{
             fontSize: "11px",
-            color: "rgba(212,175,55,.75)",
+            color: "rgba(16,185,129,.75)",
             fontWeight: 600,
             padding: "4px 9px",
-            background: "rgba(212,175,55,.05)",
-            border: "1px solid rgba(212,175,55,.15)",
+            background: "rgba(16,185,129,.05)",
+            border: "1px solid rgba(16,185,129,.15)",
             borderRadius: "8px",
           }}
         >
@@ -590,7 +590,7 @@ function InternCard({ intern }) {
           display: "inline-flex",
           alignItems: "center",
           gap: "6px",
-          color: btnHov ? "#D4AF37" : "rgba(212,175,55,.6)",
+          color: btnHov ? "#10b981" : "rgba(16,185,129,.6)",
           fontSize: "13px",
           fontWeight: 700,
           background: "none",
@@ -624,11 +624,11 @@ function CultureCard({ item }) {
         textAlign: "center",
         padding: "18px 12px",
         borderRadius: "16px",
-        background: hovered ? "rgba(212,175,55,.08)" : "rgba(212,175,55,.04)",
-        border: `1px solid ${hovered ? "rgba(212,175,55,.3)" : "rgba(212,175,55,.1)"}`,
+        background: hovered ? "rgba(16,185,129,.08)" : "rgba(16,185,129,.04)",
+        border: `1px solid ${hovered ? "rgba(16,185,129,.3)" : "rgba(16,185,129,.1)"}`,
         transition: "all .35s ease",
         transform: hovered ? "translateY(-4px)" : "translateY(0)",
-        boxShadow: hovered ? "0 12px 30px rgba(212,175,55,.08)" : "none",
+        boxShadow: hovered ? "0 12px 30px rgba(16,185,129,.08)" : "none",
         cursor: "default",
       }}
     >
@@ -640,12 +640,12 @@ function CultureCard({ item }) {
           width: "34px",
           height: "34px",
           borderRadius: "10px",
-          background: hovered ? "rgba(212,175,55,.15)" : "rgba(212,175,55,.08)",
-          border: "1px solid rgba(212,175,55,.2)",
+          background: hovered ? "rgba(16,185,129,.15)" : "rgba(16,185,129,.08)",
+          border: "1px solid rgba(16,185,129,.2)",
           margin: "0 auto 10px",
-          color: "#D4AF37",
+          color: "#10b981",
           transition: "all .3s ease",
-          boxShadow: hovered ? "0 0 14px rgba(212,175,55,.25)" : "none",
+          boxShadow: hovered ? "0 0 14px rgba(16,185,129,.25)" : "none",
         }}
       >
         {item.icon}
@@ -688,9 +688,9 @@ function CtaButton({ fullWidth }) {
         gap: "10px",
         padding: "14px 30px",
         background: hovered
-          ? "linear-gradient(135deg,#F0D060,#D4AF37,#BF9520)"
-          : "linear-gradient(135deg,#D4AF37,#BF9520)",
-        color: "#000",
+          ? "linear-gradient(135deg,#22d3ee,#10b981,#047857)"
+          : "linear-gradient(135deg,#10b981,#047857)",
+        color: "#0f172a",
         fontWeight: 900,
         fontSize: "13px",
         borderRadius: "14px",
@@ -698,7 +698,7 @@ function CtaButton({ fullWidth }) {
         cursor: "pointer",
         transition: "all .35s cubic-bezier(.23,1,.32,1)",
         boxShadow: hovered
-          ? "0 0 36px rgba(212,175,55,.7),0 16px 40px rgba(0,0,0,.4)"
+          ? "0 0 36px rgba(16,185,129,.7),0 16px 40px rgba(0,0,0,.4)"
           : "0 8px 24px rgba(0,0,0,.3)",
         transform: hovered ? "scale(1.05) translateY(-2px)" : "scale(1)",
         letterSpacing: ".5px",
@@ -739,7 +739,7 @@ export default function Careers() {
       id="careers"
       style={{
         position: "relative",
-        background: "#000",
+        background: "#0f172a",
         padding: isMobile ? "40px 0" : isTablet ? "80px 0" : "100px 0",
         fontFamily: "'Outfit',sans-serif",
         overflow: "hidden",
@@ -760,7 +760,7 @@ export default function Careers() {
           width: isMobile ? "260px" : "480px",
           height: isMobile ? "260px" : "480px",
           background:
-            "radial-gradient(circle,rgba(212,175,55,.05) 0%,transparent 70%)",
+            "radial-gradient(circle,rgba(16,185,129,.05) 0%,transparent 70%)",
           borderRadius: "50%",
           pointerEvents: "none",
           animation: "pulse 8s ease-in-out infinite",
@@ -774,7 +774,7 @@ export default function Careers() {
           width: isMobile ? "180px" : "480px",
           height: isMobile ? "180px" : "480px",
           background:
-            "radial-gradient(circle,rgba(212,175,55,.03) 0%,transparent 70%)",
+            "radial-gradient(circle,rgba(16,185,129,.03) 0%,transparent 70%)",
           borderRadius: "50%",
           pointerEvents: "none",
           animation: "pulse 12s ease-in-out infinite reverse",
@@ -788,8 +788,8 @@ export default function Careers() {
             position: "absolute",
             inset: 0,
             backgroundImage: `
-            linear-gradient(rgba(212,175,55,.025) 1px,transparent 1px),
-            linear-gradient(90deg,rgba(212,175,55,.025) 1px,transparent 1px)`,
+            linear-gradient(rgba(16,185,129,.025) 1px,transparent 1px),
+            linear-gradient(90deg,rgba(16,185,129,.025) 1px,transparent 1px)`,
             backgroundSize: "60px 60px",
             pointerEvents: "none",
             maskImage:
@@ -809,7 +809,7 @@ export default function Careers() {
             right: 0,
             height: "1px",
             background:
-              "linear-gradient(90deg,transparent,rgba(212,175,55,.5),transparent)",
+              "linear-gradient(90deg,transparent,rgba(16,185,129,.5),transparent)",
           }}
         />
       ))}
@@ -834,15 +834,15 @@ export default function Careers() {
               display: "inline-block",
               padding: "6px 16px",
               borderRadius: "30px",
-              border: "1px solid rgba(212,175,55,.35)",
-              background: "rgba(212,175,55,.07)",
-              color: "#D4AF37",
+              border: "1px solid rgba(16,185,129,.35)",
+              background: "rgba(16,185,129,.07)",
+              color: "#10b981",
               fontSize: "10px",
               fontWeight: 800,
               letterSpacing: "3px",
               textTransform: "uppercase",
               marginBottom: "20px",
-              boxShadow: "0 0 18px rgba(212,175,55,.1)",
+              boxShadow: "0 0 18px rgba(16,185,129,.1)",
             }}
           >
             ✦ Join Our Team ✦
@@ -862,7 +862,7 @@ export default function Careers() {
             <span
               style={{
                 background:
-                  "linear-gradient(135deg,#D4AF37 0%,#F0D060 40%,#D4AF37 70%,#BF9520 100%)",
+                  "linear-gradient(135deg,#10b981 0%,#22d3ee 40%,#10b981 70%,#047857 100%)",
                 backgroundSize: "200% auto",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
@@ -933,16 +933,16 @@ export default function Careers() {
               height: "1px",
               minWidth: "20px",
               background:
-                "linear-gradient(90deg,rgba(212,175,55,.35),transparent)",
+                "linear-gradient(90deg,rgba(16,185,129,.35),transparent)",
             }}
           />
           <span
             style={{
               padding: "4px 11px",
-              background: "rgba(212,175,55,.1)",
-              border: "1px solid rgba(212,175,55,.25)",
+              background: "rgba(16,185,129,.1)",
+              border: "1px solid rgba(16,185,129,.25)",
               borderRadius: "20px",
-              color: "#D4AF37",
+              color: "#10b981",
               fontSize: "11px",
               fontWeight: 700,
               whiteSpace: "nowrap",
@@ -982,15 +982,15 @@ export default function Careers() {
                 height: "42px",
                 flexShrink: 0,
                 borderRadius: "12px",
-                background: "rgba(212,175,55,.1)",
-                border: "1px solid rgba(212,175,55,.25)",
+                background: "rgba(16,185,129,.1)",
+                border: "1px solid rgba(16,185,129,.25)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                boxShadow: "0 0 18px rgba(212,175,55,.15)",
+                boxShadow: "0 0 18px rgba(16,185,129,.15)",
               }}
             >
-              <GraduationCap color="#D4AF37" size={19} />
+              <GraduationCap color="#10b981" size={19} />
             </div>
             <div>
               <h3
@@ -1036,10 +1036,10 @@ export default function Careers() {
           style={{
             marginTop: isMobile ? "48px" : "72px",
             borderRadius: isMobile ? "20px" : "28px",
-            border: `1px solid ${ctaHov ? "rgba(212,175,55,.4)" : "rgba(212,175,55,.15)"}`,
+            border: `1px solid ${ctaHov ? "rgba(16,185,129,.4)" : "rgba(16,185,129,.15)"}`,
             background: ctaHov
-              ? "linear-gradient(135deg,rgba(212,175,55,.1),rgba(212,175,55,.04) 50%,rgba(0,0,0,.5))"
-              : "linear-gradient(135deg,rgba(212,175,55,.06),rgba(0,0,0,.4))",
+              ? "linear-gradient(135deg,rgba(16,185,129,.1),rgba(16,185,129,.04) 50%,rgba(0,0,0,.5))"
+              : "linear-gradient(135deg,rgba(16,185,129,.06),rgba(0,0,0,.4))",
             padding: isMobile
               ? "36px 20px"
               : isTablet
@@ -1049,7 +1049,7 @@ export default function Careers() {
             position: "relative",
             overflow: "hidden",
             transition: "all .5s cubic-bezier(.23,1,.32,1)",
-            boxShadow: ctaHov ? "0 30px 80px rgba(212,175,55,.08)" : "none",
+            boxShadow: ctaHov ? "0 30px 80px rgba(16,185,129,.08)" : "none",
           }}
         >
           {/* corner stars – desktop only */}
@@ -1064,7 +1064,7 @@ export default function Careers() {
                     bottom: pos.includes("bottom") ? "18px" : "auto",
                     left: pos.includes("left") ? "18px" : "auto",
                     right: pos.includes("right") ? "18px" : "auto",
-                    color: "rgba(212,175,55,.2)",
+                    color: "rgba(16,185,129,.2)",
                     fontSize: "18px",
                   }}
                 >
@@ -1077,7 +1077,7 @@ export default function Careers() {
             style={{
               fontSize: isMobile ? "30px" : "38px",
               marginBottom: "14px",
-              filter: "drop-shadow(0 0 18px rgba(212,175,55,.3))",
+              filter: "drop-shadow(0 0 18px rgba(16,185,129,.3))",
               display: "inline-block",
             }}
           >

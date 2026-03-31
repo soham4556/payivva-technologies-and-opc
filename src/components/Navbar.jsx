@@ -1,250 +1,232 @@
-import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
-import logo from "../assets/logo.png";
-import NavLogo from "./navbar/NavLogo";
-import NavLink from "./navbar/NavLink";
-import NavCTA from "./navbar/NavCTA";
-import MobileDrawer from "./navbar/MobileDrawer";
+import { useEffect, useMemo, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import {
+  Menu,
+  X,
+  Code2,
+  Search,
+  Share2,
+  Megaphone,
+  Sparkles,
+  Users,
+  ArrowUpRight,
+} from "lucide-react";
+import fullBrandLogo from "../assets/Logo/4efec8ca-3e32-4ce3-8ac8-c606c96c2d8e (2).png";
 
-const navLinks = [
+// Logo sizing config (px) — tweak these values to increase/decrease sizes and gap
+const LOGO_SIZE_MOBILE = 80; // mobile topbar (increased)
+const LOGO_SIZE_DESKTOP = 128; // desktop header (increased)
+const LOGO_SIZE_MENU = 104; // mobile menu header (increased)
+const LOGO_GAP = 1; // vertical gap between stacked logos in px
+
+const links = [
   { label: "Home", to: "/" },
-  { label: "About Us", to: "/about" },
+  { label: "About", to: "/about" },
   { label: "Services", to: "/services" },
   { label: "Careers", to: "/careers" },
   { label: "Contact", to: "/contact" },
 ];
 
-export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+// services removed per request
 
-  /* ── Scroll effect only for background ── */
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+function DesktopLink({ item, onHover }) {
+  return (
+    <li onMouseEnter={() => onHover(item.mega ? "services" : null)}>
+      <NavLink
+        to={item.to}
+        className={({ isActive }) =>
+          `px-3 py-2 rounded-xl text-sm tracking-[0.05em] transition-colors ${
+            isActive
+              ? "text-cyan-300 bg-cyan-400/10"
+              : "text-[var(--text-main)]/80 hover:text-cyan-300 hover:bg-white/8"
+          }`
+        }
+      >
+        {item.label}
+      </NavLink>
+    </li>
+  );
+}
 
-  /* ── Close on resize ── */
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1024) setMobileOpen(false);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  /* ── Cursor glow on header ── */
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-  };
-
-  const handleNavClick = () => {
-    setMobileOpen(false);
+function LogoSingle({ size = LOGO_SIZE_DESKTOP, shift = 0 }) {
+  const resolvedSize = typeof size === "number" ? size : LOGO_SIZE_DESKTOP;
+  const style = {
+    width: `${resolvedSize}px`,
+    height: `${resolvedSize}px`,
+    objectFit: "contain",
+    transform: `translateY(${shift}px)`,
   };
 
   return (
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <img src={fullBrandLogo} alt="PAYIVVA" style={style} />
+    </div>
+  );
+}
+
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [megaOpen, setMegaOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < 1024);
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  // Open mobile menu when user taps an image logo on small screens
+  useEffect(() => {
+    const onDocClick = (e) => {
+      if (!isMobile) return;
+      const target = e.target;
+      const img = target.tagName === "IMG" ? target : target.closest?.("img");
+      if (!img) return;
+      const src = img.getAttribute("src") || "";
+      const alt = (img.getAttribute("alt") || "").toLowerCase();
+      if (src.includes("logo") || alt.includes("payivva")) {
+        e.preventDefault();
+        setMobileOpen(true);
+      }
+    };
+
+    document.addEventListener("click", onDocClick);
+    return () => document.removeEventListener("click", onDocClick);
+  }, [isMobile]);
+
+  const shellStyle = useMemo(
+    () => ({
+      background: scrolled || isMobile ? "var(--bg-panel)" : "transparent",
+      borderBottom:
+        scrolled || isMobile
+          ? "1px solid var(--border-soft)"
+          : "1px solid transparent",
+      backdropFilter: scrolled || isMobile ? "blur(14px)" : "blur(0px)",
+    }),
+    [scrolled, isMobile],
+  );
+
+  return (
     <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
-
-        .nav-font { font-family: 'Outfit', sans-serif; }
-        .logo-font { font-family: 'Cinzel', serif; }
-
-        @keyframes shimmer {
-          0%   { background-position: -200% center; }
-          100% { background-position: 200% center; }
-        }
-        @keyframes fadeSlideDown {
-          from { opacity: 0; transform: translateY(-12px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes mobileItemIn {
-          from { opacity: 0; transform: translateX(-18px); }
-          to   { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes borderSpin {
-          to { --angle: 360deg; }
-        }
-
-        .shimmer-logo {
-          background: linear-gradient(90deg, #D4AF37 0%, #FFF0A0 40%, #D4AF37 60%, #B8921E 100%);
-          background-size: 200% auto;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          animation: shimmer 3.5s linear infinite;
-        }
-
-
-        .cta-btn {
-          position: relative;
-          overflow: hidden;
-          background: linear-gradient(135deg, #D4AF37 0%, #F7E070 50%, #B8921E 100%);
-          background-size: 200% 200%;
-          background-position: 0% 50%;
-          transition: background-position 0.5s ease, transform 0.25s ease, box-shadow 0.3s ease;
-        }
-        .cta-btn:hover {
-          background-position: 100% 50%;
-          transform: translateY(-2px);
-          box-shadow: 0 8px 30px rgba(212,175,55,0.55), 0 0 0 1px rgba(212,175,55,0.3);
-        }
-        .cta-btn:active { transform: translateY(0) scale(0.97); }
-        .cta-btn::after {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
-          pointer-events: none;
-        }
-
-        .mobile-link {
-          animation: mobileItemIn 0.4s ease both;
-        }
-
-        .cursor-glow {
-          pointer-events: none;
-          position: absolute;
-          border-radius: 50%;
-          background: radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%);
-          transform: translate(-50%, -50%);
-          transition: width 0.3s ease, height 0.3s ease;
-        }
-
-        .header-border-active {
-          border-bottom: 1px solid rgba(0,0,0,0.08);
-        }
-
-        .mobile-drawer-overlay {
-          position: fixed;
-          inset: 0;
-          background: rgba(255, 255, 255, 0.85);
-          backdrop-filter: blur(25px) saturate(160%);
-          z-index: 40;
-          opacity: 0;
-          visibility: hidden;
-          transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
-                      visibility 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .mobile-drawer-overlay.is-open {
-          opacity: 1;
-          visibility: visible;
-        }
-
-        .nav-link-text {
-          position: relative;
-          letter-spacing: 0.04em;
-        }
-        .nav-link-text::before {
-          content: attr(data-text);
-          position: absolute;
-          inset: 0;
-          background: none;
-          -webkit-background-clip: unset;
-          -webkit-text-fill-color: unset;
-          background-clip: text;
-          color: #D4AF37;
-          opacity: 0;
-          transition: opacity 0.25s ease;
-        }
-        .nav-link-text.is-active::before,
-        a:hover .nav-link-text::before {
-          opacity: 1;
-        }
-
-        /* ── Hamburger Icon Animations ── */
-        .hamburger-line {
-          transform-origin: center;
-          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                      opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                      stroke-dashoffset 0.4s ease;
-        }
-      `}</style>
-
-      <header
-        onMouseMove={handleMouseMove}
-        className={`nav-font fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? "header-border-active py-0" : "py-2"
-        }`}
-        style={{
-          background: scrolled ? "#FFFFFF" : "rgba(255,255,255,0.85)",
-          backdropFilter: "blur(20px) saturate(140%)",
-          boxShadow: scrolled ? "0 1px 0 rgba(0,0,0,0.05)" : "none",
-        }}
-        role="banner"
-      >
-        {/* Cursor glow */}
-        <div
-          className="cursor-glow"
-          style={{
-            left: mousePos.x,
-            top: mousePos.y,
-            width: 340,
-            height: 340,
-          }}
-        />
-
-        <nav
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-          aria-label="Main navigation"
+      {/* Mobile-only top bar: logo (opens drawer) + hamburger */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3 bg-[var(--bg-panel)]/92 backdrop-blur-md border-b border-[var(--border-soft)]">
+        <button
+          onClick={() => setMobileOpen(true)}
+          aria-label="Open menu"
+          className="flex items-center gap-3"
         >
-          <div className="flex items-center justify-between h-16 lg:h-20">
-            {/* ── Left Side: Logo ── */}
-            <NavLogo logo={logo} />
+          <LogoSingle size={LOGO_SIZE_MOBILE} shift={2} />
+          <span className="text-sm font-semibold text-[v1ar(--text-main)] hidden">
+            PAYIVVA
+          </span>
+        </button>
 
-            {/* ── Right Side: Links + CTA + Hamburger ── */}
-            <div className="flex items-center gap-4 lg:gap-8">
-              {/* Desktop Links */}
-              <div className="hidden lg:block">
-                <ul className="flex items-center gap-4" role="list">
-                  {navLinks.map((link) => (
-                    <li key={link.to}>
-                      <NavLink {...link} onClick={handleNavClick} />
-                    </li>
-                  ))}
-                </ul>
-              </div>
+        <button
+          onClick={() => setMobileOpen((p) => !p)}
+          aria-label="Toggle menu"
+          className="w-10 h-10 rounded-xl border border-[var(--border-soft)] bg-white/5 grid place-items-center text-[var(--text-main)]"
+        >
+          {mobileOpen ? <X size={19} /> : <Menu size={19} />}
+        </button>
+      </div>
 
-              {/* CTA + Hamburger Area */}
-              <div className="flex items-center gap-3">
-                <NavCTA onClick={handleNavClick} />
+      {/* Desktop header */}
+      <header
+        className="hidden lg:block fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        style={shellStyle}
+        onMouseLeave={() => setMegaOpen(false)}
+      >
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+          <Link to="/" className="flex items-center">
+            <LogoSingle size={LOGO_SIZE_DESKTOP} shift={2} />
+          </Link>
 
-                <button
-                  onClick={() => setMobileOpen(!mobileOpen)}
-                  className="lg:hidden relative z-[100] p-2 rounded-xl transition-all duration-300 focus:outline-none"
-                  aria-label={mobileOpen ? "Close menu" : "Open menu"}
-                  aria-expanded={mobileOpen}
-                  aria-controls="mobile-menu"
-                >
-                  <div className="w-6 h-6 flex flex-col justify-center items-center gap-1.5">
-                    <span 
-                      className={`w-5 h-0.5 bg-black transition-all duration-300 ${mobileOpen ? "rotate-45 translate-y-2 !bg-[#D4AF37]" : ""}`}
-                    />
-                    <span 
-                      className={`w-5 h-0.5 bg-black transition-all duration-300 ${mobileOpen ? "opacity-0" : ""}`}
-                    />
-                    <span 
-                      className={`w-5 h-0.5 bg-black transition-all duration-300 ${mobileOpen ? "-rotate-45 -translate-y-2 !bg-[#D4AF37]" : ""}`}
-                    />
-                  </div>
-                </button>
-              </div>
-            </div>
+          <ul className="hidden lg:flex items-center gap-6">
+            {links.map((item) => (
+              <DesktopLink
+                key={item.to}
+                item={item}
+                onHover={(value) => setMegaOpen(value === "services")}
+              />
+            ))}
+          </ul>
+
+          <div className="hidden lg:flex items-center gap-3">
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold tracking-[0.06em] text-white bg-gradient-to-r from-[#071b64] to-[#00d9ff] hover:brightness-110"
+            >
+              Let's Talk <ArrowUpRight size={16} />
+            </Link>
           </div>
         </nav>
+
+        {/* Services mega-menu removed */}
       </header>
 
-      <MobileDrawer
-        mobileOpen={mobileOpen}
-        handleNavClick={handleNavClick}
-        navLinks={navLinks}
-      />
+      {/* Mobile menu (outside header) */}
+      <div
+        className={`lg:hidden fixed inset-0 top-14 z-[60] transition-all duration-300 ${mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+      >
+        <div
+          className="absolute inset-0 bg-black/60"
+          onClick={() => setMobileOpen(false)}
+        />
+
+        <div className="absolute inset-0 flex items-start justify-center p-6">
+          <div className="w-full max-w-md bg-[var(--bg-surface)]/96 backdrop-blur-xl rounded-2xl border border-[var(--border-soft)] p-6 shadow-lg overflow-y-auto">
+            <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-3">
+                <LogoSingle size={LOGO_SIZE_MENU} shift={2} />
+                <span className="text-lg font-bold">PAYIVVA</span>
+              </div>
+              <button
+                onClick={() => setMobileOpen(false)}
+                aria-label="Close menu"
+                className="w-10 h-10 rounded-xl grid place-items-center border border-[var(--border-soft)] bg-white/5"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <nav className="mb-6">
+              <ul className="flex flex-col gap-4">
+                {links.map((item) => (
+                  <li key={item.to}>
+                    <NavLink
+                      to={item.to}
+                      onClick={() => setMobileOpen(false)}
+                      className="block text-lg font-semibold py-3 px-4 rounded-lg hover:bg-white/5"
+                    >
+                      {item.label}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            <div className="mb-6">{/* Services list removed */}</div>
+
+            <div className="mt-4">
+              <NavLink
+                to="/contact"
+                onClick={() => setMobileOpen(false)}
+                className="inline-flex w-full items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-[#071b64] to-[#00d9ff] rounded-xl text-white font-semibold"
+              >
+                Let's Talk
+              </NavLink>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

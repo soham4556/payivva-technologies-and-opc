@@ -3,10 +3,39 @@ import { ArrowRight, Play, ChevronDown } from "lucide-react";
 
 /* ═══════════════════════════ DATA ═══════════════════════════ */
 const stats = [
-  { value: "500+", label: "Projects Delivered", icon: "◈" },
-  { value: "98%", label: "Client Satisfaction", icon: "◉" },
-  { value: "5+", label: "Years Experience", icon: "◆" },
-  { value: "50+", label: "Expert Team", icon: "◇" },
+  { target: 500, suffix: "+", label: "Projects Delivered", icon: "◈" },
+  { target: 98, suffix: "%", label: "Client Satisfaction", icon: "◉" },
+  { target: 5, suffix: "+", label: "Years Experience", icon: "◆" },
+  { target: 50, suffix: "+", label: "Expert Team", icon: "◇" },
+];
+
+const typingWords = ["Business", "Brand", "Future"];
+
+const caseStudyShowcase = [
+  {
+    title: "Ecommerce Funnel Rebuild",
+    problem: "ROAS stuck below 1.8x and checkout drop-offs above 68%.",
+    solution:
+      "Rebuilt ad segmentation, page speed, and intent-based product journeys to boost conversion quality.",
+    image:
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    title: "Healthcare Local Visibility",
+    problem: "Multi-location clinic was invisible on local Google discovery.",
+    solution:
+      "Deployed local SEO clusters, review automation, and geo-landing pages for every branch.",
+    image:
+      "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    title: "B2B SaaS Content Engine",
+    problem: "High CAC and poor inbound pipeline from content channels.",
+    solution:
+      "Built a keyword-led content engine with conversion-focused lead magnets and intent retargeting.",
+    image:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+  },
 ];
 
 const services = [
@@ -14,7 +43,7 @@ const services = [
     icon: "⬡",
     num: "01",
     title: "Web Development",
-    color: "#D4AF37",
+    color: "#10b981",
     desc: "Scalable, lightning-fast websites and web applications engineered for performance, SEO, and conversion-rate maximization.",
     tags: ["React", "Next.js", "Node.js", "TypeScript"],
   },
@@ -22,7 +51,7 @@ const services = [
     icon: "◎",
     num: "02",
     title: "Digital Marketing",
-    color: "#C49B2E",
+    color: "#0891b2",
     desc: "Data-driven campaigns across all channels — SEO, PPC, social, email — that maximize your ROI and brand visibility.",
     tags: ["SEO", "Google Ads", "Meta", "Analytics"],
   },
@@ -30,7 +59,7 @@ const services = [
     icon: "◈",
     num: "03",
     title: "Brand Strategy",
-    color: "#B8890D",
+    color: "#047857",
     desc: "Compelling brand identities and narratives crafted to resonate with your target audience and stand out in competitive markets.",
     tags: ["Identity", "Messaging", "Positioning", "Voice"],
   },
@@ -38,7 +67,7 @@ const services = [
     icon: "⬟",
     num: "04",
     title: "AI Solutions",
-    color: "#D4AF37",
+    color: "#10b981",
     desc: "Intelligent automation and machine learning solutions that transform your operations and unlock new business opportunities.",
     tags: ["GPT-4", "LangChain", "Automation", "ML"],
   },
@@ -46,7 +75,7 @@ const services = [
     icon: "◇",
     num: "05",
     title: "UI/UX Design",
-    color: "#C49B2E",
+    color: "#0891b2",
     desc: "Beautiful, intuitive interfaces designed with user psychology and conversion science to delight users and drive business goals.",
     tags: ["Figma", "Prototyping", "Research", "Testing"],
   },
@@ -54,7 +83,7 @@ const services = [
     icon: "◉",
     num: "06",
     title: "Cloud Services",
-    color: "#B8890D",
+    color: "#047857",
     desc: "Robust, secure cloud infrastructure and DevOps pipelines that give your enterprise the scalability to grow without limits.",
     tags: ["AWS", "GCP", "Docker", "CI/CD"],
   },
@@ -137,18 +166,18 @@ export default function Hero() {
   const animRef = useRef(null);
   const statsRef = useRef(null);
 
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(true);
   const [activeService, setActiveService] = useState(0);
   const [hoveredStat, setHoveredStat] = useState(null);
   const [hoveredService, setHoveredService] = useState(null);
   const [countStarted, setCountStarted] = useState(false);
+  const [typedWordIndex, setTypedWordIndex] = useState(0);
+  const [typedLength, setTypedLength] = useState(0);
+  const [typingForward, setTypingForward] = useState(true);
+  const [statsValue, setStatsValue] = useState(stats.map(() => 0));
 
   const scrollTo = (href) =>
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
-
-  useEffect(() => {
-    setTimeout(() => setLoaded(true), 80);
-  }, []);
 
   useEffect(() => {
     const id = setInterval(
@@ -157,6 +186,29 @@ export default function Hero() {
     );
     return () => clearInterval(id);
   }, []);
+
+  useEffect(() => {
+    const ticker = setTimeout(
+      () => {
+        const currentWord = typingWords[typedWordIndex];
+        if (typingForward) {
+          if (typedLength < currentWord.length) {
+            setTypedLength((prev) => prev + 1);
+          } else {
+            setTypingForward(false);
+          }
+        } else if (typedLength > 0) {
+          setTypedLength((prev) => prev - 1);
+        } else {
+          setTypingForward(true);
+          setTypedWordIndex((prev) => (prev + 1) % typingWords.length);
+        }
+      },
+      typingForward ? 110 : 65,
+    );
+
+    return () => clearTimeout(ticker);
+  }, [typedLength, typedWordIndex, typingForward]);
 
   useEffect(() => {
     const el = statsRef.current;
@@ -171,20 +223,43 @@ export default function Hero() {
     return () => obs.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!countStarted) return;
+
+    const steps = 46;
+    let frame = 0;
+    const timer = setInterval(() => {
+      frame += 1;
+      const progress = Math.min(frame / steps, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setStatsValue(stats.map((item) => Math.round(item.target * eased)));
+
+      if (progress >= 1) {
+        clearInterval(timer);
+      }
+    }, 24);
+
+    return () => clearInterval(timer);
+  }, [countStarted]);
+
   /* DOM particles */
   useEffect(() => {
     const container = particlesRef.current;
     if (!container) return;
     const particles = [];
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 10; i++) {
       const p = document.createElement("div");
-      const size = Math.random() * 4 + 1;
+      const size = Math.random() * 3 + 1;
+      const useAlt = Math.random() > 0.5;
+      const color = useAlt
+        ? `rgba(6,182,212,${Math.random() * 0.3 + 0.05})`
+        : `rgba(16,185,129,${Math.random() * 0.3 + 0.05})`;
       p.style.cssText = `
         position:absolute;width:${size}px;height:${size}px;
-        background:rgba(212,175,55,${Math.random() * 0.5 + 0.1});
+        background:${color};
         border-radius:50%;left:${Math.random() * 100}%;top:${Math.random() * 100}%;
-        animation:pvFloat ${Math.random() * 5 + 4}s ease-in-out infinite;
-        animation-delay:${Math.random() * 4}s;pointer-events:none;`;
+        animation:pvFloat ${Math.random() * 8 + 6}s ease-in-out infinite;
+        animation-delay:${Math.random() * 5}s;pointer-events:none;`;
       container.appendChild(p);
       particles.push(p);
     }
@@ -241,7 +316,7 @@ export default function Hero() {
           );
           if (d < 130) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(212,175,55,${(1 - d / 130) * 0.2})`;
+            ctx.strokeStyle = `rgba(16,185,129,${(1 - d / 130) * 0.2})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(nodes[i].x, nodes[i].y);
             ctx.lineTo(nodes[j].x, nodes[j].y);
@@ -250,7 +325,7 @@ export default function Hero() {
         }
         ctx.beginPath();
         ctx.arc(nodes[i].x, nodes[i].y, nodes[i].r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(212,175,55,${nodes[i].op})`;
+        ctx.fillStyle = `rgba(16,185,129,${nodes[i].op})`;
         ctx.fill();
       }
       animRef.current = requestAnimationFrame(tick);
@@ -274,15 +349,14 @@ export default function Hero() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap');
         *{box-sizing:border-box;margin:0;padding:0;}
-        body{background:#000;}
+        body{background:var(--hero-bg);}
 
         @keyframes pvFloat{0%,100%{transform:translateY(0) rotate(0deg)}40%{transform:translateY(-16px) rotate(3deg)}70%{transform:translateY(-7px) rotate(-2deg)}}
         @keyframes pvShimmer{0%{background-position:-200% center}100%{background-position:200% center}}
         @keyframes pvRotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
         @keyframes pvRotateR{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
-        @keyframes pvPulse{0%,100%{box-shadow:0 0 18px rgba(212,175,55,.18),0 0 50px rgba(212,175,55,.04)}50%{box-shadow:0 0 36px rgba(212,175,55,.4),0 0 90px rgba(212,175,55,.14)}}
+        @keyframes pvPulse{0%,100%{box-shadow:0 0 18px rgba(16,185,129,.18),0 0 50px rgba(16,185,129,.04)}50%{box-shadow:0 0 36px rgba(16,185,129,.4),0 0 90px rgba(16,185,129,.14)}}
         @keyframes pvScan{0%{transform:translateY(-100%)}100%{transform:translateY(100vh)}}
         @keyframes pvBlink{0%,100%{opacity:1}50%{opacity:0}}
         @keyframes pvTicker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
@@ -290,29 +364,29 @@ export default function Hero() {
         @keyframes pvCount{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
 
         .pv-gold{
-          background:linear-gradient(135deg,#7a5a0e 0%,#D4AF37 28%,#F5E070 50%,#D4AF37 72%,#7a5a0e 100%);
+          background:linear-gradient(135deg,#059669 0%,#10b981 30%,#06b6d4 50%,#10b981 70%,#059669 100%);
           background-size:200% auto;
           -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-          background-clip:text;animation:pvShimmer 4s linear infinite;
+          background-clip:text;animation:pvShimmer 8s linear infinite;
         }
         .pv-label{
           display:inline-flex;align-items:center;gap:14px;
           font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;
-          letter-spacing:.2em;text-transform:uppercase;color:rgba(212,175,55,.65);
+          letter-spacing:.2em;text-transform:uppercase;color:rgba(16,185,129,.65);
         }
-        .pv-label::before,.pv-label::after{content:'';display:block;height:1px;background:rgba(212,175,55,.3);}
+        .pv-label::before,.pv-label::after{content:'';display:block;height:1px;background:rgba(16,185,129,.3);}
         .pv-label::before{width:30px;} .pv-label::after{width:18px;}
 
         /* buttons */
         .pv-btn{display:inline-flex;align-items:center;gap:10px;padding:15px 34px;
-          background:linear-gradient(135deg,#c9a42e,#F0D060,#c9a42e);background-size:200% auto;
+          background:linear-gradient(135deg,#041a5a,#00d9ff,#06267d);background-size:200% auto;
           color:#000;font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;
           letter-spacing:.07em;text-transform:uppercase;border:none;border-radius:9px;cursor:pointer;
           position:relative;overflow:hidden;transition:background-position .4s,box-shadow .3s,transform .3s;}
         .pv-btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.2);
           transform:translateX(-110%) skewX(-18deg);transition:transform .45s;}
         .pv-btn:hover{background-position:right center;
-          box-shadow:0 0 38px rgba(212,175,55,.65),0 10px 36px rgba(212,175,55,.28);transform:translateY(-2px);}
+          box-shadow:0 0 20px rgba(0,217,255,.32),0 8px 24px rgba(2,64,255,.24);transform:translateY(-2px);}
         .pv-btn:hover::after{transform:translateX(200%) skewX(-18deg);}
 
         .pv-btn-o{display:inline-flex;align-items:center;gap:10px;padding:14px 34px;
@@ -320,75 +394,75 @@ export default function Hero() {
           font-weight:600;font-size:13px;letter-spacing:.07em;text-transform:uppercase;
           border:1px solid rgba(255,255,255,.18);border-radius:9px;cursor:pointer;
           transition:border-color .3s,color .3s,background .3s,transform .3s;}
-        .pv-btn-o:hover{border-color:#D4AF37;color:#D4AF37;background:rgba(212,175,55,.06);transform:translateY(-2px);}
+        .pv-btn-o:hover{border-color:#10b981;color:#10b981;background:rgba(16,185,129,.06);transform:translateY(-2px);}
 
         /* pill */
         .pv-pill{display:inline-block;padding:5px 15px;border-radius:100px;
           font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:.04em;
-          border:1px solid rgba(212,175,55,.2);color:rgba(212,175,55,.42);transition:all .4s;white-space:nowrap;}
-        .pv-pill.on{background:rgba(212,175,55,.12);border-color:rgba(212,175,55,.85);
-          color:#D4AF37;box-shadow:0 0 18px rgba(212,175,55,.2);}
+          border:1px solid rgba(16,185,129,.2);color:rgba(16,185,129,.42);transition:all .4s;white-space:nowrap;}
+        .pv-pill.on{background:rgba(16,185,129,.12);border-color:rgba(16,185,129,.85);
+          color:#10b981;box-shadow:0 0 18px rgba(16,185,129,.2);}
 
         /* stat card */
-        .pv-stat{position:relative;border:1px solid rgba(212,175,55,.2);border-radius:16px;
-          padding:24px 18px;background:rgba(212,175,55,.03);backdrop-filter:blur(14px);
+        .pv-stat{position:relative;border:1px solid rgba(16,185,129,.2);border-radius:16px;
+          padding:24px 18px;background:rgba(16,185,129,.03);backdrop-filter:blur(14px);
           text-align:center;cursor:default;overflow:hidden;
           transition:transform .4s cubic-bezier(.23,1,.32,1),border-color .4s,box-shadow .4s;}
         .pv-stat::before{content:'';position:absolute;inset:0;
-          background:radial-gradient(circle at 50% 0%,rgba(212,175,55,.1),transparent 68%);
+          background:radial-gradient(circle at 50% 0%,rgba(16,185,129,.1),transparent 68%);
           opacity:0;transition:opacity .4s;}
-        .pv-stat:hover{transform:translateY(-8px);border-color:rgba(212,175,55,.55);
-          box-shadow:0 24px 58px rgba(212,175,55,.14);}
+        .pv-stat:hover{transform:translateY(-5px);border-color:rgba(16,185,129,.35);
+          box-shadow:0 16px 40px rgba(16,185,129,.08);}
         .pv-stat:hover::before{opacity:1;}
 
         /* svc card */
-        .pv-svc{padding:42px 36px;background:rgba(212,175,55,.02);position:relative;
+        .pv-svc{padding:42px 36px;background:rgba(16,185,129,.02);position:relative;
           cursor:default;transition:background .35s,border-color .3s;overflow:hidden;
-          border-right:1px solid rgba(212,175,55,.07);border-bottom:1px solid rgba(212,175,55,.07);}
+          border-right:1px solid rgba(16,185,129,.07);border-bottom:1px solid rgba(16,185,129,.07);}
         .g3 > div:nth-child(3n){border-right:none;}
         .g3 > div:nth-child(n+4){border-bottom:none;}
         @media(max-width:768px){
-          .g3 > div{border-right:none!important;border-bottom:1px solid rgba(212,175,55,.07)!important;}
+          .g3 > div{border-right:none!important;border-bottom:1px solid rgba(16,185,129,.07)!important;}
           .g3 > div:last-child{border-bottom:none!important;}
           .pv-svc{padding:32px 24px;}
         }
         .pv-svc-bar{position:absolute;top:0;left:0;right:0;height:2px;
-          background:linear-gradient(90deg,transparent,#D4AF37,transparent);
+          background:linear-gradient(90deg,transparent,#10b981,transparent);
           transform:scaleX(0);transition:transform .5s cubic-bezier(.23,1,.32,1);}
         .pv-svc:hover .pv-svc-bar{transform:scaleX(1);}
         .pv-tag{display:inline-block;padding:3px 10px;border-radius:4px;
-          background:rgba(212,175,55,.07);border:1px solid rgba(212,175,55,.14);
+          background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.14);
           font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;
-          color:rgba(212,175,55,.55);letter-spacing:.05em;margin:3px 3px 0 0;}
+          color:rgba(16,185,129,.55);letter-spacing:.05em;margin:3px 3px 0 0;}
 
         /* process step */
-        .pv-step{position:relative;padding:36px 32px;border:1px solid rgba(212,175,55,.1);
-          border-radius:20px;background:rgba(212,175,55,.02);overflow:hidden;
+        .pv-step{position:relative;padding:36px 32px;border:1px solid rgba(16,185,129,.1);
+          border-radius:20px;background:rgba(16,185,129,.02);overflow:hidden;
           transition:border-color .4s,transform .4s,box-shadow .4s;}
-        .pv-step:hover{border-color:rgba(212,175,55,.4);transform:translateY(-6px);
-          box-shadow:0 20px 50px rgba(212,175,55,.1);}
+        .pv-step:hover{border-color:rgba(16,185,129,.28);transform:translateY(-4px);
+          box-shadow:0 14px 36px rgba(16,185,129,.06);}
         .pv-step-bg-num{font-family:'Cormorant Garamond',serif;font-size:80px;font-weight:900;
           line-height:1;position:absolute;top:16px;right:20px;pointer-events:none;
-          background:linear-gradient(135deg,rgba(212,175,55,.07),rgba(212,175,55,.02));
+          background:linear-gradient(135deg,rgba(16,185,129,.07),rgba(16,185,129,.02));
           -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 
         /* testimonial */
-        .pv-testi{padding:36px 32px;border:1px solid rgba(212,175,55,.12);border-radius:20px;
-          background:rgba(212,175,55,.02);position:relative;overflow:hidden;
+        .pv-testi{padding:36px 32px;border:1px solid rgba(16,185,129,.12);border-radius:20px;
+          background:rgba(16,185,129,.02);position:relative;overflow:hidden;
           transition:border-color .4s,box-shadow .4s,transform .4s;}
         .pv-testi::before{content:'"';position:absolute;top:8px;right:22px;
           font-family:'Cormorant Garamond',serif;font-size:110px;
-          color:rgba(212,175,55,.05);line-height:1;pointer-events:none;}
-        .pv-testi:hover{border-color:rgba(212,175,55,.38);
-          box-shadow:0 20px 50px rgba(212,175,55,.1);transform:translateY(-5px);}
+          color:rgba(16,185,129,.05);line-height:1;pointer-events:none;}
+        .pv-testi:hover{border-color:rgba(16,185,129,.25);
+          box-shadow:0 14px 36px rgba(16,185,129,.06);transform:translateY(-3px);}
 
         /* portfolio card */
-        .pv-port{border-radius:16px;overflow:hidden;border:1px solid rgba(212,175,55,.1);
+        .pv-port{border-radius:16px;overflow:hidden;border:1px solid rgba(16,185,129,.1);
           cursor:pointer;position:relative;aspect-ratio:4/3;display:flex;
           flex-direction:column;justify-content:flex-end;
           transition:border-color .4s,box-shadow .4s,transform .4s;}
-        .pv-port:hover{border-color:rgba(212,175,55,.45);
-          box-shadow:0 24px 60px rgba(212,175,55,.15);transform:translateY(-6px) scale(1.01);}
+        .pv-port:hover{border-color:rgba(16,185,129,.45);
+          box-shadow:0 24px 60px rgba(16,185,129,.15);transform:translateY(-6px) scale(1.01);}
         .pv-overlay{position:absolute;inset:0;
           background:linear-gradient(to top,rgba(0,0,0,.9) 0%,rgba(0,0,0,.2) 60%,transparent 100%);
           transition:opacity .4s;}
@@ -396,37 +470,37 @@ export default function Hero() {
 
         /* ticker */
         .pv-ticker{overflow:hidden;white-space:nowrap;
-          border-top:1px solid rgba(212,175,55,.08);border-bottom:1px solid rgba(212,175,55,.08);
-          padding:11px 0;background:rgba(212,175,55,.012);}
+          border-top:1px solid rgba(16,185,129,.08);border-bottom:1px solid rgba(16,185,129,.08);
+          padding:11px 0;background:rgba(16,185,129,.012);}
         .pv-ticker-inner{display:inline-block;animation:pvTicker 30s linear infinite;}
         .pv-ticker-item{display:inline-flex;align-items:center;gap:12px;margin-right:56px;
           font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;
-          letter-spacing:.14em;text-transform:uppercase;color:rgba(212,175,55,.38);}
-        .pv-dot{width:4px;height:4px;background:#D4AF37;border-radius:50%;opacity:.5;}
+          letter-spacing:.14em;text-transform:uppercase;color:rgba(16,185,129,.38);}
+        .pv-dot{width:4px;height:4px;background:#10b981;border-radius:50%;opacity:.5;}
 
         /* scroll */
         .pv-scroll{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
           display:flex;flex-direction:column;align-items:center;gap:8px;
           background:none;border:none;cursor:pointer;color:rgba(255,255,255,.28);transition:color .3s;}
-        .pv-scroll:hover{color:rgba(212,175,55,.7);}
+        .pv-scroll:hover{color:rgba(16,185,129,.7);}
         .pv-scroll-line{width:1px;height:48px;position:relative;overflow:hidden;
-          background:linear-gradient(to bottom,transparent,rgba(212,175,55,.5),transparent);}
+          background:linear-gradient(to bottom,transparent,rgba(16,185,129,.5),transparent);}
         .pv-scroll-line::after{content:'';position:absolute;top:-100%;width:100%;height:100%;
           background:linear-gradient(to bottom,transparent,#fff,transparent);
           animation:pvScrollLine 2s ease-in-out infinite;}
 
-        .pv-ring{position:absolute;border-radius:50%;border:1px solid rgba(212,175,55,.055);pointer-events:none;}
-        .pv-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,.18),transparent);margin:0 60px;}
+        .pv-ring{position:absolute;border-radius:50%;border:1px solid rgba(16,185,129,.055);pointer-events:none;}
+        .pv-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(16,185,129,.18),transparent);margin:0 60px;}
         .pv-tech{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;
-          border:1px solid rgba(212,175,55,.15);border-radius:10px;background:rgba(212,175,55,.03);
+          border:1px solid rgba(16,185,129,.15);border-radius:10px;background:rgba(16,185,129,.03);
           font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:rgba(255,255,255,.55);
           transition:border-color .3s,color .3s,background .3s,transform .3s;}
-        .pv-tech:hover{border-color:rgba(212,175,55,.5);color:#D4AF37;background:rgba(212,175,55,.07);transform:translateY(-2px);}
+        .pv-tech:hover{border-color:rgba(16,185,129,.5);color:#10b981;background:rgba(16,185,129,.07);transform:translateY(-2px);}
         .pv-avatar{width:48px;height:48px;border-radius:50%;
-          background:linear-gradient(135deg,#D4AF37,#8B6914);flex-shrink:0;
+          background:linear-gradient(135deg,#10b981,#065f46);flex-shrink:0;
           display:flex;align-items:center;justify-content:center;
           font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;color:#000;
-          border:2px solid rgba(212,175,55,.4);}
+          border:2px solid rgba(16,185,129,.4);}
 
         @media(max-width:1024px){
           .g4{grid-template-columns:repeat(2,1fr)!important;}
@@ -446,19 +520,18 @@ export default function Hero() {
         }
       `}</style>
 
-      {/* scanline */}
+      {/* subtle top accent line */}
       <div
         style={{
           position: "fixed",
           top: 0,
           left: 0,
           right: 0,
-          height: 2,
+          height: 1,
           zIndex: 999,
           pointerEvents: "none",
           background:
-            "linear-gradient(transparent,rgba(212,175,55,.04),transparent)",
-          animation: "pvScan 9s linear infinite",
+            "linear-gradient(90deg,transparent,rgba(16,185,129,.3),rgba(6,182,212,.3),transparent)",
         }}
       />
 
@@ -473,7 +546,7 @@ export default function Hero() {
           alignItems: "center",
           justifyContent: "center",
           overflow: "hidden",
-          background: "#000",
+          background: "var(--hero-bg)",
         }}
       >
         <canvas
@@ -491,7 +564,7 @@ export default function Hero() {
             inset: 0,
             zIndex: 1,
             background:
-              "radial-gradient(ellipse 90% 70% at 15% 15%,#1a1200,transparent 65%)",
+              "radial-gradient(ellipse 90% 70% at 15% 15%,#0f172a,transparent 65%)",
           }}
         />
         <div
@@ -500,17 +573,7 @@ export default function Hero() {
             inset: 0,
             zIndex: 1,
             background:
-              "radial-gradient(ellipse 70% 90% at 85% 85%,#0d0900,transparent 60%)",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            zIndex: 1,
-            opacity: 0.034,
-            backgroundImage: `linear-gradient(rgba(212,175,55,1) 1px,transparent 1px),linear-gradient(90deg,rgba(212,175,55,1) 1px,transparent 1px)`,
-            backgroundSize: "60px 60px",
+              "radial-gradient(ellipse 70% 90% at 85% 85%,#0c1425,transparent 60%)",
           }}
         />
         <div
@@ -522,121 +585,49 @@ export default function Hero() {
             pointerEvents: "none",
           }}
         />
+        {/* Organic aurora blobs */}
         <div
           style={{
             position: "absolute",
-            top: "20%",
-            left: "18%",
-            width: 420,
-            height: 420,
-            background: "rgba(212,175,55,.05)",
-            filter: "blur(110px)",
-            borderRadius: "50%",
-            zIndex: 1,
-            pointerEvents: "none",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: "20%",
-            right: "18%",
-            width: 340,
-            height: 340,
-            background: "rgba(212,175,55,.04)",
-            filter: "blur(95px)",
-            borderRadius: "50%",
-            zIndex: 1,
-            pointerEvents: "none",
-          }}
-        />
-        {[520, 820, 1100].map((sz, i) => (
-          <div
-            key={i}
-            className="pv-ring"
-            style={{
-              width: sz,
-              height: sz,
-              top: "50%",
-              left: "50%",
-              marginTop: -sz / 2,
-              marginLeft: -sz / 2,
-              borderStyle: i === 1 ? "dashed" : "solid",
-              zIndex: 1,
-              animation: `${i % 2 === 0 ? "pvRotate" : "pvRotateR"} ${28 + i * 14}s linear infinite`,
-            }}
-          />
-        ))}
-        <svg
-          style={{
-            position: "absolute",
-            top: "7%",
-            right: "7%",
-            width: 110,
-            opacity: 0.07,
-            animation: "pvFloat 9s ease-in-out infinite",
-            zIndex: 2,
-            pointerEvents: "none",
-          }}
-          className="hide-mobile"
-          viewBox="0 0 100 100"
-        >
-          <polygon
-            points="50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5"
-            fill="none"
-            stroke="#D4AF37"
-            strokeWidth="1.2"
-          />
-        </svg>
-        <svg
-          style={{
-            position: "absolute",
-            bottom: "14%",
+            top: "10%",
             left: "5%",
-            width: 72,
-            opacity: 0.07,
-            animation: "pvFloat 11s ease-in-out infinite",
-            animationDelay: "3s",
-            zIndex: 2,
+            width: 500,
+            height: 500,
+            background: "rgba(16,185,129,.06)",
+            filter: "blur(120px)",
+            borderRadius: "40% 60% 70% 30% / 40% 50% 60% 50%",
+            zIndex: 1,
             pointerEvents: "none",
           }}
-          viewBox="0 0 100 100"
-        >
-          <rect
-            x="18"
-            y="18"
-            width="64"
-            height="64"
-            fill="none"
-            stroke="#D4AF37"
-            strokeWidth="1.4"
-            transform="rotate(45 50 50)"
-          />
-        </svg>
-        <svg
+        />
+        <div
           style={{
             position: "absolute",
-            top: "40%",
-            left: "3%",
-            width: 44,
-            opacity: 0.06,
-            animation: "pvFloat 7s ease-in-out infinite",
-            animationDelay: "1.5s",
-            zIndex: 2,
+            bottom: "15%",
+            right: "10%",
+            width: 400,
+            height: 400,
+            background: "rgba(6,182,212,.05)",
+            filter: "blur(100px)",
+            borderRadius: "60% 40% 30% 70% / 50% 60% 40% 50%",
+            zIndex: 1,
             pointerEvents: "none",
           }}
-          viewBox="0 0 100 100"
-        >
-          <circle
-            cx="50"
-            cy="50"
-            r="40"
-            fill="none"
-            stroke="#D4AF37"
-            strokeWidth="1.8"
-            strokeDasharray="8 5"
-          />
-        </svg>
+        />
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            right: "30%",
+            width: 250,
+            height: 250,
+            background: "rgba(139,92,246,.04)",
+            filter: "blur(80px)",
+            borderRadius: "50% 30% 60% 40%",
+            zIndex: 1,
+            pointerEvents: "none",
+          }}
+        />
 
         <div
           style={{
@@ -656,23 +647,20 @@ export default function Hero() {
               alignItems: "center",
               gap: 10,
               padding: "8px 22px",
-              border: "1px solid rgba(212,175,55,.32)",
+              border: "1px solid rgba(16,185,129,.2)",
               borderRadius: 100,
-              background: "rgba(212,175,55,.06)",
+              background: "rgba(16,185,129,.05)",
               backdropFilter: "blur(10px)",
               marginBottom: 38,
-              animation: "pvPulse 3.2s ease-in-out infinite",
               ...reveal(0.1),
             }}
           >
             <span
               style={{
-                width: 7,
-                height: 7,
-                background: "#D4AF37",
+                width: 6,
+                height: 6,
+                background: "#10b981",
                 borderRadius: "50%",
-                boxShadow: "0 0 8px #D4AF37",
-                animation: "pvBlink 2s ease-in-out infinite",
               }}
             />
             <span
@@ -680,29 +668,19 @@ export default function Hero() {
                 fontFamily: "'DM Sans',sans-serif",
                 fontSize: 12,
                 fontWeight: 600,
-                color: "rgba(212,175,55,.9)",
-                letterSpacing: ".12em",
+                color: "rgba(16,185,129,.8)",
+                letterSpacing: ".1em",
                 textTransform: "uppercase",
               }}
             >
               Inspiring Innovations · PAYIVVA Technologies
             </span>
-            <span
-              style={{
-                width: 7,
-                height: 7,
-                background: "#D4AF37",
-                borderRadius: "50%",
-                boxShadow: "0 0 8px #D4AF37",
-                animation: "pvBlink 2s ease-in-out infinite 1s",
-              }}
-            />
           </div>
 
           <div style={reveal(0.22, { marginBottom: 6 })}>
             <h1
               style={{
-                fontFamily: "'Cormorant Garamond',serif",
+                fontFamily: "'Montserrat',sans-serif",
                 fontSize: "clamp(50px,8.5vw,112px)",
                 fontWeight: 900,
                 lineHeight: 1.02,
@@ -710,21 +688,30 @@ export default function Hero() {
                 letterSpacing: "-.02em",
               }}
             >
-              Grow Your Business
+              Grow Your
             </h1>
           </div>
           <div style={reveal(0.36, { marginBottom: 26 })}>
             <h1
               className="pv-gold"
               style={{
-                fontFamily: "'Cormorant Garamond',serif",
+                fontFamily: "'Montserrat',sans-serif",
                 fontSize: "clamp(50px,8.5vw,112px)",
                 fontWeight: 900,
                 lineHeight: 1.02,
                 letterSpacing: "-.02em",
               }}
             >
-              Online with Experts
+              {typingWords[typedWordIndex].slice(0, typedLength)}
+              <span
+                style={{
+                  color: "rgba(255,255,255,0.75)",
+                  marginLeft: 5,
+                  animation: "pvBlink .7s ease-in-out infinite",
+                }}
+              >
+                |
+              </span>
             </h1>
           </div>
 
@@ -793,7 +780,7 @@ export default function Hero() {
               Get Started <ArrowRight size={16} />
             </button>
             <button className="pv-btn-o" onClick={() => scrollTo("#services")}>
-              <Play size={14} style={{ color: "#D4AF37" }} /> Our Services
+              <Play size={14} style={{ color: "#10b981" }} /> Our Services
             </button>
           </div>
 
@@ -823,8 +810,8 @@ export default function Hero() {
                     left: 0,
                     width: 18,
                     height: 18,
-                    borderTop: "1px solid rgba(212,175,55,.5)",
-                    borderLeft: "1px solid rgba(212,175,55,.5)",
+                    borderTop: "1px solid rgba(16,185,129,.5)",
+                    borderLeft: "1px solid rgba(16,185,129,.5)",
                     borderRadius: "12px 0 0 0",
                   }}
                 />
@@ -835,15 +822,15 @@ export default function Hero() {
                     right: 0,
                     width: 18,
                     height: 18,
-                    borderBottom: "1px solid rgba(212,175,55,.5)",
-                    borderRight: "1px solid rgba(212,175,55,.5)",
+                    borderBottom: "1px solid rgba(16,185,129,.5)",
+                    borderRight: "1px solid rgba(16,185,129,.5)",
                     borderRadius: "0 0 12px 0",
                   }}
                 />
                 <div
                   style={{
                     fontSize: 18,
-                    color: "rgba(212,175,55,.35)",
+                    color: "rgba(16,185,129,.35)",
                     marginBottom: 4,
                   }}
                 >
@@ -852,7 +839,7 @@ export default function Hero() {
                 <p
                   className="pv-gold"
                   style={{
-                    fontFamily: "'Cormorant Garamond',serif",
+                    fontFamily: "'Montserrat',sans-serif",
                     fontSize: "clamp(28px,3vw,40px)",
                     fontWeight: 900,
                     lineHeight: 1,
@@ -863,7 +850,8 @@ export default function Hero() {
                     animationDelay: `${i * 0.1}s`,
                   }}
                 >
-                  {s.value}
+                  {statsValue[i]}
+                  {s.suffix}
                 </p>
                 <p
                   style={{
@@ -921,7 +909,7 @@ export default function Hero() {
           position: "relative",
           zIndex: 10,
           padding: "110px 0 0",
-          background: "#000",
+          background: "var(--hero-bg)",
         }}
       >
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 28px" }}>
@@ -966,7 +954,7 @@ export default function Hero() {
         </div>
         <div
           style={{
-            border: "1px solid rgba(212,175,55,.08)",
+            border: "1px solid rgba(16,185,129,.08)",
             borderLeft: "none",
             borderRight: "none",
           }}
@@ -996,14 +984,14 @@ export default function Hero() {
                     marginBottom: 20,
                   }}
                 >
-                  <span style={{ fontSize: 26, color: "rgba(212,175,55,.55)" }}>
+                  <span style={{ fontSize: 26, color: "rgba(16,185,129,.55)" }}>
                     {svc.icon}
                   </span>
                   <span
                     style={{
                       fontFamily: "'Cormorant Garamond',serif",
                       fontSize: 13,
-                      color: "rgba(212,175,55,.22)",
+                      color: "rgba(16,185,129,.22)",
                       fontWeight: 700,
                     }}
                   >
@@ -1015,7 +1003,7 @@ export default function Hero() {
                     fontFamily: "'Cormorant Garamond',serif",
                     fontSize: 24,
                     fontWeight: 700,
-                    color: hoveredService === i ? "#D4AF37" : "#fff",
+                    color: hoveredService === i ? "#10b981" : "#fff",
                     marginBottom: 14,
                     lineHeight: 1.2,
                     transition: "color .3s",
@@ -1048,7 +1036,7 @@ export default function Hero() {
                     alignItems: "center",
                     gap: 7,
                     color:
-                      hoveredService === i ? "#D4AF37" : "rgba(212,175,55,.5)",
+                      hoveredService === i ? "#10b981" : "rgba(16,185,129,.5)",
                     fontFamily: "'DM Sans',sans-serif",
                     fontSize: 12,
                     fontWeight: 600,
@@ -1069,7 +1057,7 @@ export default function Hero() {
       <section
         style={{
           padding: "80px 24px",
-          background: "#000",
+          background: "var(--hero-bg)",
           zIndex: 10,
           position: "relative",
         }}
@@ -1152,7 +1140,7 @@ export default function Hero() {
         id="process"
         style={{
           padding: "80px 24px",
-          background: "#000",
+          background: "var(--hero-bg)",
           zIndex: 10,
           position: "relative",
         }}
@@ -1239,7 +1227,7 @@ export default function Hero() {
                       top: "50%",
                       right: -9,
                       zIndex: 3,
-                      color: "rgba(212,175,55,.3)",
+                      color: "rgba(16,185,129,.3)",
                       fontSize: 20,
                       transform: "translateY(-50%)",
                     }}
@@ -1260,7 +1248,7 @@ export default function Hero() {
         id="testimonials"
         style={{
           padding: "80px 24px",
-          background: "#000",
+          background: "var(--hero-bg)",
           zIndex: 10,
           position: "relative",
         }}
@@ -1315,7 +1303,7 @@ export default function Hero() {
               <div key={i} className="pv-testi">
                 <div style={{ display: "flex", gap: 3, marginBottom: 14 }}>
                   {[1, 2, 3, 4, 5].map((s) => (
-                    <span key={s} style={{ color: "#D4AF37", fontSize: 13 }}>
+                    <span key={s} style={{ color: "#10b981", fontSize: 13 }}>
                       ★
                     </span>
                   ))}
@@ -1350,7 +1338,7 @@ export default function Hero() {
                       style={{
                         fontFamily: "'DM Sans',sans-serif",
                         fontSize: 12,
-                        color: "rgba(212,175,55,.6)",
+                        color: "rgba(16,185,129,.6)",
                         letterSpacing: ".04em",
                       }}
                     >
@@ -1370,7 +1358,7 @@ export default function Hero() {
       <section
         style={{
           padding: "80px 24px",
-          background: "#000",
+          background: "var(--hero-bg)",
           zIndex: 10,
           position: "relative",
         }}
@@ -1431,19 +1419,19 @@ export default function Hero() {
                       alignItems: "center",
                       gap: 14,
                       padding: "13px 18px",
-                      border: "1px solid rgba(212,175,55,.1)",
+                      border: "1px solid rgba(16,185,129,.1)",
                       borderRadius: 12,
-                      background: "rgba(212,175,55,.02)",
+                      background: "rgba(16,185,129,.02)",
                       transition: "border-color .3s,background .3s",
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.borderColor =
-                        "rgba(212,175,55,.38)";
-                      e.currentTarget.style.background = "rgba(212,175,55,.06)";
+                        "rgba(16,185,129,.38)";
+                      e.currentTarget.style.background = "rgba(16,185,129,.06)";
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = "rgba(212,175,55,.1)";
-                      e.currentTarget.style.background = "rgba(212,175,55,.02)";
+                      e.currentTarget.style.borderColor = "rgba(16,185,129,.1)";
+                      e.currentTarget.style.background = "rgba(16,185,129,.02)";
                     }}
                   >
                     <span style={{ fontSize: 17 }}>{item.icon}</span>
@@ -1460,7 +1448,7 @@ export default function Hero() {
                     <span
                       style={{
                         marginLeft: "auto",
-                        color: "rgba(212,175,55,.55)",
+                        color: "rgba(16,185,129,.55)",
                         fontSize: 13,
                         fontWeight: 700,
                       }}
@@ -1473,10 +1461,10 @@ export default function Hero() {
             </div>
             <div
               style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
-              gap: 16,
-            }}
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
+                gap: 16,
+              }}
             >
               {[
                 {
@@ -1504,20 +1492,20 @@ export default function Hero() {
                   key={i}
                   style={{
                     padding: "28px 20px",
-                    border: "1px solid rgba(212,175,55,.13)",
+                    border: "1px solid rgba(16,185,129,.13)",
                     borderRadius: 16,
-                    background: "rgba(212,175,55,.025)",
+                    background: "rgba(16,185,129,.025)",
                     textAlign: "center",
                     transition: "border-color .3s,transform .4s,box-shadow .4s",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(212,175,55,.45)";
+                    e.currentTarget.style.borderColor = "rgba(16,185,129,.45)";
                     e.currentTarget.style.transform = "translateY(-5px)";
                     e.currentTarget.style.boxShadow =
-                      "0 18px 50px rgba(212,175,55,.12)";
+                      "0 18px 50px rgba(16,185,129,.12)";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(212,175,55,.13)";
+                    e.currentTarget.style.borderColor = "rgba(16,185,129,.13)";
                     e.currentTarget.style.transform = "translateY(0)";
                     e.currentTarget.style.boxShadow = "none";
                   }}
@@ -1561,11 +1549,151 @@ export default function Hero() {
         </div>
       </section>
 
+      <div className="pv-divider" />
+
+      <section
+        id="case-studies"
+        style={{
+          padding: "88px 24px",
+          background: "var(--hero-bg)",
+          zIndex: 10,
+          position: "relative",
+        }}
+      >
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: 44 }}>
+            <div
+              className="pv-label"
+              style={{
+                justifyContent: "center",
+                display: "flex",
+                marginBottom: 16,
+              }}
+            >
+              Featured Work
+            </div>
+            <h2
+              style={{
+                fontFamily: "'Montserrat',sans-serif",
+                fontSize: "clamp(32px,4.5vw,58px)",
+                fontWeight: 800,
+                color: "#fff",
+                marginBottom: 14,
+              }}
+            >
+              Case Studies with <span className="pv-gold">Real Impact</span>
+            </h2>
+          </div>
+
+          <div
+            className="g3"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3,1fr)",
+              gap: 18,
+            }}
+          >
+            {caseStudyShowcase.map((item, idx) => (
+              <article
+                key={item.title}
+                className="pv-testi"
+                style={{
+                  padding: 0,
+                  overflow: "hidden",
+                  opacity: loaded ? 1 : 0,
+                  transform: loaded ? "translateY(0)" : "translateY(24px)",
+                  transition: `opacity .6s ease ${idx * 0.12}s, transform .6s ease ${idx * 0.12}s`,
+                }}
+              >
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  style={{ width: "100%", height: 190, objectFit: "cover" }}
+                  loading="lazy"
+                />
+                <div style={{ padding: "22px 20px" }}>
+                  <p
+                    style={{
+                      fontFamily: "'Montserrat',sans-serif",
+                      color: "#fff",
+                      fontWeight: 700,
+                      fontSize: 20,
+                      marginBottom: 14,
+                    }}
+                  >
+                    {item.title}
+                  </p>
+                  <div
+                    style={{
+                      border: "1px solid rgba(255,255,255,.1)",
+                      borderRadius: 12,
+                      padding: "12px 12px",
+                      marginBottom: 10,
+                      background: "rgba(255,255,255,.02)",
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontSize: 11,
+                        letterSpacing: ".08em",
+                        color: "#f87171",
+                        marginBottom: 6,
+                      }}
+                    >
+                      PROBLEM
+                    </p>
+                    <p
+                      style={{
+                        fontFamily: "'Open Sans',sans-serif",
+                        color: "rgba(255,255,255,.72)",
+                        fontSize: 13,
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      {item.problem}
+                    </p>
+                  </div>
+                  <div
+                    style={{
+                      border: "1px solid rgba(16,185,129,.25)",
+                      borderRadius: 12,
+                      padding: "12px 12px",
+                      background: "rgba(16,185,129,.07)",
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontSize: 11,
+                        letterSpacing: ".08em",
+                        color: "#2dd4bf",
+                        marginBottom: 6,
+                      }}
+                    >
+                      SOLUTION
+                    </p>
+                    <p
+                      style={{
+                        fontFamily: "'Open Sans',sans-serif",
+                        color: "rgba(255,255,255,.8)",
+                        fontSize: 13,
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      {item.solution}
+                    </p>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ════════════ CTA BANNER ════════════ */}
       <section
         style={{
           padding: "0 40px 100px",
-          background: "#000",
+          background: "var(--hero-bg)",
           zIndex: 10,
           position: "relative",
         }}
@@ -1574,10 +1702,10 @@ export default function Hero() {
           style={{
             position: "relative",
             padding: "min(90px, 12vw) 24px",
-            border: "1px solid rgba(212,175,55,.18)",
+            border: "1px solid rgba(16,185,129,.18)",
             borderRadius: 28,
             background:
-              "linear-gradient(135deg,rgba(212,175,55,.07) 0%,rgba(0,0,0,0) 50%,rgba(212,175,55,.04) 100%)",
+              "linear-gradient(135deg,rgba(16,185,129,.07) 0%,rgba(0,0,0,0) 50%,rgba(16,185,129,.04) 100%)",
             textAlign: "center",
             overflow: "hidden",
           }}
@@ -1590,7 +1718,7 @@ export default function Hero() {
               width: 300,
               height: 300,
               background:
-                "radial-gradient(circle,rgba(212,175,55,.12),transparent 70%)",
+                "radial-gradient(circle,rgba(16,185,129,.12),transparent 70%)",
               pointerEvents: "none",
             }}
           />
@@ -1602,7 +1730,7 @@ export default function Hero() {
               width: 250,
               height: 250,
               background:
-                "radial-gradient(circle,rgba(212,175,55,.08),transparent 70%)",
+                "radial-gradient(circle,rgba(16,185,129,.08),transparent 70%)",
               pointerEvents: "none",
             }}
           />

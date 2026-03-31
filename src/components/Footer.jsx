@@ -49,9 +49,12 @@ const footerNav = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "About Us", href: "/about" },
-  { label: "Case Studies", href: "/case-studies" },
   { label: "Careers", href: "/careers" },
   { label: "Contact", href: "/contact" },
+  { label: "Legal", href: "/legal" },
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Terms of Service", href: "/terms" },
+  { label: "Security", href: "/security" },
 ];
 
 const socials = [
@@ -114,7 +117,7 @@ function FooterLink({ to, children, chevron }) {
           display: "inline-flex",
           alignItems: "center",
           gap: "6px",
-          color: hov ? "#D4AF37" : "rgba(255,255,255,.45)",
+          color: hov ? "#10b981" : "rgba(255,255,255,.45)",
           fontSize: "13px",
           textDecoration: "none",
           transition: "all .25s ease",
@@ -154,7 +157,7 @@ function SectionTitle({ children }) {
           display: "inline-block",
           width: "24px",
           height: "2px",
-          background: "linear-gradient(90deg,#D4AF37,#F0D060)",
+          background: "linear-gradient(90deg,#10b981,#22d3ee)",
           borderRadius: "2px",
           flexShrink: 0,
         }}
@@ -179,12 +182,12 @@ function ContactCard({ href, icon: Icon, label, value, sub }) {
         gap: "12px",
         padding: "14px 16px",
         borderRadius: "14px",
-        background: hov ? "rgba(212,175,55,.07)" : "rgba(255,255,255,.03)",
-        border: `1px solid ${hov ? "rgba(212,175,55,.3)" : "rgba(255,255,255,.06)"}`,
+        background: hov ? "rgba(16,185,129,.07)" : "rgba(255,255,255,.03)",
+        border: `1px solid ${hov ? "rgba(16,185,129,.3)" : "rgba(255,255,255,.06)"}`,
         textDecoration: "none",
         transition: "all .3s cubic-bezier(.23,1,.32,1)",
         transform: hov ? "translateY(-2px)" : "translateY(0)",
-        boxShadow: hov ? "0 8px 24px rgba(212,175,55,.08)" : "none",
+        boxShadow: hov ? "0 8px 24px rgba(16,185,129,.08)" : "none",
         cursor: href ? "pointer" : "default",
       }}
     >
@@ -194,16 +197,16 @@ function ContactCard({ href, icon: Icon, label, value, sub }) {
           height: "36px",
           flexShrink: 0,
           borderRadius: "10px",
-          background: hov ? "rgba(212,175,55,.15)" : "rgba(212,175,55,.08)",
-          border: "1px solid rgba(212,175,55,.2)",
+          background: hov ? "rgba(16,185,129,.15)" : "rgba(16,185,129,.08)",
+          border: "1px solid rgba(16,185,129,.2)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           transition: "all .3s ease",
-          boxShadow: hov ? "0 0 12px rgba(212,175,55,.2)" : "none",
+          boxShadow: hov ? "0 0 12px rgba(16,185,129,.2)" : "none",
         }}
       >
-        <Icon color="#D4AF37" size={16} />
+        <Icon color="#10b981" size={16} />
       </div>
       <div style={{ minWidth: 0 }}>
         <p
@@ -217,7 +220,7 @@ function ContactCard({ href, icon: Icon, label, value, sub }) {
         </p>
         <p
           style={{
-            color: hov ? "#D4AF37" : "rgba(255,255,255,.8)",
+            color: hov ? "#10b981" : "rgba(255,255,255,.8)",
             fontSize: "13px",
             fontWeight: 600,
             margin: "0",
@@ -274,7 +277,7 @@ export default function Footer() {
   return (
     <footer
       style={{
-        background: "#000",
+        background: "#0f172a",
         fontFamily: "'Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif",
         position: "relative",
       }}
@@ -289,8 +292,8 @@ export default function Footer() {
       <div
         style={{
           background:
-            "linear-gradient(135deg,rgba(212,175,55,.08) 0%,rgba(212,175,55,.03) 50%,rgba(0,0,0,.6) 100%)",
-          borderBottom: "1px solid rgba(212,175,55,.15)",
+            "linear-gradient(135deg,rgba(16,185,129,.08) 0%,rgba(16,185,129,.03) 50%,rgba(0,0,0,.6) 100%)",
+          borderBottom: "1px solid rgba(16,185,129,.15)",
           padding: isMobile
             ? "36px 16px"
             : isTablet
@@ -310,7 +313,7 @@ export default function Footer() {
             width: "600px",
             height: "300px",
             background:
-              "radial-gradient(ellipse,rgba(212,175,55,.06) 0%,transparent 70%)",
+              "radial-gradient(ellipse,rgba(16,185,129,.06) 0%,transparent 70%)",
             pointerEvents: "none",
           }}
         />
@@ -335,9 +338,9 @@ export default function Footer() {
                 gap: "6px",
                 padding: "5px 12px",
                 borderRadius: "20px",
-                background: "rgba(212,175,55,.1)",
-                border: "1px solid rgba(212,175,55,.3)",
-                color: "#D4AF37",
+                background: "rgba(16,185,129,.1)",
+                border: "1px solid rgba(16,185,129,.3)",
+                color: "#10b981",
                 fontSize: "10px",
                 fontWeight: 700,
                 letterSpacing: "1px",
@@ -362,7 +365,7 @@ export default function Footer() {
               <span
                 style={{
                   background:
-                    "linear-gradient(135deg,#D4AF37,#F0D060,#D4AF37,#BF9520)",
+                    "linear-gradient(135deg,#10b981,#22d3ee,#10b981,#047857)",
                   backgroundSize: "200% auto",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
@@ -410,20 +413,20 @@ export default function Footer() {
                       width: "34px",
                       height: "34px",
                       borderRadius: "9px",
-                      background: "rgba(212,175,55,.1)",
-                      border: "1px solid rgba(212,175,55,.2)",
+                      background: "rgba(16,185,129,.1)",
+                      border: "1px solid rgba(16,185,129,.2)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       flexShrink: 0,
                     }}
                   >
-                    <Icon size={15} color="#D4AF37" />
+                    <Icon size={15} color="#10b981" />
                   </div>
                   <div>
                     <div
                       style={{
-                        color: "#D4AF37",
+                        color: "#10b981",
                         fontWeight: 900,
                         fontSize: "16px",
                         lineHeight: 1,
@@ -457,9 +460,9 @@ export default function Footer() {
               gap: "10px",
               padding: isMobile ? "14px 24px" : "16px 32px",
               background: ctaHov
-                ? "linear-gradient(135deg,#F0D060,#D4AF37)"
-                : "linear-gradient(135deg,#D4AF37,#BF9520)",
-              color: "#000",
+                ? "linear-gradient(135deg,#22d3ee,#10b981)"
+                : "linear-gradient(135deg,#10b981,#047857)",
+              color: "#0f172a",
               fontWeight: 900,
               fontSize: isMobile ? "13px" : "14px",
               borderRadius: "14px",
@@ -467,7 +470,7 @@ export default function Footer() {
               cursor: "pointer",
               transition: "all .35s cubic-bezier(.23,1,.32,1)",
               boxShadow: ctaHov
-                ? "0 0 36px rgba(212,175,55,.6),0 16px 40px rgba(0,0,0,.4)"
+                ? "0 0 36px rgba(16,185,129,.6),0 16px 40px rgba(0,0,0,.4)"
                 : "0 8px 24px rgba(0,0,0,.3)",
               transform: ctaHov ? "scale(1.04) translateY(-2px)" : "scale(1)",
               letterSpacing: ".4px",
@@ -540,7 +543,7 @@ export default function Footer() {
                     position: "absolute",
                     inset: "-4px",
                     background:
-                      "radial-gradient(circle,rgba(212,175,55,.25),transparent 70%)",
+                      "radial-gradient(circle,rgba(16,185,129,.25),transparent 70%)",
                     borderRadius: "50%",
                   }}
                 />
@@ -569,7 +572,7 @@ export default function Footer() {
                 </p>
                 <p
                   style={{
-                    color: "rgba(212,175,55,.7)",
+                    color: "rgba(16,185,129,.7)",
                     fontSize: "10px",
                     margin: 0,
                     letterSpacing: "2px",
@@ -624,7 +627,7 @@ export default function Footer() {
                   style={{
                     flex: 1,
                     background: "rgba(255,255,255,.04)",
-                    border: `1px solid ${inputFoc ? "rgba(212,175,55,.5)" : "rgba(255,255,255,.08)"}`,
+                    border: `1px solid ${inputFoc ? "rgba(16,185,129,.5)" : "rgba(255,255,255,.08)"}`,
                     borderRadius: "10px",
                     padding: "10px 14px",
                     color: "#fff",
@@ -632,7 +635,7 @@ export default function Footer() {
                     outline: "none",
                     transition: "border-color .2s, box-shadow .2s",
                     boxShadow: inputFoc
-                      ? "0 0 0 3px rgba(212,175,55,.08)"
+                      ? "0 0 0 3px rgba(16,185,129,.08)"
                       : "none",
                     fontFamily: "inherit",
                     minWidth: 0,
@@ -648,8 +651,8 @@ export default function Footer() {
                     height: "42px",
                     flexShrink: 0,
                     background: sendHov
-                      ? "linear-gradient(135deg,#F0D060,#D4AF37)"
-                      : "linear-gradient(135deg,#D4AF37,#BF9520)",
+                      ? "linear-gradient(135deg,#22d3ee,#10b981)"
+                      : "linear-gradient(135deg,#10b981,#047857)",
                     border: "none",
                     borderRadius: "10px",
                     cursor: "pointer",
@@ -658,12 +661,12 @@ export default function Footer() {
                     justifyContent: "center",
                     transition: "all .3s ease",
                     boxShadow: sendHov
-                      ? "0 0 16px rgba(212,175,55,.5)"
+                      ? "0 0 16px rgba(16,185,129,.5)"
                       : "none",
                     transform: sendHov ? "scale(1.08)" : "scale(1)",
                   }}
                 >
-                  <Send size={15} color="#000" />
+                  <Send size={15} color="#0f172a" />
                 </button>
               </form>
               {isSubscribed && (
@@ -781,6 +784,24 @@ export default function Footer() {
 S.no.50, Madhuban Banglow, Jagdamba Bhawan Marg, opposite Sunshine Hills Lane to Bloom Field School, Shree Siddhivinayak Meera, Undri, Pune, Maharashtra 411060"
                 />
               </div>
+
+              <div
+                style={{
+                  marginTop: "12px",
+                  borderRadius: "14px",
+                  overflow: "hidden",
+                  border: "1px solid rgba(16,185,129,.2)",
+                  background: "rgba(255,255,255,.02)",
+                }}
+              >
+                <iframe
+                  title="PAYIVVA Office Map"
+                  src="https://www.google.com/maps?q=Undri%20Pune%20Maharashtra&output=embed"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  style={{ width: "100%", height: "220px", border: "none" }}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -826,7 +847,7 @@ S.no.50, Madhuban Banglow, Jagdamba Bhawan Marg, opposite Sunshine Hills Lane to
             }}
           >
             Made with{" "}
-            <Heart size={11} color="#D4AF37" style={{ display: "inline" }} /> in
+            <Heart size={11} color="#10b981" style={{ display: "inline" }} /> in
             India
           </p>
         </div>
@@ -850,11 +871,11 @@ function ServiceLink({ to, icon: Icon, highlight, children }) {
           gap: "8px",
           padding: "7px 8px",
           borderRadius: "8px",
-          color: hov ? "#D4AF37" : "rgba(255,255,255,.45)",
+          color: hov ? "#10b981" : "rgba(255,255,255,.45)",
           fontSize: "13px",
           textDecoration: "none",
           transition: "all .25s ease",
-          background: hov ? "rgba(212,175,55,.06)" : "transparent",
+          background: hov ? "rgba(16,185,129,.06)" : "transparent",
           transform: hov ? "translateX(3px)" : "translateX(0)",
         }}
       >
@@ -865,8 +886,8 @@ function ServiceLink({ to, icon: Icon, highlight, children }) {
             style={{
               padding: "2px 7px",
               borderRadius: "20px",
-              background: "linear-gradient(135deg,#D4AF37,#F0D060)",
-              color: "#000",
+              background: "linear-gradient(135deg,#10b981,#22d3ee)",
+              color: "#0f172a",
               fontSize: "9px",
               fontWeight: 800,
               letterSpacing: ".3px",

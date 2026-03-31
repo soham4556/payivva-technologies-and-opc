@@ -68,14 +68,14 @@ function ContactCard({ info }) {
         display: 'flex', alignItems: 'flex-start', gap: '16px',
         padding: '18px 20px',
         background: hovered
-          ? 'linear-gradient(135deg,rgba(212,175,55,.08),rgba(255,255,255,.03))'
+          ? 'linear-gradient(135deg,rgba(16,185,129,.08),rgba(255,255,255,.03))'
           : 'linear-gradient(135deg,rgba(255,255,255,.03),rgba(255,255,255,.01))',
-        border: `1px solid ${hovered ? 'rgba(212,175,55,.35)' : 'rgba(255,255,255,.06)'}`,
+        border: `1px solid ${hovered ? 'rgba(16,185,129,.35)' : 'rgba(255,255,255,.06)'}`,
         borderRadius: '16px',
         textDecoration: 'none',
         transition: 'all .35s cubic-bezier(.23,1,.32,1)',
         transform: hovered ? 'translateY(-3px)' : 'translateY(0)',
-        boxShadow: hovered ? '0 16px 40px rgba(212,175,55,.1)' : '0 4px 20px rgba(0,0,0,.25)',
+        boxShadow: hovered ? '0 16px 40px rgba(16,185,129,.1)' : '0 4px 20px rgba(0,0,0,.25)',
         backdropFilter: 'blur(8px)',
         position: 'relative', overflow: 'hidden',
       }}
@@ -84,7 +84,7 @@ function ContactCard({ info }) {
       <div style={{
         position: 'absolute', top: 0, left: 0, right: 0, height: '1px',
         background: hovered
-          ? 'linear-gradient(90deg,transparent,rgba(212,175,55,.7),transparent)'
+          ? 'linear-gradient(90deg,transparent,rgba(16,185,129,.7),transparent)'
           : 'linear-gradient(90deg,transparent,rgba(255,255,255,.04),transparent)',
         transition: 'all .35s ease',
       }} />
@@ -92,20 +92,20 @@ function ContactCard({ info }) {
       <div style={{
         width: '44px', height: '44px', flexShrink: 0,
         borderRadius: '12px',
-        background: hovered ? 'rgba(212,175,55,.15)' : 'rgba(212,175,55,.08)',
-        border: '1px solid rgba(212,175,55,.25)',
+        background: hovered ? 'rgba(16,185,129,.15)' : 'rgba(16,185,129,.08)',
+        border: '1px solid rgba(16,185,129,.25)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         transition: 'all .3s ease',
-        boxShadow: hovered ? '0 0 16px rgba(212,175,55,.2)' : 'none',
+        boxShadow: hovered ? '0 0 16px rgba(16,185,129,.2)' : 'none',
         transform: hovered ? 'scale(1.1)' : 'scale(1)',
       }}>
-        <Icon color="#D4AF37" size={19} />
+        <Icon color="#10b981" size={19} />
       </div>
 
       <div>
         <p style={{ color: 'rgba(255,255,255,.4)', fontSize: '11px', margin: '0 0 3px 0' }}>{info.label}</p>
         <p style={{
-          color: hovered ? '#D4AF37' : '#fff',
+          color: hovered ? '#10b981' : '#fff',
           fontWeight: 700, fontSize: '14px', margin: '0 0 3px 0',
           transition: 'color .3s ease',
         }}>{info.value}</p>
@@ -151,7 +151,7 @@ function inputStyle(hasError) {
   return {
     width: '100%',
     background: 'rgba(255,255,255,.03)',
-    border: `1px solid ${hasError ? 'rgba(239,68,68,.5)' : 'rgba(212,175,55,.15)'}`,
+    border: `1px solid ${hasError ? 'rgba(239,68,68,.5)' : 'rgba(16,185,129,.15)'}`,
     borderRadius: '10px',
     padding: '11px 14px',
     color: '#fff',
@@ -210,9 +210,9 @@ export default function Contact() {
   const fieldStyle = (name) => ({
     ...inputStyle(!!errors[name]),
     borderColor: focused === name && !errors[name]
-      ? 'rgba(212,175,55,.5)' : errors[name]
-      ? 'rgba(239,68,68,.5)' : 'rgba(212,175,55,.15)',
-    boxShadow: focused === name ? '0 0 0 3px rgba(212,175,55,.08)' : 'none',
+      ? 'rgba(16,185,129,.5)' : errors[name]
+      ? 'rgba(239,68,68,.5)' : 'rgba(16,185,129,.15)',
+    boxShadow: focused === name ? '0 0 0 3px rgba(16,185,129,.08)' : 'none',
   });
 
   const focusProps = (name) => ({
@@ -225,7 +225,7 @@ export default function Contact() {
       id="contact"
       style={{
         position: 'relative',
-        background: '#0a0a0a',
+        background: '#0f172a',
         padding: isMobile ? '40px 0' : isTablet ? '80px 0' : '100px 0',
         fontFamily: "'Outfit',sans-serif",
         overflow: 'hidden',
@@ -237,7 +237,7 @@ export default function Contact() {
         @keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
         @keyframes spin{to{transform:rotate(360deg)}}
         input::placeholder,textarea::placeholder,select option{color:rgba(255,255,255,.25)}
-        select option{background:#111}
+        select option{background:#1e293b}
       `}</style>
 
       {/* centre glow */}
@@ -246,7 +246,7 @@ export default function Contact() {
         transform: 'translate(-50%,-50%)',
         width: isMobile ? '320px' : '600px',
         height: isMobile ? '320px' : '600px',
-        background: 'radial-gradient(circle,rgba(212,175,55,.04) 0%,transparent 70%)',
+        background: 'radial-gradient(circle,rgba(16,185,129,.04) 0%,transparent 70%)',
         borderRadius: '50%', pointerEvents: 'none',
         animation: 'pulse 10s ease-in-out infinite',
       }} />
@@ -255,7 +255,7 @@ export default function Contact() {
       <div style={{
         position: 'absolute', bottom: '10%', right: '-5%',
         width: isMobile ? '200px' : '400px', height: isMobile ? '200px' : '400px',
-        background: 'radial-gradient(circle,rgba(212,175,55,.03) 0%,transparent 70%)',
+        background: 'radial-gradient(circle,rgba(16,185,129,.03) 0%,transparent 70%)',
         borderRadius: '50%', pointerEvents: 'none',
       }} />
 
@@ -263,7 +263,7 @@ export default function Contact() {
       {['top','bottom'].map(pos => (
         <div key={pos} style={{
           position: 'absolute', [pos]: 0, left: 0, right: 0, height: '1px',
-          background: 'linear-gradient(90deg,transparent,rgba(212,175,55,.45),transparent)',
+          background: 'linear-gradient(90deg,transparent,rgba(16,185,129,.45),transparent)',
         }} />
       ))}
 
@@ -280,10 +280,10 @@ export default function Contact() {
         }}>
           <span style={{
             display: 'inline-block', padding: '6px 16px', borderRadius: '30px',
-            border: '1px solid rgba(212,175,55,.35)', background: 'rgba(212,175,55,.07)',
-            color: '#D4AF37', fontSize: '10px', fontWeight: 800,
+            border: '1px solid rgba(16,185,129,.35)', background: 'rgba(16,185,129,.07)',
+            color: '#10b981', fontSize: '10px', fontWeight: 800,
             letterSpacing: '3px', textTransform: 'uppercase',
-            marginBottom: '20px', boxShadow: '0 0 18px rgba(212,175,55,.1)',
+            marginBottom: '20px', boxShadow: '0 0 18px rgba(16,185,129,.1)',
           }}>✦ Get In Touch ✦</span>
 
           <h2 style={{
@@ -293,7 +293,7 @@ export default function Contact() {
           }}>
             Let's Grow Your Business{' '}
             <span style={{
-              background: 'linear-gradient(135deg,#D4AF37 0%,#F0D060 40%,#D4AF37 70%,#BF9520 100%)',
+              background: 'linear-gradient(135deg,#10b981 0%,#22d3ee 40%,#10b981 70%,#047857 100%)',
               backgroundSize: '200% auto',
               WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
               backgroundClip: 'text', animation: 'shimmer 4s linear infinite',
@@ -329,7 +329,7 @@ export default function Contact() {
             {/* Map */}
             <div style={{
               borderRadius: '16px', overflow: 'hidden',
-              border: '1px solid rgba(212,175,55,.15)',
+              border: '1px solid rgba(16,185,129,.15)',
               height: isMobile ? '180px' : '210px',
               boxShadow: '0 8px 30px rgba(0,0,0,.3)',
             }}>
@@ -356,7 +356,7 @@ export default function Contact() {
             {/* card shimmer top */}
             <div style={{
               position: 'absolute', top: 0, left: 0, right: 0, height: '1px',
-              background: 'linear-gradient(90deg,transparent,rgba(212,175,55,.4),transparent)',
+              background: 'linear-gradient(90deg,transparent,rgba(16,185,129,.4),transparent)',
             }} />
 
             {status === 'success' ? (
@@ -482,14 +482,14 @@ export default function Contact() {
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
                     padding: isMobile ? '14px' : '16px',
                     background: status === 'submitting' || !submitHov
-                      ? 'linear-gradient(135deg,#D4AF37,#BF9520)'
-                      : 'linear-gradient(135deg,#F0D060,#D4AF37)',
-                    color: '#000', fontWeight: 900,
+                      ? 'linear-gradient(135deg,#10b981,#047857)'
+                      : 'linear-gradient(135deg,#22d3ee,#10b981)',
+                    color: '#0f172a', fontWeight: 900,
                     fontSize: isMobile ? '13px' : '14px',
                     borderRadius: '12px', border: 'none', cursor: status === 'submitting' ? 'not-allowed' : 'pointer',
                     transition: 'all .35s cubic-bezier(.23,1,.32,1)',
                     boxShadow: submitHov && status !== 'submitting'
-                      ? '0 0 32px rgba(212,175,55,.6),0 12px 32px rgba(0,0,0,.4)'
+                      ? '0 0 32px rgba(16,185,129,.6),0 12px 32px rgba(0,0,0,.4)'
                       : '0 6px 20px rgba(0,0,0,.3)',
                     transform: submitHov && status !== 'submitting' ? 'translateY(-2px)' : 'translateY(0)',
                     opacity: status === 'submitting' ? .7 : 1,
@@ -543,7 +543,7 @@ function FieldGroup({ label, required, error, children }) {
         letterSpacing: '.3px',
       }}>
         {label}{' '}
-        {required && <span style={{ color: '#D4AF37' }}>*</span>}
+        {required && <span style={{ color: '#10b981' }}>*</span>}
       </label>
       {children}
       {error && (
@@ -568,14 +568,14 @@ function SuccessState({ onReset, isMobile }) {
     }}>
       <div style={{
         width: '70px', height: '70px',
-        background: 'rgba(212,175,55,.1)',
-        border: '1px solid rgba(212,175,55,.3)',
+        background: 'rgba(16,185,129,.1)',
+        border: '1px solid rgba(16,185,129,.3)',
         borderRadius: '50%',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         margin: '0 auto 20px',
-        boxShadow: '0 0 30px rgba(212,175,55,.15)',
+        boxShadow: '0 0 30px rgba(16,185,129,.15)',
       }}>
-        <CheckCircle2 color="#D4AF37" size={32} />
+        <CheckCircle2 color="#10b981" size={32} />
       </div>
 
       <h3 style={{
@@ -598,9 +598,9 @@ function SuccessState({ onReset, isMobile }) {
         onClick={onReset}
         style={{
           padding: '12px 24px',
-          border: `1px solid ${btnHov ? 'rgba(212,175,55,.6)' : 'rgba(212,175,55,.35)'}`,
-          background: btnHov ? 'rgba(212,175,55,.1)' : 'transparent',
-          color: '#D4AF37', borderRadius: '10px', cursor: 'pointer',
+          border: `1px solid ${btnHov ? 'rgba(16,185,129,.6)' : 'rgba(16,185,129,.35)'}`,
+          background: btnHov ? 'rgba(16,185,129,.1)' : 'transparent',
+          color: '#10b981', borderRadius: '10px', cursor: 'pointer',
           fontSize: '13px', fontWeight: 700,
           transition: 'all .3s ease',
           letterSpacing: '.3px',

@@ -29,14 +29,14 @@ import {
 
 /* ─── DESIGN TOKENS ─── */
 const C = {
-  bg: "#080808",
-  bg2: "#0a0a0a",
-  bg3: "#111111",
-  gold: "#D4AF37",
-  goldLight: "#F0D060",
-  goldDim: "rgba(212,175,55,0.12)",
-  goldBorder: "rgba(212,175,55,0.18)",
-  goldBorder2: "rgba(212,175,55,0.38)",
+  bg: "#0f172a",
+  bg2: "#0f172a",
+  bg3: "#1e293b111",
+  gold: "#10b981",
+  goldLight: "#22d3ee",
+  goldDim: "rgba(16,185,129,0.12)",
+  goldBorder: "rgba(16,185,129,0.18)",
+  goldBorder2: "rgba(16,185,129,0.38)",
   text: "rgba(255,255,255,0.88)",
   muted: "rgba(255,255,255,0.45)",
   faint: "rgba(255,255,255,0.06)",
@@ -393,15 +393,15 @@ function HoverCard({ children, style = {}, highlight = false }) {
         ...glass,
         ...(highlight
           ? {
-              background: "rgba(212,175,55,0.06)",
+              background: "rgba(16,185,129,0.06)",
               borderColor: C.goldBorder2,
-              boxShadow: `0 0 50px rgba(212,175,55,0.1)`,
+              boxShadow: `0 0 50px rgba(16,185,129,0.1)`,
             }
           : {}),
         ...(hovered && !highlight
           ? {
               borderColor: C.goldBorder2,
-              boxShadow: `0 0 40px rgba(212,175,55,0.07)`,
+              boxShadow: `0 0 40px rgba(16,185,129,0.07)`,
             }
           : {}),
         transition: "border-color 0.35s, box-shadow 0.35s",
@@ -461,11 +461,11 @@ export default function WebDevelopment() {
       .wd-marquee-track { display: flex; animation: wd-marquee 28s linear infinite; width: max-content; }
       .wd-marquee-track:hover { animation-play-state: paused; }
       @keyframes wd-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-      .wd-cta-main:hover { background: #F0D060 !important; transform: scale(1.04) translateY(-2px) !important; box-shadow: 0 20px 50px rgba(212,175,55,0.45) !important; }
-      .wd-cta-ghost:hover { border-color: rgba(212,175,55,0.4) !important; color: #fff !important; }
-      .wd-back:hover { color: #D4AF37 !important; }
-      .wd-pkg-btn-main:hover { background: #F0D060 !important; box-shadow: 0 0 30px rgba(212,175,55,0.4) !important; }
-      .wd-pkg-btn-ghost:hover { border-color: rgba(212,175,55,0.4) !important; color: #fff !important; }
+      .wd-cta-main:hover { background: #22d3ee !important; transform: scale(1.04) translateY(-2px) !important; box-shadow: 0 20px 50px rgba(16,185,129,0.45) !important; }
+      .wd-cta-ghost:hover { border-color: rgba(16,185,129,0.4) !important; color: #fff !important; }
+      .wd-back:hover { color: #10b981 !important; }
+      .wd-pkg-btn-main:hover { background: #22d3ee !important; box-shadow: 0 0 30px rgba(16,185,129,0.4) !important; }
+      .wd-pkg-btn-ghost:hover { border-color: rgba(16,185,129,0.4) !important; color: #fff !important; }
     `;
     document.head.appendChild(style);
 
@@ -514,7 +514,7 @@ export default function WebDevelopment() {
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(to bottom, rgba(212,175,55,0.06), transparent)",
+              "linear-gradient(to bottom, rgba(16,185,129,0.06), transparent)",
             pointerEvents: "none",
           }}
         />
@@ -526,7 +526,7 @@ export default function WebDevelopment() {
             width: 500,
             height: 500,
             background:
-              "radial-gradient(circle, rgba(212,175,55,0.06) 0%, transparent 70%)",
+              "radial-gradient(circle, rgba(16,185,129,0.06) 0%, transparent 70%)",
             borderRadius: "50%",
             pointerEvents: "none",
           }}
@@ -539,7 +539,7 @@ export default function WebDevelopment() {
               display: "inline-flex",
               alignItems: "center",
               gap: 8,
-              color: "rgba(212,175,55,0.6)",
+              color: "rgba(16,185,129,0.6)",
               textDecoration: "none",
               marginBottom: 48,
               fontSize: 14,
@@ -587,7 +587,7 @@ export default function WebDevelopment() {
               <span
                 style={{
                   color: C.gold,
-                  textShadow: "0 0 30px rgba(212,175,55,0.3)",
+                  textShadow: "0 0 30px rgba(16,185,129,0.3)",
                 }}
               >
                 Development
@@ -617,7 +617,7 @@ export default function WebDevelopment() {
                   gap: 10,
                   padding: "14px 32px",
                   background: C.gold,
-                  color: "#000",
+                  color: "#0f172a",
                   fontWeight: 800,
                   borderRadius: 14,
                   textDecoration: "none",
@@ -777,7 +777,7 @@ export default function WebDevelopment() {
         style={{
           borderTop: `1px solid ${C.border}`,
           borderBottom: `1px solid ${C.border}`,
-          background: "#000",
+          background: "#0f172a",
           padding: "20px 0",
           overflow: "hidden",
         }}
@@ -988,7 +988,7 @@ export default function WebDevelopment() {
                       transform: "translateX(-50%)",
                       padding: "6px 20px",
                       background: C.gold,
-                      color: "#000",
+                      color: "#0f172a",
                       fontSize: 10,
                       fontWeight: 800,
                       borderRadius: 100,
@@ -1082,7 +1082,7 @@ export default function WebDevelopment() {
                       textDecoration: "none",
                       transition: "all 0.3s",
                       ...(pkg.highlight
-                        ? { background: C.gold, color: "#000", border: "none" }
+                        ? { background: C.gold, color: "#0f172a", border: "none" }
                         : {
                             background: "transparent",
                             color: C.muted,
@@ -1165,7 +1165,7 @@ export default function WebDevelopment() {
                     </div>
                     <div
                       style={{
-                        color: "rgba(212,175,55,0.65)",
+                        color: "rgba(16,185,129,0.65)",
                         fontSize: 12,
                         marginTop: 4,
                       }}
@@ -1287,7 +1287,7 @@ export default function WebDevelopment() {
             position: "absolute",
             inset: 0,
             background:
-              "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(212,175,55,0.06) 0%, transparent 70%)",
+              "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(16,185,129,0.06) 0%, transparent 70%)",
             pointerEvents: "none",
           }}
         />
@@ -1299,7 +1299,7 @@ export default function WebDevelopment() {
             right: 0,
             height: 1,
             background:
-              "linear-gradient(90deg, transparent, rgba(212,175,55,0.35), transparent)",
+              "linear-gradient(90deg, transparent, rgba(16,185,129,0.35), transparent)",
           }}
         />
         <div
@@ -1328,7 +1328,7 @@ export default function WebDevelopment() {
               <span
                 style={{
                   color: C.gold,
-                  textShadow: "0 0 30px rgba(212,175,55,0.35)",
+                  textShadow: "0 0 30px rgba(16,185,129,0.35)",
                 }}
               >
                 legendary?
@@ -1364,7 +1364,7 @@ export default function WebDevelopment() {
                   gap: 12,
                   padding: "16px 40px",
                   background: C.gold,
-                  color: "#000",
+                  color: "#0f172a",
                   fontWeight: 800,
                   borderRadius: 16,
                   textDecoration: "none",

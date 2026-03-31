@@ -10,9 +10,9 @@ import {
 
 /* ─── TOKENS ─── */
 const C = {
-  bg: "#080808", bg2: "#0a0a0a",
-  gold: "#D4AF37", goldLight: "#F0D060", goldDim: "rgba(212,175,55,0.12)",
-  goldBorder: "rgba(212,175,55,0.18)", goldBorder2: "rgba(212,175,55,0.38)",
+  bg: "#0f172a", bg2: "#0f172a",
+  gold: "#10b981", goldLight: "#22d3ee", goldDim: "rgba(16,185,129,0.12)",
+  goldBorder: "rgba(16,185,129,0.18)", goldBorder2: "rgba(16,185,129,0.38)",
   text: "rgba(255,255,255,0.88)", muted: "rgba(255,255,255,0.45)",
   border: "rgba(255,255,255,0.06)",
 };
@@ -108,7 +108,7 @@ function HoverCard({ children, style = {} }) {
   const [hov, setHov] = useState(false);
   return (
     <div onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
-      style={{ ...glass, borderColor: hov ? C.goldBorder2 : C.goldBorder, boxShadow: hov ? "0 0 40px rgba(212,175,55,0.07)" : "none", transition: "border-color 0.35s, box-shadow 0.35s", ...style }}>
+      style={{ ...glass, borderColor: hov ? C.goldBorder2 : C.goldBorder, boxShadow: hov ? "0 0 40px rgba(16,185,129,0.07)" : "none", transition: "border-color 0.35s, box-shadow 0.35s", ...style }}>
       {children}
     </div>
   );
@@ -141,10 +141,10 @@ export default function GoogleFacebookAds() {
       .gfa-marquee { display: flex; animation: gfa-scroll 32s linear infinite; width: max-content; }
       .gfa-marquee:hover { animation-play-state: paused; }
       @keyframes gfa-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-      .gfa-cta-main:hover { background: #F0D060 !important; transform: scale(1.04) translateY(-2px) !important; box-shadow: 0 20px 50px rgba(212,175,55,0.45) !important; }
-      .gfa-cta-ghost:hover { border-color: rgba(212,175,55,0.4) !important; color: #fff !important; }
-      .gfa-back:hover { color: #D4AF37 !important; }
-      .gfa-platform:hover { border-color: rgba(212,175,55,0.45) !important; background: rgba(212,175,55,0.06) !important; transform: translateY(-4px); }
+      .gfa-cta-main:hover { background: #22d3ee !important; transform: scale(1.04) translateY(-2px) !important; box-shadow: 0 20px 50px rgba(16,185,129,0.45) !important; }
+      .gfa-cta-ghost:hover { border-color: rgba(16,185,129,0.4) !important; color: #fff !important; }
+      .gfa-back:hover { color: #10b981 !important; }
+      .gfa-platform:hover { border-color: rgba(16,185,129,0.45) !important; background: rgba(16,185,129,0.06) !important; transform: translateY(-4px); }
       .gfa-bar-fill { transition: width 1.4s cubic-bezier(0.16,1,0.3,1); }
     `;
     document.head.appendChild(style);
@@ -169,11 +169,11 @@ export default function GoogleFacebookAds() {
       </Helmet>
       {/* ── HERO ── */}
       <section style={{ position: "relative", paddingTop: 128, paddingBottom: 96, overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(212,175,55,0.06), transparent)", pointerEvents: "none" }} />
-        <div style={{ position: "absolute", top: 40, right: -60, width: 520, height: 520, background: "radial-gradient(circle, rgba(212,175,55,0.06) 0%, transparent 68%)", borderRadius: "50%", pointerEvents: "none" }} />
-        <div style={{ position: "absolute", bottom: 0, left: -80, width: 400, height: 400, background: "radial-gradient(circle, rgba(212,175,55,0.04) 0%, transparent 70%)", borderRadius: "50%", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(16,185,129,0.06), transparent)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", top: 40, right: -60, width: 520, height: 520, background: "radial-gradient(circle, rgba(16,185,129,0.06) 0%, transparent 68%)", borderRadius: "50%", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", bottom: 0, left: -80, width: 400, height: 400, background: "radial-gradient(circle, rgba(16,185,129,0.04) 0%, transparent 70%)", borderRadius: "50%", pointerEvents: "none" }} />
         <div style={wrap}>
-          <Link to="/services" className="gfa-back" style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "rgba(212,175,55,0.6)", textDecoration: "none", marginBottom: 48, fontSize: 14, fontWeight: 500, transition: "color 0.2s" }}>
+          <Link to="/services" className="gfa-back" style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "rgba(16,185,129,0.6)", textDecoration: "none", marginBottom: 48, fontSize: 14, fontWeight: 500, transition: "color 0.2s" }}>
             <ArrowLeft size={15} /> Back to Services
           </Link>
           <div className="gfa-reveal">
@@ -182,13 +182,13 @@ export default function GoogleFacebookAds() {
               <span style={{ color: C.gold, fontWeight: 700, letterSpacing: "0.22em", fontSize: 11, textTransform: "uppercase" }}>Service Detail</span>
             </div>
             <h1 style={{ fontSize: "clamp(2.8rem,7vw,5.5rem)", fontWeight: 900, lineHeight: 1.05, margin: "0 0 24px", letterSpacing: "-0.02em" }}>
-              Paid <span style={{ color: C.gold, textShadow: "0 0 30px rgba(212,175,55,0.3)" }}>Advertising</span>
+              Paid <span style={{ color: C.gold, textShadow: "0 0 30px rgba(16,185,129,0.3)" }}>Advertising</span>
             </h1>
             <p style={{ fontSize: 18, color: C.muted, maxWidth: 640, lineHeight: 1.8, margin: "0 0 36px" }}>
               Stop guessing. Start growing. We manage your Google and Facebook ad spend with surgical precision — delivering high-quality leads, measurable ROAS, and a scaling engine that compounds over time.
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
-              <Link to="/contact" className="gfa-cta-main" style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "14px 32px", background: C.gold, color: "#000", fontWeight: 800, borderRadius: 14, textDecoration: "none", fontSize: 15, transition: "all 0.3s", letterSpacing: "0.02em" }}>
+              <Link to="/contact" className="gfa-cta-main" style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "14px 32px", background: C.gold, color: "#0f172a", fontWeight: 800, borderRadius: 14, textDecoration: "none", fontSize: 15, transition: "all 0.3s", letterSpacing: "0.02em" }}>
                 Start Scaling Today <ArrowRight size={18} />
               </Link>
               <a href="#process" className="gfa-cta-ghost" style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "14px 32px", ...glass, color: C.muted, textDecoration: "none", fontSize: 15, fontWeight: 600, transition: "all 0.3s" }}>
@@ -234,7 +234,7 @@ export default function GoogleFacebookAds() {
       </section>
 
       {/* ── MARQUEE ── */}
-      <div style={{ borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}`, background: "#000", padding: "18px 0", overflow: "hidden" }}>
+      <div style={{ borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}`, background: "#0f172a", padding: "18px 0", overflow: "hidden" }}>
         <div className="gfa-marquee">
           {[...["Google Search Ads", "Meta Lead Ads", "Retargeting Funnels", "A/B Testing", "ROAS Optimisation", "Lookalike Audiences", "Conversion Tracking", "Shopping Campaigns", "YouTube Ads", "LinkedIn Ads", "Dynamic Ads", "Budget Scaling"],
             ...["Google Search Ads", "Meta Lead Ads", "Retargeting Funnels", "A/B Testing", "ROAS Optimisation", "Lookalike Audiences", "Conversion Tracking", "Shopping Campaigns", "YouTube Ads", "LinkedIn Ads", "Dynamic Ads", "Budget Scaling"]
@@ -249,7 +249,7 @@ export default function GoogleFacebookAds() {
         <div style={wrap}>
           <div className="gfa-reveal">
             <div style={{ ...glass, borderRadius: 32, padding: "60px 56px", position: "relative", overflow: "hidden" }}>
-              <div style={{ position: "absolute", top: -80, right: -80, width: 400, height: 400, background: "radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 65%)", borderRadius: "50%", pointerEvents: "none" }} />
+              <div style={{ position: "absolute", top: -80, right: -80, width: 400, height: 400, background: "radial-gradient(circle, rgba(16,185,129,0.1) 0%, transparent 65%)", borderRadius: "50%", pointerEvents: "none" }} />
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center", position: "relative", zIndex: 1 }}>
                 {/* Left */}
                 <div>
@@ -377,7 +377,7 @@ export default function GoogleFacebookAds() {
                   <p style={{ color: "rgba(255,255,255,0.65)", fontSize: 14, lineHeight: 1.8, flex: 1, margin: 0 }}>"{t.text}"</p>
                   <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: 20 }}>
                     <div style={{ fontWeight: 700, color: "#fff", fontSize: 15 }}>{t.name}</div>
-                    <div style={{ color: "rgba(212,175,55,0.65)", fontSize: 12, marginTop: 4 }}>{t.role}</div>
+                    <div style={{ color: "rgba(16,185,129,0.65)", fontSize: 12, marginTop: 4 }}>{t.role}</div>
                   </div>
                 </HoverCard>
               </div>
@@ -418,20 +418,20 @@ export default function GoogleFacebookAds() {
 
       {/* ── FINAL CTA ── */}
       <section style={{ padding: "120px 0", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(212,175,55,0.06) 0%, transparent 70%)", pointerEvents: "none" }} />
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg, transparent, rgba(212,175,55,0.35), transparent)" }} />
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(16,185,129,0.06) 0%, transparent 70%)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg, transparent, rgba(16,185,129,0.35), transparent)" }} />
         <div style={{ ...wrap, textAlign: "center", position: "relative", zIndex: 1 }}>
           <div className="gfa-reveal">
             <TrendingUp style={{ color: C.gold, margin: "0 auto 24px", display: "block" }} size={52} />
             <h2 style={{ fontSize: "clamp(2.2rem,5vw,4rem)", fontWeight: 900, color: "#fff", margin: "0 0 24px", lineHeight: 1.1 }}>
               Turn your ad spend into{" "}
-              <span style={{ color: C.gold, textShadow: "0 0 30px rgba(212,175,55,0.35)" }}>revenue.</span>
+              <span style={{ color: C.gold, textShadow: "0 0 30px rgba(16,185,129,0.35)" }}>revenue.</span>
             </h2>
             <p style={{ fontSize: 17, color: C.muted, margin: "0 auto 48px", maxWidth: 560, lineHeight: 1.8 }}>
               Most businesses waste 40% of their ad budget on poor targeting. We eliminate the noise — and build a campaign system that generates predictable, scalable returns month after month.
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 14, justifyContent: "center" }}>
-              <Link to="/contact" className="gfa-cta-main" style={{ display: "inline-flex", alignItems: "center", gap: 12, padding: "16px 40px", background: C.gold, color: "#000", fontWeight: 800, borderRadius: 16, textDecoration: "none", fontSize: 16, transition: "all 0.35s", letterSpacing: "0.03em" }}>
+              <Link to="/contact" className="gfa-cta-main" style={{ display: "inline-flex", alignItems: "center", gap: 12, padding: "16px 40px", background: C.gold, color: "#0f172a", fontWeight: 800, borderRadius: 16, textDecoration: "none", fontSize: 16, transition: "all 0.35s", letterSpacing: "0.03em" }}>
                 Start Scaling Today <ArrowRight size={20} />
               </Link>
               <Link to="/services" className="gfa-cta-ghost" style={{ display: "inline-flex", alignItems: "center", gap: 12, padding: "16px 40px", ...glass, color: C.muted, textDecoration: "none", fontSize: 16, fontWeight: 600, transition: "all 0.35s" }}>

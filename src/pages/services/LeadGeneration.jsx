@@ -29,13 +29,13 @@ import {
 
 /* ─── TOKENS ─── */
 const C = {
-  bg: "#080808",
-  bg2: "#0a0a0a",
-  gold: "#D4AF37",
-  goldLight: "#F0D060",
-  goldDim: "rgba(212,175,55,0.12)",
-  goldBorder: "rgba(212,175,55,0.18)",
-  goldBorder2: "rgba(212,175,55,0.38)",
+  bg: "#0f172a",
+  bg2: "#0f172a",
+  gold: "#10b981",
+  goldLight: "#22d3ee",
+  goldDim: "rgba(16,185,129,0.12)",
+  goldBorder: "rgba(16,185,129,0.18)",
+  goldBorder2: "rgba(16,185,129,0.38)",
   text: "rgba(255,255,255,0.88)",
   muted: "rgba(255,255,255,0.45)",
   border: "rgba(255,255,255,0.06)",
@@ -334,7 +334,7 @@ function HoverCard({ children, style = {} }) {
       style={{
         ...glass,
         borderColor: hov ? C.goldBorder2 : C.goldBorder,
-        boxShadow: hov ? "0 0 40px rgba(212,175,55,0.07)" : "none",
+        boxShadow: hov ? "0 0 40px rgba(16,185,129,0.07)" : "none",
         transition: "border-color 0.35s, box-shadow 0.35s",
         ...style,
       }}
@@ -391,9 +391,9 @@ export default function LeadGeneration() {
       .lg-marquee { display: flex; animation: lg-scroll 32s linear infinite; width: max-content; }
       .lg-marquee:hover { animation-play-state: paused; }
       @keyframes lg-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-      .lg-cta-main:hover { background: #F0D060 !important; transform: scale(1.04) translateY(-2px) !important; box-shadow: 0 20px 50px rgba(212,175,55,0.45) !important; }
-      .lg-cta-ghost:hover { border-color: rgba(212,175,55,0.4) !important; color: #fff !important; }
-      .lg-back:hover { color: #D4AF37 !important; }
+      .lg-cta-main:hover { background: #22d3ee !important; transform: scale(1.04) translateY(-2px) !important; box-shadow: 0 20px 50px rgba(16,185,129,0.45) !important; }
+      .lg-cta-ghost:hover { border-color: rgba(16,185,129,0.4) !important; color: #fff !important; }
+      .lg-back:hover { color: #10b981 !important; }
       .lg-users-pulse { animation: lg-pulse 3s ease-in-out infinite; }
       @keyframes lg-pulse { 0%,100%{opacity:0.2;transform:scale(1)} 50%{opacity:0.35;transform:scale(1.05)} }
     `;
@@ -443,7 +443,7 @@ export default function LeadGeneration() {
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(to bottom, rgba(212,175,55,0.06), transparent)",
+              "linear-gradient(to bottom, rgba(16,185,129,0.06), transparent)",
             pointerEvents: "none",
           }}
         />
@@ -455,7 +455,7 @@ export default function LeadGeneration() {
             width: 520,
             height: 520,
             background:
-              "radial-gradient(circle, rgba(212,175,55,0.06) 0%, transparent 68%)",
+              "radial-gradient(circle, rgba(16,185,129,0.06) 0%, transparent 68%)",
             borderRadius: "50%",
             pointerEvents: "none",
           }}
@@ -468,7 +468,7 @@ export default function LeadGeneration() {
             width: 400,
             height: 400,
             background:
-              "radial-gradient(circle, rgba(212,175,55,0.04) 0%, transparent 70%)",
+              "radial-gradient(circle, rgba(16,185,129,0.04) 0%, transparent 70%)",
             borderRadius: "50%",
             pointerEvents: "none",
           }}
@@ -481,7 +481,7 @@ export default function LeadGeneration() {
               display: "inline-flex",
               alignItems: "center",
               gap: 8,
-              color: "rgba(212,175,55,0.6)",
+              color: "rgba(16,185,129,0.6)",
               textDecoration: "none",
               marginBottom: 48,
               fontSize: 14,
@@ -528,7 +528,7 @@ export default function LeadGeneration() {
               <span
                 style={{
                   color: C.gold,
-                  textShadow: "0 0 30px rgba(212,175,55,0.3)",
+                  textShadow: "0 0 30px rgba(16,185,129,0.3)",
                 }}
               >
                 Generation
@@ -558,7 +558,7 @@ export default function LeadGeneration() {
                   gap: 10,
                   padding: "14px 32px",
                   background: C.gold,
-                  color: "#000",
+                  color: "#0f172a",
                   fontWeight: 800,
                   borderRadius: 14,
                   textDecoration: "none",
@@ -713,7 +713,7 @@ export default function LeadGeneration() {
         style={{
           borderTop: `1px solid ${C.border}`,
           borderBottom: `1px solid ${C.border}`,
-          background: "#000",
+          background: "#0f172a",
           padding: "18px 0",
           overflow: "hidden",
         }}
@@ -863,7 +863,7 @@ export default function LeadGeneration() {
                     position: "absolute",
                     inset: 0,
                     background:
-                      "linear-gradient(135deg, rgba(212,175,55,0.08) 0%, transparent 60%)",
+                      "linear-gradient(135deg, rgba(16,185,129,0.08) 0%, transparent 60%)",
                     borderRadius: 32,
                   }}
                 />
@@ -1160,7 +1160,7 @@ export default function LeadGeneration() {
                     </div>
                     <div
                       style={{
-                        color: "rgba(212,175,55,0.65)",
+                        color: "rgba(16,185,129,0.65)",
                         fontSize: 12,
                         marginTop: 4,
                       }}
@@ -1282,7 +1282,7 @@ export default function LeadGeneration() {
             position: "absolute",
             inset: 0,
             background:
-              "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(212,175,55,0.06) 0%, transparent 70%)",
+              "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(16,185,129,0.06) 0%, transparent 70%)",
             pointerEvents: "none",
           }}
         />
@@ -1294,7 +1294,7 @@ export default function LeadGeneration() {
             right: 0,
             height: 1,
             background:
-              "linear-gradient(90deg, transparent, rgba(212,175,55,0.35), transparent)",
+              "linear-gradient(90deg, transparent, rgba(16,185,129,0.35), transparent)",
           }}
         />
         <div
@@ -1323,7 +1323,7 @@ export default function LeadGeneration() {
               <span
                 style={{
                   color: C.gold,
-                  textShadow: "0 0 30px rgba(212,175,55,0.35)",
+                  textShadow: "0 0 30px rgba(16,185,129,0.35)",
                 }}
               >
                 customers.
@@ -1359,7 +1359,7 @@ export default function LeadGeneration() {
                   gap: 12,
                   padding: "16px 40px",
                   background: C.gold,
-                  color: "#000",
+                  color: "#0f172a",
                   fontWeight: 800,
                   borderRadius: 16,
                   textDecoration: "none",

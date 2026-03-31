@@ -19,79 +19,90 @@ import {
   BarChart3,
   Layers,
   ChevronDown,
+  Sparkles,
+  Code2,
+  Rocket,
+  Trophy,
+  Cpu,
+  BrainCircuit,
 } from "lucide-react";
 import logo from "../assets/logo.png";
 
-/* ─── TOKENS ─── */
+/* ─── DESIGN TOKENS ─── */
 const C = {
-  bg: "#080808",
-  bg2: "#0a0a0a",
-  gold: "#D4AF37",
-  goldLight: "#F0D060",
-  goldDim: "rgba(212,175,55,0.12)",
-  goldBorder: "rgba(212,175,55,0.18)",
-  goldBorder2: "rgba(212,175,55,0.38)",
-  text: "rgba(255,255,255,0.88)",
-  muted: "rgba(255,255,255,0.45)",
-  border: "rgba(255,255,255,0.06)",
+  bg: "#040810",
+  bg2: "#060c14",
+  surface: "#0a1628",
+  surfaceHigh: "#0d1f38",
+  gold: "#10b981",
+  goldLight: "#34d399",
+  goldGlow: "#6ee7b7",
+  cyan: "#22d3ee",
+  cyanDim: "rgba(34,211,238,0.08)",
+  goldDim: "rgba(16,185,129,0.08)",
+  goldBorder: "rgba(16,185,129,0.15)",
+  goldBorder2: "rgba(16,185,129,0.3)",
+  goldBorder3: "rgba(16,185,129,0.5)",
+  text: "rgba(255,255,255,0.92)",
+  muted: "rgba(255,255,255,0.48)",
+  muted2: "rgba(255,255,255,0.28)",
+  border: "rgba(255,255,255,0.05)",
+  borderMid: "rgba(255,255,255,0.1)",
 };
-const glass = {
-  background: "rgba(255,255,255,0.03)",
-  border: `1px solid ${C.goldBorder}`,
-  backdropFilter: "blur(12px)",
-  borderRadius: 20,
-};
+
+const glass = (strong = false) => ({
+  background: strong ? "rgba(16,185,129,0.06)" : "rgba(255,255,255,0.02)",
+  border: `1px solid ${strong ? C.goldBorder2 : C.goldBorder}`,
+  backdropFilter: "blur(20px)",
+  borderRadius: 24,
+});
+
 const tagStyle = {
-  display: "inline-block",
-  padding: "5px 16px",
+  display: "inline-flex",
+  alignItems: "center",
+  gap: 6,
+  padding: "6px 18px",
   borderRadius: 100,
   fontSize: 10,
   fontWeight: 700,
-  letterSpacing: "0.22em",
+  letterSpacing: "0.25em",
   textTransform: "uppercase",
-  background: C.goldDim,
+  background:
+    "linear-gradient(135deg, rgba(16,185,129,0.15), rgba(34,211,238,0.08))",
   border: `1px solid ${C.goldBorder2}`,
   color: C.gold,
-  marginBottom: 16,
+  marginBottom: 20,
 };
-const iconBox = (size = 48) => ({
-  width: size,
-  height: size,
-  borderRadius: 14,
-  flexShrink: 0,
-  background: C.goldDim,
-  border: `1px solid ${C.goldBorder2}`,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  color: C.gold,
-});
 
 /* ─── DATA ─── */
 const VALUES = [
   {
     icon: Target,
     title: "Mission-Driven",
+    gradient: "135deg, #10b981, #22d3ee",
     description:
-      "Our mission is to empower businesses of all sizes to thrive in the digital landscape through creative innovation and data-backed strategies that deliver measurable impact.",
+      "We empower businesses of all sizes to thrive in the digital landscape through creative innovation and data-backed strategies that deliver measurable, lasting impact.",
   },
   {
     icon: Lightbulb,
     title: "Innovation First",
+    gradient: "135deg, #22d3ee, #a78bfa",
     description:
       "We stay ahead of emerging technologies and trends, constantly evolving our approach to deliver cutting-edge digital solutions that keep you ahead of the curve.",
   },
   {
     icon: Award,
     title: "Excellence Standard",
+    gradient: "135deg, #f59e0b, #10b981",
     description:
       "Every project we undertake meets the highest standards of quality, performance, and creativity — no shortcuts, no exceptions, no compromises.",
   },
   {
     icon: TrendingUp,
     title: "Growth Oriented",
+    gradient: "135deg, #ec4899, #10b981",
     description:
-      "Your success is our success. We measure our performance by the tangible growth we generate — revenue, leads, brand equity, and long-term market position.",
+      "Your success is our success. We measure performance by tangible growth we generate — revenue, leads, brand equity, and long-term market position.",
   },
 ];
 
@@ -103,123 +114,231 @@ const MILESTONES = [
   "Award-winning campaigns generating millions in client revenue",
 ];
 
-const STATS_CARD = [
-  { number: "500+", label: "Projects" },
-  { number: "98%", label: "Satisfaction" },
-  { number: "50+", label: "Experts" },
-  { number: "5+", label: "Years" },
-];
-
 const BIG_STATS = [
-  { value: "500+", label: "Projects Completed", icon: Layers },
-  { value: "₹50Cr+", label: "Revenue Generated for Clients", icon: TrendingUp },
-  { value: "98%", label: "Client Retention Rate", icon: Heart },
-  { value: "50+", label: "Digital Experts", icon: Users },
-  { value: "15+", label: "Industries Served", icon: Globe },
-  { value: "2023", label: "Founded in Pune, India", icon: MapPin },
+  {
+    value: "500+",
+    label: "Projects Completed",
+    icon: Layers,
+    color: "#10b981",
+  },
+  {
+    value: "₹50Cr+",
+    label: "Revenue Generated",
+    icon: TrendingUp,
+    color: "#22d3ee",
+  },
+  { value: "98%", label: "Client Retention", icon: Heart, color: "#f59e0b" },
+  { value: "50+", label: "Digital Experts", icon: Users, color: "#a78bfa" },
+  { value: "15+", label: "Industries Served", icon: Globe, color: "#ec4899" },
+  {
+    value: "2023",
+    label: "Founded, Pune India",
+    icon: MapPin,
+    color: "#10b981",
+  },
 ];
 
 const TEAM_VALUES = [
   {
     icon: Shield,
     title: "Radical Transparency",
+    color: "#10b981",
     desc: "No hidden fees, no vague reports. You see exactly what we do, why we do it, and what it delivers — every single month.",
   },
   {
     icon: Clock,
     title: "On-Time, Always",
+    color: "#22d3ee",
     desc: "We don't miss deadlines. 97% of our projects are delivered on or ahead of schedule. Your timeline is a commitment, not a suggestion.",
   },
   {
     icon: MessageSquare,
     title: "Dedicated Communication",
+    color: "#a78bfa",
     desc: "A dedicated project manager is your single point of contact — responsive, accountable, and always aligned with your goals.",
   },
   {
     icon: Zap,
     title: "Speed to Impact",
+    color: "#f59e0b",
     desc: "We move fast without breaking things. Most engagements show measurable impact within the first 30–45 days.",
   },
   {
     icon: Heart,
     title: "Long-Term Partnership",
+    color: "#ec4899",
     desc: "98% of our clients renew. We build relationships, not just campaigns. Your long-term growth is always the north star.",
   },
   {
     icon: Award,
     title: "Certified Excellence",
+    color: "#10b981",
     desc: "ISO-certified processes, Google & Meta certified specialists, and award-winning creative work that consistently exceeds expectations.",
   },
 ];
 
 const WHY_US = [
   {
+    icon: Cpu,
     title: "Full-Service Under One Roof",
     desc: "Web development, SEO, social media, paid ads, brand building, and lead generation — all handled by one cohesive team that understands your entire digital ecosystem.",
   },
   {
+    icon: BarChart3,
     title: "Data First, Always",
-    desc: "Every strategy begins with research and ends with measurement. We don't guess — we analyse, test, and optimise based on real performance data from your campaigns.",
+    desc: "Every strategy begins with research and ends with measurement. We don't guess — we analyse, test, and optimise based on real performance data.",
   },
   {
+    icon: Globe,
     title: "Industry-Agnostic Expertise",
     desc: "We've built winning strategies for real estate, healthcare, e-commerce, education, SaaS, legal, and F&B — our frameworks adapt to any market, any audience.",
   },
   {
+    icon: Shield,
     title: "No Lock-In Contracts",
     desc: "We earn your business every month. All accounts, assets, and campaigns belong to you from day one. Zero lock-in, total transparency, complete ownership.",
   },
 ];
 
-const SERVICES_QUICK = [
-  "Website Development",
-  "SEO Optimisation",
-  "Social Media Marketing",
-  "Google & Facebook Ads",
-  "Brand Promotion",
-  "Lead Generation",
+const SERVICES = [
+  {
+    icon: Globe,
+    name: "Website Development",
+    desc: "High-performance, conversion-optimised web solutions built for growth.",
+    link: "/services/website-development",
+    color: "#10b981",
+  },
+  {
+    icon: BarChart3,
+    name: "SEO Optimisation",
+    desc: "Data-driven strategies to dominate search rankings and grow organic traffic.",
+    link: "/services/seo",
+    color: "#22d3ee",
+  },
+  {
+    icon: MessageSquare,
+    name: "Social Media Marketing",
+    desc: "Content and community management that builds brand loyalty and engagement.",
+    link: "/services/social-media",
+    color: "#a78bfa",
+  },
+  {
+    icon: Target,
+    name: "Google & Facebook Ads",
+    desc: "Precision paid campaigns engineered for maximum ROAS and lead volume.",
+    link: "/services/ads",
+    color: "#f59e0b",
+  },
+  {
+    icon: Star,
+    name: "Brand Promotion",
+    desc: "End-to-end brand building that makes your business the obvious choice.",
+    link: "/services/brand",
+    color: "#ec4899",
+  },
+  {
+    icon: Users,
+    name: "Lead Generation",
+    desc: "Systematic lead funnels that keep your pipeline full and your team busy.",
+    link: "/services/leads",
+    color: "#10b981",
+  },
 ];
 
-function HoverCard({ children, style = {} }) {
+/* ─── MICRO COMPONENTS ─── */
+function HoverCard({ children, style = {}, accentColor = C.gold }) {
   const [hov, setHov] = useState(false);
   return (
     <div
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
       style={{
-        ...glass,
-        borderColor: hov ? C.goldBorder2 : C.goldBorder,
-        boxShadow: hov ? "0 0 40px rgba(212,175,55,0.07)" : "none",
-        transition: "border-color 0.35s, box-shadow 0.35s",
+        ...glass(),
+        position: "relative",
+        overflow: "hidden",
+        borderColor: hov ? accentColor + "55" : C.goldBorder,
+        boxShadow: hov
+          ? `0 0 50px ${accentColor}12, inset 0 1px 0 rgba(255,255,255,0.05)`
+          : "inset 0 1px 0 rgba(255,255,255,0.03)",
+        transform: hov ? "translateY(-3px)" : "translateY(0)",
+        transition: "all 0.4s cubic-bezier(0.16,1,0.3,1)",
         ...style,
       }}
     >
+      {hov && (
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            opacity: 0.04,
+            background: `radial-gradient(circle at 30% 30%, ${accentColor}, transparent 60%)`,
+            pointerEvents: "none",
+          }}
+        />
+      )}
       {children}
     </div>
   );
 }
 
-function SectionHead({ badge, title, goldWord, sub, center = false }) {
+function GlowDot({ color = C.gold }) {
   return (
-    <div style={{ marginBottom: 56, textAlign: center ? "center" : "left" }}>
-      <span style={tagStyle}>{badge}</span>
+    <span
+      style={{
+        display: "inline-block",
+        width: 8,
+        height: 8,
+        borderRadius: "50%",
+        background: color,
+        boxShadow: `0 0 12px ${color}, 0 0 24px ${color}55`,
+        flexShrink: 0,
+        animation: "pulseDot 2.5s ease-in-out infinite",
+      }}
+    />
+  );
+}
+
+function SectionHead({
+  badge,
+  title,
+  goldWord,
+  sub,
+  center = false,
+  icon: Icon,
+}) {
+  return (
+    <div style={{ marginBottom: 64, textAlign: center ? "center" : "left" }}>
+      <span style={tagStyle}>
+        {Icon && <Icon size={10} />}
+        {badge}
+      </span>
       <h2
         style={{
-          fontSize: "clamp(2rem,4vw,3rem)",
+          fontSize: "clamp(2rem,4vw,3.2rem)",
           fontWeight: 900,
           color: "#fff",
-          margin: "0 0 12px",
-          lineHeight: 1.1,
+          margin: "0 0 16px",
+          lineHeight: 1.08,
+          letterSpacing: "-0.025em",
         }}
       >
-        {title} <span style={{ color: C.gold }}>{goldWord}</span>
+        {title}{" "}
+        <span
+          style={{
+            background: `linear-gradient(135deg, ${C.gold}, ${C.cyan})`,
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}
+        >
+          {goldWord}
+        </span>
       </h2>
       {sub && (
         <p
           style={{
             color: C.muted,
-            fontSize: 15,
-            lineHeight: 1.7,
+            fontSize: 15.5,
+            lineHeight: 1.75,
             maxWidth: center ? 540 : 520,
             margin: center ? "0 auto" : 0,
           }}
@@ -231,38 +350,50 @@ function SectionHead({ badge, title, goldWord, sub, center = false }) {
   );
 }
 
-/* ─── MAIN ─── */
+/* ─── MAIN COMPONENT ─── */
 export default function About() {
-  const sectionRef = useRef(null);
+  const rootRef = useRef(null);
 
   useEffect(() => {
     const style = document.createElement("style");
     style.textContent = `
-      @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap');
       .ab-root * { box-sizing: border-box; }
-      .ab-root { font-family: 'Outfit', sans-serif !important; }
-      .ab-reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1); }
-      .ab-reveal.visible { opacity: 1; transform: translateY(0); }
-      .ab-marquee { display: flex; animation: ab-scroll 28s linear infinite; width: max-content; }
-      .ab-marquee:hover { animation-play-state: paused; }
-      @keyframes ab-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-      .ab-cta-main:hover { background: #F0D060 !important; transform: scale(1.04) translateY(-2px) !important; box-shadow: 0 20px 50px rgba(212,175,55,0.45) !important; }
-      .ab-cta-ghost:hover { border-color: rgba(212,175,55,0.4) !important; color: #fff !important; }
-      .ab-pulse { animation: ab-p 2.5s ease-in-out infinite; }
-      @keyframes ab-p { 0%,100%{opacity:0.12;transform:scale(1)} 50%{opacity:0.22;transform:scale(1.06)} }
-      .ab-dot { animation: ab-dot 2s ease-in-out infinite; }
-      @keyframes ab-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.5)} }
+      .ab-root { font-family: 'DM Sans', sans-serif !important; }
+      .ab-root h1,.ab-root h2,.ab-root h3,.ab-root h4 { font-family: 'Syne', sans-serif !important; }
+      .ab-reveal { opacity:0; transform:translateY(40px); transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+      .ab-reveal.visible { opacity:1; transform:translateY(0); }
+      .ab-reveal-left { opacity:0; transform:translateX(-40px); transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+      .ab-reveal-left.visible { opacity:1; transform:translateX(0); }
+      .ab-reveal-right { opacity:0; transform:translateX(40px); transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+      .ab-reveal-right.visible { opacity:1; transform:translateX(0); }
+      .ab-marquee { display:flex; animation:ab-scroll 30s linear infinite; width:max-content; }
+      .ab-marquee:hover { animation-play-state:paused; }
+      @keyframes ab-scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+      @keyframes pulseDot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(1.4)} }
+      @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+      @keyframes spinSlow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+      @keyframes gradientShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+      @keyframes scanline { 0%{transform:translateY(-100%)} 100%{transform:translateY(400%)} }
+      @keyframes borderGlow { 0%,100%{opacity:0.3} 50%{opacity:1} }
+      .ab-cta-btn { transition: all 0.35s cubic-bezier(0.16,1,0.3,1) !important; }
+      .ab-cta-btn:hover { transform:scale(1.05) translateY(-3px) !important; box-shadow:0 24px 60px rgba(16,185,129,0.5) !important; }
+      .ab-ghost-btn { transition: all 0.35s !important; }
+      .ab-ghost-btn:hover { border-color:rgba(16,185,129,0.5) !important; color:#fff !important; background:rgba(16,185,129,0.08) !important; }
+      .stat-card:hover .stat-icon { transform:scale(1.15) rotate(-5deg); }
+      .stat-icon { transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); }
     `;
     document.head.appendChild(style);
+
     const obs = new IntersectionObserver(
       (entries) =>
         entries.forEach(
           (e) => e.isIntersecting && e.target.classList.add("visible"),
         ),
-      { threshold: 0.08 },
+      { threshold: 0.07 },
     );
-    sectionRef.current
-      ?.querySelectorAll(".ab-reveal")
+    rootRef.current
+      ?.querySelectorAll(".ab-reveal, .ab-reveal-left, .ab-reveal-right")
       .forEach((el) => obs.observe(el));
     return () => {
       obs.disconnect();
@@ -274,133 +405,176 @@ export default function About() {
 
   return (
     <div
-      ref={sectionRef}
+      ref={rootRef}
       className="ab-root"
       style={{ background: C.bg, minHeight: "100vh", color: C.text }}
     >
-      {/* ── TOP EDGE ── */}
+      {/* ── TOP ACCENT LINE ── */}
       <div
         style={{
-          height: 1,
+          height: 2,
           background:
-            "linear-gradient(90deg, transparent, rgba(212,175,55,0.4) 30%, rgba(212,175,55,0.6) 50%, rgba(212,175,55,0.4) 70%, transparent)",
+            "linear-gradient(90deg, transparent 0%, #10b981 30%, #22d3ee 50%, #10b981 70%, transparent 100%)",
+          boxShadow: "0 0 20px rgba(16,185,129,0.6)",
         }}
       />
 
-      {/* ── HERO / INTRO ── */}
+      {/* ══════════════════════════════════════════
+          HERO SECTION
+      ══════════════════════════════════════════ */}
       <section
         style={{
           position: "relative",
-          paddingTop: "clamp(60px, 10vw, 100px)",
-          paddingBottom: "clamp(60px, 10vw, 96px)",
+          paddingTop: "clamp(70px,10vw,110px)",
+          paddingBottom: "clamp(60px,8vw,96px)",
           overflow: "hidden",
         }}
       >
+        {/* Background effects */}
         <div
           style={{
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(to bottom, rgba(212,175,55,0.05), transparent)",
+              "radial-gradient(ellipse 80% 60% at 20% 0%, rgba(16,185,129,0.06) 0%, transparent 60%)",
             pointerEvents: "none",
           }}
         />
         <div
           style={{
             position: "absolute",
-            top: 60,
-            left: -60,
-            width: 480,
-            height: 480,
+            inset: 0,
             background:
-              "radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 68%)",
-            borderRadius: "50%",
+              "radial-gradient(ellipse 60% 50% at 80% 100%, rgba(34,211,238,0.04) 0%, transparent 60%)",
             pointerEvents: "none",
           }}
         />
+
+        {/* Animated grid */}
         <div
           style={{
             position: "absolute",
-            bottom: 0,
-            right: -80,
-            width: 420,
-            height: 420,
-            background:
-              "radial-gradient(circle, rgba(212,175,55,0.04) 0%, transparent 70%)",
-            borderRadius: "50%",
+            inset: 0,
             pointerEvents: "none",
+            opacity: 0.025,
+            backgroundImage:
+              "linear-gradient(rgba(16,185,129,1) 1px, transparent 1px), linear-gradient(90deg, rgba(16,185,129,1) 1px, transparent 1px)",
+            backgroundSize: "60px 60px",
           }}
         />
+
+        {/* Floating orbs */}
+        {[
+          {
+            top: "10%",
+            left: "5%",
+            size: 320,
+            color: "rgba(16,185,129,0.07)",
+            delay: "0s",
+          },
+          {
+            top: "60%",
+            right: "-5%",
+            size: 280,
+            color: "rgba(34,211,238,0.05)",
+            delay: "1.5s",
+          },
+          {
+            bottom: "10%",
+            left: "30%",
+            size: 200,
+            color: "rgba(167,139,250,0.04)",
+            delay: "0.8s",
+          },
+        ].map((orb, i) => (
+          <div
+            key={i}
+            style={{
+              position: "absolute",
+              ...orb,
+              width: orb.size,
+              height: orb.size,
+              background: `radial-gradient(circle, ${orb.color} 0%, transparent 70%)`,
+              borderRadius: "50%",
+              pointerEvents: "none",
+              animation: `float 6s ease-in-out infinite`,
+              animationDelay: orb.delay,
+            }}
+          />
+        ))}
 
         <div style={wrap}>
           <div
-            style={{ textAlign: "center", marginBottom: 72 }}
-            className="ab-reveal"
-          >
-            <span style={tagStyle}>Who We Are</span>
-          </div>
-
-          {/* Two-col layout */}
-          <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-              gap: "clamp(32px, 6vw, 80px)",
+              gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+              gap: "clamp(40px,6vw,96px)",
               alignItems: "center",
-              marginBottom: 80,
             }}
           >
-            {/* Left */}
-            <div className="ab-reveal">
+            {/* LEFT COLUMN */}
+            <div className="ab-reveal-left">
+              <div style={tagStyle}>
+                <Sparkles size={10} />
+                Who We Are
+              </div>
+
               <h1
                 style={{
-                  fontSize: "clamp(2.4rem,5vw,4rem)",
-                  fontWeight: 900,
+                  fontSize: "clamp(2.6rem,5.5vw,4.4rem)",
+                  fontWeight: 800,
                   color: "#fff",
-                  lineHeight: 1.06,
-                  margin: "0 0 24px",
-                  letterSpacing: "-0.02em",
+                  lineHeight: 1.04,
+                  margin: "0 0 8px",
+                  letterSpacing: "-0.03em",
                 }}
               >
                 Pioneers of
-                <br />
-                <span
-                  style={{
-                    color: C.gold,
-                    textShadow: "0 0 28px rgba(212,175,55,0.3)",
-                  }}
-                >
-                  Digital Excellence
-                </span>
               </h1>
+              <h1
+                style={{
+                  fontSize: "clamp(2.6rem,5.5vw,4.4rem)",
+                  fontWeight: 800,
+                  lineHeight: 1.04,
+                  margin: "0 0 28px",
+                  letterSpacing: "-0.03em",
+                  background:
+                    "linear-gradient(135deg, #10b981 0%, #22d3ee 50%, #a78bfa 100%)",
+                  backgroundSize: "200% 200%",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  animation: "gradientShift 4s ease infinite",
+                }}
+              >
+                Digital Excellence
+              </h1>
+
               <p
                 style={{
                   fontSize: 16,
                   color: C.muted,
                   lineHeight: 1.85,
-                  margin: "0 0 20px",
+                  margin: "0 0 18px",
+                  maxWidth: 500,
                 }}
               >
                 PAYIVVA Technologies (OPC) Pvt Ltd is a premium digital
                 solutions company dedicated to transforming how businesses
                 connect, grow, and thrive online. Founded on the principles of
-                innovation, integrity, and impact, we bring together a
-                world-class team of developers, designers, and digital
-                strategists.
+                innovation, integrity, and impact.
               </p>
               <p
                 style={{
                   fontSize: 16,
                   color: C.muted,
                   lineHeight: 1.85,
-                  margin: "0 0 32px",
+                  margin: "0 0 36px",
+                  maxWidth: 500,
                 }}
               >
                 From ambitious startups to established enterprises, we partner
-                with brands that dare to think differently. Our holistic
-                approach combines deep technical expertise with creative
-                storytelling to build digital experiences that don't just look
-                beautiful — they deliver measurable, lasting results.
+                with brands that dare to think differently — combining deep
+                technical expertise with creative storytelling.
               </p>
 
               {/* Milestones */}
@@ -408,10 +582,10 @@ export default function About() {
                 style={{
                   listStyle: "none",
                   padding: 0,
-                  margin: "0 0 32px",
+                  margin: "0 0 40px",
                   display: "flex",
                   flexDirection: "column",
-                  gap: 12,
+                  gap: 14,
                 }}
               >
                 {MILESTONES.map((m, i) => (
@@ -421,152 +595,283 @@ export default function About() {
                       display: "flex",
                       alignItems: "flex-start",
                       gap: 12,
-                      fontSize: 14,
-                      color: "rgba(255,255,255,0.7)",
+                      fontSize: 14.5,
+                      color: "rgba(255,255,255,0.72)",
                       lineHeight: 1.6,
                     }}
                   >
-                    <CheckCircle2
-                      size={17}
-                      style={{ color: C.gold, flexShrink: 0, marginTop: 2 }}
-                    />
+                    <div
+                      style={{
+                        width: 20,
+                        height: 20,
+                        borderRadius: 6,
+                        background: "rgba(16,185,129,0.15)",
+                        border: "1px solid rgba(16,185,129,0.3)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
+                        marginTop: 1,
+                      }}
+                    >
+                      <CheckCircle2 size={12} style={{ color: C.gold }} />
+                    </div>
                     {m}
                   </li>
                 ))}
               </ul>
 
-              <button
-                onClick={() =>
-                  document
-                    .querySelector("#contact")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="ab-cta-main"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 10,
-                  padding: "14px 30px",
-                  background: C.gold,
-                  color: "#000",
-                  fontWeight: 800,
-                  borderRadius: 12,
-                  border: "none",
-                  cursor: "pointer",
-                  fontSize: 15,
-                  fontFamily: "inherit",
-                  transition: "all 0.3s",
-                  letterSpacing: "0.02em",
-                }}
-              >
-                Work With Us <ArrowRight size={18} />
-              </button>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 14 }}>
+                <button
+                  className="ab-cta-btn"
+                  onClick={() =>
+                    document
+                      .querySelector("#contact")
+                      ?.scrollIntoView({ behavior: "smooth" })
+                  }
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 10,
+                    padding: "15px 32px",
+                    background: "linear-gradient(135deg, #10b981, #22d3ee)",
+                    color: "#040810",
+                    fontWeight: 700,
+                    borderRadius: 14,
+                    border: "none",
+                    cursor: "pointer",
+                    fontSize: 15,
+                    fontFamily: "inherit",
+                    letterSpacing: "0.02em",
+                    boxShadow: "0 8px 32px rgba(16,185,129,0.35)",
+                  }}
+                >
+                  Work With Us <ArrowRight size={18} />
+                </button>
+                <Link
+                  to="/services"
+                  className="ab-ghost-btn"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 10,
+                    padding: "15px 32px",
+                    background: "rgba(255,255,255,0.03)",
+                    border: "1px solid rgba(255,255,255,0.12)",
+                    color: C.muted,
+                    textDecoration: "none",
+                    fontSize: 15,
+                    fontWeight: 600,
+                    borderRadius: 14,
+                    fontFamily: "inherit",
+                  }}
+                >
+                  Our Services
+                </Link>
+              </div>
             </div>
 
-            {/* Right — Company Card */}
-            <div className="ab-reveal" style={{ position: "relative" }}>
+            {/* RIGHT COLUMN — Company Card */}
+            <div className="ab-reveal-right" style={{ position: "relative" }}>
+              {/* Spinning ring */}
               <div
-                className="ab-pulse"
                 style={{
                   position: "absolute",
-                  inset: -20,
-                  background:
-                    "radial-gradient(circle, rgba(212,175,55,0.18) 0%, transparent 65%)",
-                  borderRadius: 40,
+                  top: -24,
+                  right: -24,
+                  width: 120,
+                  height: 120,
+                  borderRadius: "50%",
+                  border: "1px dashed rgba(16,185,129,0.2)",
+                  animation: "spinSlow 20s linear infinite",
                   pointerEvents: "none",
                 }}
               />
               <div
                 style={{
-                  ...glass,
+                  position: "absolute",
+                  bottom: -16,
+                  left: -16,
+                  width: 80,
+                  height: 80,
+                  borderRadius: "50%",
+                  border: "1px dashed rgba(34,211,238,0.15)",
+                  animation: "spinSlow 15s linear infinite reverse",
+                  pointerEvents: "none",
+                }}
+              />
+
+              {/* Main card */}
+              <div
+                style={{
+                  ...glass(true),
                   borderRadius: 28,
                   padding: "40px 36px",
                   position: "relative",
                   overflow: "hidden",
+                  boxShadow:
+                    "0 40px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06)",
                 }}
               >
-                {/* grid texture */}
+                {/* Scanline effect */}
                 <div
                   style={{
                     position: "absolute",
-                    inset: 0,
-                    opacity: 0.03,
-                    backgroundImage:
-                      "linear-gradient(rgba(212,175,55,1) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,1) 1px, transparent 1px)",
-                    backgroundSize: "28px 28px",
-                    borderRadius: 28,
+                    left: 0,
+                    right: 0,
+                    height: "20%",
+                    background:
+                      "linear-gradient(to bottom, transparent, rgba(16,185,129,0.03), transparent)",
+                    animation: "scanline 5s linear infinite",
+                    pointerEvents: "none",
                   }}
                 />
+
+                {/* Corner accents */}
+                {[
+                  {
+                    top: 0,
+                    left: 0,
+                    borderTop: `2px solid ${C.gold}`,
+                    borderLeft: `2px solid ${C.gold}`,
+                    borderRadius: "28px 0 0 0",
+                  },
+                  {
+                    top: 0,
+                    right: 0,
+                    borderTop: `2px solid ${C.cyan}`,
+                    borderRight: `2px solid ${C.cyan}`,
+                    borderRadius: "0 28px 0 0",
+                  },
+                  {
+                    bottom: 0,
+                    left: 0,
+                    borderBottom: `2px solid ${C.cyan}`,
+                    borderLeft: `2px solid ${C.cyan}`,
+                    borderRadius: "0 0 0 28px",
+                  },
+                  {
+                    bottom: 0,
+                    right: 0,
+                    borderBottom: `2px solid ${C.gold}`,
+                    borderRight: `2px solid ${C.gold}`,
+                    borderRadius: "0 0 28px 0",
+                  },
+                ].map((corner, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      position: "absolute",
+                      width: 28,
+                      height: 28,
+                      ...corner,
+                      animation: `borderGlow 3s ease-in-out infinite`,
+                      animationDelay: `${i * 0.75}s`,
+                    }}
+                  />
+                ))}
+
                 <div style={{ position: "relative" }}>
                   {/* Logo */}
                   <div
                     style={{
-                      width: 84,
-                      height: 84,
-                      marginBottom: 20,
-                      filter: "drop-shadow(0 0 18px rgba(212,175,55,0.4))",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 16,
+                      marginBottom: 28,
                     }}
                   >
-                    <img
-                      src={logo}
-                      alt="PAYIVVA Technologies logo"
+                    <div
                       style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "contain",
-                        borderRadius: 18,
+                        width: 72,
+                        height: 72,
+                        borderRadius: 20,
+                        background:
+                          "linear-gradient(135deg, rgba(16,185,129,0.2), rgba(34,211,238,0.1))",
+                        border: `1px solid ${C.goldBorder2}`,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        boxShadow: "0 0 30px rgba(16,185,129,0.25)",
                       }}
-                    />
+                    >
+                      <img
+                        src={logo}
+                        alt="PAYIVVA"
+                        style={{ width: 52, height: 52, objectFit: "contain" }}
+                      />
+                    </div>
+                    <div>
+                      <p
+                        style={{
+                          fontSize: 18,
+                          fontWeight: 800,
+                          color: "#fff",
+                          margin: "0 0 3px",
+                          fontFamily: "Syne, sans-serif",
+                        }}
+                      >
+                        PAYIVVA Technologies
+                      </p>
+                      <p
+                        style={{
+                          fontSize: 10,
+                          color: C.gold,
+                          fontWeight: 700,
+                          letterSpacing: "0.22em",
+                          textTransform: "uppercase",
+                          margin: 0,
+                        }}
+                      >
+                        Inspiring Innovations
+                      </p>
+                    </div>
                   </div>
-                  <p
-                    style={{
-                      fontSize: 22,
-                      fontWeight: 800,
-                      color: "#fff",
-                      margin: "0 0 4px",
-                    }}
-                  >
-                    PAYIVVA Technologies
-                  </p>
-                  <p
-                    style={{
-                      fontSize: 11,
-                      color: C.gold,
-                      fontWeight: 700,
-                      letterSpacing: "0.22em",
-                      textTransform: "uppercase",
-                      margin: "0 0 28px",
-                    }}
-                  >
-                    Inspiring Innovations
-                  </p>
 
                   {/* Stats grid */}
                   <div
                     style={{
                       display: "grid",
                       gridTemplateColumns: "1fr 1fr",
-                      gap: 12,
+                      gap: 10,
                       marginBottom: 20,
                     }}
                   >
-                    {STATS_CARD.map((s, i) => (
+                    {[
+                      { number: "500+", label: "Projects", color: C.gold },
+                      { number: "98%", label: "Satisfaction", color: C.cyan },
+                      { number: "50+", label: "Experts", color: "#a78bfa" },
+                      { number: "5+", label: "Years", color: "#f59e0b" },
+                    ].map((s, i) => (
                       <div
                         key={i}
                         style={{
-                          background: C.goldDim,
-                          border: `1px solid ${C.goldBorder}`,
-                          borderRadius: 14,
-                          padding: "16px 12px",
+                          background: "rgba(255,255,255,0.03)",
+                          border: `1px solid rgba(255,255,255,0.06)`,
+                          borderRadius: 16,
+                          padding: "18px 14px",
                           textAlign: "center",
+                          position: "relative",
+                          overflow: "hidden",
                         }}
                       >
                         <div
                           style={{
-                            fontSize: 24,
+                            position: "absolute",
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            height: 2,
+                            background: `linear-gradient(90deg, transparent, ${s.color}, transparent)`,
+                          }}
+                        />
+                        <div
+                          style={{
+                            fontSize: 26,
                             fontWeight: 900,
-                            color: C.gold,
+                            color: s.color,
                             lineHeight: 1,
+                            fontFamily: "Syne, sans-serif",
                           }}
                         >
                           {s.number}
@@ -575,7 +880,7 @@ export default function About() {
                           style={{
                             fontSize: 11,
                             color: C.muted,
-                            marginTop: 4,
+                            marginTop: 5,
                             fontWeight: 500,
                           }}
                         >
@@ -585,36 +890,41 @@ export default function About() {
                     ))}
                   </div>
 
-                  {/* Status */}
+                  {/* Live badge */}
                   <div
                     style={{
                       display: "flex",
                       alignItems: "center",
-                      gap: 10,
-                      padding: "12px 16px",
-                      background: C.goldDim,
-                      border: `1px solid ${C.goldBorder}`,
-                      borderRadius: 10,
+                      justifyContent: "space-between",
+                      padding: "14px 18px",
+                      background: "rgba(16,185,129,0.06)",
+                      border: `1px solid rgba(16,185,129,0.2)`,
+                      borderRadius: 12,
                     }}
                   >
                     <div
-                      className="ab-dot"
-                      style={{
-                        width: 8,
-                        height: 8,
-                        background: "#4ade80",
-                        borderRadius: "50%",
-                        flexShrink: 0,
-                      }}
-                    />
+                      style={{ display: "flex", alignItems: "center", gap: 10 }}
+                    >
+                      <GlowDot color="#4ade80" />
+                      <span
+                        style={{
+                          fontSize: 13,
+                          color: "rgba(255,255,255,0.65)",
+                          fontWeight: 500,
+                        }}
+                      >
+                        Accepting new projects
+                      </span>
+                    </div>
                     <span
                       style={{
-                        fontSize: 13,
-                        color: "rgba(255,255,255,0.6)",
-                        fontWeight: 500,
+                        fontSize: 11,
+                        color: C.gold,
+                        fontWeight: 700,
+                        letterSpacing: "0.1em",
                       }}
                     >
-                      Currently accepting new projects
+                      LIVE
                     </span>
                   </div>
                 </div>
@@ -624,43 +934,85 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── BIG STATS BAR ── */}
+      {/* ══════════════════════════════════════════
+          STATS BAR
+      ══════════════════════════════════════════ */}
       <div
         style={{
           borderTop: `1px solid ${C.border}`,
           borderBottom: `1px solid ${C.border}`,
           background: C.bg2,
+          padding: "52px 0",
         }}
       >
-        <div style={{ ...wrap, padding: "48px 28px" }}>
+        <div style={wrap}>
           <div
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
-              gap: 16,
+              gap: 14,
             }}
           >
             {BIG_STATS.map((s, i) => (
               <div
                 key={i}
-                className="ab-reveal"
+                className="ab-reveal stat-card"
                 style={{
-                  transitionDelay: `${i * 70}ms`,
-                  ...glass,
-                  padding: "24px 18px",
+                  transitionDelay: `${i * 60}ms`,
+                  position: "relative",
+                  background: "rgba(255,255,255,0.02)",
+                  border: `1px solid ${C.border}`,
+                  borderRadius: 20,
+                  padding: "28px 16px",
                   textAlign: "center",
+                  cursor: "default",
+                  overflow: "hidden",
+                  transition: "all 0.4s cubic-bezier(0.16,1,0.3,1)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = s.color + "44";
+                  e.currentTarget.style.background = s.color + "08";
+                  e.currentTarget.style.transform = "translateY(-4px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = C.border;
+                  e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                  e.currentTarget.style.transform = "translateY(0)";
                 }}
               >
-                <div style={iconBox(40)} className={undefined}>
-                  <s.icon size={18} style={{ color: C.gold }} />
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    height: 2,
+                    background: `linear-gradient(90deg, transparent, ${s.color}66, transparent)`,
+                  }}
+                />
+                <div
+                  className="stat-icon"
+                  style={{
+                    width: 44,
+                    height: 44,
+                    borderRadius: 12,
+                    margin: "0 auto 14px",
+                    background: s.color + "18",
+                    border: `1px solid ${s.color}33`,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <s.icon size={20} style={{ color: s.color }} />
                 </div>
                 <div
                   style={{
-                    marginTop: 12,
-                    fontSize: 26,
+                    fontSize: 28,
                     fontWeight: 900,
-                    color: C.gold,
+                    color: s.color,
                     lineHeight: 1,
+                    fontFamily: "Syne, sans-serif",
                   }}
                 >
                   {s.value}
@@ -670,7 +1022,7 @@ export default function About() {
                     fontSize: 11,
                     color: C.muted,
                     fontWeight: 500,
-                    marginTop: 6,
+                    marginTop: 7,
                     lineHeight: 1.4,
                   }}
                 >
@@ -682,14 +1034,33 @@ export default function About() {
         </div>
       </div>
 
-      {/* ── VALUES GRID ── */}
-      <section style={{ padding: "96px 0" }}>
+      {/* ══════════════════════════════════════════
+          VALUES
+      ══════════════════════════════════════════ */}
+      <section
+        style={{ padding: "104px 0", position: "relative", overflow: "hidden" }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%,-50%)",
+            width: 600,
+            height: 600,
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, rgba(16,185,129,0.04) 0%, transparent 70%)",
+            pointerEvents: "none",
+          }}
+        />
         <div style={wrap}>
-          <div className="ab-reveal">
+          <div className="ab-reveal" style={{ textAlign: "center" }}>
             <SectionHead
               badge="Core Values"
               title="What We"
               goldWord="Stand For"
+              icon={Trophy}
               sub="The principles that guide every decision, every campaign, and every client relationship we build."
               center
             />
@@ -697,8 +1068,8 @@ export default function About() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-              gap: 20,
+              gridTemplateColumns: "repeat(auto-fit, minmax(270px, 1fr))",
+              gap: 18,
             }}
           >
             {VALUES.map((val, i) => (
@@ -707,28 +1078,70 @@ export default function About() {
                 className="ab-reveal"
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
-                <HoverCard
+                <div
                   style={{
-                    padding: "36px 28px",
+                    position: "relative",
+                    borderRadius: 24,
+                    padding: "40px 28px",
+                    background: "rgba(255,255,255,0.02)",
+                    border: `1px solid ${C.goldBorder}`,
                     textAlign: "center",
                     height: "100%",
+                    overflow: "hidden",
+                    transition: "all 0.4s cubic-bezier(0.16,1,0.3,1)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = C.goldBorder2;
+                    e.currentTarget.style.transform = "translateY(-5px)";
+                    e.currentTarget.style.boxShadow =
+                      "0 30px 60px rgba(0,0,0,0.3)";
+                    e.currentTarget.querySelector(".val-icon").style.transform =
+                      "scale(1.1)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = C.goldBorder;
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "none";
+                    e.currentTarget.querySelector(".val-icon").style.transform =
+                      "scale(1)";
                   }}
                 >
+                  {/* Gradient top bar */}
                   <div
                     style={{
-                      ...iconBox(50),
-                      margin: "0 auto 20px",
-                      borderRadius: 16,
+                      position: "absolute",
+                      top: 0,
+                      left: "20%",
+                      right: "20%",
+                      height: 2,
+                      background: `linear-gradient(90deg, transparent, ${val.gradient.includes("cyan") ? C.cyan : C.gold}, transparent)`,
+                      borderRadius: 1,
+                    }}
+                  />
+
+                  <div
+                    className="val-icon"
+                    style={{
+                      width: 64,
+                      height: 64,
+                      borderRadius: 20,
+                      margin: "0 auto 22px",
+                      background: `linear-gradient(${val.gradient})`,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      boxShadow: `0 8px 32px rgba(16,185,129,0.2)`,
+                      transition: "transform 0.4s cubic-bezier(0.16,1,0.3,1)",
                     }}
                   >
-                    <val.icon size={24} />
+                    <val.icon size={26} style={{ color: "#040810" }} />
                   </div>
                   <h3
                     style={{
                       fontSize: 19,
-                      fontWeight: 800,
+                      fontWeight: 700,
                       color: "#fff",
-                      margin: "0 0 12px",
+                      margin: "0 0 14px",
                     }}
                   >
                     {val.title}
@@ -737,63 +1150,78 @@ export default function About() {
                     style={{
                       color: C.muted,
                       fontSize: 14,
-                      lineHeight: 1.78,
+                      lineHeight: 1.8,
                       margin: 0,
                     }}
                   >
                     {val.description}
                   </p>
-                </HoverCard>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── MARQUEE ── */}
+      {/* ══════════════════════════════════════════
+          MARQUEE
+      ══════════════════════════════════════════ */}
       <div
         style={{
           borderTop: `1px solid ${C.border}`,
           borderBottom: `1px solid ${C.border}`,
-          background: "#000",
-          padding: "18px 0",
+          background: "#020609",
+          padding: "22px 0",
           overflow: "hidden",
         }}
       >
         <div className="ab-marquee">
-          {[
-            ...SERVICES_QUICK,
-            ...SERVICES_QUICK,
-            ...SERVICES_QUICK,
-            ...SERVICES_QUICK,
-          ].map((t, i) => (
-            <span
-              key={i}
-              style={{
-                padding: "0 40px",
-                fontSize: 28,
-                fontWeight: 900,
-                fontStyle: "italic",
-                textTransform: "uppercase",
-                color: "rgba(255,255,255,0.1)",
-                whiteSpace: "nowrap",
-                letterSpacing: "0.04em",
-              }}
-            >
-              {t}
-            </span>
-          ))}
+          {[...Array(4)].flatMap(() =>
+            [
+              "Website Development",
+              "SEO Optimisation",
+              "Social Media Marketing",
+              "Google Ads",
+              "Brand Promotion",
+              "Lead Generation",
+            ].map((t, j) => (
+              <span
+                key={t + j}
+                style={{
+                  padding: "0 48px",
+                  fontSize: 24,
+                  fontWeight: 800,
+                  fontStyle: "italic",
+                  textTransform: "uppercase",
+                  color: "rgba(255,255,255,0.07)",
+                  whiteSpace: "nowrap",
+                  letterSpacing: "0.06em",
+                  fontFamily: "Syne, sans-serif",
+                }}
+              >
+                {t}
+                <span
+                  style={{ marginLeft: 48, color: C.goldBorder3, fontSize: 16 }}
+                >
+                  ◆
+                </span>
+              </span>
+            )),
+          )}
         </div>
       </div>
 
-      {/* ── TEAM VALUES ── */}
-      <section style={{ background: C.bg2, padding: "96px 0" }}>
+      {/* ══════════════════════════════════════════
+          HOW WE WORK (Team Values)
+      ══════════════════════════════════════════ */}
+      <section style={{ background: C.bg2, padding: "104px 0" }}>
         <div style={wrap}>
           <div className="ab-reveal">
             <SectionHead
               badge="How We Operate"
               title="The Way We"
               goldWord="Work"
+              icon={Rocket}
               sub="Six operating principles that define how we treat every client, every project, every day."
             />
           </div>
@@ -810,16 +1238,56 @@ export default function About() {
                 className="ab-reveal"
                 style={{ transitionDelay: `${i * 60}ms` }}
               >
-                <HoverCard
+                <div
                   style={{
-                    padding: "28px",
+                    position: "relative",
+                    borderRadius: 20,
+                    background: "rgba(255,255,255,0.02)",
+                    border: `1px solid ${C.border}`,
+                    padding: "28px 24px",
                     display: "flex",
                     alignItems: "flex-start",
                     gap: 18,
+                    overflow: "hidden",
+                    transition: "all 0.4s cubic-bezier(0.16,1,0.3,1)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = item.color + "44";
+                    e.currentTarget.style.background = item.color + "06";
+                    e.currentTarget.style.transform = "translateY(-3px)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = C.border;
+                    e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                    e.currentTarget.style.transform = "translateY(0)";
                   }}
                 >
-                  <div style={iconBox(44)}>
-                    <item.icon size={20} />
+                  {/* Left accent stripe */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: 0,
+                      top: "20%",
+                      bottom: "20%",
+                      width: 2,
+                      background: `linear-gradient(to bottom, transparent, ${item.color}, transparent)`,
+                      borderRadius: 2,
+                    }}
+                  />
+                  <div
+                    style={{
+                      width: 46,
+                      height: 46,
+                      borderRadius: 14,
+                      flexShrink: 0,
+                      background: item.color + "18",
+                      border: `1px solid ${item.color}33`,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <item.icon size={20} style={{ color: item.color }} />
                   </div>
                   <div>
                     <h4
@@ -835,7 +1303,7 @@ export default function About() {
                     <p
                       style={{
                         color: C.muted,
-                        fontSize: 13,
+                        fontSize: 13.5,
                         lineHeight: 1.75,
                         margin: 0,
                       }}
@@ -843,28 +1311,40 @@ export default function About() {
                       {item.desc}
                     </p>
                   </div>
-                </HoverCard>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── WHY PAYIVVA ── */}
-      <section style={{ padding: "96px 0" }}>
+      {/* ══════════════════════════════════════════
+          WHY PAYIVVA — Bento-style grid
+      ══════════════════════════════════════════ */}
+      <section style={{ padding: "104px 0", position: "relative" }}>
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "radial-gradient(ellipse 70% 40% at 50% 50%, rgba(34,211,238,0.03) 0%, transparent 70%)",
+            pointerEvents: "none",
+          }}
+        />
         <div style={wrap}>
           <div className="ab-reveal">
             <SectionHead
               badge="Why Choose Us"
               title="Why"
               goldWord="PAYIVVA"
+              icon={BrainCircuit}
               sub="We're not just another digital agency. Here's what makes the difference."
             />
           </div>
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
               gap: 16,
             }}
           >
@@ -874,202 +1354,257 @@ export default function About() {
                 className="ab-reveal"
                 style={{ transitionDelay: `${i * 70}ms` }}
               >
-                <HoverCard style={{ padding: "32px 28px" }}>
+                <div
+                  style={{
+                    position: "relative",
+                    borderRadius: 22,
+                    background: "rgba(255,255,255,0.02)",
+                    border: `1px solid ${C.border}`,
+                    padding: "36px 30px",
+                    overflow: "hidden",
+                    transition: "all 0.4s cubic-bezier(0.16,1,0.3,1)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = C.goldBorder2;
+                    e.currentTarget.style.background = "rgba(16,185,129,0.04)";
+                    e.currentTarget.style.transform = "translateY(-4px)";
+                    e.currentTarget.style.boxShadow =
+                      "0 20px 40px rgba(0,0,0,0.3)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = C.border;
+                    e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
+                >
+                  {/* Number watermark */}
                   <div
                     style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 10,
-                      marginBottom: 14,
+                      position: "absolute",
+                      top: 20,
+                      right: 24,
+                      fontSize: 64,
+                      fontWeight: 900,
+                      color: "rgba(16,185,129,0.04)",
+                      fontFamily: "Syne, sans-serif",
+                      lineHeight: 1,
+                      userSelect: "none",
                     }}
                   >
-                    <div
-                      style={{
-                        width: 8,
-                        height: 8,
-                        borderRadius: "50%",
-                        background: C.gold,
-                        boxShadow: `0 0 10px ${C.gold}`,
-                        flexShrink: 0,
-                      }}
-                    />
-                    <h4
-                      style={{
-                        fontSize: 17,
-                        fontWeight: 800,
-                        color: "#fff",
-                        margin: 0,
-                      }}
-                    >
-                      {item.title}
-                    </h4>
+                    {String(i + 1).padStart(2, "0")}
                   </div>
+
+                  <div
+                    style={{
+                      width: 48,
+                      height: 48,
+                      borderRadius: 14,
+                      marginBottom: 20,
+                      background: "rgba(16,185,129,0.1)",
+                      border: `1px solid ${C.goldBorder2}`,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <item.icon size={22} style={{ color: C.gold }} />
+                  </div>
+
+                  <h4
+                    style={{
+                      fontSize: 18,
+                      fontWeight: 700,
+                      color: "#fff",
+                      margin: "0 0 12px",
+                    }}
+                  >
+                    {item.title}
+                  </h4>
                   <p
                     style={{
                       color: C.muted,
                       fontSize: 14,
-                      lineHeight: 1.78,
+                      lineHeight: 1.8,
                       margin: 0,
                     }}
                   >
                     {item.desc}
                   </p>
-                </HoverCard>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 6,
+                      marginTop: 20,
+                    }}
+                  >
+                    <GlowDot color={C.gold} />
+                    <span
+                      style={{
+                        fontSize: 11,
+                        color: C.gold,
+                        fontWeight: 600,
+                        letterSpacing: "0.1em",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      Our commitment
+                    </span>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── SERVICES QUICK LOOK ── */}
-      <section style={{ background: C.bg2, padding: "80px 0" }}>
+      {/* ══════════════════════════════════════════
+          SERVICES
+      ══════════════════════════════════════════ */}
+      <section style={{ background: C.bg2, padding: "88px 0" }}>
         <div style={wrap}>
-          <div
-            className="ab-reveal"
-            style={{ textAlign: "center", marginBottom: 48 }}
-          >
-            <span style={tagStyle}>What We Offer</span>
-            <h2
-              style={{
-                fontSize: "clamp(1.8rem,3.5vw,2.6rem)",
-                fontWeight: 900,
-                color: "#fff",
-                margin: "0 0 12px",
-                lineHeight: 1.1,
-              }}
-            >
-              Our <span style={{ color: C.gold }}>Services</span>
-            </h2>
-            <p
-              style={{
-                color: C.muted,
-                fontSize: 15,
-                lineHeight: 1.7,
-                maxWidth: 480,
-                margin: "0 auto",
-              }}
-            >
-              Everything you need to grow your digital presence — under one
-              roof.
-            </p>
+          <div className="ab-reveal" style={{ textAlign: "center" }}>
+            <SectionHead
+              badge="What We Offer"
+              title="Our"
+              goldWord="Services"
+              icon={Code2}
+              sub="Everything you need to grow your digital presence — under one roof."
+              center
+            />
           </div>
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
               gap: 14,
             }}
           >
-            {[
-              {
-                icon: Globe,
-                name: "Website Development",
-                desc: "High-performance, conversion-optimised web solutions built for growth.",
-                link: "/services/website-development",
-              },
-              {
-                icon: BarChart3,
-                name: "SEO Optimisation",
-                desc: "Data-driven strategies to dominate search rankings and grow organic traffic.",
-                link: "/services/seo",
-              },
-              {
-                icon: MessageSquare,
-                name: "Social Media Marketing",
-                desc: "Content and community management that builds brand loyalty and engagement.",
-                link: "/services/social-media",
-              },
-              {
-                icon: Target,
-                name: "Google & Facebook Ads",
-                desc: "Precision paid campaigns engineered for maximum ROAS and lead volume.",
-                link: "/services/ads",
-              },
-              {
-                icon: Star,
-                name: "Brand Promotion",
-                desc: "End-to-end brand building that makes your business the obvious choice.",
-                link: "/services/brand",
-              },
-              {
-                icon: Users,
-                name: "Lead Generation",
-                desc: "Systematic lead funnels that keep your pipeline full and your team busy.",
-                link: "/services/leads",
-              },
-            ].map((svc, i) => (
+            {SERVICES.map((svc, i) => (
               <div
                 key={i}
                 className="ab-reveal"
                 style={{ transitionDelay: `${i * 60}ms` }}
               >
-                <HoverCard
-                  style={{
-                    padding: "24px 22px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 12,
-                  }}
+                <Link
+                  to={svc.link}
+                  style={{ textDecoration: "none", display: "block" }}
                 >
                   <div
-                    style={{ display: "flex", alignItems: "center", gap: 12 }}
+                    style={{
+                      position: "relative",
+                      borderRadius: 20,
+                      background: "rgba(255,255,255,0.02)",
+                      border: `1px solid ${C.border}`,
+                      padding: "28px 24px",
+                      overflow: "hidden",
+                      transition: "all 0.4s cubic-bezier(0.16,1,0.3,1)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = svc.color + "55";
+                      e.currentTarget.style.background = svc.color + "07";
+                      e.currentTarget.style.transform = "translateY(-4px)";
+                      e.currentTarget.style.boxShadow = `0 20px 40px rgba(0,0,0,0.3)`;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = C.border;
+                      e.currentTarget.style.background =
+                        "rgba(255,255,255,0.02)";
+                      e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.boxShadow = "none";
+                    }}
                   >
-                    <div style={iconBox(40)}>
-                      <svc.icon size={18} />
+                    {/* Top accent */}
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: "25%",
+                        right: "25%",
+                        height: 2,
+                        background: `linear-gradient(90deg, transparent, ${svc.color}88, transparent)`,
+                      }}
+                    />
+
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        marginBottom: 16,
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: 44,
+                          height: 44,
+                          borderRadius: 12,
+                          background: svc.color + "18",
+                          border: `1px solid ${svc.color}33`,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <svc.icon size={20} style={{ color: svc.color }} />
+                      </div>
+                      <ArrowRight size={16} style={{ color: C.muted2 }} />
                     </div>
+
                     <h4
                       style={{
-                        fontSize: 15,
+                        fontSize: 15.5,
                         fontWeight: 700,
                         color: "#fff",
-                        margin: 0,
+                        margin: "0 0 8px",
                       }}
                     >
                       {svc.name}
                     </h4>
+                    <p
+                      style={{
+                        color: C.muted,
+                        fontSize: 13,
+                        lineHeight: 1.72,
+                        margin: 0,
+                      }}
+                    >
+                      {svc.desc}
+                    </p>
                   </div>
-                  <p
-                    style={{
-                      color: C.muted,
-                      fontSize: 13,
-                      lineHeight: 1.7,
-                      margin: 0,
-                    }}
-                  >
-                    {svc.desc}
-                  </p>
-                  <Link
-                    to={svc.link}
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: 6,
-                      fontSize: 12,
-                      fontWeight: 600,
-                      color: C.gold,
-                      textDecoration: "none",
-                      marginTop: 4,
-                    }}
-                  >
-                    Learn more <ArrowRight size={12} />
-                  </Link>
-                </HoverCard>
+                </Link>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── CTA ── */}
+      {/* ══════════════════════════════════════════
+          CTA
+      ══════════════════════════════════════════ */}
       <section
-        style={{ padding: "110px 0", position: "relative", overflow: "hidden" }}
+        style={{ padding: "120px 0", position: "relative", overflow: "hidden" }}
       >
+        {/* Background effects */}
         <div
           style={{
             position: "absolute",
             inset: 0,
             background:
-              "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(212,175,55,0.06) 0%, transparent 70%)",
+              "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(16,185,129,0.07) 0%, transparent 70%)",
+            pointerEvents: "none",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage:
+              "linear-gradient(rgba(16,185,129,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(16,185,129,0.6) 1px, transparent 1px)",
+            backgroundSize: "60px 60px",
+            opacity: 0.015,
             pointerEvents: "none",
           }}
         />
@@ -1081,9 +1616,41 @@ export default function About() {
             right: 0,
             height: 1,
             background:
-              "linear-gradient(90deg, transparent, rgba(212,175,55,0.35), transparent)",
+              "linear-gradient(90deg, transparent, rgba(16,185,129,0.4), transparent)",
           }}
         />
+        <div
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: 1,
+            background:
+              "linear-gradient(90deg, transparent, rgba(34,211,238,0.3), transparent)",
+          }}
+        />
+
+        {/* Large background text */}
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%,-50%)",
+            fontSize: "clamp(80px,15vw,180px)",
+            fontWeight: 900,
+            fontFamily: "Syne, sans-serif",
+            color: "rgba(16,185,129,0.03)",
+            whiteSpace: "nowrap",
+            letterSpacing: "-0.05em",
+            userSelect: "none",
+            pointerEvents: "none",
+          }}
+        >
+          PAYIVVA
+        </div>
+
         <div
           style={{
             ...wrap,
@@ -1093,52 +1660,91 @@ export default function About() {
           }}
         >
           <div className="ab-reveal">
-            <Award
-              style={{ color: C.gold, margin: "0 auto 24px", display: "block" }}
-              size={52}
-            />
+            {/* Icon cluster */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 12,
+                marginBottom: 32,
+              }}
+            >
+              {[Trophy, Rocket, Star].map((Icon, i) => (
+                <div
+                  key={i}
+                  style={{
+                    width: 48,
+                    height: 48,
+                    borderRadius: 14,
+                    background:
+                      i === 1
+                        ? "linear-gradient(135deg, #10b981, #22d3ee)"
+                        : "rgba(16,185,129,0.1)",
+                    border: `1px solid ${i === 1 ? "transparent" : C.goldBorder2}`,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    transform: i === 1 ? "scale(1.15)" : "scale(1)",
+                  }}
+                >
+                  <Icon
+                    size={20}
+                    style={{ color: i === 1 ? "#040810" : C.gold }}
+                  />
+                </div>
+              ))}
+            </div>
+
             <h2
               style={{
-                fontSize: "clamp(2.2rem,5vw,4rem)",
+                fontSize: "clamp(2.4rem,5vw,4.2rem)",
                 fontWeight: 900,
                 color: "#fff",
-                margin: "0 0 22px",
-                lineHeight: 1.1,
+                margin: "0 0 20px",
+                lineHeight: 1.08,
+                letterSpacing: "-0.025em",
               }}
             >
               Ready to grow with{" "}
               <span
                 style={{
-                  color: C.gold,
-                  textShadow: "0 0 30px rgba(212,175,55,0.35)",
+                  background:
+                    "linear-gradient(135deg, #10b981, #22d3ee, #a78bfa)",
+                  backgroundSize: "200% 200%",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  animation: "gradientShift 4s ease infinite",
                 }}
               >
                 PAYIVVA?
               </span>
             </h2>
+
             <p
               style={{
                 fontSize: 17,
                 color: C.muted,
-                margin: "0 auto 44px",
-                maxWidth: 540,
+                margin: "0 auto 48px",
+                maxWidth: 520,
                 lineHeight: 1.8,
               }}
             >
               Let's build something remarkable together. Whether you need a new
               website, more leads, stronger SEO, or a brand that commands
-              attention — we have the team and the track record to deliver.
+              attention — we have the team and the track record.
             </p>
+
             <div
               style={{
                 display: "flex",
                 flexWrap: "wrap",
-                gap: 14,
+                gap: 16,
                 justifyContent: "center",
               }}
             >
               <button
-                className="ab-cta-main"
+                className="ab-cta-btn"
                 onClick={() =>
                   document
                     .querySelector("#contact")
@@ -1148,39 +1754,71 @@ export default function About() {
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 12,
-                  padding: "16px 40px",
-                  background: C.gold,
-                  color: "#000",
+                  padding: "18px 44px",
+                  background: "linear-gradient(135deg, #10b981, #22d3ee)",
+                  color: "#040810",
                   fontWeight: 800,
                   borderRadius: 16,
                   border: "none",
                   cursor: "pointer",
                   fontSize: 16,
                   fontFamily: "inherit",
-                  transition: "all 0.35s",
                   letterSpacing: "0.03em",
+                  boxShadow: "0 12px 40px rgba(16,185,129,0.4)",
                 }}
               >
-                Work With Us <ArrowRight size={20} />
+                Start a Project <ArrowRight size={20} />
               </button>
               <Link
                 to="/services"
-                className="ab-cta-ghost"
+                className="ab-ghost-btn"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 12,
-                  padding: "16px 40px",
-                  ...glass,
+                  padding: "18px 44px",
+                  background: "rgba(255,255,255,0.03)",
+                  border: "1px solid rgba(255,255,255,0.1)",
                   color: C.muted,
                   textDecoration: "none",
                   fontSize: 16,
                   fontWeight: 600,
-                  transition: "all 0.35s",
+                  borderRadius: 16,
+                  fontFamily: "inherit",
                 }}
               >
                 Explore Services
               </Link>
+            </div>
+
+            {/* Trust line */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 24,
+                marginTop: 52,
+                flexWrap: "wrap",
+              }}
+            >
+              {[
+                "No lock-in contracts",
+                "Free consultation",
+                "Dedicated support",
+              ].map((text, i) => (
+                <div
+                  key={i}
+                  style={{ display: "flex", alignItems: "center", gap: 8 }}
+                >
+                  <CheckCircle2 size={14} style={{ color: C.gold }} />
+                  <span
+                    style={{ fontSize: 13, color: C.muted, fontWeight: 500 }}
+                  >
+                    {text}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -1189,9 +1827,10 @@ export default function About() {
       {/* ── BOTTOM EDGE ── */}
       <div
         style={{
-          height: 1,
+          height: 2,
           background:
-            "linear-gradient(90deg, transparent, rgba(212,175,55,0.4) 30%, rgba(212,175,55,0.6) 50%, rgba(212,175,55,0.4) 70%, transparent)",
+            "linear-gradient(90deg, transparent 0%, #10b981 30%, #22d3ee 50%, #10b981 70%, transparent 100%)",
+          boxShadow: "0 0 20px rgba(16,185,129,0.4)",
         }}
       />
     </div>

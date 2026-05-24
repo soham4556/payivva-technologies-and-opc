@@ -74,11 +74,11 @@
 .cta-banner-wrapper {
   position: relative;
   width: 100%;
-  min-height: 380px;
+  min-height: 260px;
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   align-items: center;
-  padding: 4rem 5rem;
+  padding: 2.5rem 5rem;
   overflow: visible;
   background: transparent !important;
   border-radius: 0;
@@ -252,8 +252,8 @@
   .cta-banner-visual {
     position: relative;
     right: 0;
-    bottom: 0 !important;
-    height: 240px !important;
+    bottom: -40px !important;
+    height: 280px !important;
     margin-top: 0.75rem;
     margin-bottom: 0 !important;
     display: flex;
@@ -264,18 +264,18 @@
 
 @media (max-width: 600px) {
   .cta-banner-visual {
-    height: 240px !important;
+    height: 280px !important;
     margin-bottom: 0 !important;
-    bottom: 0 !important;
+    bottom: -40px !important;
     margin-top: 0.5rem !important;
   }
 }
 
 @media (max-width: 400px) {
   .cta-banner-visual {
-    height: 200px !important;
+    height: 240px !important;
     margin-bottom: 0 !important;
-    bottom: 0 !important;
+    bottom: -30px !important;
     margin-top: 0.25rem !important;
   }
 }
@@ -321,7 +321,7 @@
     padding: 2.5rem;
     border-radius: 35px !important;
     /* Slide the box down just enough to cover the straight-cut bottom edge */
-    margin: 2.2rem 2px 2px 2px !important;
+    margin: 1.5rem 2px 2px 2px !important;
   }
 
   .footer-brand-column {
@@ -352,8 +352,8 @@
     gap: 2rem;
     padding: 2.2rem 1.5rem;
     border-radius: 30px !important;
-    /* Slide the box down to uncover the photo completely */
-    margin: 6.5rem 8px 2px 8px !important;
+    /* Clean comfortable margin on tablet view where photo is relative */
+    margin: 2.2rem 8px 2px 8px !important;
     width: calc(100% - 16px) !important;
   }
 
@@ -383,8 +383,8 @@
     grid-template-columns: repeat(3, 1fr) !important;
     padding: 1.25rem 0.8rem 0.8rem 0.8rem !important;
     width: calc(100% - 16px) !important;
-    /* Push the footer card further down to fully reveal the person image! */
-    margin: 7.5rem 8px 2px 8px !important;
+    /* Clean comfortable margin on mobile view where photo is relative */
+    margin: 2.2rem 8px 2px 8px !important;
     gap: 0.9rem !important;
     border-radius: 20px !important;
   }
@@ -770,8 +770,9 @@
     bottom: 6px;
   }
   .cta-banner-visual {
-    height: 140px !important;
+    height: 180px !important;
     margin-bottom: 0 !important;
+    bottom: -20px !important;
   }
   .footer-container {
     padding: 1.5rem 0.6rem 1.1rem 0.6rem !important;

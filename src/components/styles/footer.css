@@ -89,19 +89,19 @@
 /* Fix: Mobile side padding — 5rem is too wide below 768px */
 @media (max-width: 768px) {
   .cta-banner-wrapper {
-    padding: 3rem 1.5rem;
+    padding: 3rem 1.5rem 0 1.5rem !important;
   }
 }
 
 @media (max-width: 480px) {
   .cta-banner-wrapper {
-    padding: 2.5rem 1rem;
+    padding: 2.5rem 1.5rem 0 1.5rem !important;
   }
 }
 
 @media (max-width: 360px) {
   .cta-banner-wrapper {
-    padding: 2rem 0.75rem;
+    padding: 2rem 0.75rem 0 0.75rem !important;
   }
 }
 
@@ -116,7 +116,7 @@
 @media (max-width: 1024px) {
   .cta-banner-wrapper {
     grid-template-columns: 1fr;
-    padding: 3rem 2rem;
+    padding: 3rem 2rem 0 2rem !important;
     min-height: auto;
     gap: 2rem;
     overflow: hidden;
@@ -252,6 +252,7 @@
     bottom: 0 !important;
     height: 300px !important;
     margin-top: 1rem;
+    margin-bottom: 0 !important;
     display: flex;
     justify-content: center;
     width: 100%;
@@ -261,12 +262,14 @@
 @media (max-width: 600px) {
   .cta-banner-visual {
     height: 220px !important;
+    margin-bottom: 0 !important;
   }
 }
 
 @media (max-width: 400px) {
   .cta-banner-visual {
     height: 160px !important;
+    margin-bottom: 0 !important;
   }
 }
 
@@ -336,7 +339,7 @@
 }
 
 /* Tablet Portrait Layout (2 Columns) */
-@media (max-width: 768px) and (min-width: 501px) {
+@media (max-width: 768px) and (min-width: 601px) {
   .footer-container {
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
@@ -367,63 +370,98 @@
   }
 }
 
-/* Mobile Layout (1 Column) */
-@media (max-width: 500px) {
+/* Mobile Layout (3 Columns Grid) - Optimised for Android & Mobile Views */
+@media (max-width: 600px) {
   .footer-container {
-    grid-template-columns: 1fr;
-    padding: 1.75rem 1.1rem 1.1rem 1.1rem;
+    grid-template-columns: repeat(3, 1fr) !important;
+    padding: 1.75rem 1rem 1.1rem 1rem !important;
     width: calc(100% - 16px) !important;
     /* No top margin — footer should be flush against the CTA section */
     margin: 0 8px 2px 8px !important;
-    gap: 1.75rem;
+    gap: 1.25rem !important;
     border-radius: 20px !important;
   }
 
   .footer-brand-column {
-    align-items: center;
-    text-align: center;
+    grid-column: span 3 !important;
+    align-items: center !important;
+    text-align: center !important;
+    margin-bottom: 0.25rem !important;
   }
 
   .footer-logo {
-    justify-content: center;
+    justify-content: center !important;
   }
 
   .footer-desc {
-    text-align: center;
+    text-align: center !important;
+    max-width: 95% !important;
+    margin: 0 auto !important;
+    font-size: 0.7rem !important;
   }
 
   .footer-social-links {
-    justify-content: center;
+    justify-content: center !important;
   }
 
-  .footer-column {
-    align-items: center;
-    text-align: center;
+  .footer-container > .footer-column:nth-child(2),
+  .footer-container > .footer-column:nth-child(3),
+  .footer-container > .footer-column:nth-child(4) {
+    grid-column: span 1 !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    width: 100% !important;
   }
 
-  .footer-column-title::after {
-    left: 50%;
-    transform: translateX(-50%);
+  /* Keep their titles left-aligned */
+  .footer-container > .footer-column:nth-child(2) .footer-column-title::after,
+  .footer-container > .footer-column:nth-child(3) .footer-column-title::after,
+  .footer-container > .footer-column:nth-child(4) .footer-column-title::after {
+    left: 0 !important;
+    transform: none !important;
   }
 
-  .footer-links-list {
-    text-align: center;
+  .footer-container > .footer-column:nth-child(2) .footer-links-list,
+  .footer-container > .footer-column:nth-child(3) .footer-links-list {
+    text-align: left !important;
   }
 
-  .footer-contact-details {
-    text-align: center;
+  .footer-container > .footer-column:nth-child(4) .footer-contact-details {
+    text-align: left !important;
   }
 
-  .footer-contact-item {
-    justify-content: center;
+  .footer-container > .footer-column:nth-child(4) .footer-contact-item {
+    justify-content: flex-start !important;
+    gap: 0.35rem !important;
   }
 
-  .footer-accreditation-badges {
-    justify-content: center;
+  /* Stack ISO badges vertically to avoid squishing inside a narrow column */
+  .footer-container > .footer-column:nth-child(4) .footer-accreditation-badges {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    gap: 0.4rem !important;
+  }
+  
+  .footer-container > .footer-column:nth-child(4) .footer-badge-item {
+    padding: 0.25rem 0.35rem !important;
+  }
+
+  /* Map column spans full 3 columns below them */
+  .footer-container > .footer-column:nth-child(5) {
+    grid-column: span 3 !important;
+    align-items: center !important;
+    text-align: center !important;
+    margin-top: 0.5rem !important;
+  }
+
+  .footer-container > .footer-column:nth-child(5) .footer-column-title::after {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
   }
 
   .footer-map-card {
-    height: 180px;
+    height: 180px !important;
   }
 }
 
@@ -703,7 +741,7 @@
     padding: 1.5rem 0 2px 0 !important;
   }
   .cta-banner-wrapper {
-    padding: 2rem 1rem;
+    padding: 2rem 1rem 0 1rem !important;
   }
   .cta-banner-title {
     font-size: clamp(1.3rem, 4.5vw, 1.5rem);
@@ -715,14 +753,15 @@
   }
   .cta-banner-visual {
     height: 140px !important;
+    margin-bottom: 0 !important;
   }
   .footer-container {
-    padding: 1.5rem 0.8rem;
-    gap: 1.5rem;
+    padding: 1.5rem 0.6rem 1.1rem 0.6rem !important;
+    gap: 1.25rem 0.5rem !important;
     border-radius: 20px !important;
   }
   .footer-map-card {
-    height: 140px;
+    height: 140px !important;
   }
   .footer-logo-img {
     height: 24px;
@@ -734,14 +773,14 @@
 
 @media (max-width: 320px) {
   .cta-banner-wrapper {
-    padding: 1.5rem 0.75rem;
+    padding: 1.5rem 0.75rem 0 0.75rem !important;
   }
   .cta-banner-title {
     font-size: clamp(1.1rem, 4vw, 1.3rem);
   }
   .footer-container {
-    padding: 1rem 0.6rem;
-    gap: 1rem;
+    padding: 1rem 0.5rem 1rem 0.5rem !important;
+    gap: 1rem 0.4rem !important;
     border-radius: 16px !important;
   }
   .footer-social-links {

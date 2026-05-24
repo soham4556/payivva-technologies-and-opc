@@ -1,4 +1,4 @@
-import { Shield, Flame, Code, Cpu, Database, PenTool, BarChart, Layers, Globe, Zap, Clock, ArrowRight, Sparkles, Users, Target, BadgeCheck, MapPinned } from 'lucide-react';
+﻿import { Shield, Flame, Code, Cpu, Database, PenTool, BarChart, Layers, Globe, Zap, Clock, ArrowRight, Sparkles, Users, Target, BadgeCheck, MapPinned } from 'lucide-react';
 import './styles/About.css';
 
 const About = () => {
@@ -46,8 +46,8 @@ const About = () => {
     },
     {
       year: '2025',
-      title: 'Hinjawadi HQ',
-      text: 'Core operations moved into Gera Imperium Rise, Phase II, to sit inside Pune’s tech corridor.',
+      title: 'Handewadi HQ',
+      text: 'Core operations moved into our Handewadi facility to sit inside Pune\u2019s tech corridor.',
       icon: <Globe size={14} />,
       tone: 'purple'
     },
@@ -91,7 +91,7 @@ const About = () => {
               </div>
               <div className="terminal-body">
                 <div className="stat-line"><span className="stat-label">SYSTEM INTEGRATION</span><span className="stat-value text-glow-indigo">ACTIVE</span></div>
-                <div className="stat-line"><span className="stat-label">HQ LOCATION</span><span className="stat-value text-glow-teal">HINJAWADI, PUNE</span></div>
+                <div className="stat-line"><span className="stat-label">HQ LOCATION</span><span className="stat-value text-glow-teal">HANDEWADI, PUNE</span></div>
                 <div className="stat-line"><span className="stat-label">DELIVERY MODEL</span><span className="stat-value text-glow-indigo">BOUTIQUE + ENTERPRISE</span></div>
                 <div className="stat-bar-holder">
                   <span className="stat-label">CLIENT SATISFACTION</span>
@@ -114,7 +114,7 @@ const About = () => {
             <div className="obsidian-card-premium snapshot-card">
               <div className="snapshot-icon"><MapPinned size={20} /></div>
               <h3>Where we operate</h3>
-              <p>Our HQ is in Gera Imperium Rise, Phase II, Hinjawadi, Pune, close to the city’s core tech ecosystem.</p>
+              <p>Our HQ is at House no. 105, Green Park - Venkatesh Properties, Autadwadi Handewadi, Pune, close to the city's core tech ecosystem.</p>
             </div>
             <div className="obsidian-card-premium snapshot-card">
               <div className="snapshot-icon"><Shield size={20} /></div>
@@ -198,3 +198,4 @@ const About = () => {
 };
 
 export default About;
+

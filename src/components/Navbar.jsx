@@ -42,7 +42,6 @@ const Navbar = () => {
         {/* Brand Logo */}
         <Link to="/" className="nav-logo-link">
           <img src="/logo.png" alt="PAYIVVA Technologies Logo" className="nav-logo-img" />
-          <span className="nav-brand-text">PAYIVVA</span>
         </Link>
 
         {/* Desktop Menu */}

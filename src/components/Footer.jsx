@@ -100,7 +100,7 @@ const ArrowRightIcon = ({ size = 14 }) => (
           <div className="footer-contact-details">
             <div className="footer-contact-item">
               <MapPinIcon size={14} className="footer-contact-icon" />
-              <span>820, Sreen building, Phase II, Hinjawadi, Pune - 411057</span>
+              <span>House no. 105, Green Park - Venkatesh Properties, Autadwadi Handewadi, Pune - 411060</span>
             </div>
             <div className="footer-contact-item">
               <MailIcon size={14} className="footer-contact-icon" />
@@ -125,7 +125,7 @@ const ArrowRightIcon = ({ size = 14 }) => (
           <h4 className="footer-column-title">Reach us</h4>
           <div className="footer-map-card">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3781.5649980649755!2d73.72791487501579!3d18.593641282513998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bbc14c0a5a31%3A0x6001db16315bd6a0!2sGera%20Imperium%20Rise!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.9104732701894!2d73.912077!3d18.435952099999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2eb5e0a802bc7%3A0xfddfe2bb2e402d54!2sPayivva%20Technologies%20opc%20Pvt%20Ltd!5e1!3m2!1sen!2sin!4v1779633572583!5m2!1sen!2sin" 
               width="100%" 
               height="220" 
               style={{ border: 0, borderRadius: '12px' }} 

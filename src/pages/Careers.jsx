@@ -142,7 +142,7 @@ const Careers = () => {
               <div className="terminal-stack">
                 <div className="stack-item"><span className="stack-label">Next Review</span><strong>Today, 05:30 PM</strong></div>
                 <div className="stack-item"><span className="stack-label">Candidate Flow</span><strong>Open</strong></div>
-                <div className="stack-item"><span className="stack-label">Pune HQ</span><strong>Phase II</strong></div>
+                <div className="stack-item"><span className="stack-label">Pune HQ</span><strong>Handewadi</strong></div>
               </div>
             </div>
           </aside>

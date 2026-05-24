@@ -29,7 +29,7 @@ const Legal = () => {
           <li><strong>Company Type:</strong> One Person Company (OPC)</li>
           <li><strong>Registration Authority:</strong> Registrar of Companies (ROC), Pune, India</li>
           <li><strong>Registered State:</strong> Maharashtra, India</li>
-          <li><strong>Operating Headquarters:</strong> 922, Gera Imperium Rise, Phase II, Hinjawadi, Pune, Maharashtra, 411057, India</li>
+          <li><strong>Operating Headquarters:</strong> House no. 105, Green Park - Venkatesh Properties, Autadwadi Handewadi, Pune, Maharashtra, 411060, India</li>
         </ul>
 
         <h2>2. Professional Licensing & Tax Compliance</h2>

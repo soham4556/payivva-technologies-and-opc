@@ -55,7 +55,7 @@ const Contact = () => {
           <div className="contact-radar-card glass-card">
             <div className="radar-header">
               <span className="radar-chip">HQ Operations Radar</span>
-              <strong>Hinjawadi Tech Hub</strong>
+              <strong>Handewadi Operations Hub</strong>
             </div>
             <div className="radar-canvas">
               <span className="radar-pin"></span>
@@ -65,7 +65,7 @@ const Contact = () => {
               <span className="radar-grid-line line-a"></span>
               <span className="radar-grid-line line-b"></span>
             </div>
-            <div className="radar-footer">Gera Imperium Rise, Phase II, Hinjawadi, Pune</div>
+            <div className="radar-footer">House no. 105, Green Park - Venkatesh Properties, Autadwadi Handewadi, Pune</div>
           </div>
         </div>
       </section>
@@ -81,7 +81,7 @@ const Contact = () => {
                 <div className="contact-icon-box"><MapPin size={18} /></div>
                 <div>
                   <h3>HQ Location</h3>
-                  <p>922, Gera Imperium Rise, Phase II, Hinjawadi, Pune, Maharashtra, 411057, India</p>
+                  <p>House no. 105, Green Park - Venkatesh Properties, Autadwadi Handewadi, Pune, Maharashtra, 411060, India</p>
                 </div>
               </div>
               <div className="contact-info-row">

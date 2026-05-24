@@ -67,7 +67,7 @@
 /* Mobile: allow horizontal overflow of person image to be contained */
 @media (max-width: 900px) {
   .cta-banner-container-direct {
-    overflow: hidden;
+    overflow: visible !important;
   }
 }
 
@@ -265,7 +265,8 @@
 @media (max-width: 600px) {
   .cta-banner-visual {
     height: 240px !important;
-    margin-bottom: -60px !important;
+    margin-bottom: 0 !important;
+    bottom: 0 !important;
     margin-top: 0.5rem !important;
   }
 }
@@ -273,7 +274,8 @@
 @media (max-width: 400px) {
   .cta-banner-visual {
     height: 200px !important;
-    margin-bottom: -50px !important;
+    margin-bottom: 0 !important;
+    bottom: 0 !important;
     margin-top: 0.25rem !important;
   }
 }

@@ -16,8 +16,16 @@
   width: 100%;
 }
 
+/* 
+  FIX: bg_contact_image.png is a 1260×540px wide image designed for desktop.
+  On mobile, background-size:100% 100% squishes the curved white pocket to
+  ~30% of screen width, which looks totally broken. 
+  Solution: use a solid CSS gradient that matches the blue on screens ≤1024px
+*/
 @media (max-width: 1024px) {
   .combined-footer-wrapper {
+    background: linear-gradient(160deg, #bdd5f0 0%, #c8dcf5 40%, #d6e7fa 70%, #e6f0fb 100%) !important;
+    background-size: unset !important;
     padding: 4rem 0 2px 0 !important;
     gap: 2rem;
   }
@@ -25,6 +33,7 @@
 
 @media (max-width: 600px) {
   .combined-footer-wrapper {
+    background: linear-gradient(160deg, #bdd5f0 0%, #c8dcf5 40%, #d6e7fa 70%, #e6f0fb 100%) !important;
     padding: 3rem 0 2px 0 !important;
     gap: 1.5rem;
   }
@@ -32,6 +41,7 @@
 
 @media (max-width: 400px) {
   .combined-footer-wrapper {
+    background: linear-gradient(160deg, #bdd5f0 0%, #c8dcf5 50%, #e0ecfa 100%) !important;
     padding: 2rem 0 2px 0 !important;
     gap: 1rem;
   }
@@ -105,9 +115,10 @@
 @media (max-width: 1024px) {
   .cta-banner-wrapper {
     grid-template-columns: 1fr;
-    padding: 3.5rem 2.5rem;
+    padding: 3rem 2rem;
     min-height: auto;
     gap: 2rem;
+    overflow: hidden;
   }
 }
 
@@ -261,6 +272,7 @@
 .cta-person-img {
   height: 100%;
   width: auto;
+  max-width: 100%;
   object-fit: contain;
   display: block;
 }

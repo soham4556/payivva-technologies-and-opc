@@ -535,10 +535,13 @@ a {
   outline: none !important;
 }
 
-/* Crop the top 4px of the footer background image to hide any image-edge border lines */
-.combined-footer-wrapper {
-  background-size: 100% calc(100% + 4px) !important;
-  background-position: center bottom !important;
+/* Crop the top 4px of the footer background IMAGE to hide edge border lines */
+/* Only applies on desktop where we actually use the image — mobile uses CSS gradient */
+@media (min-width: 1025px) {
+  .combined-footer-wrapper {
+    background-size: 100% calc(100% + 4px) !important;
+    background-position: center bottom !important;
+  }
 }
 
 /* ==========================================================================

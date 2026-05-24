@@ -35,6 +35,21 @@
   --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-fast: all 0.2s ease;
   --max-width: 1200px;
+
+  /* Navbar height — matches Navbar.css breakpoints */
+  --navbar-height: 80px;
+}
+
+@media (max-width: 600px) {
+  :root { --navbar-height: 70px; }
+}
+
+@media (max-width: 375px) {
+  :root { --navbar-height: 64px; }
+}
+
+@media (max-width: 320px) {
+  :root { --navbar-height: 58px; }
 }
 
 /* Reset and Core Styles */
@@ -117,7 +132,7 @@ a {
 
 @media (max-width: 768px) {
   .section-padding {
-    padding: 0.6rem 0 !important;
+    padding: 2rem 0 !important;
   }
 }
 
@@ -236,6 +251,13 @@ a {
   pointer-events: none;
   z-index: 0;
   background-color: var(--bg-primary);
+}
+
+/* Fix: iOS Safari & Mobile Chrome cannot render background-attachment:fixed correctly */
+@media (max-width: 768px) {
+  .bg-grid {
+    background-attachment: scroll, scroll, scroll, scroll;
+  }
 }
 
 .bg-dot-pattern {

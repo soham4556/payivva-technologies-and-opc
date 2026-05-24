@@ -316,6 +316,15 @@
   }
 }
 
+/* Per-dropdown minimum widths — clamped to 90vw so they never overflow the viewport */
+.industries-dropdown {
+  min-width: min(280px, 90vw);
+}
+
+.resources-dropdown {
+  min-width: min(200px, 90vw);
+}
+
 /* Custom Grid for Large Services Dropdown */
 .dropdown-grid {
   display: grid;

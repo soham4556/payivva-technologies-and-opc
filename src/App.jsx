@@ -69,7 +69,7 @@ function App() {
         <Navbar />
 
         {/* Dynamic Route Container */}
-        <main style={{ flex: 1, paddingTop: '80px', position: 'relative', zIndex: 1 }}>
+        <main style={{ flex: 1, paddingTop: 'var(--navbar-height)', position: 'relative', zIndex: 1 }}>
           <div className="bg-grid"></div>
           <Suspense fallback={<PageLoader />}>
             <Routes>

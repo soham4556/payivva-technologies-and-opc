@@ -119,7 +119,7 @@ const Navbar = () => {
               <button className={`nav-item-link nav-dropdown-btn ${activeDropdown === 'industries' ? 'active' : ''}`}>
                 Industries <ChevronDown size={14} className="dropdown-arrow" />
               </button>
-              <div className={`nav-dropdown-menu ${activeDropdown === 'industries' ? 'show' : ''}`} style={{ minWidth: '280px' }}>
+              <div className={`nav-dropdown-menu industries-dropdown ${activeDropdown === 'industries' ? 'show' : ''}`}>
                 {industriesData.map((ind) => (
                   <Link key={ind.slug} to={`/industries/${ind.slug}`} className="dropdown-item">
                     <span className="dropdown-item-title">{ind.tabTitle}</span>
@@ -138,7 +138,7 @@ const Navbar = () => {
               <button className={`nav-item-link nav-dropdown-btn ${activeDropdown === 'resources' ? 'active' : ''}`}>
                 Resources <ChevronDown size={14} className="dropdown-arrow" />
               </button>
-              <div className={`nav-dropdown-menu ${activeDropdown === 'resources' ? 'show' : ''}`} style={{ minWidth: '200px' }}>
+              <div className={`nav-dropdown-menu resources-dropdown ${activeDropdown === 'resources' ? 'show' : ''}`}>
                 <Link to="/resources/case-studies" className="dropdown-item">
                   <span className="dropdown-item-title">Case Studies</span>
                 </Link>

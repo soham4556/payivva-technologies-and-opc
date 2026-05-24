@@ -229,7 +229,7 @@
   position: absolute;
   bottom: -140px !important;
   right: 8%;
-  height: 580px !important;
+  height: 165% !important;
   width: auto;
   pointer-events: none;
   z-index: 9 !important;
@@ -240,7 +240,7 @@
 @media (max-width: 1200px) {
   .cta-banner-visual {
     right: -10% !important;
-    height: 440px !important;
+    height: 120% !important;
     bottom: -50px !important;
   }
   .cta-banner-title {

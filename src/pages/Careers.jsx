@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Laptop, Heart, BookOpen, Calendar, X, ArrowRight, UploadCloud, CheckCircle } from 'lucide-react';
 import './styles/Careers.css';
 
@@ -9,6 +9,18 @@ const Careers = () => {
   const [resumeName, setResumeName] = useState('');
   const [isDragging, setIsDragging] = useState(false);
   const resumeInputRef = useRef(null);
+
+  useEffect(() => {
+    const bgGrid = document.querySelector('.bg-grid');
+    if (bgGrid) {
+      bgGrid.classList.add('hide-brain-bg');
+    }
+    return () => {
+      if (bgGrid) {
+        bgGrid.classList.remove('hide-brain-bg');
+      }
+    };
+  }, []);
 
   const jobsList = [
     { title: 'Senior React Developer', department: 'Engineering', location: 'Pune HQ', type: 'Full-time' },

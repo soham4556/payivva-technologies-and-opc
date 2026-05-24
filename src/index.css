@@ -253,6 +253,13 @@ a {
   background-color: var(--bg-primary);
 }
 
+.bg-grid.hide-brain-bg {
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)),
+    radial-gradient(circle at 50% 200px, rgba(6, 182, 212, 0.15), transparent 50%),
+    radial-gradient(circle at 90% 100px, rgba(139, 92, 246, 0.1), transparent 45%) !important;
+}
+
 /* Fix: iOS Safari & Mobile Chrome cannot render background-attachment:fixed correctly */
 @media (max-width: 768px) {
   .bg-grid {

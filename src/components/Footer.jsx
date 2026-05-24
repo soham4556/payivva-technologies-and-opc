@@ -45,7 +45,7 @@ const ArrowRightIcon = ({ size = 14 }) => (
               <span className="specialization-tag" style={{ color: '#ffffff', opacity: 0.9 }}>GET STARTED</span>
               <span className="tag-horizontal-line" style={{ background: '#ffffff', opacity: 0.8 }}></span>
             </div>
-            <h2 className="cta-banner-title">
+            <h2 className="cta-banner-title" style={{ color: '#ffffff' }}>
               Let's Make Something<br />Great Together
             </h2>
             <div className="cta-buttons-row">

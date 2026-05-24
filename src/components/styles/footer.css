@@ -25,7 +25,7 @@
 */
 @media (max-width: 1024px) {
   .combined-footer-wrapper {
-    background: linear-gradient(160deg, #bdd5f0 0%, #c8dcf5 40%, #d6e7fa 70%, #e6f0fb 100%) !important;
+    background: linear-gradient(180deg, #090d16 0%, #0b1329 100%) !important;
     background-size: unset !important;
     padding: 4rem 0 0 0 !important;
     gap: 0;
@@ -34,7 +34,7 @@
 
 @media (max-width: 600px) {
   .combined-footer-wrapper {
-    background: linear-gradient(160deg, #bdd5f0 0%, #c8dcf5 40%, #d6e7fa 70%, #e6f0fb 100%) !important;
+    background: linear-gradient(180deg, #090d16 0%, #0c152b 100%) !important;
     padding: 3rem 0 0 0 !important;
     gap: 0;
   }
@@ -42,7 +42,7 @@
 
 @media (max-width: 400px) {
   .combined-footer-wrapper {
-    background: linear-gradient(160deg, #bdd5f0 0%, #c8dcf5 50%, #e0ecfa 100%) !important;
+    background: linear-gradient(180deg, #090d16 0%, #0d1730 100%) !important;
     padding: 2rem 0 0 0 !important;
     gap: 0;
   }
@@ -89,19 +89,19 @@
 /* Fix: Mobile side padding — 5rem is too wide below 768px */
 @media (max-width: 768px) {
   .cta-banner-wrapper {
-    padding: 3rem 1.5rem 0 1.5rem !important;
+    padding: 1.75rem 1.25rem 0 1.25rem !important;
   }
 }
 
 @media (max-width: 480px) {
   .cta-banner-wrapper {
-    padding: 2.5rem 1.5rem 0 1.5rem !important;
+    padding: 1.25rem 1rem 0 1rem !important;
   }
 }
 
 @media (max-width: 360px) {
   .cta-banner-wrapper {
-    padding: 2rem 0.75rem 0 0.75rem !important;
+    padding: 1rem 0.5rem 0 0.5rem !important;
   }
 }
 
@@ -250,8 +250,8 @@
     position: relative;
     right: 0;
     bottom: 0 !important;
-    height: 300px !important;
-    margin-top: 1rem;
+    height: 240px !important;
+    margin-top: 0.75rem;
     margin-bottom: 0 !important;
     display: flex;
     justify-content: center;
@@ -261,15 +261,17 @@
 
 @media (max-width: 600px) {
   .cta-banner-visual {
-    height: 220px !important;
+    height: 160px !important;
     margin-bottom: 0 !important;
+    margin-top: 0.5rem !important;
   }
 }
 
 @media (max-width: 400px) {
   .cta-banner-visual {
-    height: 160px !important;
+    height: 120px !important;
     margin-bottom: 0 !important;
+    margin-top: 0.25rem !important;
   }
 }
 
@@ -374,11 +376,11 @@
 @media (max-width: 600px) {
   .footer-container {
     grid-template-columns: repeat(3, 1fr) !important;
-    padding: 1.75rem 1rem 1.1rem 1rem !important;
+    padding: 1.25rem 0.8rem 0.8rem 0.8rem !important;
     width: calc(100% - 16px) !important;
     /* No top margin — footer should be flush against the CTA section */
     margin: 0 8px 2px 8px !important;
-    gap: 1.25rem !important;
+    gap: 0.9rem !important;
     border-radius: 20px !important;
   }
 
@@ -386,7 +388,7 @@
     grid-column: span 3 !important;
     align-items: center !important;
     text-align: center !important;
-    margin-bottom: 0.25rem !important;
+    margin-bottom: 0.15rem !important;
   }
 
   .footer-logo {
@@ -452,7 +454,7 @@
     grid-column: span 3 !important;
     align-items: center !important;
     text-align: center !important;
-    margin-top: 0.5rem !important;
+    margin-top: 0.35rem !important;
   }
 
   .footer-container > .footer-column:nth-child(5) .footer-column-title::after {
@@ -461,18 +463,29 @@
   }
 
   .footer-map-card {
-    height: 180px !important;
+    height: 130px !important;
+  }
+
+  .footer-bottom-row {
+    margin-top: 0.5rem !important;
+    padding-top: 0.5rem !important;
+  }
+
+  .footer-bottom-row span {
+    font-size: 0.68rem !important;
+    padding: 0.35rem 0.8rem !important;
+    min-height: 32px !important;
   }
 }
 
 @media (max-width: 360px) {
   .footer-container {
-    padding: 1.5rem 0.8rem;
-    gap: 1.5rem;
+    padding: 1rem 0.6rem !important;
+    gap: 0.75rem !important;
   }
 
   .footer-map-card {
-    height: 140px;
+    height: 120px !important;
   }
 }
 

@@ -519,3 +519,64 @@ img,
   background-size: 100% calc(100% + 4px) !important;
   background-position: center bottom !important;
 }
+
+/* ==========================================================================
+   GLOBAL RESPONSIVE TWEAKS
+   ========================================================================== */
+@media (max-width: 600px) {
+  html, body {
+    font-size: 15px;
+  }
+  .container {
+    padding: 0 1rem;
+  }
+  .section-padding {
+    padding: 1.5rem 0 !important;
+  }
+  .btn {
+    padding: 0.65rem 1.4rem;
+    font-size: 0.88rem;
+  }
+  .glass-card {
+    padding: 1.5rem;
+    border-radius: 14px;
+  }
+  .service-showcase-card,
+  .service-dashboard-card {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 375px) {
+  html, body {
+    font-size: 14px;
+  }
+  .container {
+    padding: 0 0.75rem;
+  }
+  .btn {
+    padding: 0.55rem 1.2rem;
+    font-size: 0.82rem;
+  }
+  .glass-card {
+    padding: 1.2rem;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 320px) {
+  html, body {
+    font-size: 13px;
+  }
+  .container {
+    padding: 0 0.5rem;
+  }
+  .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.78rem;
+  }
+  .glass-card {
+    padding: 1rem;
+    border-radius: 10px;
+  }
+}

@@ -985,6 +985,105 @@
   .industry-stat-value {
     font-size: 1.5rem;
   }
+  .industry-challenge-card,
+  .industry-feature-card,
+  .industry-card,
+  .industry-impact-card {
+    padding: 1.2rem;
+  }
+  .industry-usecase-item {
+    padding: 1rem 1.2rem;
+  }
+  .industry-cta-card {
+    padding: 1.5rem 1rem;
+  }
+  .industry-container {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .industry-hero-title {
+    font-size: 1.4rem;
+  }
+  .industry-hero-desc {
+    font-size: 0.88rem;
+  }
+  .industry-section-title {
+    font-size: 1.3rem;
+  }
+  .industry-section-desc {
+    font-size: 0.85rem;
+  }
+  .industry-stat-value {
+    font-size: 1.3rem;
+  }
+  .industry-stat-label {
+    font-size: 0.65rem;
+  }
+  .industry-challenge-title,
+  .industry-feature-title,
+  .industry-card-title {
+    font-size: 0.92rem;
+  }
+  .industry-challenge-desc,
+  .industry-feature-desc,
+  .industry-card-desc {
+    font-size: 0.82rem;
+  }
+  .industry-cta-title {
+    font-size: 1.2rem;
+  }
+  .industry-cta-desc {
+    font-size: 0.88rem;
+  }
+  .industry-stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  .timeline-step-content-card {
+    padding: 1.2rem;
+  }
+  .bento-card {
+    padding: 1.5rem !important;
+  }
+  .ml-app-grid-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .industry-hero-title {
+    font-size: 1.2rem;
+  }
+  .industry-hero-desc {
+    font-size: 0.82rem;
+  }
+  .industry-section-title {
+    font-size: 1.1rem;
+  }
+  .industry-stat-value {
+    font-size: 1.1rem;
+  }
+  .industry-stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+  .industry-hero-tag {
+    font-size: 0.65rem;
+  }
+  .industry-section-tag {
+    font-size: 0.6rem;
+  }
+  .industry-casestudy-card {
+    padding: 1rem;
+  }
+  .industry-casestudy-title {
+    font-size: 1.1rem;
+  }
+  .industry-container {
+    padding: 0 0.75rem;
+  }
 }
 
 /* ==========================================

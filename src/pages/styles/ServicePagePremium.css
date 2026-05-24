@@ -1517,6 +1517,172 @@
   }
 }
 
+@media (max-width: 480px) {
+  .srv-title {
+    font-size: clamp(1.5rem, 7vw, 2rem);
+  }
+  .srv-desc {
+    font-size: 0.88rem;
+  }
+  .srv-badge {
+    font-size: 0.6rem;
+  }
+  .showcase-pane {
+    padding: 14px;
+  }
+  .pane-title {
+    font-size: 1.1rem;
+  }
+  .matrix-card {
+    padding: 16px;
+  }
+  .matrix-title {
+    font-size: 1rem;
+  }
+  .matrix-desc {
+    font-size: 0.84rem;
+  }
+  .pipeline-step {
+    padding: 14px;
+  }
+  .step-title {
+    font-size: 0.9rem;
+  }
+  .step-desc {
+    font-size: 0.84rem;
+  }
+  .outcome-card {
+    padding: 16px;
+  }
+  .outcome-val {
+    font-size: clamp(1.6rem, 5vw, 2.2rem);
+  }
+  .cta-title {
+    font-size: clamp(1.3rem, 6vw, 1.8rem);
+  }
+  .proj-title {
+    font-size: 1.2rem;
+  }
+  .project-visual-pane {
+    min-height: 200px;
+  }
+  .modal-content-shell {
+    padding: 16px;
+  }
+  .modal-grid-three-col {
+    grid-template-columns: 1fr;
+  }
+  .service-portfolio-feature {
+    grid-template-columns: 1fr;
+  }
+  .service-portfolio-showcase {
+    grid-template-columns: 1fr;
+  }
+  .service-portfolio-mini-card {
+    min-height: auto;
+    padding: 12px;
+  }
+  .service-portfolio-card-media {
+    min-height: 160px;
+  }
+  .service-portfolio-card-body {
+    padding: 12px;
+  }
+  .service-portfolio-card-head h3 {
+    font-size: 0.95rem;
+  }
+  .service-portfolio-spotlight {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .service-portfolio-modal {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 375px) {
+  .srv-title {
+    font-size: clamp(1.3rem, 7vw, 1.6rem);
+  }
+  .srv-desc {
+    font-size: 0.84rem;
+  }
+  .premium-glass-graphic-wrapper {
+    padding: 10px;
+  }
+  .pane-title {
+    font-size: 1rem;
+  }
+  .pane-tag {
+    font-size: 0.62rem;
+  }
+  .matrix-icon-box {
+    width: 42px;
+    height: 42px;
+  }
+  .step-num-node {
+    width: 34px;
+    height: 34px;
+  }
+  .details-title {
+    font-size: clamp(1rem, 5vw, 1.3rem);
+  }
+  .vertical-item-num {
+    width: 24px;
+    height: 24px;
+  }
+  .srv-cta-panel {
+    padding: 14px;
+  }
+  .proj-title {
+    font-size: 1.1rem;
+  }
+  .mini-card-title {
+    font-size: 0.8rem;
+  }
+  .service-portfolio-card-head h3 {
+    font-size: 0.88rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .srv-title {
+    font-size: clamp(1.1rem, 6vw, 1.3rem);
+  }
+  .srv-badge {
+    font-size: 0.55rem;
+    padding: 0.3rem 0.5rem;
+  }
+  .tech-pill {
+    font-size: 0.62rem;
+    padding: 0.25rem 0.5rem;
+  }
+  .matrix-card {
+    padding: 12px;
+  }
+  .pipeline-step {
+    padding: 12px;
+  }
+  .outcome-card {
+    padding: 12px;
+  }
+  .outcome-val {
+    font-size: clamp(1.3rem, 5vw, 1.6rem);
+  }
+  .proj-title {
+    font-size: 1rem;
+  }
+  .project-visual-pane {
+    min-height: 160px;
+  }
+  .projects-layout-container {
+    padding: 12px;
+  }
+  .modal-content-shell {
+    padding: 12px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .floating-glowing-graphic,
   .srv-page-wrapper,

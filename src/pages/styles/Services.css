@@ -922,6 +922,109 @@
   }
 }
 
+@media (max-width: 480px) {
+  .hero-main-title {
+    font-size: clamp(1.7rem, 8vw, 2.15rem);
+  }
+  .hero-sub-text {
+    font-size: 0.88rem;
+  }
+  .hero-visual-card {
+    padding: 14px;
+  }
+  .visual-stat-row {
+    font-size: 0.72rem;
+    padding: 8px 0;
+  }
+  .visual-chart-mock {
+    height: 80px;
+  }
+  .cap-title {
+    font-size: 1.05rem;
+  }
+  .cap-tagline {
+    font-size: 0.82rem;
+  }
+  .segment-desc {
+    font-size: 0.84rem;
+  }
+  .estimator-desc {
+    font-size: 0.88rem;
+  }
+  .estimator-opt-card {
+    padding: 12px;
+  }
+  .opt-label {
+    font-size: 0.85rem;
+  }
+  .dash-metric-row {
+    grid-template-columns: 1fr;
+  }
+  .metric-value-large {
+    font-size: clamp(1.6rem, 5vw, 2rem);
+  }
+}
+
+@media (max-width: 375px) {
+  .hero-main-title {
+    font-size: clamp(1.5rem, 8vw, 1.8rem);
+  }
+  .hero-sub-text {
+    font-size: 0.84rem;
+  }
+  .premium-tag-glow {
+    font-size: 0.58rem;
+  }
+  .section-title-modern-light {
+    font-size: clamp(1.4rem, 6vw, 1.65rem);
+  }
+  .capabilities-tabs {
+    overflow-x: auto;
+    width: 100%;
+  }
+  .tab-btn {
+    font-size: 0.68rem;
+    padding: 8px 10px;
+  }
+  .cap-title {
+    font-size: 0.95rem;
+  }
+  .dashboard-glass-shell {
+    padding: 14px;
+  }
+  .dash-title {
+    font-size: 0.68rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .hero-main-title {
+    font-size: clamp(1.3rem, 7vw, 1.5rem);
+  }
+  .section-title-modern-light {
+    font-size: clamp(1.2rem, 6vw, 1.4rem);
+  }
+  .cap-icon-box {
+    width: 56px;
+    height: 56px;
+  }
+  .cap-icon-box img {
+    width: 56px;
+    height: 56px;
+  }
+  .cap-icon-box img.srv-icon-llm {
+    width: 42px;
+    height: 42px;
+  }
+  .cap-icon-box img.srv-icon-cv {
+    width: 68px;
+    height: 68px;
+  }
+  .metric-card strong {
+    font-size: 0.95rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .capability-card-wrapper,
   .visual-chart-mock .bar,

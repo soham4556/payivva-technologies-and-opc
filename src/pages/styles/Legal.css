@@ -71,3 +71,66 @@
   font-weight: 500;
   font-size: 0.95rem;
 }
+
+@media (max-width: 600px) {
+  .legal-container {
+    padding: 3rem 1rem 4rem;
+  }
+  .legal-header {
+    padding-bottom: 1.2rem;
+    margin-bottom: 2rem;
+  }
+  .legal-content-wrapper {
+    font-size: 0.88rem;
+    gap: 1.5rem;
+  }
+  .legal-content-wrapper h2 {
+    font-size: 1.3rem;
+  }
+  .legal-content-wrapper h3 {
+    font-size: 1rem;
+  }
+  .legal-callout-box {
+    padding: 1rem;
+    margin: 0.75rem 0;
+  }
+  .legal-callout-box p {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .legal-container {
+    padding: 2rem 0.85rem 3rem;
+  }
+  .legal-content-wrapper {
+    font-size: 0.84rem;
+  }
+  .legal-content-wrapper h2 {
+    font-size: 1.1rem;
+  }
+  .legal-meta {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .legal-container {
+    padding: 1.5rem 0.75rem 2.5rem;
+  }
+  .legal-content-wrapper h2 {
+    font-size: 1rem;
+  }
+  .legal-content-wrapper ul {
+    padding-left: 1rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .legal-container {
+    padding: 1rem 0.5rem 2rem;
+  }
+  .legal-content-wrapper {
+    font-size: 0.8rem;
+  }
+}

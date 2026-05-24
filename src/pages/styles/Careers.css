@@ -569,3 +569,137 @@
     width: 100%;
   }
 }
+
+@media (max-width: 600px) {
+  .careers-hero-grid {
+    grid-template-columns: 1fr;
+  }
+  .careers-hero-title {
+    font-size: clamp(1.8rem, 7vw, 2.65rem);
+  }
+  .careers-hero-copy-text {
+    font-size: 0.92rem;
+  }
+  .careers-hero-copy,
+  .careers-terminal-panel {
+    min-height: auto;
+    padding: 20px;
+  }
+  .careers-stat-chip {
+    min-width: auto;
+    flex: 1;
+    padding: 0.7rem;
+  }
+  .careers-stat-chip strong {
+    font-size: 0.85rem;
+  }
+  .careers-stat-chip span {
+    font-size: 0.7rem;
+  }
+  .pipeline-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .benefits-bento-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .benefit-card {
+    padding: 1.2rem;
+    min-height: 180px;
+  }
+  .benefit-card h3 {
+    font-size: 1rem;
+  }
+  .benefit-card p {
+    font-size: 0.84rem;
+  }
+  .benefit-icon-sphere {
+    width: 44px;
+    height: 44px;
+  }
+  .job-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .job-meta h3 {
+    font-size: 1.05rem;
+  }
+  .job-tags span {
+    font-size: 0.65rem;
+  }
+  .careers-apply-btn {
+    width: 100%;
+  }
+  .careers-modal-box {
+    padding: 1.2rem;
+  }
+  .careers-modal-form {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .careers-hero-title {
+    font-size: clamp(1.5rem, 7vw, 1.8rem);
+  }
+  .careers-hero-stats {
+    flex-direction: column;
+  }
+  .careers-stat-chip {
+    min-width: auto;
+  }
+  .benefits-bento-grid {
+    grid-template-columns: 1fr;
+  }
+  .pipeline-grid {
+    grid-template-columns: 1fr;
+  }
+  .benefit-card {
+    min-height: auto;
+  }
+  .form-input-node,
+  .form-textarea-node {
+    padding: 0.75rem 0.85rem;
+    font-size: 0.88rem;
+  }
+  .modal-title {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .careers-hero-title {
+    font-size: clamp(1.3rem, 7vw, 1.5rem);
+  }
+  .careers-hero-copy-text {
+    font-size: 0.85rem;
+  }
+  .careers-tag {
+    font-size: 0.62rem;
+  }
+  .section-title {
+    font-size: 1.3rem;
+  }
+  .section-desc {
+    font-size: 0.85rem;
+  }
+  .job-meta h3 {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .careers-hero-title {
+    font-size: clamp(1.1rem, 6vw, 1.3rem);
+  }
+  .benefit-card {
+    padding: 1rem;
+  }
+  .benefit-card h3 {
+    font-size: 0.9rem;
+  }
+  .form-label-node {
+    font-size: 0.72rem;
+  }
+}

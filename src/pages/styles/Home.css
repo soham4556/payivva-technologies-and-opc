@@ -1358,10 +1358,18 @@
   align-items: stretch;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 900px) {
   .specialization-grid {
-    grid-template-columns: 1fr;
-    gap: 3.5rem;
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  .specialization-visual {
+    height: 250px !important;
+    min-height: auto !important;
+  }
+  .large-specialization-img {
+    height: 100% !important;
+    border-radius: 20px !important;
   }
 }
 
@@ -2667,7 +2675,8 @@
   }
 
   .specialization-visual {
-    min-height: 300px;
+    min-height: auto !important;
+    height: 180px !important;
   }
 
   .specialization-title {
@@ -3043,7 +3052,8 @@
   }
 
   .specialization-visual {
-    min-height: 220px;
+    min-height: auto !important;
+    height: 140px !important;
   }
 
   .specialization-title {

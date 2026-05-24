@@ -20,30 +20,31 @@
   FIX: bg_contact_image.png is a 1260×540px wide image designed for desktop.
   On mobile, background-size:100% 100% squishes the curved white pocket to
   ~30% of screen width, which looks totally broken. 
-  Solution: use a solid CSS gradient that matches the blue on screens ≤1024px
+  Solution: use a solid CSS gradient that matches the blue on screens ≤1024px.
+  Also: gap:0 so footer dark card sticks directly to the CTA section with no white gap.
 */
 @media (max-width: 1024px) {
   .combined-footer-wrapper {
     background: linear-gradient(160deg, #bdd5f0 0%, #c8dcf5 40%, #d6e7fa 70%, #e6f0fb 100%) !important;
     background-size: unset !important;
-    padding: 4rem 0 2px 0 !important;
-    gap: 2rem;
+    padding: 4rem 0 0 0 !important;
+    gap: 0;
   }
 }
 
 @media (max-width: 600px) {
   .combined-footer-wrapper {
     background: linear-gradient(160deg, #bdd5f0 0%, #c8dcf5 40%, #d6e7fa 70%, #e6f0fb 100%) !important;
-    padding: 3rem 0 2px 0 !important;
-    gap: 1.5rem;
+    padding: 3rem 0 0 0 !important;
+    gap: 0;
   }
 }
 
 @media (max-width: 400px) {
   .combined-footer-wrapper {
     background: linear-gradient(160deg, #bdd5f0 0%, #c8dcf5 50%, #e0ecfa 100%) !important;
-    padding: 2rem 0 2px 0 !important;
-    gap: 1rem;
+    padding: 2rem 0 0 0 !important;
+    gap: 0;
   }
 }
 
@@ -309,7 +310,8 @@
     gap: 2rem;
     padding: 2.5rem;
     border-radius: 35px !important;
-    margin: 2.5rem 2px 2px 2px !important;
+    /* No top margin — footer should be flush against the CTA section */
+    margin: 0 2px 2px 2px !important;
   }
 
   .footer-brand-column {
@@ -340,7 +342,8 @@
     gap: 2rem;
     padding: 2.2rem 1.5rem;
     border-radius: 30px !important;
-    margin: 2rem 8px 2px 8px !important;
+    /* No top margin — footer should be flush against the CTA section */
+    margin: 0 8px 2px 8px !important;
     width: calc(100% - 16px) !important;
   }
 
@@ -370,7 +373,8 @@
     grid-template-columns: 1fr;
     padding: 1.75rem 1.1rem 1.1rem 1.1rem;
     width: calc(100% - 16px) !important;
-    margin: 1.5rem 8px 2px 8px !important;
+    /* No top margin — footer should be flush against the CTA section */
+    margin: 0 8px 2px 8px !important;
     gap: 1.75rem;
     border-radius: 20px !important;
   }

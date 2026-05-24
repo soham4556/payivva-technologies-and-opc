@@ -23,7 +23,7 @@
   Solution: use a solid CSS gradient that matches the blue on screens ≤1024px.
   Also: gap:0 so footer dark card sticks directly to the CTA section with no white gap.
 */
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .combined-footer-wrapper {
     background: linear-gradient(180deg, #090d16 0%, #0b1329 100%) !important;
     background-size: unset !important;
@@ -65,7 +65,7 @@
 }
 
 /* Mobile: allow horizontal overflow of person image to be contained */
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .cta-banner-container-direct {
     overflow: hidden;
   }
@@ -113,7 +113,7 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .cta-banner-wrapper {
     grid-template-columns: 1fr;
     padding: 3rem 2rem 0 2rem !important;
@@ -139,7 +139,7 @@
   text-transform: uppercase;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .cta-watermark-text {
     font-size: 3.8rem;
     left: 2.5rem;
@@ -165,7 +165,7 @@
   gap: 1.25rem;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .cta-banner-content {
     align-items: center;
     text-align: center;
@@ -204,7 +204,7 @@
   margin-top: 0.5rem;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .cta-buttons-row {
     justify-content: center;
   }
@@ -245,7 +245,7 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .cta-banner-visual {
     position: relative;
     right: 0;
@@ -309,7 +309,7 @@
 }
 
 /* Laptop and Tablet Landscape Layout (3 Columns) */
-@media (max-width: 1100px) and (min-width: 769px) {
+@media (max-width: 900px) and (min-width: 769px) {
   .footer-container {
     grid-template-columns: 1.5fr 1fr 1.5fr;
     gap: 2rem;

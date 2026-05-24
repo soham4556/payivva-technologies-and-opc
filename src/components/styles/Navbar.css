@@ -109,6 +109,38 @@
   }
 }
 
+/* Fix: Prevent brand name, links, and buttons from overlapping on medium screens & Mobile Desktop Site views */
+@media (max-width: 1200px) and (min-width: 901px) {
+  .nav-menu {
+    gap: 0.85rem !important;
+  }
+  
+  .nav-item-link {
+    font-size: 0.82rem !important;
+  }
+  
+  .navbar-container {
+    padding: 0 1rem !important;
+  }
+  
+  .nav-logo-link {
+    gap: 0.4rem !important;
+  }
+  
+  .nav-brand-text {
+    font-size: 0.95rem !important;
+  }
+  
+  .nav-actions {
+    gap: 0.6rem !important;
+  }
+  
+  .nav-actions .btn {
+    padding: 0.5rem 1rem !important;
+    font-size: 0.78rem !important;
+  }
+}
+
 .nav-item-link {
   font-family: var(--font-headings);
   font-size: 0.95rem;

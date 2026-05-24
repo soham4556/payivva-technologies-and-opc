@@ -239,9 +239,9 @@
 
 @media (max-width: 1200px) {
   .cta-banner-visual {
-    right: 4%;
-    height: 150% !important;
-    bottom: -100px !important;
+    right: -2% !important;
+    height: 135% !important;
+    bottom: -70px !important;
   }
 }
 

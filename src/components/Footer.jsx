@@ -1,904 +1,147 @@
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Linkedin,
-  Instagram,
-  Twitter,
-  Facebook,
-  Youtube,
-  ArrowRight,
-  Heart,
-  Send,
-  ChevronRight,
-  Sparkles,
-  Globe,
-  Award,
-  Users,
-  TrendingUp,
-  Clock,
-} from "lucide-react";
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import logo from "../assets/logo.png";
+import { Link, useLocation } from 'react-router-dom';
+import { Mail as MailIcon, MapPin as MapPinIcon } from 'lucide-react';
+import SaaSButton from './SaaSButton';
+import './styles/Footer.css';
 
-/* ─── Responsive hook ─────────────────────────────────────────── */
-function useWindowWidth() {
-  const [width, setWidth] = useState(
-    typeof window !== "undefined" ? window.innerWidth : 1024,
-  );
-  useEffect(() => {
-    const onResize = () => setWidth(window.innerWidth);
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
-  return width;
-}
+const LinkedInIcon = ({ size = 18 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-linkedin">
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+    <rect width="4" height="12" x="2" y="9"/>
+    <circle cx="4" cy="4" r="2"/>
+  </svg>
+);
 
-/* ─── Data ────────────────────────────────────────────────────── */
-const footerServices = [
-  { name: "Website Development", icon: Globe, highlight: true },
-  { name: "SEO Optimization", icon: TrendingUp },
-  { name: "Social Media Marketing", icon: Users },
-  { name: "Google & Facebook Ads", icon: Award },
-  { name: "Brand Promotion", icon: Sparkles },
-  { name: "Lead Generation", icon: Users },
-];
+const InstagramIcon = ({ size = 18 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-instagram">
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+  </svg>
+);
 
-const footerNav = [
-  { label: "Home", href: "/" },
-  { label: "Services", href: "/services" },
-  { label: "About Us", href: "/about" },
-  { label: "Careers", href: "/careers" },
-  { label: "Contact", href: "/contact" },
-  { label: "Legal", href: "/legal" },
-  { label: "Privacy Policy", href: "/privacy" },
-  { label: "Terms of Service", href: "/terms" },
-  { label: "Security", href: "/security" },
-];
+const TwitterIcon = ({ size = 18 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-twitter">
+    <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/>
+  </svg>
+);
 
-const socials = [
-  { icon: Linkedin, href: "#", label: "LinkedIn", color: "#0A66C2" },
-  { icon: Instagram, href: "#", label: "Instagram", color: "#E1306C" },
-  { icon: Twitter, href: "#", label: "Twitter", color: "#1DA1F2" },
-  { icon: Facebook, href: "#", label: "Facebook", color: "#1877F2" },
-  { icon: Youtube, href: "#", label: "YouTube", color: "#FF0000" },
-];
+const LinkedinIcon = LinkedInIcon;
 
-const stats = [
-  { number: "50+", label: "Projects Delivered", icon: Award },
-  { number: "98%", label: "Client Satisfaction", icon: Heart },
-  { number: "24/7", label: "Support Available", icon: Clock },
-];
+const ArrowRightIcon = ({ size = 14 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right" style={{ marginLeft: '6px' }}>
+    <path d="M5 12h14"/>
+    <path d="m12 5 7 7-7 7"/>
+  </svg>
+);
 
-/* ─── Social Button ───────────────────────────────────────────── */
-function SocialBtn({ icon: Icon, href, label, color }) {
-  const [hov, setHov] = useState(false);
+  const Footer = () => {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`Follow PAYIVVA on ${label}`}
-      onMouseEnter={() => setHov(true)}
-      onMouseLeave={() => setHov(false)}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        width: "36px",
-        height: "36px",
-        borderRadius: "10px",
-        background: hov ? `${color}22` : "rgba(255,255,255,.05)",
-        border: `1px solid ${hov ? color + "55" : "rgba(255,255,255,.08)"}`,
-        color: hov ? color : "rgba(255,255,255,.5)",
-        transition: "all .3s cubic-bezier(.23,1,.32,1)",
-        transform: hov ? "translateY(-3px)" : "translateY(0)",
-        boxShadow: hov ? `0 8px 20px ${color}33` : "none",
-        textDecoration: "none",
-        flexShrink: 0,
-      }}
-    >
-      <Icon size={16} />
-    </a>
-  );
-}
-
-/* ─── Link Item ───────────────────────────────────────────────── */
-function FooterLink({ to, children, chevron }) {
-  const [hov, setHov] = useState(false);
-  return (
-    <li style={{ listStyle: "none" }}>
-      <Link
-        to={to}
-        onMouseEnter={() => setHov(true)}
-        onMouseLeave={() => setHov(false)}
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "6px",
-          color: hov ? "#10b981" : "rgba(255,255,255,.45)",
-          fontSize: "13px",
-          textDecoration: "none",
-          transition: "all .25s ease",
-          transform: hov ? "translateX(4px)" : "translateX(0)",
-        }}
-      >
-        {chevron ? (
-          <ChevronRight
-            size={13}
-            style={{ flexShrink: 0, opacity: hov ? 1 : 0.4 }}
-          />
-        ) : null}
-        {children}
-      </Link>
-    </li>
-  );
-}
-
-/* ─── Section title ───────────────────────────────────────────── */
-function SectionTitle({ children }) {
-  return (
-    <h3
-      style={{
-        color: "#fff",
-        fontWeight: 800,
-        fontSize: "12px",
-        letterSpacing: "2.5px",
-        textTransform: "uppercase",
-        margin: "0 0 18px 0",
-        display: "flex",
-        alignItems: "center",
-        gap: "10px",
-      }}
-    >
-      <span
-        style={{
-          display: "inline-block",
-          width: "24px",
-          height: "2px",
-          background: "linear-gradient(90deg,#10b981,#22d3ee)",
-          borderRadius: "2px",
-          flexShrink: 0,
-        }}
-      />
-      {children}
-    </h3>
-  );
-}
-
-/* ─── Contact Card ────────────────────────────────────────────── */
-function ContactCard({ href, icon: Icon, label, value, sub }) {
-  const [hov, setHov] = useState(false);
-  const Tag = href ? "a" : "div";
-  return (
-    <Tag
-      href={href}
-      onMouseEnter={() => setHov(true)}
-      onMouseLeave={() => setHov(false)}
-      style={{
-        display: "flex",
-        alignItems: "flex-start",
-        gap: "12px",
-        padding: "14px 16px",
-        borderRadius: "14px",
-        background: hov ? "rgba(16,185,129,.07)" : "rgba(255,255,255,.03)",
-        border: `1px solid ${hov ? "rgba(16,185,129,.3)" : "rgba(255,255,255,.06)"}`,
-        textDecoration: "none",
-        transition: "all .3s cubic-bezier(.23,1,.32,1)",
-        transform: hov ? "translateY(-2px)" : "translateY(0)",
-        boxShadow: hov ? "0 8px 24px rgba(16,185,129,.08)" : "none",
-        cursor: href ? "pointer" : "default",
-      }}
-    >
-      <div
-        style={{
-          width: "36px",
-          height: "36px",
-          flexShrink: 0,
-          borderRadius: "10px",
-          background: hov ? "rgba(16,185,129,.15)" : "rgba(16,185,129,.08)",
-          border: "1px solid rgba(16,185,129,.2)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          transition: "all .3s ease",
-          boxShadow: hov ? "0 0 12px rgba(16,185,129,.2)" : "none",
-        }}
-      >
-        <Icon color="#10b981" size={16} />
-      </div>
-      <div style={{ minWidth: 0 }}>
-        <p
-          style={{
-            color: "rgba(255,255,255,.35)",
-            fontSize: "10px",
-            margin: "0 0 2px 0",
-          }}
-        >
-          {label}
-        </p>
-        <p
-          style={{
-            color: hov ? "#10b981" : "rgba(255,255,255,.8)",
-            fontSize: "13px",
-            fontWeight: 600,
-            margin: "0",
-            transition: "color .25s",
-            wordBreak: "break-all",
-          }}
-        >
-          {value}
-        </p>
-        {sub && (
-          <p
-            style={{
-              color: "rgba(255,255,255,.3)",
-              fontSize: "11px",
-              margin: "2px 0 0",
-            }}
-          >
-            {sub}
-          </p>
-        )}
-      </div>
-    </Tag>
-  );
-}
-
-/* ─── Main Footer ─────────────────────────────────────────────── */
-export default function Footer() {
-  const w = useWindowWidth();
-  const isMobile = w < 480;
-  const isTablet = w >= 480 && w < 900;
-  const isDesktop = w >= 900;
-
-  const [email, setEmail] = useState("");
-  const [isSubscribed, setIsSubscribed] = useState(false);
-  const [ctaHov, setCtaHov] = useState(false);
-  const [inputFoc, setInputFoc] = useState(false);
-  const [sendHov, setSendHov] = useState(false);
-
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    if (email) {
-      setIsSubscribed(true);
-      setEmail("");
-      setTimeout(() => setIsSubscribed(false), 3000);
-    }
-  };
-
-  const handleScroll = (id) => {
-    document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const hPad = isMobile ? "16px" : isTablet ? "24px" : "40px";
-
-  return (
-    <footer
-      style={{
-        background: "#0f172a",
-        fontFamily: "'Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif",
-        position: "relative",
-      }}
-    >
-      <style>{`
-        @keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
-        @keyframes pulse{0%,100%{opacity:.6}50%{opacity:1}}
-        * { box-sizing: border-box; }
-      `}</style>
-
-      {/* ── CTA BANNER ── */}
-      <div
-        style={{
-          background:
-            "linear-gradient(135deg,rgba(16,185,129,.08) 0%,rgba(16,185,129,.03) 50%,rgba(0,0,0,.6) 100%)",
-          borderBottom: "1px solid rgba(16,185,129,.15)",
-          padding: isMobile
-            ? "36px 16px"
-            : isTablet
-              ? "48px 24px"
-              : "56px 40px",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        {/* glow */}
-        <div
-          style={{
-            position: "absolute",
-            top: "-40%",
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: "600px",
-            height: "300px",
-            background:
-              "radial-gradient(ellipse,rgba(16,185,129,.06) 0%,transparent 70%)",
-            pointerEvents: "none",
-          }}
-        />
-
-        <div
-          style={{
-            maxWidth: "1200px",
-            margin: "0 auto",
-            display: "flex",
-            flexDirection: isMobile ? "column" : "row",
-            alignItems: isMobile ? "flex-start" : "center",
-            justifyContent: "space-between",
-            gap: isMobile ? "28px" : "40px",
-          }}
-        >
-          <div style={{ flex: 1 }}>
-            {/* badge */}
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "6px",
-                padding: "5px 12px",
-                borderRadius: "20px",
-                background: "rgba(16,185,129,.1)",
-                border: "1px solid rgba(16,185,129,.3)",
-                color: "#10b981",
-                fontSize: "10px",
-                fontWeight: 700,
-                letterSpacing: "1px",
-                textTransform: "uppercase",
-                marginBottom: "14px",
-              }}
-            >
-              <Sparkles size={11} /> Limited Time Offer
+    <section className="combined-footer-wrapper animate-fade-in">
+      <div className="container cta-banner-container-direct">
+        <div className="cta-banner-wrapper">
+          <div className="cta-watermark-text">PAYIVVA</div>
+          <div className="cta-banner-content">
+            <div className="specialization-tag-line">
+              <span className="specialization-tag" style={{ color: '#ffffff', opacity: 0.9 }}>GET STARTED</span>
+              <span className="tag-horizontal-line" style={{ background: '#ffffff', opacity: 0.8 }}></span>
             </div>
-
-            <h2
-              style={{
-                color: "#fff",
-                fontWeight: 900,
-                fontSize: isMobile ? "22px" : isTablet ? "28px" : "34px",
-                margin: "0 0 10px 0",
-                lineHeight: 1.2,
-                letterSpacing: "-0.8px",
-              }}
-            >
-              Ready to{" "}
-              <span
-                style={{
-                  background:
-                    "linear-gradient(135deg,#10b981,#22d3ee,#10b981,#047857)",
-                  backgroundSize: "200% auto",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                  animation: "shimmer 4s linear infinite",
-                }}
-              >
-                Scale Your Business?
-              </span>
+            <h2 className="cta-banner-title">
+              Let's Make Something<br />Great Together
             </h2>
-
-            <p
-              style={{
-                color: "rgba(255,255,255,.45)",
-                fontSize: isMobile ? "13px" : "14px",
-                lineHeight: 1.7,
-                margin: "0 0 24px 0",
-                maxWidth: "480px",
-              }}
-            >
-              Join 500+ businesses that have transformed their digital presence
-              with PAYIVVA. Get a free strategy call and detailed audit worth
-              ₹15,000.
-            </p>
-
-            {/* Stats row */}
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: isMobile ? "12px" : "20px",
-              }}
-            >
-              {stats.map(({ number, label, icon: Icon }) => (
-                <div
-                  key={label}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "10px",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: "34px",
-                      height: "34px",
-                      borderRadius: "9px",
-                      background: "rgba(16,185,129,.1)",
-                      border: "1px solid rgba(16,185,129,.2)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexShrink: 0,
-                    }}
-                  >
-                    <Icon size={15} color="#10b981" />
-                  </div>
-                  <div>
-                    <div
-                      style={{
-                        color: "#10b981",
-                        fontWeight: 900,
-                        fontSize: "16px",
-                        lineHeight: 1,
-                      }}
-                    >
-                      {number}
-                    </div>
-                    <div
-                      style={{
-                        color: "rgba(255,255,255,.4)",
-                        fontSize: "11px",
-                        marginTop: "2px",
-                      }}
-                    >
-                      {label}
-                    </div>
-                  </div>
-                </div>
-              ))}
+            <div className="cta-buttons-row">
+              <SaaSButton to="/services" variant="primary">Discover More</SaaSButton>
+              <SaaSButton to="/contact" variant="ghost">Contact Us</SaaSButton>
             </div>
           </div>
-
-          {/* CTA Button */}
-          <button
-            onMouseEnter={() => setCtaHov(true)}
-            onMouseLeave={() => setCtaHov(false)}
-            onClick={() => handleScroll("#contact")}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "10px",
-              padding: isMobile ? "14px 24px" : "16px 32px",
-              background: ctaHov
-                ? "linear-gradient(135deg,#22d3ee,#10b981)"
-                : "linear-gradient(135deg,#10b981,#047857)",
-              color: "#0f172a",
-              fontWeight: 900,
-              fontSize: isMobile ? "13px" : "14px",
-              borderRadius: "14px",
-              border: "none",
-              cursor: "pointer",
-              transition: "all .35s cubic-bezier(.23,1,.32,1)",
-              boxShadow: ctaHov
-                ? "0 0 36px rgba(16,185,129,.6),0 16px 40px rgba(0,0,0,.4)"
-                : "0 8px 24px rgba(0,0,0,.3)",
-              transform: ctaHov ? "scale(1.04) translateY(-2px)" : "scale(1)",
-              letterSpacing: ".4px",
-              textTransform: "uppercase",
-              whiteSpace: "nowrap",
-              flexShrink: 0,
-              width: isMobile ? "100%" : "auto",
-              justifyContent: "center",
-            }}
-          >
-            Get Free Consultation
-            <ArrowRight
-              size={16}
-              style={{
-                transition: "transform .3s",
-                transform: ctaHov ? "translateX(3px)" : "translateX(0)",
-              }}
+          <div className="cta-banner-visual">
+            <img src="/project_img/men.png" alt="PAYIVVA Specialist" className="cta-person-img" />
+          </div>
+        </div>
+      </div>
+      <div className="footer-container">
+        <div className="footer-brand-column">
+          <div className="footer-logo">
+            <img src="/logo.png" alt="PAYIVVA Logo" className="footer-logo-img" />
+            <span className="footer-brand-text">PAYIVVA</span>
+          </div>
+          <p className="footer-desc">
+            Empowering industries with AI-driven tools tailored for success, unlocking new business potential. We pioneer applied AI solutions to build the intelligent enterprises of tomorrow.
+          </p>
+          <div className="footer-social-links">
+            <a href="#" className="social-icon-btn"><TwitterIcon size={14} /></a>
+            <a href="#" className="social-icon-btn"><InstagramIcon size={14} /></a>
+            <a href="#" className="social-icon-btn"><LinkedinIcon size={14} /></a>
+          </div>
+        </div>
+        <div className="footer-column">
+          <h4 className="footer-column-title">Company</h4>
+          <ul className="footer-links-list">
+            <li className="footer-link-item"><Link to="/about">About Us</Link></li>
+            <li className="footer-link-item"><Link to="/services">Services</Link></li>
+            <li className="footer-link-item"><Link to="/services">Industries</Link></li>
+            <li className="footer-link-item"><Link to="/careers">Careers</Link></li>
+            <li className="footer-link-item"><Link to="/blog">Blog Insights</Link></li>
+            <li className="footer-link-item"><Link to="/contact">Contact</Link></li>
+          </ul>
+        </div>
+        <div className="footer-column">
+          <h4 className="footer-column-title">Our Services</h4>
+          <ul className="footer-links-list">
+            <li className="footer-link-item"><Link to="/services/ai-consulting-strategy">AI Consulting</Link></li>
+            <li className="footer-link-item"><Link to="/services/machine-learning-solutions">Machine Learning</Link></li>
+            <li className="footer-link-item"><Link to="/services/computer-vision-nlp">Computer Vision</Link></li>
+            <li className="footer-link-item"><Link to="/services/generative-ai-llm">Generative AI</Link></li>
+            <li className="footer-link-item"><Link to="/services/software-development">Custom Software</Link></li>
+            <li className="footer-link-item"><Link to="/services/app-development">Mobile Apps</Link></li>
+          </ul>
+        </div>
+        <div className="footer-column">
+          <h4 className="footer-column-title">Get in touch</h4>
+          <div className="footer-contact-details">
+            <div className="footer-contact-item">
+              <MapPinIcon size={14} className="footer-contact-icon" />
+              <span>820, Sreen building, Phase II, Hinjawadi, Pune - 411057</span>
+            </div>
+            <div className="footer-contact-item">
+              <MailIcon size={14} className="footer-contact-icon" />
+              <div className="footer-emails">
+                <span>sales@payivva.com</span>
+                <span>support@payivva.com</span>
+              </div>
+            </div>
+          </div>
+          <div className="footer-accreditation-badges">
+            <div className="footer-badge-item">
+              <span className="badge-text-top">ISO 27001</span>
+              <span className="badge-text-bottom">SECURE SYSTEM</span>
+            </div>
+            <div className="footer-badge-item">
+              <span className="badge-text-top">ISO 9001:2015</span>
+              <span className="badge-text-bottom">CERTIFIED</span>
+            </div>
+          </div>
+        </div>
+        <div className="footer-column">
+          <h4 className="footer-column-title">Reach us</h4>
+          <div className="footer-map-card">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3781.5649980649755!2d73.72791487501579!3d18.593641282513998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bbc14c0a5a31%3A0x6001db16315bd6a0!2sGera%20Imperium%20Rise!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+              width="100%" 
+              height="220" 
+              style={{ border: 0, borderRadius: '12px' }} 
+              allowFullScreen="" 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+              title="PAYIVVA Technologies Headquarters"
             />
-          </button>
-        </div>
-      </div>
-
-      {/* ── MAIN FOOTER BODY ── */}
-      <div
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          padding: isMobile
-            ? "40px 16px 32px"
-            : isTablet
-              ? "52px 24px 36px"
-              : "64px 40px 48px",
-        }}
-      >
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: isDesktop ? "280px 1fr" : "1fr",
-            gap: isMobile ? "40px" : isTablet ? "48px" : "64px",
-          }}
-        >
-          {/* ── BRAND COLUMN ── */}
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "24px" }}
-          >
-            {/* Logo */}
-            <button
-              onClick={() => handleScroll("#home")}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "12px",
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                padding: 0,
-                width: "fit-content",
-              }}
-            >
-              <div
-                style={{
-                  position: "relative",
-                  width: "48px",
-                  height: "48px",
-                  flexShrink: 0,
-                }}
-              >
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: "-4px",
-                    background:
-                      "radial-gradient(circle,rgba(16,185,129,.25),transparent 70%)",
-                    borderRadius: "50%",
-                  }}
-                />
-                <img
-                  src={logo}
-                  alt="PAYIVVA Technologies logo"
-                  style={{
-                    width: "48px",
-                    height: "48px",
-                    objectFit: "contain",
-                    position: "relative",
-                  }}
-                />
-              </div>
-              <div style={{ textAlign: "left" }}>
-                <p
-                  style={{
-                    color: "#fff",
-                    fontWeight: 900,
-                    fontSize: "18px",
-                    margin: 0,
-                    letterSpacing: "1px",
-                  }}
-                >
-                  PAYIVVA
-                </p>
-                <p
-                  style={{
-                    color: "rgba(16,185,129,.7)",
-                    fontSize: "10px",
-                    margin: 0,
-                    letterSpacing: "2px",
-                  }}
-                >
-                  TECHNOLOGIES
-                </p>
-              </div>
-            </button>
-
-            <p
-              style={{
-                color: "rgba(255,255,255,.4)",
-                fontSize: "13px",
-                lineHeight: 1.7,
-                margin: 0,
-              }}
-            >
-              PAYIVVA Technologies (OPC) Pvt Ltd — helping businesses scale
-              digitally through innovation, strategy, and technology since 2020.
-            </p>
-
-            {/* Newsletter */}
-            <div>
-              <p
-                style={{
-                  color: "rgba(255,255,255,.6)",
-                  fontSize: "12px",
-                  fontWeight: 700,
-                  letterSpacing: ".5px",
-                  margin: "0 0 10px 0",
-                  textTransform: "uppercase",
-                }}
-              >
-                Subscribe to our newsletter
-              </p>
-              <form
-                onSubmit={handleSubscribe}
-                style={{
-                  display: "flex",
-                  gap: "8px",
-                }}
-              >
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  onFocus={() => setInputFoc(true)}
-                  onBlur={() => setInputFoc(false)}
-                  placeholder="Enter your email"
-                  required
-                  style={{
-                    flex: 1,
-                    background: "rgba(255,255,255,.04)",
-                    border: `1px solid ${inputFoc ? "rgba(16,185,129,.5)" : "rgba(255,255,255,.08)"}`,
-                    borderRadius: "10px",
-                    padding: "10px 14px",
-                    color: "#fff",
-                    fontSize: "13px",
-                    outline: "none",
-                    transition: "border-color .2s, box-shadow .2s",
-                    boxShadow: inputFoc
-                      ? "0 0 0 3px rgba(16,185,129,.08)"
-                      : "none",
-                    fontFamily: "inherit",
-                    minWidth: 0,
-                  }}
-                />
-                <button
-                  type="submit"
-                  onMouseEnter={() => setSendHov(true)}
-                  onMouseLeave={() => setSendHov(false)}
-                  aria-label="Subscribe"
-                  style={{
-                    width: "42px",
-                    height: "42px",
-                    flexShrink: 0,
-                    background: sendHov
-                      ? "linear-gradient(135deg,#22d3ee,#10b981)"
-                      : "linear-gradient(135deg,#10b981,#047857)",
-                    border: "none",
-                    borderRadius: "10px",
-                    cursor: "pointer",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    transition: "all .3s ease",
-                    boxShadow: sendHov
-                      ? "0 0 16px rgba(16,185,129,.5)"
-                      : "none",
-                    transform: sendHov ? "scale(1.08)" : "scale(1)",
-                  }}
-                >
-                  <Send size={15} color="#0f172a" />
-                </button>
-              </form>
-              {isSubscribed && (
-                <p
-                  style={{
-                    color: "#4ade80",
-                    fontSize: "12px",
-                    margin: "8px 0 0 0",
-                    fontWeight: 600,
-                  }}
-                >
-                  ✓ Successfully subscribed!
-                </p>
-              )}
-            </div>
-
-            {/* Social links */}
-            <div>
-              <p
-                style={{
-                  color: "rgba(255,255,255,.6)",
-                  fontSize: "12px",
-                  fontWeight: 700,
-                  letterSpacing: ".5px",
-                  margin: "0 0 10px 0",
-                  textTransform: "uppercase",
-                }}
-              >
-                Follow Us
-              </p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-                {socials.map((s) => (
-                  <SocialBtn key={s.label} {...s} />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* ── LINKS + CONTACT ── */}
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "36px" }}
-          >
-            {/* Services + Navigation row */}
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: isMobile ? "1fr 1fr" : "1fr 1fr",
-                gap: isMobile ? "28px" : "40px",
-              }}
-            >
-              {/* Services */}
-              <div>
-                <SectionTitle>Services</SectionTitle>
-                <ul style={{ margin: 0, padding: 0 }}>
-                  {footerServices.map(({ name, icon: Icon, highlight }) => (
-                    <ServiceLink
-                      key={name}
-                      to="/services"
-                      icon={Icon}
-                      highlight={highlight}
-                    >
-                      {name}
-                    </ServiceLink>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Navigation */}
-              <div>
-                <SectionTitle>Navigation</SectionTitle>
-                <ul
-                  style={{
-                    margin: 0,
-                    padding: 0,
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "4px",
-                  }}
-                >
-                  {footerNav.map(({ label, href }) => (
-                    <FooterLink key={label} to={href} chevron>
-                      {label}
-                    </FooterLink>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            {/* Contact cards */}
-            <div>
-              <SectionTitle>Contact</SectionTitle>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)",
-                  gap: "10px",
-                }}
-              >
-                <ContactCard
-                  href="mailto:info@payivva.com"
-                  icon={Mail}
-                  label="Email Us"
-                  value="info@payivva.com"
-                />
-                <ContactCard
-                  href="tel:+919876543210"
-                  icon={Phone}
-                  label="Call Us"
-                  value="+91 98765 43210"
-                />
-                <ContactCard
-                  icon={MapPin}
-                  label="Location"
-                  value="
-S.no.50, Madhuban Banglow, Jagdamba Bhawan Marg, opposite Sunshine Hills Lane to Bloom Field School, Shree Siddhivinayak Meera, Undri, Pune, Maharashtra 411060"
-                />
-              </div>
-
-              <div
-                style={{
-                  marginTop: "12px",
-                  borderRadius: "14px",
-                  overflow: "hidden",
-                  border: "1px solid rgba(16,185,129,.2)",
-                  background: "rgba(255,255,255,.02)",
-                }}
-              >
-                <iframe
-                  title="PAYIVVA Office Map"
-                  src="https://www.google.com/maps?q=Undri%20Pune%20Maharashtra&output=embed"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  style={{ width: "100%", height: "220px", border: "none" }}
-                />
-              </div>
-            </div>
           </div>
         </div>
-      </div>
-
-      {/* ── BOTTOM BAR ── */}
-      <div
-        style={{
-          borderTop: "1px solid rgba(255,255,255,.06)",
-          padding: isMobile ? "16px" : "20px 40px",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1200px",
-            margin: "0 auto",
-            display: "flex",
-            flexDirection: isMobile ? "column" : "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "10px",
-            textAlign: isMobile ? "center" : "left",
-          }}
-        >
-          <p
-            style={{
-              color: "rgba(255,255,255,.25)",
-              fontSize: "12px",
-              margin: 0,
-            }}
-          >
-            © {new Date().getFullYear()} PAYIVVA Technologies (OPC) Pvt Ltd. All
-            rights reserved.
-          </p>
-          <p
-            style={{
-              color: "rgba(255,255,255,.2)",
-              fontSize: "12px",
-              margin: 0,
-              display: "flex",
-              alignItems: "center",
-              gap: "4px",
-            }}
-          >
-            Made with{" "}
-            <Heart size={11} color="#10b981" style={{ display: "inline" }} /> in
-            India
-          </p>
+        <div className="footer-bottom-row">
+          <span>© Copyright {new Date().getFullYear()} PAYIVVA. All Rights Reserved.</span>
         </div>
       </div>
-    </footer>
+    </section>
   );
-}
+};
 
-/* ─── Service Link ────────────────────────────────────────────── */
-function ServiceLink({ to, icon: Icon, highlight, children }) {
-  const [hov, setHov] = useState(false);
-  return (
-    <li style={{ listStyle: "none", marginBottom: "2px" }}>
-      <Link
-        to={to}
-        onMouseEnter={() => setHov(true)}
-        onMouseLeave={() => setHov(false)}
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "8px",
-          padding: "7px 8px",
-          borderRadius: "8px",
-          color: hov ? "#10b981" : "rgba(255,255,255,.45)",
-          fontSize: "13px",
-          textDecoration: "none",
-          transition: "all .25s ease",
-          background: hov ? "rgba(16,185,129,.06)" : "transparent",
-          transform: hov ? "translateX(3px)" : "translateX(0)",
-        }}
-      >
-        <Icon size={13} style={{ flexShrink: 0, opacity: hov ? 1 : 0.55 }} />
-        <span style={{ flex: 1, minWidth: 0 }}>{children}</span>
-        {highlight && (
-          <span
-            style={{
-              padding: "2px 7px",
-              borderRadius: "20px",
-              background: "linear-gradient(135deg,#10b981,#22d3ee)",
-              color: "#0f172a",
-              fontSize: "9px",
-              fontWeight: 800,
-              letterSpacing: ".3px",
-              textTransform: "uppercase",
-              flexShrink: 0,
-            }}
-          >
-            Popular
-          </span>
-        )}
-      </Link>
-    </li>
-  );
-}
+export default Footer;

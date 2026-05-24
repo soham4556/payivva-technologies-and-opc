@@ -1,0 +1,120 @@
+.saas-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 34px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: inherit;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  background: #0b1a2e;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  isolation: isolate;
+  overflow: hidden;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.saas-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 100px;
+  background: linear-gradient(
+    120deg,
+    #2563eb 0%,
+    #3b82f6 40%,
+    #60a5fa 70%,
+    #93c5fd 100%
+  );
+  transform: translateX(-101%);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+}
+
+.saas-btn:hover::before {
+  transform: translateX(0);
+}
+
+.saas-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 32px rgba(37, 99, 235, 0.35),
+              0 2px 8px rgba(37, 99, 235, 0.15);
+}
+
+.saas-btn-text {
+  position: relative;
+  z-index: 1;
+  transition: color 0.4s ease;
+}
+
+.saas-btn-arrow {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.saas-btn:hover .saas-btn-arrow {
+  transform: translateX(6px);
+}
+
+/* Ghost variant */
+.saas-btn--ghost {
+  background: transparent;
+  color: #0b1a2e;
+  box-shadow: inset 0 0 0 1.5px rgba(11, 26, 46, 0.15);
+}
+
+.saas-btn--ghost::before {
+  background: linear-gradient(
+    120deg,
+    #0b1a2e 0%,
+    #1e2f47 50%,
+    #2c3f58 100%
+  );
+}
+
+.saas-btn--ghost:hover {
+  color: #ffffff;
+  box-shadow: 0 8px 32px rgba(11, 26, 46, 0.3),
+              0 2px 8px rgba(11, 26, 46, 0.12);
+}
+
+.saas-btn--ghost:hover .saas-btn-text {
+  color: #ffffff;
+}
+
+/* Outline variant */
+.saas-btn--outline {
+  background: transparent;
+  color: #2563eb;
+  box-shadow: inset 0 0 0 1.5px rgba(37, 99, 235, 0.3);
+}
+
+.saas-btn--outline::before {
+  background: linear-gradient(
+    120deg,
+    #2563eb 0%,
+    #3b82f6 50%,
+    #60a5fa 100%
+  );
+}
+
+.saas-btn--outline:hover {
+  color: #ffffff;
+  box-shadow: 0 8px 32px rgba(37, 99, 235, 0.3),
+              0 2px 8px rgba(37, 99, 235, 0.12);
+}
+
+.saas-btn--outline:hover .saas-btn-text {
+  color: #ffffff;
+}

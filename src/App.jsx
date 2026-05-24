@@ -1,92 +1,114 @@
-import { lazy, Suspense } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import ScrollToTop from "./components/ScrollToTop";
-import AIChatbotWidget from "./components/AIChatbotWidget";
+import { lazy, Suspense } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
+import './App.css';
 
-// Pages
-const Home = lazy(() => import("./pages/Home"));
-const ServicesPage = lazy(() => import("./pages/ServicesPage"));
-const AboutPage = lazy(() => import("./pages/AboutPage"));
-// Case studies page removed
-const CareersPage = lazy(() => import("./pages/CareersPage"));
-const ContactPage = lazy(() => import("./pages/ContactPage"));
-const Legal = lazy(() => import("./pages/Legal"));
-const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
-const TermsOfService = lazy(() => import("./pages/TermsOfService"));
-const Security = lazy(() => import("./pages/Security"));
+// Lazy load page views for performance optimization
+const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./pages/About'));
+const Services = lazy(() => import('./pages/Services'));
+const Careers = lazy(() => import('./pages/Careers'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Blog = lazy(() => import('./pages/Blog'));
+const CaseStudies = lazy(() => import('./pages/CaseStudies'));
+const Documentation = lazy(() => import('./pages/Documentation'));
 
-// Individual Service Pages
-const WebDevelopment = lazy(() => import("./pages/services/WebDevelopment"));
-const SEOOptimization = lazy(() => import("./pages/services/SEOOptimization"));
-const SocialMediaMarketing = lazy(
-  () => import("./pages/services/SocialMediaMarketing"),
+// Lazy load legal sections
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const TermsOfService = lazy(() => import('./pages/TermsOfService'));
+const Security = lazy(() => import('./pages/Security'));
+const Legal = lazy(() => import('./pages/Legal'));
+const AIConsultingStrategy = lazy(() => import('./pages/AI_Consulting_Strategy'));
+const MachineLearningSolutions = lazy(() => import('./pages/Machine_Learning_Solutions'));
+const ComputerVisionNLP = lazy(() => import('./pages/Computer_Vision_NLP'));
+const GenerativeAILLM = lazy(() => import('./pages/Generative_AI_LLM'));
+const SoftwareDevelopment = lazy(() => import('./pages/Software_Development'));
+const AppDevelopment = lazy(() => import('./pages/App_Development'));
+const WebsiteDevelopment = lazy(() => import('./pages/Website_Development'));
+const DigitalMarketing = lazy(() => import('./pages/Digital_Marketing'));
+const IndustryPage = lazy(() => import('./pages/IndustryPage'));
+
+// Sleek dark glowing loading spinner for lazy fallback
+const PageLoader = () => (
+  <div style={{
+    minHeight: '80vh',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'var(--bg-primary)',
+    color: '#ffffff',
+    flexDirection: 'column',
+    gap: '1rem'
+  }}>
+    <div style={{
+      width: '40px',
+      height: '40px',
+      border: '3px solid rgba(6, 182, 212, 0.1)',
+      borderTop: '3px solid var(--color-teal)',
+      borderRadius: '50%',
+      animation: 'spin-slow 1.5s linear infinite'
+    }}></div>
+    <span style={{
+      fontFamily: 'var(--font-headings)',
+      fontSize: '0.9rem',
+      letterSpacing: '0.1em',
+      color: 'var(--text-secondary)'
+    }}>LOADING SYSTEM...</span>
+  </div>
 );
-const GoogleFacebookAds = lazy(
-  () => import("./pages/services/GoogleFacebookAds"),
-);
-const BrandPromotion = lazy(() => import("./pages/services/BrandPromotion"));
-const LeadGeneration = lazy(() => import("./pages/services/LeadGeneration"));
 
 function App() {
   return (
     <Router>
-      <Helmet>
-        <title>PAYIVVA Technologies | Inspiring Innovations</title>
-        <meta
-          name="description"
-          content="PAYIVVA Technologies helps businesses scale digitally using innovative marketing and technology solutions."
-        />
-      </Helmet>
       <ScrollToTop />
-      <div className="min-h-screen app-shell text-white">
+      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'var(--bg-primary)' }}>
+        
+        {/* Navigation Shell */}
         <Navbar />
-        <main id="main-content">
-          <Suspense fallback={<div className="min-h-screen bg-[#0f172a]" />}>
+
+        {/* Dynamic Route Container */}
+        <main style={{ flex: 1, paddingTop: '80px', position: 'relative', zIndex: 1 }}>
+          <div className="bg-grid"></div>
+          <Suspense fallback={<PageLoader />}>
             <Routes>
+              {/* Primary Core Routes */}
               <Route path="/" element={<Home />} />
-              <Route path="/services" element={<ServicesPage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/careers" element={<CareersPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="/legal" element={<Legal />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/careers" element={<Careers />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/resources/case-studies" element={<CaseStudies />} />
+              <Route path="/resources/documentation" element={<Documentation />} />
+
+              {/* Legal Routes */}
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/terms" element={<TermsOfService />} />
               <Route path="/security" element={<Security />} />
+              <Route path="/legal" element={<Legal />} />
 
-              {/* Individual Service Routes */}
-              <Route
-                path="/services/web-development"
-                element={<WebDevelopment />}
-              />
-              <Route
-                path="/services/seo-optimization"
-                element={<SEOOptimization />}
-              />
-              <Route
-                path="/services/social-media-marketing"
-                element={<SocialMediaMarketing />}
-              />
-              <Route
-                path="/services/google-facebook-ads"
-                element={<GoogleFacebookAds />}
-              />
-              <Route
-                path="/services/brand-promotion"
-                element={<BrandPromotion />}
-              />
-              <Route
-                path="/services/lead-generation"
-                element={<LeadGeneration />}
-              />
+              {/* Service Detail Routes */}
+              <Route path="/services/ai-consulting-strategy" element={<AIConsultingStrategy />} />
+              <Route path="/services/machine-learning-solutions" element={<MachineLearningSolutions />} />
+              <Route path="/services/computer-vision-nlp" element={<ComputerVisionNLP />} />
+              <Route path="/services/generative-ai-llm" element={<GenerativeAILLM />} />
+              <Route path="/services/software-development" element={<SoftwareDevelopment />} />
+              <Route path="/services/app-development" element={<AppDevelopment />} />
+              <Route path="/services/website-development" element={<WebsiteDevelopment />} />
+              <Route path="/services/digital-marketing" element={<DigitalMarketing />} />
+
+              {/* Industry Detail Routes */}
+              <Route path="/industries/:slug" element={<IndustryPage />} />
             </Routes>
           </Suspense>
         </main>
+
+        {/* Global Footer */}
         <Footer />
+        
       </div>
-      <AIChatbotWidget />
     </Router>
   );
 }

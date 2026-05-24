@@ -53,6 +53,13 @@
   padding-inline: clamp(16px, 2.2vw, 30px);
 }
 
+/* Mobile: allow horizontal overflow of person image to be contained */
+@media (max-width: 1024px) {
+  .cta-banner-container-direct {
+    overflow: hidden;
+  }
+}
+
 .cta-banner-wrapper {
   position: relative;
   width: 100%;
@@ -66,6 +73,25 @@
   border-radius: 0;
   border: none;
   box-shadow: none;
+}
+
+/* Fix: Mobile side padding — 5rem is too wide below 768px */
+@media (max-width: 768px) {
+  .cta-banner-wrapper {
+    padding: 3rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta-banner-wrapper {
+    padding: 2.5rem 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .cta-banner-wrapper {
+    padding: 2rem 0.75rem;
+  }
 }
 
 @media (max-width: 1100px) {
@@ -241,7 +267,9 @@
 
 /* ==========================================
    DARK ACCREDITED ENTERPRISE FOOTER CONTAINER
-   ========================================== */
+   ========================================================================== */
+/* NOTE: border and box-shadow are restored here via class-specific rules to
+   override the global `section { border: none !important }` in index.css    */
 .footer-container {
   display: grid;
   grid-template-columns: 2.2fr 1fr 1.2fr 1.6fr 1.8fr;
@@ -255,8 +283,8 @@
   background-size: cover;
   background-position: center;
   border-radius: 45px !important;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 20px 50px rgba(11, 19, 41, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 20px 50px rgba(11, 19, 41, 0.45) !important;
   color: #ffffff;
   position: relative;
   z-index: 10;
@@ -298,9 +326,10 @@
   .footer-container {
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
-    padding: 2.2rem;
+    padding: 2.2rem 1.5rem;
     border-radius: 30px !important;
-    margin: 2rem 2px 2px 2px !important;
+    margin: 2rem 8px 2px 8px !important;
+    width: calc(100% - 16px) !important;
   }
 
   .footer-brand-column {
@@ -327,11 +356,11 @@
 @media (max-width: 500px) {
   .footer-container {
     grid-template-columns: 1fr;
-    padding: 2rem 1.2rem 1.2rem 1.2rem;
-    width: calc(100% - 8px) !important;
-    margin: 1.5rem 4px 2px 4px !important;
-    gap: 2rem;
-    border-radius: 24px !important;
+    padding: 1.75rem 1.1rem 1.1rem 1.1rem;
+    width: calc(100% - 16px) !important;
+    margin: 1.5rem 8px 2px 8px !important;
+    gap: 1.75rem;
+    border-radius: 20px !important;
   }
 
   .footer-brand-column {

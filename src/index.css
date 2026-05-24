@@ -518,8 +518,7 @@ a {
 }
 
 /* Nuclear override to completely remove straight grey lines near the footer on homepage */
-section,
-img,
+/* NOTE: Deliberately NOT using `section` or `img` here to avoid nuking footer-container borders */
 .combined-footer-wrapper,
 .premium-blogs-section,
 .premium-light-testimonials,

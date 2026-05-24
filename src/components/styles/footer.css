@@ -119,7 +119,7 @@
     padding: 3rem 2rem 0 2rem !important;
     min-height: auto;
     gap: 2rem;
-    overflow: hidden;
+    overflow: visible !important;
   }
 }
 

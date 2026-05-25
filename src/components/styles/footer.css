@@ -88,6 +88,18 @@
   box-shadow: none;
 }
 
+/* When the specialist visual is not rendered (non-home pages), tighten layout */
+.cta-banner-wrapper--no-visual {
+  grid-template-columns: 1fr;
+  min-height: auto;
+}
+
+/* When the specialist visual is not rendered (non-home pages), tighten layout */
+.cta-banner-wrapper--no-visual {
+  grid-template-columns: 1fr;
+  min-height: auto;
+}
+
 /* Fix: Mobile side padding — 5rem is too wide below 768px */
 @media (max-width: 768px) {
   .cta-banner-wrapper {

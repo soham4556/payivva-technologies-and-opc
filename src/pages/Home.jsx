@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  ArrowRight, Sparkles, Cpu, Users, 
-  BarChart, Star, Shield, 
+import {
+  ArrowRight, Cpu,
+  Star, Shield,
   Database, Activity, GitBranch
 } from 'lucide-react';
 import SaaSButton from '../components/SaaSButton';
@@ -102,6 +102,31 @@ const Home = () => {
   const [selectedBlogCategory, setSelectedBlogCategory] = useState("All");
   const [activeReadingBlog, setActiveReadingBlog] = useState(null);
 
+  // Hero console state (interactive playground)
+  const [activeConsoleTab, setActiveConsoleTab] = useState('applied');
+  const [gpuLoad, setGpuLoad] = useState(62);
+  const [quantumSecure, setQuantumSecure] = useState(true);
+  const [terminalLogs, setTerminalLogs] = useState(() => [
+    '[BOOT] PAYIVVA Orchestration Console v3.8.2',
+    '[OK] Secure context initialized',
+    '[ALLOC] GPU pool warm: 4x A100 (logical)',
+    '[OK] Telemetry stream connected',
+  ]);
+  const [simulatingSpike, setSimulatingSpike] = useState(false);
+  const spikeTimeoutRef = useRef(null);
+
+  const consoleTabs = useMemo(
+    () => (
+      [
+        { key: 'applied', label: 'Applied AI', icon: Cpu },
+        { key: 'nlp', label: 'Language Core', icon: Database },
+        { key: 'agentic', label: 'Agentic Loops', icon: GitBranch },
+        { key: 'edge', label: 'Edge Systems', icon: Activity },
+      ]
+    ),
+    []
+  );
+
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -117,6 +142,92 @@ const Home = () => {
     document.querySelectorAll('.reveal-on-scroll').forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    return () => {
+      if (spikeTimeoutRef.current) window.clearTimeout(spikeTimeoutRef.current);
+    };
+  }, []);
+
+  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+
+  const computedTelemetry = useMemo(() => {
+    const load = clamp(gpuLoad, 0, 100);
+    const baseTemp = 42;
+    const temp = Math.round(baseTemp + (load * 0.4) + (simulatingSpike ? 7 : 0));
+    const tflops = Math.round((16 + load * 0.85 + (simulatingSpike ? 14 : 0)) * 10) / 10;
+    const latencyMs = Math.max(4, Math.round(18 - load * 0.08 + (simulatingSpike ? 10 : 0)));
+    const qps = Math.round(680 + load * 22 + (simulatingSpike ? 900 : 0));
+    const enc = quantumSecure ? 'CRYSTALS-Kyber' : 'RSA-4096';
+    const speed = 0.9 + load / 120 + (simulatingSpike ? 0.35 : 0);
+    return { load, temp, tflops, latencyMs, qps, enc, speed };
+  }, [gpuLoad, quantumSecure, simulatingSpike]);
+
+  const pushLog = (line) => {
+    setTerminalLogs((prev) => {
+      const next = [...prev, line];
+      return next.length > 14 ? next.slice(next.length - 14) : next;
+    });
+  };
+
+  // Continuous simulated logs: low overhead, driven by current state
+  useEffect(() => {
+    const encTag = quantumSecure ? 'KYBER-1024' : 'RSA-4096';
+    const logPool = {
+      applied: [
+        '[OK] Model weights allocated',
+        `[ROUTE] Policy engine: load=${computedTelemetry.load}%`,
+        `[THROUGHPUT] ${computedTelemetry.tflops} TFLOPs sustained`,
+        '[OK] Drift monitor within bounds',
+      ],
+      nlp: [
+        '[TOKENIZE] semantic intent vectorized',
+        `[DECRYPT] Handshake verified via ${encTag}`,
+        `[LATENCY] Telemetry computed in ${computedTelemetry.latencyMs}ms`,
+        '[OK] Context window pinned',
+      ],
+      agentic: [
+        '[LOOP] planner → tool → verifier',
+        '[OK] Guardrails satisfied',
+        '[COMMIT] action graph advanced',
+        `[QPS] ${computedTelemetry.qps} req/s (simulated)`,
+      ],
+      edge: [
+        '[EDGE] regional mesh synchronized',
+        `[LATENCY] p95=${computedTelemetry.latencyMs}ms`,
+        '[OK] cache hit-rate stable',
+        '[ROLL] canary deploy: 5%',
+      ],
+    };
+
+    const id = window.setInterval(() => {
+      const pool = logPool[activeConsoleTab] || logPool.applied;
+      const msg = pool[Math.floor(Math.random() * pool.length)];
+      pushLog(msg);
+    }, simulatingSpike ? 520 : 900);
+
+    return () => window.clearInterval(id);
+  }, [activeConsoleTab, quantumSecure, computedTelemetry.load, computedTelemetry.tflops, computedTelemetry.latencyMs, computedTelemetry.qps, simulatingSpike]);
+
+  // On tab change, inject a short header line
+  useEffect(() => {
+    const tabLabel = consoleTabs.find((t) => t.key === activeConsoleTab)?.label || 'Console';
+    pushLog(`[SWITCH] ${tabLabel} console engaged`);
+  }, [activeConsoleTab, consoleTabs]);
+
+  const triggerSpike = () => {
+    if (simulatingSpike) return;
+    setSimulatingSpike(true);
+    pushLog('[ALERT] Spike test initiated');
+    pushLog('[WARN] Thermal headroom narrowing');
+
+    if (spikeTimeoutRef.current) window.clearTimeout(spikeTimeoutRef.current);
+    spikeTimeoutRef.current = window.setTimeout(() => {
+      setSimulatingSpike(false);
+      pushLog('[RECOVER] Load normalized');
+      pushLog('[OK] Stability restored');
+    }, 2600);
+  };
 
   const testimonials = [
     {
@@ -156,6 +267,21 @@ const Home = () => {
                 Contact Us
               </Link>
             </div>
+
+            <div className="hero-quick-metrics">
+              <div className="hero-metric-pill">
+                <span className="hero-metric-k">Encryption</span>
+                <span className="hero-metric-v">{computedTelemetry.enc}</span>
+              </div>
+              <div className="hero-metric-pill">
+                <span className="hero-metric-k">GPU</span>
+                <span className="hero-metric-v">{computedTelemetry.load}%</span>
+              </div>
+              <div className="hero-metric-pill">
+                <span className="hero-metric-k">Latency</span>
+                <span className="hero-metric-v">{computedTelemetry.latencyMs}ms</span>
+              </div>
+            </div>
           </div>
 
           {/* Hero Visual Graphic Column - Premium Interactive Dashboard */}
@@ -163,89 +289,173 @@ const Home = () => {
             <div className="neon-orb orb-cyan"></div>
             <div className="neon-orb orb-magenta"></div>
             
-            <div className="hero-tech-card obsidian-glass">
+            <div className={`hero-console-card obsidian-glass ${simulatingSpike ? 'is-spiking' : ''}`}>
               <div className="card-gloss-overlay"></div>
               <div className="card-diagonal-sweep"></div>
               
-              <div className="tech-card-header">
+              <div className="console-header">
                 <div className="header-title-wrapper">
                   <span className="live-terminal-prompt">&gt;</span>
-                  <span className="header-text-main">System Operations Control</span>
+                  <span className="header-text-main">PAYIVVA Orchestration</span>
                 </div>
                 <div className="live-status-container">
                   <span className="live-pulse-dot"></span>
                   <span className="live-status-pill">ACTIVE FEED</span>
                 </div>
               </div>
+
+              <div className="console-tabs" role="tablist" aria-label="Orchestration tabs">
+                {consoleTabs.map((t) => {
+                  const Icon = t.icon;
+                  const isActive = activeConsoleTab === t.key;
+                  return (
+                    <button
+                      key={t.key}
+                      type="button"
+                      role="tab"
+                      aria-selected={isActive}
+                      className={`console-tab ${isActive ? 'active' : ''}`}
+                      onClick={() => setActiveConsoleTab(t.key)}
+                    >
+                      <Icon size={16} />
+                      <span>{t.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="console-body">
+                <div className="console-left">
+                  <div className="console-metrics">
+                    <div className="metric">
+                      <div className="metric-k">GPU Load</div>
+                      <div className="metric-v">{computedTelemetry.load}%</div>
+                      <div className="metric-bar" aria-hidden="true">
+                        <div className="metric-bar-fill" style={{ width: `${computedTelemetry.load}%` }} />
+                      </div>
+                    </div>
+                    <div className="metric">
+                      <div className="metric-k">Throughput</div>
+                      <div className="metric-v">{computedTelemetry.tflops} TFLOPs</div>
+                      <div className="metric-sub">Compute lane: fp16 mixed</div>
+                    </div>
+                    <div className="metric">
+                      <div className="metric-k">Thermals</div>
+                      <div className="metric-v">{computedTelemetry.temp}°C</div>
+                      <div className="metric-sub">Pune SRE policy: stable</div>
+                    </div>
+                  </div>
+
+                  <div className="console-controls">
+                    <div className="control-row">
+                      <label className="control-label" htmlFor="gpu-load">
+                        GPU Cluster Load
+                      </label>
+                      <div className="control-value">{gpuLoad}%</div>
+                    </div>
+                    <input
+                      id="gpu-load"
+                      className="console-slider"
+                      type="range"
+                      min="0"
+                      max="100"
+                      value={gpuLoad}
+                      onChange={(e) => setGpuLoad(Number(e.target.value))}
+                      aria-label="GPU Cluster Load"
+                    />
+
+                    <div className="control-row" style={{ marginTop: '0.9rem' }}>
+                      <div className="control-label">Quantum-Safe Fallback</div>
+                      <label className="console-toggle">
+                        <input
+                          type="checkbox"
+                          checked={quantumSecure}
+                          onChange={(e) => setQuantumSecure(e.target.checked)}
+                          aria-label="Quantum-Safe Fallback"
+                        />
+                        <span className="toggle-track" aria-hidden="true">
+                          <span className="toggle-thumb" />
+                        </span>
+                      </label>
+                    </div>
+                    <div className="control-hint">
+                      Active standard: <span className="mono">{computedTelemetry.enc}</span>
+                    </div>
+
+                    <button
+                      type="button"
+                      className={`console-spike-btn ${simulatingSpike ? 'active' : ''}`}
+                      onClick={triggerSpike}
+                      disabled={simulatingSpike}
+                    >
+                      <Shield size={16} />
+                      Trigger Spike Alert
+                    </button>
+                  </div>
+                </div>
+
+                <div className="console-right">
+                  <div className="console-visual" aria-hidden="true" style={{ '--viz-speed': computedTelemetry.speed }}>
+                    <div className={`viz-frame tab-${activeConsoleTab}`}>
+                      <div className="viz-grid" />
+                      <div className="viz-scan" />
+
+                      {/* Applied AI: node flow */}
+                      <div className="viz-nodes">
+                        {Array.from({ length: 8 }).map((_, i) => (
+                          <span key={i} className={`viz-node n${i + 1}`} />
+                        ))}
+                        {Array.from({ length: 6 }).map((_, i) => (
+                          <span key={i} className={`viz-link l${i + 1}`} />
+                        ))}
+                      </div>
+
+                      {/* NLP: tokenizer bars */}
+                      <div className="viz-tokens">
+                        {Array.from({ length: 10 }).map((_, i) => (
+                          <span key={i} className={`viz-token t${i + 1}`} />
+                        ))}
+                      </div>
+
+                      {/* Agentic: loop rings */}
+                      <div className="viz-loops">
+                        <span className="loop-ring r1" />
+                        <span className="loop-ring r2" />
+                        <span className="loop-ring r3" />
+                        <span className="loop-core" />
+                      </div>
+
+                      {/* Edge: latency chart */}
+                      <div className="viz-latency">
+                        {Array.from({ length: 12 }).map((_, i) => (
+                          <span key={i} className={`lat-bar b${i + 1}`} />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="console-terminal" aria-label="Live terminal logs">
+                    <div className="terminal-header">
+                      <span className="terminal-title">live.log</span>
+                      <span className="terminal-meta">
+                        {computedTelemetry.qps} r/s · p95 {computedTelemetry.latencyMs}ms
+                      </span>
+                    </div>
+                    <div className="terminal-body" role="log" aria-live="polite">
+                      {terminalLogs.map((line, idx) => (
+                        <div key={`${idx}-${line.slice(0, 12)}`} className="terminal-line">
+                          <span className="terminal-time">{String(idx + 1).padStart(2, '0')}</span>
+                          <span className="terminal-text">{line}</span>
+                        </div>
+                      ))}
+                      <div className="terminal-caret" aria-hidden="true">
+                        <span className="caret-block" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               
-              <div className="hero-tech-row accent-cyan">
-                <div className="tech-row-left">
-                  <div className="tech-icon-box box-cyan">
-                    <img src="/project_img/aiimage.png" alt="Applied AI Models" className="row-icon-img" />
-                  </div>
-                  <div>
-                    <div className="tech-meta-title">Applied AI Models</div>
-                    <div className="tech-meta-subtitle">Autonomous Decision Routing</div>
-                  </div>
-                </div>
-                <div className="tech-status-dot-radar cyan-radar">
-                  <span className="radar-core"></span>
-                  <span className="radar-wave wave-1"></span>
-                  <span className="radar-wave wave-2"></span>
-                </div>
-              </div>
-
-              <div className="hero-tech-row accent-magenta">
-                <div className="tech-row-left">
-                  <div className="tech-icon-box box-magenta">
-                    <img src="/project_img/mlimage.png" alt="Natural Language Core" className="row-icon-img" />
-                  </div>
-                  <div>
-                    <div className="tech-meta-title">Natural Language Core</div>
-                    <div className="tech-meta-subtitle">Semantic Intent Parser</div>
-                  </div>
-                </div>
-                <div className="tech-status-dot-radar magenta-radar">
-                  <span className="radar-core"></span>
-                  <span className="radar-wave wave-1"></span>
-                  <span className="radar-wave wave-2"></span>
-                </div>
-              </div>
-
-              <div className="hero-tech-row accent-purple">
-                <div className="tech-row-left">
-                  <div className="tech-icon-box box-purple">
-                    <img src="/project_img/software_dev.png" alt="Agentic AI Pipeline" className="row-icon-img" />
-                  </div>
-                  <div>
-                    <div className="tech-meta-title">Agentic AI Pipeline</div>
-                    <div className="tech-meta-subtitle">Automated Execution Loops</div>
-                  </div>
-                </div>
-                <div className="tech-status-dot-radar purple-radar">
-                  <span className="radar-core"></span>
-                  <span className="radar-wave wave-1"></span>
-                  <span className="radar-wave wave-2"></span>
-                </div>
-              </div>
-
-              <div className="hero-tech-row accent-teal">
-                <div className="tech-row-left">
-                  <div className="tech-icon-box box-teal">
-                    <img src="/project_img/appdev.png" alt="App Development" className="row-icon-img" />
-                  </div>
-                  <div>
-                    <div className="tech-meta-title">App Development</div>
-                    <div className="tech-meta-subtitle">Cross-Platform Mobile Apps</div>
-                  </div>
-                </div>
-                <div className="tech-status-dot-radar teal-radar">
-                  <span className="radar-core"></span>
-                  <span className="radar-wave wave-1"></span>
-                  <span className="radar-wave wave-2"></span>
-                </div>
-              </div>
-
             </div>
           </div>
 
@@ -432,7 +642,7 @@ const Home = () => {
 
           <div className="why-us-grid-light">
             
-            {/* Left Column: Apple-style Minimalist Video Monitor */}
+            {/* Left Column: Premium Capability Showcase (no video) */}
             <div className="why-us-visual-light reveal-on-scroll delay-1">
               <div className="why-us-video-monitor-frame-light">
                 {/* Header controls bar */}
@@ -442,19 +652,23 @@ const Home = () => {
                     <span className="dot-yellow-pastel"></span>
                     <span className="dot-green-pastel"></span>
                   </div>
-                  <span className="monitor-telemetry-status-light">OPERATIONAL SYSTEM BROADCAST</span>
+                  <span className="monitor-telemetry-status-light">ENGINEERING SIGNAL</span>
                 </div>
                 
-                {/* Loop Video Element */}
-                <div className="video-viewport-light">
-                  <video 
-                    src="/assets/vid1.mp4" 
-                    autoPlay 
-                    loop 
-                    muted 
-                    playsInline 
-                    className="why-us-video-element-light"
+                {/* Static Image Panel */}
+                <div className="video-viewport-light why-us-image-viewport">
+                  <img
+                    src="/project_img/overview_cybersecurity.png"
+                    alt="Security and AI engineering overview"
+                    className="why-us-image-element"
+                    loading="lazy"
                   />
+                  <div className="why-us-image-gradient"></div>
+                  <div className="why-us-image-badges" aria-hidden="true">
+                    <span className="why-us-badge">SLA</span>
+                    <span className="why-us-badge">LOW LATENCY</span>
+                    <span className="why-us-badge">SECURE BY DEFAULT</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -617,12 +831,12 @@ const Home = () => {
         <div className="container specialization-grid">
           
           {/* Left Column: Premium Large Image */}
-          <div className="specialization-visual">
-            <div className="visual-image-wrapper">
-              <img src="/large_image.png" alt="Applied AI Specialist" className="large-specialization-img" />
+           <div className="specialization-visual">
+             <div className="visual-image-wrapper">
+              <img src="/project_img/overview_manufacturing.png" alt="AI engineering specialization" className="large-specialization-img" />
               <div className="visual-glow-overlay"></div>
-            </div>
-          </div>
+             </div>
+           </div>
 
           {/* Right Column: Specialization List with Custom Connector Arrows */}
           <div className="specialization-content">

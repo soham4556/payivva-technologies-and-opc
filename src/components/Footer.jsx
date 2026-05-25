@@ -35,10 +35,13 @@ const ArrowRightIcon = ({ size = 14 }) => (
 );
 
   const Footer = () => {
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+
   return (
     <section className="combined-footer-wrapper animate-fade-in">
       <div className="container cta-banner-container-direct">
-        <div className="cta-banner-wrapper">
+        <div className={`cta-banner-wrapper ${isHomePage ? '' : 'cta-banner-wrapper--no-visual'}`.trim()}>
           <div className="cta-watermark-text">PAYIVVA</div>
           <div className="cta-banner-content">
             <div className="specialization-tag-line">
@@ -53,9 +56,12 @@ const ArrowRightIcon = ({ size = 14 }) => (
               <SaaSButton to="/contact" variant="ghost">Contact Us</SaaSButton>
             </div>
           </div>
-          <div className="cta-banner-visual">
-            <img src="/project_img/men.png" alt="PAYIVVA Specialist" className="cta-person-img" />
-          </div>
+
+          {isHomePage ? (
+            <div className="cta-banner-visual" aria-hidden="true">
+              <img src="/project_img/men.png" alt="PAYIVVA Specialist" className="cta-person-img" loading="lazy" />
+            </div>
+          ) : null}
         </div>
       </div>
       <div className="footer-container">

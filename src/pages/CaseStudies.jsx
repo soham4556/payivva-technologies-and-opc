@@ -128,7 +128,7 @@ const CaseStudies = () => {
       <div className="premium-edge-section case-grid">
         <div className="case-studies-layout">
           <article className="case-featured-card">
-            <img src={activeCase.image} alt={activeCase.title} />
+            <img src={activeCase.image} alt={activeCase.title} loading="lazy" />
             <div className="case-featured-body">
               <span className="case-tag">{activeCase.category}</span>
               <h2>{activeCase.title}</h2>
@@ -154,7 +154,7 @@ const CaseStudies = () => {
                 className={`case-list-item ${activeCase.id === item.id ? 'active' : ''}`}
                 onClick={() => setActiveCase(item)}
               >
-                <img src={item.image} alt={item.title} />
+                <img src={item.image} alt={item.title} loading="lazy" />
                 <div>
                   <span>{item.category}</span>
                   <h3>{item.title}</h3>

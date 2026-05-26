@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { CheckCircle, ArrowRight } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
 import SaaSButton from '../components/SaaSButton';
 import { getIndustryBySlug } from '../data/industries';
 import './styles/IndustryPage.css';
@@ -148,7 +148,7 @@ const IndustryPage = () => {
             </div>
             <div className="industry-hero-visual">
               <div className="industry-hero-img-placeholder">
-                <img src={industry.image} alt={industry.title} />
+                <img src={industry.image} alt={industry.title} loading="lazy" />
               </div>
             </div>
           </div>
@@ -172,7 +172,7 @@ const IndustryPage = () => {
           {/* Right Column: Premium Image Card */}
           <div className="industry-overview-image-col">
             <div className="industry-overview-img-wrapper">
-              <img src={industry.overviewImage} alt={`${industry.title} Overview`} className="overview-side-img" />
+              <img src={industry.overviewImage} alt={`${industry.title} Overview`} className="overview-side-img" loading="lazy" />
               <div className="overview-img-glow-overlay"></div>
             </div>
           </div>

@@ -28,15 +28,19 @@ const Navbar = () => {
 
   // Close mobile drawer when route changes
   useEffect(() => {
-    setIsOpen(false);
-    setActiveDropdown(null);
-    setMobileServicesOpen(false);
-    setMobileIndustriesOpen(false);
-    setMobileResourcesOpen(false);
+    // Defer to avoid setState during effect evaluation (eslint react-hooks/set-state-in-effect).
+    const id = window.setTimeout(() => {
+      setIsOpen(false);
+      setActiveDropdown(null);
+      setMobileServicesOpen(false);
+      setMobileIndustriesOpen(false);
+      setMobileResourcesOpen(false);
+    }, 0);
+    return () => window.clearTimeout(id);
   }, [location]);
 
   return (
-    <header className={`navbar-wrapper ${scrolled ? 'scrolled' : ''}`}>
+    <header className={`navbar-wrapper ${scrolled ? 'scrolled' : ''}`} role="banner">
       <div className="navbar-container">
         
         {/* Brand Logo */}
@@ -44,8 +48,11 @@ const Navbar = () => {
           <img src="/logo.png" alt="PAYIVVA Technologies Logo" className="nav-logo-img" />
         </Link>
 
+        {/* Skip link for keyboard users */}
+        <a href="#main" className="sr-only-focusable">Skip to content</a>
+
         {/* Desktop Menu */}
-        <nav>
+        <nav aria-label="Primary">
           <ul className="nav-menu">
             <li>
               <NavLink to="/" className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`}>
@@ -190,7 +197,7 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Drawer */}
-      <div className={`mobile-drawer ${isOpen ? 'open' : ''}`} style={{ overflowY: 'auto' }}>
+      <div className={`mobile-drawer ${isOpen ? 'open' : ''}`} style={{ overflowY: 'auto' }} aria-label="Mobile">
         <ul className="mobile-nav-list">
           <li>
             <NavLink to="/" className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`} onClick={() => setIsOpen(false)}>

@@ -59,6 +59,26 @@
   padding: 0;
 }
 
+/* Accessibility: visible skip link on focus */
+.sr-only-focusable {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 9999;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  background: #0f172a;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sr-only-focusable:focus {
+  left: 1rem;
+  top: 1rem;
+  outline: 3px solid rgba(34, 211, 238, 0.6);
+  outline-offset: 2px;
+}
+
 html, body {
   width: 100%;
   min-height: 100vh;

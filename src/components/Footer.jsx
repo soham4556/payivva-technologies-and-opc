@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Mail as MailIcon, MapPin as MapPinIcon } from 'lucide-react';
 import SaaSButton from './SaaSButton';
-import './styles/footer.css';
+import './styles/Footer.css';
 
 const LinkedInIcon = ({ size = 18 }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-linkedin">
@@ -27,19 +27,12 @@ const TwitterIcon = ({ size = 18 }) => (
 
 const LinkedinIcon = LinkedInIcon;
 
-const ArrowRightIcon = ({ size = 14 }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right" style={{ marginLeft: '6px' }}>
-    <path d="M5 12h14"/>
-    <path d="m12 5 7 7-7 7"/>
-  </svg>
-);
-
   const Footer = () => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
 
   return (
-    <section className="combined-footer-wrapper animate-fade-in">
+    <footer className="combined-footer-wrapper animate-fade-in">
       <div className="container cta-banner-container-direct">
         <div className={`cta-banner-wrapper ${isHomePage ? '' : 'cta-banner-wrapper--no-visual'}`.trim()}>
           <div className="cta-watermark-text">PAYIVVA</div>
@@ -74,9 +67,9 @@ const ArrowRightIcon = ({ size = 14 }) => (
             Empowering industries with AI-driven tools tailored for success, unlocking new business potential. We pioneer applied AI solutions to build the intelligent enterprises of tomorrow.
           </p>
           <div className="footer-social-links">
-            <a href="#" className="social-icon-btn"><TwitterIcon size={14} /></a>
-            <a href="#" className="social-icon-btn"><InstagramIcon size={14} /></a>
-            <a href="#" className="social-icon-btn"><LinkedinIcon size={14} /></a>
+             <a href="https://twitter.com/payivva" className="social-icon-btn" aria-label="Payivva on X" rel="noopener noreferrer" target="_blank"><TwitterIcon size={14} /></a>
+             <a href="https://instagram.com" className="social-icon-btn" aria-label="Payivva on Instagram" rel="noopener noreferrer" target="_blank"><InstagramIcon size={14} /></a>
+             <a href="https://linkedin.com/company/payivva" className="social-icon-btn" aria-label="Payivva on LinkedIn" rel="noopener noreferrer" target="_blank"><LinkedinIcon size={14} /></a>
           </div>
         </div>
         <div className="footer-column">
@@ -146,7 +139,7 @@ const ArrowRightIcon = ({ size = 14 }) => (
           <span>© Copyright {new Date().getFullYear()} PAYIVVA. All Rights Reserved.</span>
         </div>
       </div>
-    </section>
+    </footer>
   );
 };
 

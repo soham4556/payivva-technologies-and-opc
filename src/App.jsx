@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
+import RouteSeo from './components/RouteSeo';
 import './App.css';
 
 // Lazy load page views for performance optimization
@@ -29,6 +30,7 @@ const AppDevelopment = lazy(() => import('./pages/App_Development'));
 const WebsiteDevelopment = lazy(() => import('./pages/Website_Development'));
 const DigitalMarketing = lazy(() => import('./pages/Digital_Marketing'));
 const IndustryPage = lazy(() => import('./pages/IndustryPage'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Sleek dark glowing loading spinner for lazy fallback
 const PageLoader = () => (
@@ -64,12 +66,15 @@ function App() {
     <Router>
       <ScrollToTop />
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'var(--bg-primary)' }}>
+
+        {/* Route-level SEO (title, meta, canonical, JSON-LD) */}
+        <RouteSeo />
         
         {/* Navigation Shell */}
         <Navbar />
 
         {/* Dynamic Route Container */}
-        <main style={{ flex: 1, paddingTop: 'var(--navbar-height)', position: 'relative', zIndex: 1 }}>
+        <main id="main" style={{ flex: 1, paddingTop: 'var(--navbar-height)', position: 'relative', zIndex: 1 }}>
           <div className="bg-grid"></div>
           <Suspense fallback={<PageLoader />}>
             <Routes>
@@ -101,6 +106,12 @@ function App() {
 
               {/* Industry Detail Routes */}
               <Route path="/industries/:slug" element={<IndustryPage />} />
+
+              {/* Explicit 404 route (useful for crawlers/tools) */}
+              <Route path="/404" element={<NotFound />} />
+
+              {/* Catch-all */}
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
         </main>

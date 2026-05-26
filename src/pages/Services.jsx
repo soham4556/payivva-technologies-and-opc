@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { 
-  Code, Eye, Brain, Cpu, Smartphone, Globe, BarChart3, TrendingUp,
-  ArrowRight, ShieldCheck, Zap, Sparkles, AlertCircle, CheckCircle2, ChevronRight
+  ArrowRight, ShieldCheck, Zap, AlertCircle, CheckCircle2, ChevronRight
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './styles/Services.css';

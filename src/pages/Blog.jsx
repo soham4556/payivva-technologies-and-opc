@@ -225,7 +225,7 @@ const Blog = () => {
 
       <div className="premium-edge-section blog-feature-layout">
         <article className="blog-featured-article">
-          <img src={featuredBlog.image} alt={featuredBlog.title} className="blog-featured-image" />
+          <img src={featuredBlog.image} alt={featuredBlog.title} className="blog-featured-image" loading="lazy" />
           <div className="blog-featured-content">
             <div className="blog-featured-meta">
               <span className="blog-card-category">{featuredBlog.category}</span>
@@ -248,7 +248,7 @@ const Blog = () => {
         <aside className="blog-side-stack">
           {sideBlogs.map((blog) => (
             <button key={blog.id} className="blog-side-card" onClick={() => setActiveBlog(blog)}>
-              <img src={blog.image} alt={blog.title} />
+              <img src={blog.image} alt={blog.title} loading="lazy" />
               <div>
                 <span>{blog.category}</span>
                 <h3>{blog.title}</h3>
@@ -263,7 +263,7 @@ const Blog = () => {
         {filteredBlogs.map((blog) => (
           <div key={blog.id} className="glass-card blog-card-premium explorer-card">
             <div className="blog-card-img-wrapper" onClick={() => setActiveBlog(blog)}>
-              <img src={blog.image} alt={blog.title} className="blog-card-img" />
+              <img src={blog.image} alt={blog.title} className="blog-card-img" loading="lazy" />
             </div>
             <div className="blog-card-content">
               <div className="explorer-card-meta-top">
@@ -292,7 +292,7 @@ const Blog = () => {
             <button className="reader-close-btn" onClick={() => setActiveBlog(null)} style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 6, width: '34px', height: '34px', borderRadius: '50%', border: 'none', background: 'rgba(15, 23, 42, 0.9)', color: '#fff', display: 'grid', placeItems: 'center', cursor: 'pointer', boxShadow: '0 8px 20px rgba(15, 23, 42, 0.18)' }}>✕</button>
             <div className="reader-content-scroll">
               <div className="reader-banner-wrapper">
-                <img src={activeBlog.image} alt={activeBlog.title} className="reader-banner-img" style={{ width: '100%', height: '90px', objectFit: 'cover', display: 'block' }} />
+                <img src={activeBlog.image} alt={activeBlog.title} className="reader-banner-img" loading="lazy" style={{ width: '100%', height: '90px', objectFit: 'cover', display: 'block' }} />
                 <div className="reader-banner-gradient"></div>
                 <span className="reader-badge-cat">{activeBlog.category}</span>
               </div>
@@ -306,7 +306,8 @@ const Blog = () => {
                   <span className="meta-dot">•</span>
                   <span><MessageCircle size={14} /> Expert notes</span>
                 </div>
-                <h1 className="reader-article-title">{activeBlog.title}</h1>
+                {/* Keep a single page-level H1; modal uses H2 for heading hierarchy */}
+                <h2 className="reader-article-title">{activeBlog.title}</h2>
                 <p className="reader-article-lead">{activeBlog.summary}</p>
 
                 <div className="reader-deep-dive-grid">

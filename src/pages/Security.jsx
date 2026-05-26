@@ -1,5 +1,4 @@
 import './styles/Legal.css';
-import { ShieldAlert, Key, Cloud, Eye } from 'lucide-react';
 
 const Security = () => {
   return (

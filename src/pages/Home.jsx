@@ -210,9 +210,13 @@ const Home = () => {
   }, [activeConsoleTab, quantumSecure, computedTelemetry.load, computedTelemetry.tflops, computedTelemetry.latencyMs, computedTelemetry.qps, simulatingSpike]);
 
   // On tab change, inject a short header line
+  // Defer state update to avoid setState-in-effect lint rule.
   useEffect(() => {
-    const tabLabel = consoleTabs.find((t) => t.key === activeConsoleTab)?.label || 'Console';
-    pushLog(`[SWITCH] ${tabLabel} console engaged`);
+    const id = window.setTimeout(() => {
+      const tabLabel = consoleTabs.find((t) => t.key === activeConsoleTab)?.label || 'Console';
+      pushLog(`[SWITCH] ${tabLabel} console engaged`);
+    }, 0);
+    return () => window.clearTimeout(id);
   }, [activeConsoleTab, consoleTabs]);
 
   const triggerSpike = () => {
@@ -1066,7 +1070,7 @@ const Home = () => {
             {blogsData.slice(0, 3).map((blog) => (
               <div key={blog.id} className="glass-card blog-card-premium">
                 <div className="blog-card-img-wrapper" onClick={() => setActiveReadingBlog(blog)}>
-                  <img src={blog.image} alt={blog.title} className="blog-card-img" />
+                  <img src={blog.image} alt={blog.title} className="blog-card-img" loading="lazy" />
                 </div>
                 <div className="blog-card-content">
                   <span className="blog-card-category">{blog.category}</span>
@@ -1133,7 +1137,7 @@ const Home = () => {
                   .map((blog) => (
                     <div key={blog.id} className="glass-card blog-card-premium explorer-card">
                       <div className="blog-card-img-wrapper" onClick={() => setActiveReadingBlog(blog)}>
-                        <img src={blog.image} alt={blog.title} className="blog-card-img" />
+                        <img src={blog.image} alt={blog.title} className="blog-card-img" loading="lazy" />
                       </div>
                       <div className="blog-card-content">
                         <div className="explorer-card-meta-top">
@@ -1167,7 +1171,7 @@ const Home = () => {
                 
                 {/* Banner Image */}
                 <div className="reader-banner-wrapper">
-                  <img src={activeReadingBlog.image} alt={activeReadingBlog.title} className="reader-banner-img" />
+                  <img src={activeReadingBlog.image} alt={activeReadingBlog.title} className="reader-banner-img" loading="lazy" />
                   <div className="reader-banner-gradient"></div>
                   <span className="reader-badge-cat">{activeReadingBlog.category}</span>
                 </div>
@@ -1182,7 +1186,8 @@ const Home = () => {
                     <span>{activeReadingBlog.readTime}</span>
                   </div>
                   
-                  <h1 className="reader-article-title">{activeReadingBlog.title}</h1>
+                  {/* Keep a single page-level H1; reader modal uses H2 */}
+                  <h2 className="reader-article-title">{activeReadingBlog.title}</h2>
                   
                   <div className="reader-article-text-container">
                     {activeReadingBlog.content.split('\n\n').map((paragraph, index) => (

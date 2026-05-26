@@ -4,8 +4,8 @@
 export const SITE = {
   name: 'Payivva Technologies',
   legalName: 'PAYIVVA Technologies (OPC) Private Limited',
-  domain: 'payivva-technologiess.vercel.app',
-  url: 'https://payivva-technologiess.vercel.app',
+  domain: 'payivva-technologies-and-opc.vercel.app',
+  url: 'https://payivva-technologies-and-opc.vercel.app',
   // Keep in sync with public assets
   logoPath: '/logo.png',
   // Prefer a real, shipped asset for social previews.

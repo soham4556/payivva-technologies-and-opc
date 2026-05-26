@@ -1,7 +1,7 @@
 // Vercel Serverless Function: dynamic sitemap.xml
 // URL: /sitemap.xml (via vercel.json rewrite)
 
-const SITE_URL = 'https://payivva-technologiess.vercel.app';
+const SITE_URL = 'https://payivva-technologies-and-opc.vercel.app';
 
 // Keep this list in sync with src/data/industries.js slugs.
 const INDUSTRY_SLUGS = [

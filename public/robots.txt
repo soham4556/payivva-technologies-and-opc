@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://payivva-technologiess.vercel.app/sitemap.xml
+Sitemap: https://payivva-technologies-and-opc.vercel.app/sitemap.xml

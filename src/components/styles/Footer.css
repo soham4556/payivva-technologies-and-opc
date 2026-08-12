@@ -762,7 +762,8 @@
     height: 180px !important;
   }
   .footer-logo-img {
-    height: 28px;
+    height: 90px !important;
+    max-height: 100px !important;
   }
   .footer-desc {
     font-size: 0.68rem;
@@ -811,7 +812,8 @@
     height: 140px !important;
   }
   .footer-logo-img {
-    height: 24px;
+    height: 85px !important;
+    max-height: 95px !important;
   }
   .footer-brand-text {
     font-size: 0.85rem;

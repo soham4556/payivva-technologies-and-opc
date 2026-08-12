@@ -42,19 +42,19 @@
 
 @media (max-width: 992px) {
   :root {
-    --navbar-height: 90px;
+    --navbar-height: 115px;
   }
 }
 
 @media (max-width: 600px) {
   :root {
-    --navbar-height: 90px;
+    --navbar-height: 115px;
   }
 }
 
 @media (max-width: 375px) {
   :root {
-    --navbar-height: 85px;
+    --navbar-height: 110px;
   }
 }
 

@@ -215,7 +215,7 @@ const industriesData = [
     id: 2,
     slug: "logistics-supply-chain",
     tabTitle: "Logistics & Supply Chain",
-    title: "Logistics & Supply Chain Logistics",
+    title: "Logistics & Supply Chain",
     image: "/project_img/supplychain.png",
     overviewImage: "/project_img/overview_logistics.png",
     desc1: "Revolutionizing logistics operations through AI-powered automation, predictive analytics, and intelligent supply chain orchestration that drives efficiency from warehouse to last-mile delivery.",

@@ -28,8 +28,8 @@ export const SITE = {
     longitude: 73.8567,
   },
   contact: {
-    email: 'info@payivva.com',
-    phone: '+91 20 6712 8900',
+    email: 'info@payivvatechnologies.com',
+    phone: '+91 8380009994',
   },
   social: {
     linkedin: 'https://linkedin.com/company/payivva',

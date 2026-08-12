@@ -88,14 +88,16 @@ const Contact = () => {
                 <div className="contact-icon-box accent-emerald"><Mail size={18} /></div>
                 <div>
                   <h3>Email Hub</h3>
-                  <p>info@payivva.com</p>
+                  <p><a href="mailto:info@payivvatechnologies.com" style={{ color: 'inherit', textDecoration: 'none' }}>info@payivvatechnologies.com</a></p>
                 </div>
               </div>
               <div className="contact-info-row">
                 <div className="contact-icon-box accent-purple"><Phone size={18} /></div>
                 <div>
                   <h3>Telephonic Hub</h3>
-                  <p>+91 20 6712 8900</p>
+                  <p>
+                    <a href="tel:+918380009994" style={{ color: 'inherit', textDecoration: 'none' }}>+91 8380009994</a> / <a href="tel:+918380009995" style={{ color: 'inherit', textDecoration: 'none' }}>+91 8380009995</a>
+                  </p>
                 </div>
               </div>
               <div className="contact-info-row">

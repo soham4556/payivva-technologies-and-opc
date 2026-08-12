@@ -1,9 +1,13 @@
-import { useState, useEffect, useMemo, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  ArrowRight, Cpu,
-  Star, Shield,
-  Database, Activity, GitBranch
+  ArrowRight,
+  Star,
+  Cpu,
+  ShieldCheck,
+  TrendingUp,
+  Sparkles,
+  CheckCircle2
 } from 'lucide-react';
 import SaaSButton from '../components/SaaSButton';
 import industriesData from '../data/industries';
@@ -102,32 +106,6 @@ const Home = () => {
   const [selectedBlogCategory, setSelectedBlogCategory] = useState("All");
   const [activeReadingBlog, setActiveReadingBlog] = useState(null);
 
-  // Hero console state (interactive playground)
-  const [activeConsoleTab, setActiveConsoleTab] = useState('applied');
-  const [gpuLoad, setGpuLoad] = useState(62);
-  const [quantumSecure, setQuantumSecure] = useState(true);
-  const [terminalLogs, setTerminalLogs] = useState(() => [
-    '[BOOT] PAYIVVA Orchestration Console v3.8.2',
-    '[OK] Secure context initialized',
-    '[ALLOC] GPU pool warm: 4x A100 (logical)',
-    '[OK] Telemetry stream connected',
-  ]);
-  const [simulatingSpike, setSimulatingSpike] = useState(false);
-  const spikeTimeoutRef = useRef(null);
-
-  const consoleTabs = useMemo(
-    () => (
-      [
-        { key: 'applied', label: 'Applied AI', icon: Cpu },
-        { key: 'nlp', label: 'Language Core', icon: Database },
-        { key: 'agentic', label: 'Agentic Loops', icon: GitBranch },
-        { key: 'edge', label: 'Edge Systems', icon: Activity },
-      ]
-    ),
-    []
-  );
-
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -142,96 +120,6 @@ const Home = () => {
     document.querySelectorAll('.reveal-on-scroll').forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
-
-  useEffect(() => {
-    return () => {
-      if (spikeTimeoutRef.current) window.clearTimeout(spikeTimeoutRef.current);
-    };
-  }, []);
-
-  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
-
-  const computedTelemetry = useMemo(() => {
-    const load = clamp(gpuLoad, 0, 100);
-    const baseTemp = 42;
-    const temp = Math.round(baseTemp + (load * 0.4) + (simulatingSpike ? 7 : 0));
-    const tflops = Math.round((16 + load * 0.85 + (simulatingSpike ? 14 : 0)) * 10) / 10;
-    const latencyMs = Math.max(4, Math.round(18 - load * 0.08 + (simulatingSpike ? 10 : 0)));
-    const qps = Math.round(680 + load * 22 + (simulatingSpike ? 900 : 0));
-    const enc = quantumSecure ? 'CRYSTALS-Kyber' : 'RSA-4096';
-    const speed = 0.9 + load / 120 + (simulatingSpike ? 0.35 : 0);
-    return { load, temp, tflops, latencyMs, qps, enc, speed };
-  }, [gpuLoad, quantumSecure, simulatingSpike]);
-
-  const pushLog = (line) => {
-    setTerminalLogs((prev) => {
-      const next = [...prev, line];
-      return next.length > 14 ? next.slice(next.length - 14) : next;
-    });
-  };
-
-  // Continuous simulated logs: low overhead, driven by current state
-  useEffect(() => {
-    const encTag = quantumSecure ? 'KYBER-1024' : 'RSA-4096';
-    const logPool = {
-      applied: [
-        '[OK] Model weights allocated',
-        `[ROUTE] Policy engine: load=${computedTelemetry.load}%`,
-        `[THROUGHPUT] ${computedTelemetry.tflops} TFLOPs sustained`,
-        '[OK] Drift monitor within bounds',
-      ],
-      nlp: [
-        '[TOKENIZE] semantic intent vectorized',
-        `[DECRYPT] Handshake verified via ${encTag}`,
-        `[LATENCY] Telemetry computed in ${computedTelemetry.latencyMs}ms`,
-        '[OK] Context window pinned',
-      ],
-      agentic: [
-        '[LOOP] planner → tool → verifier',
-        '[OK] Guardrails satisfied',
-        '[COMMIT] action graph advanced',
-        `[QPS] ${computedTelemetry.qps} req/s (simulated)`,
-      ],
-      edge: [
-        '[EDGE] regional mesh synchronized',
-        `[LATENCY] p95=${computedTelemetry.latencyMs}ms`,
-        '[OK] cache hit-rate stable',
-        '[ROLL] canary deploy: 5%',
-      ],
-    };
-
-    const id = window.setInterval(() => {
-      const pool = logPool[activeConsoleTab] || logPool.applied;
-      const msg = pool[Math.floor(Math.random() * pool.length)];
-      pushLog(msg);
-    }, simulatingSpike ? 520 : 900);
-
-    return () => window.clearInterval(id);
-  }, [activeConsoleTab, quantumSecure, computedTelemetry.load, computedTelemetry.tflops, computedTelemetry.latencyMs, computedTelemetry.qps, simulatingSpike]);
-
-  // On tab change, inject a short header line
-  // Defer state update to avoid setState-in-effect lint rule.
-  useEffect(() => {
-    const id = window.setTimeout(() => {
-      const tabLabel = consoleTabs.find((t) => t.key === activeConsoleTab)?.label || 'Console';
-      pushLog(`[SWITCH] ${tabLabel} console engaged`);
-    }, 0);
-    return () => window.clearTimeout(id);
-  }, [activeConsoleTab, consoleTabs]);
-
-  const triggerSpike = () => {
-    if (simulatingSpike) return;
-    setSimulatingSpike(true);
-    pushLog('[ALERT] Spike test initiated');
-    pushLog('[WARN] Thermal headroom narrowing');
-
-    if (spikeTimeoutRef.current) window.clearTimeout(spikeTimeoutRef.current);
-    spikeTimeoutRef.current = window.setTimeout(() => {
-      setSimulatingSpike(false);
-      pushLog('[RECOVER] Load normalized');
-      pushLog('[OK] Stability restored');
-    }, 2600);
-  };
 
   const testimonials = [
     {
@@ -257,6 +145,10 @@ const Home = () => {
           
           {/* Hero Content Column */}
           <div className="hero-content">
+            <div className="hero-tag hero-tag-premium">
+              <span className="hero-tag-sparkle"><Sparkles size={14} style={{ color: '#007cc3' }} /></span>
+              <span>ENTERPRISE AGENTIC AI PLATFORM</span>
+            </div>
             <h1 className="hero-title">
               Revolutionize Your Business with <span className="glow-text">Cutting-Edge AI</span> Solutions.
             </h1>
@@ -272,194 +164,92 @@ const Home = () => {
               </Link>
             </div>
 
-            <div className="hero-quick-metrics">
-              <div className="hero-metric-pill">
-                <span className="hero-metric-k">Encryption</span>
-                <span className="hero-metric-v">{computedTelemetry.enc}</span>
+            {/* Trust Micro-Metrics Bar */}
+            <div className="hero-trust-bar">
+              <div className="trust-item">
+                <span className="trust-num">99.4%</span>
+                <span className="trust-lbl">Tracking Accuracy</span>
               </div>
-              <div className="hero-metric-pill">
-                <span className="hero-metric-k">GPU</span>
-                <span className="hero-metric-v">{computedTelemetry.load}%</span>
+              <div className="trust-divider"></div>
+              <div className="trust-item">
+                <span className="trust-num">12ms</span>
+                <span className="trust-lbl">Edge Latency</span>
               </div>
-              <div className="hero-metric-pill">
-                <span className="hero-metric-k">Latency</span>
-                <span className="hero-metric-v">{computedTelemetry.latencyMs}ms</span>
+              <div className="trust-divider"></div>
+              <div className="trust-item">
+                <span className="trust-num">50+</span>
+                <span className="trust-lbl">Deployments</span>
               </div>
             </div>
           </div>
 
-          {/* Hero Visual Graphic Column - Premium Interactive Dashboard */}
-          <div className="hero-visual">
-            <div className="neon-orb orb-cyan"></div>
-            <div className="neon-orb orb-magenta"></div>
-            
-            <div className={`hero-console-card obsidian-glass ${simulatingSpike ? 'is-spiking' : ''}`}>
-              <div className="card-gloss-overlay"></div>
-              <div className="card-diagonal-sweep"></div>
+          {/* Hero Right Column: Ultra-Premium AI Command Showcase */}
+          <div className="hero-visual-container">
+            <div className="hero-glass-showcase">
               
-              <div className="console-header">
-                <div className="header-title-wrapper">
-                  <span className="live-terminal-prompt">&gt;</span>
-                  <span className="header-text-main">PAYIVVA Orchestration</span>
+              {/* Live Header Bar */}
+              <div className="showcase-header-bar">
+                <div className="system-pill">
+                  <span className="live-dot"></span>
+                  <span>PAYIVVA AGENTIC CORE v4.2</span>
                 </div>
-                <div className="live-status-container">
-                  <span className="live-pulse-dot"></span>
-                  <span className="live-status-pill">ACTIVE FEED</span>
+                <span className="system-status"><Sparkles size={11} style={{ display: 'inline', marginRight: '4px' }} /> 99.8% ACCURACY</span>
+              </div>
+
+              {/* Central Glowing AI Graphic Spotlight */}
+              <div className="showcase-graphic-box">
+                <img src="/project_img/gen_ai_llm_one.png" alt="PAYIVVA Agentic AI Platform" className="hero-glowing-graphic" />
+                <div className="graphic-ambient-glow"></div>
+                
+                {/* Live Core Overlay Chip */}
+                <div className="graphic-live-overlay">
+                  <div className="overlay-pulse-ring"></div>
+                  <span className="overlay-text">Autonomous Multi-Agent Mesh Active</span>
                 </div>
               </div>
 
-              <div className="console-tabs" role="tablist" aria-label="Orchestration tabs">
-                {consoleTabs.map((t) => {
-                  const Icon = t.icon;
-                  const isActive = activeConsoleTab === t.key;
-                  return (
-                    <button
-                      key={t.key}
-                      type="button"
-                      role="tab"
-                      aria-selected={isActive}
-                      className={`console-tab ${isActive ? 'active' : ''}`}
-                      onClick={() => setActiveConsoleTab(t.key)}
-                    >
-                      <Icon size={16} />
-                      <span>{t.label}</span>
-                    </button>
-                  );
-                })}
-              </div>
-
-              <div className="console-body">
-                <div className="console-left">
-                  <div className="console-metrics">
-                    <div className="metric">
-                      <div className="metric-k">GPU Load</div>
-                      <div className="metric-v">{computedTelemetry.load}%</div>
-                      <div className="metric-bar" aria-hidden="true">
-                        <div className="metric-bar-fill" style={{ width: `${computedTelemetry.load}%` }} />
-                      </div>
-                    </div>
-                    <div className="metric">
-                      <div className="metric-k">Throughput</div>
-                      <div className="metric-v">{computedTelemetry.tflops} TFLOPs</div>
-                      <div className="metric-sub">Compute lane: fp16 mixed</div>
-                    </div>
-                    <div className="metric">
-                      <div className="metric-k">Thermals</div>
-                      <div className="metric-v">{computedTelemetry.temp}°C</div>
-                      <div className="metric-sub">Pune SRE policy: stable</div>
-                    </div>
-                  </div>
-
-                  <div className="console-controls">
-                    <div className="control-row">
-                      <label className="control-label" htmlFor="gpu-load">
-                        GPU Cluster Load
-                      </label>
-                      <div className="control-value">{gpuLoad}%</div>
-                    </div>
-                    <input
-                      id="gpu-load"
-                      className="console-slider"
-                      type="range"
-                      min="0"
-                      max="100"
-                      value={gpuLoad}
-                      onChange={(e) => setGpuLoad(Number(e.target.value))}
-                      aria-label="GPU Cluster Load"
-                    />
-
-                    <div className="control-row" style={{ marginTop: '0.9rem' }}>
-                      <div className="control-label">Quantum-Safe Fallback</div>
-                      <label className="console-toggle">
-                        <input
-                          type="checkbox"
-                          checked={quantumSecure}
-                          onChange={(e) => setQuantumSecure(e.target.checked)}
-                          aria-label="Quantum-Safe Fallback"
-                        />
-                        <span className="toggle-track" aria-hidden="true">
-                          <span className="toggle-thumb" />
-                        </span>
-                      </label>
-                    </div>
-                    <div className="control-hint">
-                      Active standard: <span className="mono">{computedTelemetry.enc}</span>
-                    </div>
-
-                    <button
-                      type="button"
-                      className={`console-spike-btn ${simulatingSpike ? 'active' : ''}`}
-                      onClick={triggerSpike}
-                      disabled={simulatingSpike}
-                    >
-                      <Shield size={16} />
-                      Trigger Spike Alert
-                    </button>
-                  </div>
-                </div>
-
-                <div className="console-right">
-                  <div className="console-visual" aria-hidden="true" style={{ '--viz-speed': computedTelemetry.speed }}>
-                    <div className={`viz-frame tab-${activeConsoleTab}`}>
-                      <div className="viz-grid" />
-                      <div className="viz-scan" />
-
-                      {/* Applied AI: node flow */}
-                      <div className="viz-nodes">
-                        {Array.from({ length: 8 }).map((_, i) => (
-                          <span key={i} className={`viz-node n${i + 1}`} />
-                        ))}
-                        {Array.from({ length: 6 }).map((_, i) => (
-                          <span key={i} className={`viz-link l${i + 1}`} />
-                        ))}
-                      </div>
-
-                      {/* NLP: tokenizer bars */}
-                      <div className="viz-tokens">
-                        {Array.from({ length: 10 }).map((_, i) => (
-                          <span key={i} className={`viz-token t${i + 1}`} />
-                        ))}
-                      </div>
-
-                      {/* Agentic: loop rings */}
-                      <div className="viz-loops">
-                        <span className="loop-ring r1" />
-                        <span className="loop-ring r2" />
-                        <span className="loop-ring r3" />
-                        <span className="loop-core" />
-                      </div>
-
-                      {/* Edge: latency chart */}
-                      <div className="viz-latency">
-                        {Array.from({ length: 12 }).map((_, i) => (
-                          <span key={i} className={`lat-bar b${i + 1}`} />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="console-terminal" aria-label="Live terminal logs">
-                    <div className="terminal-header">
-                      <span className="terminal-title">live.log</span>
-                      <span className="terminal-meta">
-                        {computedTelemetry.qps} r/s · p95 {computedTelemetry.latencyMs}ms
-                      </span>
-                    </div>
-                    <div className="terminal-body" role="log" aria-live="polite">
-                      {terminalLogs.map((line, idx) => (
-                        <div key={`${idx}-${line.slice(0, 12)}`} className="terminal-line">
-                          <span className="terminal-time">{String(idx + 1).padStart(2, '0')}</span>
-                          <span className="terminal-text">{line}</span>
-                        </div>
-                      ))}
-                      <div className="terminal-caret" aria-hidden="true">
-                        <span className="caret-block" />
-                      </div>
-                    </div>
-                  </div>
+              {/* Floating Metric Chips */}
+              <div className="floating-chip chip-top-left float-anim-1">
+                <div className="chip-icon-box cyan"><Cpu size={16} /></div>
+                <div className="chip-info">
+                  <span className="chip-title">12ms Edge Inference</span>
+                  <span className="chip-sub">Real-Time Processing</span>
                 </div>
               </div>
-              
+
+              <div className="floating-chip chip-bottom-right float-anim-2">
+                <div className="chip-icon-box emerald"><ShieldCheck size={16} /></div>
+                <div className="chip-info">
+                  <span className="chip-title">Zero-Trust Guarded</span>
+                  <span className="chip-sub">Private Data Sovereignty</span>
+                </div>
+              </div>
+
+              <div className="floating-chip chip-top-right float-anim-3">
+                <div className="chip-icon-box blue"><TrendingUp size={16} /></div>
+                <div className="chip-info">
+                  <span className="chip-title">99.4% Defect Tracking</span>
+                  <span className="chip-sub">Automated Quality AI</span>
+                </div>
+              </div>
+
+              {/* Terminal Activity Log Strip */}
+              <div className="showcase-terminal-box">
+                <div className="terminal-header">
+                  <div className="terminal-controls">
+                    <span className="terminal-dot red"></span>
+                    <span className="terminal-dot yellow"></span>
+                    <span className="terminal-dot green"></span>
+                  </div>
+                  <span className="terminal-title">agent_execution_stream.log</span>
+                </div>
+                <div className="terminal-body">
+                  <p className="terminal-line"><span className="term-prompt">&gt;</span> [RAG Pipeline]: Syncing 1.4M Vector Embeddings...</p>
+                  <p className="terminal-line highlight"><span className="term-prompt">&gt;</span> <CheckCircle2 size={12} style={{ color: '#10b981', display: 'inline', marginRight: '4px' }} /> [Agent Consensus]: 99.8% Factual Grounding Verified</p>
+                  <p className="terminal-line pulse-line"><span className="term-prompt">&gt;</span> <span className="blinking-cursor">_</span> Running sub-second inference at 12ms latency</p>
+                </div>
+              </div>
+
             </div>
           </div>
 

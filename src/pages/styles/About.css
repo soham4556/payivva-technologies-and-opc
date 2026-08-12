@@ -46,7 +46,7 @@
    Hero Section
    ===================== */
 .about-hero-section-premium {
-  padding-block: clamp(30px, 4vw, 55px);
+  padding-block: clamp(25px, 3.5vw, 45px);
   border-bottom: 1px solid rgba(15, 23, 42, 0.08);
   padding-inline: clamp(16px, 2.2vw, 30px);
 }
@@ -56,6 +56,475 @@
   grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
   gap: clamp(20px, 3.5vw, 45px);
   align-items: center;
+}
+
+/* Registered Address Showcase Section */
+.about-address-section-premium {
+  padding-block: clamp(35px, 4vw, 55px);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.address-showcase-card {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2rem;
+  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+  border: 1px solid rgba(0, 124, 195, 0.25);
+  border-radius: 28px;
+  padding: 2.2rem;
+  box-shadow: 0 20px 60px rgba(0, 124, 195, 0.08), 0 4px 18px rgba(15, 23, 42, 0.03);
+}
+
+@media (max-width: 992px) {
+  .address-showcase-card {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+}
+
+.address-info-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.address-title {
+  font-family: var(--font-headings);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.address-sub {
+  font-size: 0.95rem;
+  color: #475569;
+}
+
+.address-details-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  margin-top: 0.8rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.address-detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.addr-icon {
+  color: #007cc3;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.addr-label {
+  font-family: var(--font-headings);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #0284c7;
+  display: block;
+}
+
+.addr-val {
+  font-family: var(--font-headings);
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.45;
+  margin-top: 0.15rem;
+  display: block;
+}
+
+.address-contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+  padding-top: 0.85rem;
+  border-top: 1px dashed #cbd5e1;
+}
+
+.address-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-headings);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.address-contact-item a {
+  color: #007cc3;
+  text-decoration: none;
+}
+
+.address-contact-item a:hover {
+  text-decoration: underline;
+}
+
+/* Map Badge Card Right */
+.address-map-col {
+  display: flex;
+  align-items: center;
+}
+
+.map-badge-card {
+  width: 100%;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 20px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 15px 40px rgba(15, 23, 42, 0.2);
+}
+
+.map-badge-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.map-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 10px #10b981;
+}
+
+.map-badge-title {
+  font-family: var(--font-headings);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #38bdf8;
+  letter-spacing: 0.08em;
+}
+
+.map-badge-text {
+  font-size: 0.84rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+.map-stats-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.map-stats-chips .chip {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-headings);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.map-directions-btn {
+  width: 100%;
+  justify-content: center;
+  font-size: 0.84rem !important;
+  padding: 0.65rem 1rem !important;
+  margin-top: 0.4rem;
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+.map-directions-btn:hover {
+  background: #007cc3 !important;
+  color: #ffffff !important;
+  border-color: #007cc3 !important;
+}
+
+/* Leadership & Visionary Ethos */
+.about-leadership-section-premium {
+  padding-block: clamp(35px, 4vw, 60px);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.leadership-grid-premium {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .leadership-grid-premium {
+    grid-template-columns: 1fr;
+  }
+}
+
+.leadership-card {
+  padding: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+.leadership-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.leadership-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  color: #007cc3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.leadership-role {
+  font-family: var(--font-headings);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.leadership-sub {
+  font-size: 0.76rem;
+  color: #007cc3;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.leadership-desc {
+  font-size: 0.88rem;
+  color: #475569;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.leadership-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.leadership-tags span {
+  font-family: var(--font-headings);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #0284c7;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+}
+
+/* Impact & Compliance Section (Light Luxury Theme) */
+.about-impact-section-premium {
+  padding-block: clamp(35px, 4vw, 60px);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.impact-grid-card {
+  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+  border: 1px solid rgba(0, 124, 195, 0.25);
+  border-radius: 28px;
+  padding: 2.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  box-shadow: 0 20px 60px rgba(0, 124, 195, 0.08), 0 4px 18px rgba(15, 23, 42, 0.03);
+}
+
+.impact-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  .impact-metrics-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .impact-metrics-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.impact-metric-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.impact-val {
+  font-family: var(--font-headings);
+  font-size: clamp(2.4rem, 4.2vw, 3.4rem);
+  font-weight: 800;
+  color: #007cc3;
+}
+
+.impact-lbl {
+  font-size: 0.84rem;
+  color: #334155;
+  margin-top: 0.35rem;
+  font-weight: 700;
+}
+
+.impact-divider {
+  display: none;
+}
+
+/* Mission & Vision Section */
+.about-mission-section-premium {
+  padding-block: clamp(35px, 4vw, 60px);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.mission-grid-premium {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .mission-grid-premium {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mission-card {
+  padding: 2rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mission-card:hover {
+  transform: translateY(-4px);
+  border-color: #007cc3;
+  box-shadow: 0 16px 45px rgba(0, 124, 195, 0.12);
+}
+
+.mission-icon-box {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  color: #007cc3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mission-title {
+  font-family: var(--font-headings);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.mission-text {
+  font-size: 0.9rem;
+  color: #475569;
+  line-height: 1.65;
+}
+
+/* Reasons & Advantage Section */
+.about-reasons-section-premium {
+  padding-block: clamp(35px, 4vw, 60px);
+}
+
+.reasons-grid-premium {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .reasons-grid-premium {
+    grid-template-columns: 1fr;
+  }
+}
+
+.reason-card {
+  padding: 1.8rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.reason-card:hover {
+  transform: translateY(-4px);
+  border-color: #007cc3;
+}
+
+.reason-num {
+  font-family: var(--font-headings);
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #007cc3;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  padding: 0.2rem 0.65rem;
+  border-radius: 9999px;
+  width: fit-content;
+}
+
+.reason-title {
+  font-family: var(--font-headings);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.reason-desc {
+  font-size: 0.88rem;
+  color: #475569;
+  line-height: 1.6;
 }
 
 @media (max-width: 992px) {

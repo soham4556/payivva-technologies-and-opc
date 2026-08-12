@@ -67,6 +67,18 @@ export function getSeoForLocation({ pathname }) {
     };
   }
 
+  // Admin panel should never be indexed
+  if (path === '/admin' || path.startsWith('/admin/')) {
+    return {
+      title: 'Admin Console',
+      description: 'PAYIVVA Operations Management Console.',
+      canonical: '/admin',
+      robots: 'noindex,nofollow',
+      og: { url: '/admin' },
+      jsonLd: [],
+    };
+  }
+
   // Core pages
   if (path === '/') {
     const breadcrumbs = [{ name: 'Home', path: '/' }];

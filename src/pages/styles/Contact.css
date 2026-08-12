@@ -308,6 +308,24 @@
   justify-content: center;
 }
 
+.form-error-node {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: 12px;
+  padding: 0.7rem 1rem;
+  color: #f87171;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.contact-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .form-success-wrapper {
   min-height: 100%;
   display: grid;

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MapPin, Mail, Phone, Clock, Send, CheckCircle } from 'lucide-react';
+import { MapPin, Mail, Phone, Clock, Send, CheckCircle, AlertCircle } from 'lucide-react';
 import './styles/Contact.css';
 
 const Contact = () => {
@@ -11,9 +11,12 @@ const Contact = () => {
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [submitLoading, setSubmitLoading] = useState(false);
 
   const resetForm = () => {
     setSubmitted(false);
+    setSubmitError('');
     setFormData({
       name: '',
       email: '',
@@ -28,10 +31,33 @@ const Contact = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.name && formData.email && formData.message) {
+    setSubmitError('');
+    setSubmitLoading(true);
+    try {
+      const res = await fetch('/api/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'contact',
+          name: formData.name,
+          email: formData.email,
+          website: formData.website,
+          service: formData.service,
+          message: formData.message
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'Failed to send message');
+      }
       setSubmitted(true);
+    } catch (err) {
+      console.error('[contact] Submit failed:', err);
+      setSubmitError(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      setSubmitLoading(false);
     }
   };
 
@@ -147,8 +173,14 @@ const Contact = () => {
                   <textarea id="contact-brief" name="message" className="form-textarea-node" rows="5" placeholder="Describe your requirements, timeline, and outcome goals..." value={formData.message} onChange={handleInputChange} required />
                 </div>
 
-                <button type="submit" className="btn btn-primary contact-submit-btn">
-                  Deploy Message <Send size={16} />
+                {submitError && (
+                  <div className="form-error-node">
+                    <AlertCircle size={15} /> {submitError}
+                  </div>
+                )}
+
+                <button type="submit" className="btn btn-primary contact-submit-btn" disabled={submitLoading}>
+                  {submitLoading ? 'Deploying...' : 'Deploy Message'} <Send size={16} />
                 </button>
               </form>
             ) : (

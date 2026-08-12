@@ -190,17 +190,8 @@ const Navbar = () => {
       <header className={`infosys-navbar-wrapper ${scrolled ? 'scrolled' : ''}`} role="banner">
         <div className="infosys-navbar-container">
 
-          {/* LEFT SECTION: Circular Menu Toggle + Brand Logo */}
+          {/* LEFT SECTION: Brand Logo */}
           <div className="left-brand-group">
-            <button
-              className="circular-menu-btn"
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label="Toggle Full Menu"
-              title="Menu"
-            >
-              {isOpen ? <X size={20} color="#0f172a" /> : <Menu size={20} color="#0f172a" />}
-            </button>
-
             <Link to="/" className="nav-logo-link" onClick={() => setActiveMegaMenu(null)}>
               <img src="/logo.png" alt="PAYIVVA Technologies Logo" className="nav-logo-img" />
             </Link>
@@ -261,15 +252,15 @@ const Navbar = () => {
             </NavLink>
           </nav>
 
-          {/* RIGHT SECTION: Glossy Dark "Ask AI" Pill Button */}
+          {/* RIGHT SECTION: Circular Menu Toggle */}
           <div className="right-action-group">
             <button
-              className="ask-ai-btn"
-              onClick={() => setIsSearchOpen(true)}
-              title="Search AI Assistant (Ctrl+K)"
+              className="circular-menu-btn"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle Full Menu"
+              title="Menu"
             >
-              <Sparkles size={16} className="ai-sparkle-icon" />
-              <span>Ask AI</span>
+              {isOpen ? <X size={20} color="#0f172a" /> : <Menu size={20} color="#0f172a" />}
             </button>
           </div>
 

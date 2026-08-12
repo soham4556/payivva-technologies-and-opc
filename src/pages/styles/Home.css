@@ -28,10 +28,7 @@
   align-items: center;
   padding: 1.5rem 0 3rem 0;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 85% 25%, rgba(0, 124, 195, 0.12) 0%, rgba(2, 132, 199, 0.04) 45%, transparent 70%),
-    radial-gradient(circle at 15% 75%, rgba(16, 185, 129, 0.06) 0%, transparent 50%),
-    linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  background: #ffffff;
 }
 
 .hero-section .container {
@@ -40,18 +37,6 @@
   max-width: 1440px !important;
   margin: 0 auto !important;
   box-sizing: border-box !important;
-}
-
-.hero-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(15, 23, 42, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15, 23, 42, 0.035) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(circle at 50% 50%, black 65%, transparent 100%);
-  pointer-events: none;
 }
 
 .hero-grid {
@@ -586,10 +571,18 @@
   font-size: 4rem;
   line-height: 1.1;
   font-weight: 700;
-  background: var(--grad-text);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #000000;
+  background: none;
+  -webkit-text-fill-color: initial;
+}
+
+.hero-title .glow-text {
+  color: #000000;
+  background: none;
+  -webkit-background-clip: initial;
+  -webkit-text-fill-color: initial;
+  background-clip: initial;
+  font-weight: 700;
 }
 
 @media (max-width: 768px) {
@@ -638,6 +631,22 @@
 /* ==========================================================================
    ADVANCED FUTURISTIC OBSIDIAN TECH CARD
    ========================================================================== */
+
+/* Hero-only "Discover More" button — solid blue */
+.hero-actions .btn-primary {
+  background: #0b6ef2;
+  color: #ffffff;
+  box-shadow: 0 6px 22px rgba(11, 110, 242, 0.35);
+  border: none;
+  filter: none;
+}
+
+.hero-actions .btn-primary:hover {
+  background: #1a7aff;
+  box-shadow: 0 8px 28px rgba(11, 110, 242, 0.45);
+  transform: translateY(-2px);
+  filter: none;
+}
 
 .hero-visual {
   position: relative;

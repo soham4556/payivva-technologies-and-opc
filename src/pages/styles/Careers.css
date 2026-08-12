@@ -618,6 +618,34 @@
   transform: translateX(5px);
 }
 
+.form-error-node {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: 12px;
+  padding: 0.7rem 1rem;
+  color: #f87171;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.careers-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.job-board-empty {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  background: var(--bg-glass);
+  border: 1px dashed var(--border-glass);
+  border-radius: 14px;
+  padding: 2.5rem;
+  text-align: center;
+}
+
 .careers-modal-overlay {
   position: fixed;
   inset: 0;

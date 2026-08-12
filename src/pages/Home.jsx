@@ -107,6 +107,18 @@ const Home = () => {
   const [activeReadingBlog, setActiveReadingBlog] = useState(null);
 
   useEffect(() => {
+    const bgGrid = document.querySelector('.bg-grid');
+    if (bgGrid) {
+      bgGrid.classList.add('hide-brain-bg');
+    }
+    return () => {
+      if (bgGrid) {
+        bgGrid.classList.remove('hide-brain-bg');
+      }
+    };
+  }, []);
+
+  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -253,25 +265,6 @@ const Home = () => {
             </div>
           </div>
 
-        </div>
-      </section>
-
-      {/* 2. Infinite Horizontal Client Logo Marquee */}
-      <section className="logo-marquee-container">
-        <div className="logo-marquee-track">
-          <span className="logo-marquee-item">CYBERSEC INFOTECH</span>
-          <span className="logo-marquee-item">ACCURE LABS</span>
-          <span className="logo-marquee-item">BIOCHEM HOMES</span>
-          <span className="logo-marquee-item">AVALANCHE MARKETING</span>
-          <span className="logo-marquee-item">COHERENT SYSTEMS</span>
-          <span className="logo-marquee-item">K&B ASSOCIATES</span>
-          {/* Double content for infinite loops scrolling */}
-          <span className="logo-marquee-item">CYBERSEC INFOTECH</span>
-          <span className="logo-marquee-item">ACCURE LABS</span>
-          <span className="logo-marquee-item">BIOCHEM HOMES</span>
-          <span className="logo-marquee-item">AVALANCHE MARKETING</span>
-          <span className="logo-marquee-item">COHERENT SYSTEMS</span>
-          <span className="logo-marquee-item">K&B ASSOCIATES</span>
         </div>
       </section>
 

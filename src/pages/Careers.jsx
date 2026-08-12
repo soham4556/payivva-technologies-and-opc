@@ -1,14 +1,19 @@
 import { useRef, useState, useEffect } from 'react';
-import { Laptop, Heart, BookOpen, Calendar, X, ArrowRight, UploadCloud, CheckCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import { Laptop, Heart, BookOpen, Calendar, X, ArrowRight, UploadCloud, CheckCircle, ChevronDown, ChevronUp, AlertCircle } from 'lucide-react';
 import './styles/Careers.css';
 
 const Careers = () => {
   const [selectedJob, setSelectedJob] = useState(null);
   const [expandedJobTitle, setExpandedJobTitle] = useState(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
+  const [resumeFile, setResumeFile] = useState(null);
   const [resumeName, setResumeName] = useState('');
   const [isDragging, setIsDragging] = useState(false);
+  const [jobsList, setJobsList] = useState([]);
+  const [jobsLoading, setJobsLoading] = useState(true);
+  const [submitError, setSubmitError] = useState('');
+  const [submitLoading, setSubmitLoading] = useState(false);
   const resumeInputRef = useRef(null);
 
   const [recruitmentLogs, setRecruitmentLogs] = useState(() => [
@@ -50,80 +55,26 @@ const Careers = () => {
     return () => window.clearInterval(id);
   }, []);
 
-  const jobsList = [
-    {
-      title: 'Senior React Developer',
-      department: 'Engineering',
-      location: 'Pune HQ',
-      type: 'Full-time',
-      summary: 'Own premium UI systems, performance budgets, and frontend architecture for AI-first products.',
-      stack: ['React', 'Vite', 'TypeScript', 'CSS Systems'],
-      responsibilities: [
-        'Ship high-quality product surfaces with strong UX and accessibility',
-        'Own performance profiling (LCP/INP), bundle discipline, and runtime stability',
-        'Collaborate with backend teams to define API contracts and telemetry',
-      ],
-      requirements: [
-        'Strong React fundamentals and component architecture experience',
-        'Proficiency in modern CSS layout and design systems',
-        'Experience debugging production issues with logs and metrics',
-      ],
-    },
-    {
-      title: 'Technical SEO Architect',
-      department: 'Marketing Science',
-      location: 'Hybrid',
-      type: 'Full-time',
-      summary: 'Engineer technical SEO foundations, structured data, and performance strategy for organic growth.',
-      stack: ['Analytics', 'Schema', 'Core Web Vitals', 'Automation'],
-      responsibilities: [
-        'Audit and improve crawlability, site architecture, and internal linking',
-        'Define Core Web Vitals targets and coordinate fixes with engineering',
-        'Develop scalable content + technical playbooks',
-      ],
-      requirements: [
-        'Hands-on technical SEO experience (indexing, CWV, schema)',
-        'Comfort working with dev teams and shipping measurable improvements',
-        'Strong analytical thinking and reporting hygiene',
-      ],
-    },
-    {
-      title: 'Performance Media Manager',
-      department: 'Paid Growth',
-      location: 'Remote',
-      type: 'Full-time',
-      summary: 'Run high-velocity experiments across paid channels and optimize CAC, ROAS, and funnel conversion.',
-      stack: ['Meta', 'Google Ads', 'Tracking', 'Creative Ops'],
-      responsibilities: [
-        'Plan and execute campaign structure with clean measurement',
-        'Iterate creative and landing pages with tight feedback loops',
-        'Report weekly performance with actionable insights',
-      ],
-      requirements: [
-        'Strong campaign management fundamentals and budget ownership',
-        'Ability to set up and validate tracking (events, UTMs, pixels)',
-        'Comfort with experimentation and rapid iteration',
-      ],
-    },
-    {
-      title: 'UI Systems Designer',
-      department: 'Product Design',
-      location: 'Pune HQ',
-      type: 'Contract',
-      summary: 'Design premium bento layouts, component specs, and interaction systems that feel world-class.',
-      stack: ['Figma', 'Design Systems', 'Motion'],
-      responsibilities: [
-        'Define reusable UI components and tokenized styles',
-        'Partner with frontend to ensure pixel-tight implementation',
-        'Create motion and interaction specs for key flows',
-      ],
-      requirements: [
-        'Strong portfolio demonstrating systems thinking',
-        'Excellent typography, layout, and interaction design taste',
-        'Ability to create implementation-ready specs',
-      ],
-    },
-  ];
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch('/api/job-postings');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        if (!cancelled && Array.isArray(data) && data.length > 0) {
+          setJobsList(data);
+        }
+      } catch (err) {
+        console.error('[careers] Failed to load job postings:', err);
+      } finally {
+        if (!cancelled) setJobsLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const selectionRounds = [
     {
@@ -188,30 +139,77 @@ const Careers = () => {
   const resetModalState = () => {
     setSelectedJob(null);
     setFormSubmitted(false);
-    setFormData({ name: '', email: '', message: '' });
+    setFormData({ name: '', email: '', phone: '', message: '' });
+    setResumeFile(null);
     setResumeName('');
     setIsDragging(false);
+    setSubmitError('');
   };
 
   const handleApplyClick = (job) => {
     setSelectedJob(job);
     setFormSubmitted(false);
-    setFormData({ name: '', email: '', message: '' });
+    setFormData({ name: '', email: '', phone: '', message: '' });
+    setResumeFile(null);
     setResumeName('');
     setIsDragging(false);
+    setSubmitError('');
   };
 
   const handleCloseModal = () => {
     resetModalState();
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.name && formData.email && resumeName) {
+    setSubmitError('');
+    if (!formData.name || !formData.email || !resumeName) {
+      setSubmitError('Please fill in your name, email and attach a resume.');
+      return;
+    }
+
+    setSubmitLoading(true);
+    try {
+      const payload = {
+        job_id: selectedJob.id,
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        cover_note: formData.message,
+        resume_name: resumeName,
+      };
+
+      if (resumeFile) {
+        const base64 = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(String(reader.result).split(',')[1] || '');
+          reader.onerror = () => reject(new Error('Failed to read resume file'));
+          reader.readAsDataURL(resumeFile);
+        });
+        const sizeKb = Math.round((resumeFile.size || 0) / 1024);
+        payload.resume_data = sizeKb > 9000 ? '' : base64;
+      }
+
+      const res = await fetch('/api/applications', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'Failed to submit application');
+      }
+
       setFormSubmitted(true);
       setTimeout(() => {
         resetModalState();
-      }, 3000);
+      }, 3500);
+    } catch (err) {
+      console.error('[careers] Application submit failed:', err);
+      setSubmitError(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      setSubmitLoading(false);
     }
   };
 
@@ -222,6 +220,7 @@ const Careers = () => {
 
   const handleResumeSelect = (file) => {
     if (!file) return;
+    setResumeFile(file);
     setResumeName(file.name);
   };
 
@@ -253,7 +252,7 @@ const Careers = () => {
               PAYIVVA is hiring sharp builders, growth engineers, and product thinkers who want to shape premium AI-first systems for ambitious teams.
             </p>
             <div className="careers-hero-stats">
-              <div className="careers-stat-chip"><strong>04</strong><span>Open Roles</span></div>
+              <div className="careers-stat-chip"><strong>{String(jobsList.length).padStart(2, '0')}</strong><span>Open Roles</span></div>
               <div className="careers-stat-chip"><strong>Hybrid</strong><span>Flexible Flow</span></div>
               <div className="careers-stat-chip"><strong>48h</strong><span>Hiring Reply</span></div>
             </div>
@@ -347,7 +346,12 @@ const Careers = () => {
           </div>
 
           <div className="job-board-list">
-            {jobsList.map((job) => (
+            {jobsLoading ? (
+              <p className="job-board-empty">Loading open roles...</p>
+            ) : jobsList.length === 0 ? (
+              <p className="job-board-empty">No open roles right now. Check back soon — we hire in cycles.</p>
+            ) : (
+            jobsList.map((job) => (
               <article key={job.title} className={`job-card glass-card ${expandedJobTitle === job.title ? 'is-expanded' : ''}`}>
                 <div className="job-meta">
                   <h3>{job.title}</h3>
@@ -404,7 +408,8 @@ const Careers = () => {
                   </div>
                 ) : null}
               </article>
-            ))}
+            ))
+            )}
           </div>
         </div>
       </section>
@@ -435,6 +440,11 @@ const Careers = () => {
                 </div>
 
                 <div className="form-group-block">
+                  <label className="form-label-node" htmlFor="applicant-phone">Phone Number</label>
+                  <input type="tel" id="applicant-phone" name="phone" className="form-input-node" placeholder="+91 98765 43210" value={formData.phone} onChange={handleInputChange} />
+                </div>
+
+                <div className="form-group-block">
                   <label className="form-label-node" htmlFor="applicant-cover">Cover Note / Experience Summary</label>
                   <textarea id="applicant-cover" name="message" className="form-textarea-node" placeholder="Briefly state your expertise..." value={formData.message} onChange={handleInputChange} />
                 </div>
@@ -447,6 +457,9 @@ const Careers = () => {
                     role="button"
                     tabIndex={0}
                     onClick={() => resumeInputRef.current?.click()}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') resumeInputRef.current?.click();
+                    }}
                     onDragOver={(e) => {
                       e.preventDefault();
                       setIsDragging(true);
@@ -460,8 +473,14 @@ const Careers = () => {
                   </div>
                 </div>
 
-                <button type="submit" className="btn btn-primary careers-submit-btn">
-                  Submit Application
+                {submitError && (
+                  <div className="form-error-node">
+                    <AlertCircle size={15} /> {submitError}
+                  </div>
+                )}
+
+                <button type="submit" className="btn btn-primary careers-submit-btn" disabled={submitLoading}>
+                  {submitLoading ? 'Submitting...' : 'Submit Application'}
                 </button>
               </form>
             ) : (

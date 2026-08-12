@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
@@ -15,6 +15,7 @@ const Contact = lazy(() => import('./pages/Contact'));
 const Blog = lazy(() => import('./pages/Blog'));
 const CaseStudies = lazy(() => import('./pages/CaseStudies'));
 const Documentation = lazy(() => import('./pages/Documentation'));
+const Admin = lazy(() => import('./pages/Admin'));
 
 // Lazy load legal sections
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
@@ -61,21 +62,20 @@ const PageLoader = () => (
   </div>
 );
 
-function App() {
+function AppContent() {
+  const isAdminRoute = useLocation().pathname.startsWith('/admin');
   return (
-    <Router>
-      <ScrollToTop />
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'var(--bg-primary)' }}>
 
         {/* Route-level SEO (title, meta, canonical, JSON-LD) */}
         <RouteSeo />
         
         {/* Navigation Shell */}
-        <Navbar />
+        {!isAdminRoute && <Navbar />}
 
         {/* Dynamic Route Container */}
-        <main id="main" style={{ flex: 1, paddingTop: 'var(--navbar-height)', position: 'relative', zIndex: 1 }}>
-          <div className="bg-grid"></div>
+        <main id="main" style={{ flex: 1, paddingTop: isAdminRoute ? 0 : 'var(--navbar-height)', position: 'relative', zIndex: 1 }}>
+          <div className={isAdminRoute ? 'bg-grid admin-bg-grid' : 'bg-grid'}></div>
           <Suspense fallback={<PageLoader />}>
             <Routes>
               {/* Primary Core Routes */}
@@ -87,6 +87,9 @@ function App() {
               <Route path="/blog" element={<Blog />} />
               <Route path="/resources/case-studies" element={<CaseStudies />} />
               <Route path="/resources/documentation" element={<Documentation />} />
+
+              {/* Admin Panel */}
+              <Route path="/admin" element={<Admin />} />
 
               {/* Legal Routes */}
               <Route path="/privacy" element={<PrivacyPolicy />} />
@@ -117,9 +120,17 @@ function App() {
         </main>
 
         {/* Global Footer */}
-        <Footer />
+        {!isAdminRoute && <Footer />}
         
       </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <ScrollToTop />
+      <AppContent />
     </Router>
   );
 }

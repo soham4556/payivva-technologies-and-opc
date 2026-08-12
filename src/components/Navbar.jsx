@@ -439,10 +439,6 @@ const Navbar = () => {
           <div className="full-drawer-header">
             <div className="drawer-header-left">
               <img src="/logo.png" alt="PAYIVVA Logo" className="drawer-logo-img" />
-              <div className="drawer-brand-tag">
-                <span className="drawer-brand-name">PAYIVVA</span>
-                <span className="drawer-brand-sub">ENTERPRISE HUB</span>
-              </div>
             </div>
 
             <button className="drawer-close-btn" onClick={() => setIsOpen(false)}>

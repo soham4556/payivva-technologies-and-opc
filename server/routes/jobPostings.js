@@ -10,10 +10,30 @@ const parseJsonArray = (val) => {
   if (!val) return [];
   try {
     const parsed = JSON.parse(val);
-    return Array.isArray(parsed) ? parsed : [];
+    return Array.isArray(parsed) ? parsed : [String(val)];
   } catch {
-    return String(val).split(',').map((s) => s.trim()).filter(Boolean);
+    return [String(val)];
   }
+};
+
+export const cleanListItems = (val) => {
+  if (!val) return [];
+  const rawArray = parseJsonArray(val);
+  const items = rawArray
+    .flatMap((s) => String(s).split(/\r?\n/))
+    .map((s) => s.replace(/^[\s•\-\d.\:]+/, '').trim())
+    .filter(Boolean);
+  return items;
+};
+
+export const cleanStackPills = (val) => {
+  if (!val) return [];
+  const rawArray = parseJsonArray(val);
+  const tags = rawArray
+    .flatMap((s) => String(s).split(/[\r\n,]+/))
+    .map((s) => s.replace(/^[\s•\-\d.\:]+/, '').trim())
+    .filter(Boolean);
+  return tags;
 };
 
 export const serializeJob = (row) => ({
@@ -23,9 +43,9 @@ export const serializeJob = (row) => ({
   location: row.location,
   type: row.type,
   summary: row.summary,
-  stack: parseJsonArray(row.stack),
-  responsibilities: parseJsonArray(row.responsibilities),
-  requirements: parseJsonArray(row.requirements),
+  stack: cleanStackPills(row.stack),
+  responsibilities: cleanListItems(row.responsibilities),
+  requirements: cleanListItems(row.requirements),
   is_active: row.is_active === 1 || row.is_active === true,
   created_at: row.created_at,
   updated_at: row.updated_at,

@@ -2,6 +2,26 @@ import { useRef, useState, useEffect } from 'react';
 import { Laptop, Heart, BookOpen, Calendar, X, ArrowRight, UploadCloud, CheckCircle, ChevronDown, ChevronUp, AlertCircle } from 'lucide-react';
 import './styles/Careers.css';
 
+const formatList = (val) => {
+  if (!val) return [];
+  const arr = Array.isArray(val) ? val : [String(val)];
+  const items = arr
+    .flatMap((s) => String(s).split(/\r?\n/))
+    .map((s) => s.replace(/^[\s•\-\d.\:]+/, '').trim())
+    .filter(Boolean);
+  return items;
+};
+
+const formatStack = (val) => {
+  if (!val) return [];
+  const arr = Array.isArray(val) ? val : [String(val)];
+  const tags = arr
+    .flatMap((s) => String(s).split(/[\r\n,]+/))
+    .map((s) => s.replace(/^[\s•\-\d.\:]+/, '').trim())
+    .filter(Boolean);
+  return tags;
+};
+
 const Careers = () => {
   const [selectedJob, setSelectedJob] = useState(null);
   const [expandedJobTitle, setExpandedJobTitle] = useState(null);
@@ -384,26 +404,29 @@ const Careers = () => {
                   <div className="job-details" aria-label="Role details">
                     <div className="job-details-grid">
                       <div className="job-details-col">
-                        <h4>Responsibilities</h4>
+                        <h4>Key Responsibilities</h4>
                         <ul>
-                          {job.responsibilities.map((item) => (
-                            <li key={item}>{item}</li>
+                          {formatList(job.responsibilities).map((item, idx) => (
+                            <li key={idx}>{item}</li>
                           ))}
                         </ul>
                       </div>
                       <div className="job-details-col">
-                        <h4>Requirements</h4>
+                        <h4>Requirements & Qualifications</h4>
                         <ul>
-                          {job.requirements.map((item) => (
-                            <li key={item}>{item}</li>
+                          {formatList(job.requirements).map((item, idx) => (
+                            <li key={idx}>{item}</li>
                           ))}
                         </ul>
                       </div>
                     </div>
-                    <div className="job-stack-row" aria-label="Primary stack">
-                      {job.stack.map((s) => (
-                        <span key={s} className="job-stack-pill">{s}</span>
-                      ))}
+                    <div className="job-stack-section">
+                      <h4 className="job-stack-title">Tech Stack & Tools</h4>
+                      <div className="job-stack-row" aria-label="Primary stack">
+                        {formatStack(job.stack).map((s, idx) => (
+                          <span key={idx} className="job-stack-pill">{s}</span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 ) : null}

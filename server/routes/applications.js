@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { query } from '../db.js';
 import { requireAdmin } from '../auth.js';
 import { sendMail, sendAdminNotification } from '../mailer.js';
+import { getCareerConfirmationEmail, getApplicationStatusEmail } from '../emailTemplates.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -45,32 +46,27 @@ router.post('/', async (req, res) => {
     );
 
     const [created] = await query('SELECT * FROM it_applications WHERE id = ?', [result.insertId]);
+    const refId = `PAY-APP-${String(result.insertId).padStart(4, '0')}`;
 
     // Email: notification to admin
     sendAdminNotification({
-      subject: `[PAYIVVA] New application for ${job.title}`,
+      subject: `[PAYIVVA] New application for ${job.title} (${refId})`,
       html: `
-        <h2>New Job Application Received</h2>
+        <h2>New Job Application Received [${refId}]</h2>
         <p><strong>Role:</strong> ${job.title}</p>
         <p><strong>Candidate:</strong> ${name} (${email})</p>
         ${phone ? `<p><strong>Phone:</strong> ${phone}</p>` : ''}
         ${cover_note ? `<p><strong>Cover Note:</strong><br/>${cover_note}</p>` : ''}
         ${resume_name ? `<p><strong>Resume:</strong> ${resume_name}</p>` : ''}
-        <p>Review it in the admin panel: ${process.env.VERCEL_URL || ''}/admin</p>
+        <p>Review it in the admin console: ${process.env.VERCEL_URL || ''}/admin</p>
       `,
     }).catch((err) => console.error('[mailer] admin notification failed:', err.message));
 
     // Email: acknowledgement to candidate
     sendMail({
       to: email,
-      subject: `Application received — ${job.title} | PAYIVVA Technologies`,
-      html: `
-        <h2>Hello ${name},</h2>
-        <p>Thank you for applying to <strong>${job.title}</strong> at PAYIVVA Technologies.</p>
-        <p>Our recruitment team will review your application and contact you within 48 business hours if your profile matches the role.</p>
-        <br/>
-        <p>Best regards,<br/><strong>PAYIVVA Technologies — IT Department</strong></p>
-      `,
+      subject: `Application Confirmation [${refId}] — ${job.title} | PAYIVVA Technologies`,
+      html: getCareerConfirmationEmail({ name, email, jobTitle: job.title, referenceId: refId }),
     }).catch((err) => console.error('[mailer] candidate acknowledgement failed:', err.message));
 
     return res.status(201).json(serializeApp(created));
@@ -102,6 +98,30 @@ router.patch('/:id', requireAdmin, async (req, res) => {
     await query('UPDATE it_applications SET status = ? WHERE id = ?', [status, id]);
     const [updated] = await query('SELECT * FROM it_applications WHERE id = ?', [id]);
     if (!updated) return res.status(404).json({ error: 'Application not found' });
+
+    // Send automated status update email to candidate
+    if (['reviewing', 'shortlisted', 'hired', 'rejected'].includes(status)) {
+      const refId = `PAY-APP-${String(updated.id).padStart(4, '0')}`;
+      const subjectMap = {
+        reviewing: `Application Under Review [${refId}] — ${updated.job_title} | PAYIVVA Technologies`,
+        shortlisted: `Congratulations! Application Shortlisted [${refId}] — ${updated.job_title} | PAYIVVA Technologies`,
+        hired: `Offer Extended & Welcome to PAYIVVA Technologies! [${refId}] — ${updated.job_title}`,
+        rejected: `Application Status Update [${refId}] — ${updated.job_title} | PAYIVVA Technologies`,
+      };
+
+      sendMail({
+        to: updated.email,
+        subject: subjectMap[status] || `Application Status Update [${refId}] | PAYIVVA Technologies`,
+        html: getApplicationStatusEmail({
+          name: updated.name,
+          email: updated.email,
+          jobTitle: updated.job_title,
+          status,
+          appId: refId,
+        }),
+      }).catch((err) => console.error('[mailer] candidate status email failed:', err.message));
+    }
+
     return res.json(serializeApp(updated));
   } catch (err) {
     console.error('[it_applications] PATCH failed:', err.message);

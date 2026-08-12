@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { query } from '../db.js';
 import { requireAdmin } from '../auth.js';
 import { sendMail, sendAdminNotification } from '../mailer.js';
+import { getContactConfirmationEmail } from '../emailTemplates.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -43,33 +44,26 @@ router.post('/', async (req, res) => {
 
     const [created] = await query('SELECT * FROM messages WHERE id = ?', [result.insertId]);
 
-    const heading = msgType === 'quote' ? 'New Quote Request' : 'New Contact Message';
+    const heading = msgType === 'quote' ? 'New Quote Request' : 'New Contact / Call Request';
+    const refId = `PAY-CR-${String(result.insertId).padStart(4, '0')}`;
 
     sendAdminNotification({
-      subject: `[PAYIVVA] ${heading} from ${name}`,
+      subject: `[PAYIVVA] ${heading} from ${name} (${refId})`,
       html: `
-        <h2>${heading}</h2>
+        <h2>${heading} [Ref: ${refId}]</h2>
         <p><strong>Name:</strong> ${escapeHtml(name)}</p>
         <p><strong>Email:</strong> ${escapeHtml(email)}</p>
         ${website ? `<p><strong>Website:</strong> ${escapeHtml(website)}</p>` : ''}
         ${service ? `<p><strong>Service:</strong> ${escapeHtml(service)}</p>` : ''}
         <p><strong>Message:</strong><br/>${escapeHtml(message).replace(/\n/g, '<br/>')}</p>
-        <p>Manage it in the admin panel: ${process.env.VERCEL_URL || ''}/admin</p>
+        <p>Manage it in the admin console: ${process.env.VERCEL_URL || ''}/admin</p>
       `,
     }).catch((err) => console.error('[mailer] admin notification failed:', err.message));
 
     sendMail({
       to: email,
-      subject: msgType === 'quote'
-        ? 'Quote Request Received | PAYIVVA Technologies'
-        : 'Message Received | PAYIVVA Technologies',
-      html: `
-        <h2>Hello ${escapeHtml(name)},</h2>
-        <p>Thank you for reaching out to PAYIVVA Technologies.</p>
-        <p>Your ${msgType === 'quote' ? 'quote request' : 'message'} has been received. A strategist will reply within 12 business hours.</p>
-        <br/>
-        <p>Best regards,<br/><strong>PAYIVVA Technologies — IT Department</strong></p>
-      `,
+      subject: `Request Confirmation [${refId}] | PAYIVVA Technologies IT Operations Desk`,
+      html: getContactConfirmationEmail({ name, email, website, service, message, referenceId: refId }),
     }).catch((err) => console.error('[mailer] user acknowledgement failed:', err.message));
 
     return res.status(201).json(serializeMsg(created));

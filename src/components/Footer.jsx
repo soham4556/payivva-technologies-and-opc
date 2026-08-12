@@ -57,7 +57,7 @@ const LinkedinIcon = LinkedInIcon;
           ) : null}
         </div>
       </div>
-      <div className="footer-container">
+      <div className={`footer-container ${isHomePage ? '' : 'footer-container--no-visual'}`.trim()}>
         <div className="footer-brand-column">
           <div className="footer-logo">
             <img src="/logo.png" alt="PAYIVVA Logo" className="footer-logo-img" />
@@ -76,7 +76,7 @@ const LinkedinIcon = LinkedInIcon;
           <ul className="footer-links-list">
             <li className="footer-link-item"><Link to="/about">About Us</Link></li>
             <li className="footer-link-item"><Link to="/services">Services</Link></li>
-            <li className="footer-link-item"><Link to="/services">Industries</Link></li>
+            <li className="footer-link-item"><Link to="/industries/manufacturing-industrial-iot">Industries</Link></li>
             <li className="footer-link-item"><Link to="/careers">Careers</Link></li>
             <li className="footer-link-item"><Link to="/blog">Tech Insights</Link></li>
             <li className="footer-link-item"><Link to="/contact">Contact</Link></li>
@@ -125,20 +125,28 @@ const LinkedinIcon = LinkedInIcon;
             </div>
           </div>
         </div>
-        <div className="footer-column">
+        <div className="footer-column footer-reachus-column">
           <h4 className="footer-column-title">Reach us</h4>
           <div className="footer-map-card">
             <iframe 
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3784.3895690104914!2d73.934078!3d18.466005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2eb5e0a802bc7%3A0xfddfe2bb2e402d54!2sPAYIVVA%20TECHNOLOGIES%20OPC%20PVT%20LTD!5e0!3m2!1smr!2sin!4v1786517757366!5m2!1smr!2sin" 
               width="100%" 
-              height="220" 
-              style={{ border: 0, borderRadius: '12px' }} 
+              height="100%" 
+              style={{ border: 0, borderRadius: '12px', width: '100%', height: '100%', display: 'block' }} 
               allowFullScreen="" 
               loading="lazy" 
               referrerPolicy="strict-origin-when-cross-origin"
               title="PAYIVVA TECHNOLOGIES OPC PVT LTD Google Maps Location"
             />
           </div>
+          <a 
+            href="https://maps.google.com/?q=PAYIVVA+TECHNOLOGIES+OPC+PVT+LTD+Autadwadi+Handewadi+Pune" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="footer-map-direct-link"
+          >
+            <span>Get Directions</span> <MapPinIcon size={12} />
+          </a>
         </div>
         <div className="footer-bottom-row">
           <span>© Copyright {new Date().getFullYear()} PAYIVVA. All Rights Reserved.</span>

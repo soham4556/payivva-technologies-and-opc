@@ -75,7 +75,7 @@ function AppContent() {
 
         {/* Dynamic Route Container */}
         <main id="main" style={{ flex: 1, paddingTop: isAdminRoute ? 0 : 'var(--navbar-height)', position: 'relative', zIndex: 1 }}>
-          <div className={isAdminRoute ? 'bg-grid admin-bg-grid' : 'bg-grid'}></div>
+          <div className={isAdminRoute ? 'bg-grid hide-brain-bg' : 'bg-grid'}></div>
           <Suspense fallback={<PageLoader />}>
             <Routes>
               {/* Primary Core Routes */}

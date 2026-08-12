@@ -1,0 +1,29 @@
+====================================================================
+  PAYIVVA TECHNOLOGIES — CHATGPT JOB DESCRIPTION (JD) PROMPT GUIDE
+====================================================================
+
+Instructions:
+1. Copy the prompt block below.
+2. Paste it into ChatGPT or any AI assistant.
+3. Replace [Job Title / Role Name] with your desired role (e.g. Senior React Developer, AI Engineer, SEO Specialist).
+4. Copy-paste the generated sections directly into the PAYIVVA Admin Job Posting form fields.
+
+--------------------------------- PROMPT START ---------------------------------
+
+Please write a professional, high-impact Job Description (JD) for the role of "[Job Title / Role Name]". 
+
+Please format the output exactly in the 4 separate sections below so that I can directly copy and paste each section into my Admin Job Portal:
+
+1. ROLE SUMMARY:
+(Write a 2-3 sentence high-impact summary paragraph outlining the core mission and scope of this role.)
+
+2. TECH STACK:
+(List 6-10 relevant tools, frameworks, and technologies for this role, each on a NEW LINE.)
+
+3. KEY RESPONSIBILITIES:
+(List 5-8 clear, action-oriented responsibilities. Write each point on a NEW LINE starting with a bullet • symbol.)
+
+4. REQUIREMENTS & QUALIFICATIONS:
+(List 5-8 essential qualifications, experience requirements, and core skills. Write each point on a NEW LINE starting with a bullet • symbol.)
+
+---------------------------------- PROMPT END ----------------------------------

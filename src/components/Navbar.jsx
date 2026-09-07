@@ -449,7 +449,7 @@ const Navbar = () => {
           {/* Drawer Body Container */}
           <div className="full-drawer-content">
             <div className="drawer-grid">
-              
+
               {/* Column 1: Company Overview Spotlight Card */}
               <div className="drawer-col company-hero-col">
                 <span className="drawer-col-heading">Overview</span>
@@ -457,7 +457,7 @@ const Navbar = () => {
                   <span className="hero-card-badge"><Sparkles size={12} /> Applied AI Leader</span>
                   <h4>Pioneering Enterprise Intelligence</h4>
                   <p>Building high-performance AI engines, cloud platforms, and Industry 4.0 IoT solutions.</p>
-                  
+
                   <div className="hero-quick-links">
                     <Link to="/" className="hero-link-btn" onClick={() => setIsOpen(false)}>
                       <Layers size={15} /> <span>Navigate your next</span> <ChevronRight size={14} className="link-arrow" />

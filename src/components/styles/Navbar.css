@@ -84,10 +84,12 @@
   .infosys-navbar-wrapper {
     height: 100px !important;
   }
+
   .nav-logo-img {
     height: 88px !important;
     max-height: 95px !important;
   }
+
   .circular-menu-btn {
     width: 46px !important;
     height: 46px !important;
@@ -156,9 +158,11 @@
 
 .pill-nav-link {
   font-family: var(--font-body);
-  font-size: 1.15rem; /* Substantially increased font size as requested */
+  font-size: 1.15rem;
+  /* Substantially increased font size as requested */
   font-weight: 700;
-  color: #0f172a; /* High-contrast dark navy font matching the screenshot */
+  color: #0f172a;
+  /* High-contrast dark navy font matching the screenshot */
   text-decoration: none;
   position: relative;
   transition: var(--transition-fast);
@@ -600,8 +604,10 @@
   left: 0 !important;
   width: 100vw !important;
   height: 100vh !important;
-  background: #ffffff !important; /* Solid white background prevents hero text bleed-through */
-  z-index: 99999 !important; /* Higher than top navbar header (1000) so top navbar hides when drawer opens */
+  background: #ffffff !important;
+  /* Solid white background prevents hero text bleed-through */
+  z-index: 99999 !important;
+  /* Higher than top navbar header (1000) so top navbar hides when drawer opens */
   display: flex;
   flex-direction: column;
   padding: 2rem 4rem 3rem 4rem;

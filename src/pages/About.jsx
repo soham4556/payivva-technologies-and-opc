@@ -1,6 +1,32 @@
-import { Shield, Code2, Cpu, Database, BarChart, Layers, Globe, Zap, Clock, ArrowRight, Sparkles, Users, Target, BadgeCheck, MapPin, Building2, Phone, Mail, CheckCircle2 } from 'lucide-react';
+import {
+  Shield, Code2, Cpu, Database, BarChart, Layers, Globe, Zap, Clock, ArrowRight,
+  Sparkles, Users, Target, BadgeCheck, MapPin, Building2, Phone, Mail, CheckCircle2,
+  ExternalLink, HardHat, Factory, Flame, Camera, Compass, Quote, UserCheck, Briefcase
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './styles/About.css';
+
+const LinkedInIcon = ({ size = 18 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect width="4" height="12" x="2" y="9" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+);
+
+const InstagramIcon = ({ size = 18 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+  </svg>
+);
+
+const FacebookIcon = ({ size = 18 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+  </svg>
+);
 
 const About = () => {
   const pillars = [
@@ -22,40 +48,41 @@ const About = () => {
   ];
 
   const capabilities = [
-    { icon: <Code2 size={22} />, label: 'React & Next.js Platforms', tone: 'cyan' },
-    { icon: <Cpu size={22} />, label: 'Node.js & Python API Core', tone: 'emerald' },
-    { icon: <Sparkles size={22} />, label: 'Generative AI & RAG', tone: 'purple' },
-    { icon: <Database size={22} />, label: 'Vector DBs (Pinecone/Milvus)', tone: 'cyan' },
-    { icon: <BarChart size={22} />, label: 'Predictive ML Analytics', tone: 'emerald' },
-    { icon: <Shield size={22} />, label: 'Zero-Trust Cybersecurity', tone: 'purple' }
+    { icon: <Code2 size={22} />, label: 'Custom Website & Web Platforms', tone: 'cyan' },
+    { icon: <Globe size={22} />, label: 'Mobile App Engineering (iOS & Android)', tone: 'emerald' },
+    { icon: <Cpu size={22} />, label: 'Enterprise Software & Robust APIs', tone: 'purple' },
+    { icon: <BarChart size={22} />, label: 'Digital Marketing & SEO Growth', tone: 'cyan' },
+    { icon: <Sparkles size={22} />, label: 'Generative AI & Private RAG', tone: 'emerald' },
+    { icon: <Shield size={22} />, label: 'ML Analytics & Zero-Trust Security', tone: 'purple' }
   ];
+
 
   const milestones = [
     {
       year: '2023',
-      title: 'Company Foundation in Pune',
-      text: 'PAYIVVA began in Pune with a core focus on high-performance web engineering and practical machine learning solutions.',
-      icon: <Zap size={14} />,
+      title: 'Industrial Engineering Heritage',
+      text: 'PAYIVVA established turnkey infrastructure, MEP engineering, and industrial construction across Pune & Maharashtra.',
+      icon: <Factory size={14} />,
       tone: 'cyan'
     },
     {
       year: '2024',
       title: 'Official OPC Incorporation',
-      text: 'Incorporated as PAYIVVA TECHNOLOGIES (OPC) PRIVATE LIMITED, expanding into enterprise AI and multi-agent RAG networks.',
+      text: 'Incorporated as PAYIVVA TECHNOLOGIES (OPC) PRIVATE LIMITED with the Ministry of Corporate Affairs, expanding operational scale.',
       icon: <Building2 size={14} />,
       tone: 'emerald'
     },
     {
       year: '2025',
-      title: 'Handewadi Tech HQ Facility',
-      text: 'Established core operations at Green Park - Venkatesh Properties, Autadwadi Handewadi, inside Pune’s tech corridor.',
+      title: 'Tech HQ & IT Department Launch',
+      text: 'Established core tech headquarters at Handewadi, Pune, and launched the dedicated enterprise IT & Artificial Intelligence Department.',
       icon: <Globe size={14} />,
       tone: 'purple'
     },
     {
       year: '2026',
-      title: 'Enterprise Global Scale',
-      text: 'A trusted systems partner for Fortune 500 & high-growth brands in AI consulting, custom software, and digital engineering.',
+      title: 'Physical & Digital AI Convergence',
+      text: 'A premier multidisciplinary partner delivering both turnkey physical infrastructure and sovereign AI software architectures.',
       icon: <Clock size={14} />,
       tone: 'cyan'
     }
@@ -63,26 +90,26 @@ const About = () => {
 
   return (
     <div className="about-page-premium animate-fade-in">
-      
+
       {/* 1. Ultra-Premium Hero Section */}
       <section className="about-hero-section-premium">
         <div className="about-hero-grid-premium">
-          
+
           {/* Left Column: Corporate Identity & Mission */}
           <div className="about-hero-content-premium">
             <span className="premium-tag-glow">
-              <Sparkles size={14} style={{ color: '#007cc3' }} /> DIVISION OF PAYIVVA TECHNOLOGIES (OPC) PVT LTD
+              <Sparkles size={14} style={{ color: '#007cc3' }} /> IT & AI DEPARTMENT • PAYIVVA TECHNOLOGIES (OPC) PVT LTD
             </span>
             <h1 className="hero-main-title">
-              Pioneering Enterprise AI & Digital Engineering from <span className="text-glow-indigo">Pune, India</span>
+              Engineering Smart Software & AI from <span className="text-glow-indigo">Pune, India</span>
             </h1>
             <p className="hero-sub-text">
-              <strong>PAYIVVA</strong> is the flagship enterprise technology division of <strong>PAYIVVA TECHNOLOGIES (OPC) PRIVATE LIMITED</strong>, an officially incorporated technology firm based in Pune, Maharashtra. We engineer high-performance software architectures, machine learning systems, and sovereign Generative AI agent networks.
+              Welcome to the official <strong>IT Department portal</strong> of <strong>PAYIVVA TECHNOLOGIES (OPC) PRIVATE LIMITED</strong>. While our parent firm is renowned across Maharashtra for premier turnkey infrastructure and industrial construction, this dedicated IT wing delivers high-velocity enterprise software architectures, machine learning engines, and sovereign Generative AI agent networks under one corporate banner.
             </p>
             <div className="about-hero-points">
               <div><BadgeCheck size={16} style={{ color: '#007cc3' }} /> Govt Registered OPC Pvt Ltd</div>
+              <div><Building2 size={16} style={{ color: '#007cc3' }} /> Dual Non-IT & IT Capabilities</div>
               <div><MapPin size={16} style={{ color: '#007cc3' }} /> Handewadi Tech HQ, Pune</div>
-              <div><Shield size={16} style={{ color: '#007cc3' }} /> Zero-Trust Data Isolation</div>
             </div>
           </div>
 
@@ -99,24 +126,28 @@ const About = () => {
               </div>
               <div className="terminal-body">
                 <div className="stat-line">
-                  <span className="stat-label">LEGAL NAME</span>
+                  <span className="stat-label">PARENT ENTITY</span>
                   <span className="stat-value text-glow-indigo">PAYIVVA TECHNOLOGIES (OPC) PVT LTD</span>
                 </div>
                 <div className="stat-line">
-                  <span className="stat-label">ENTITY TYPE</span>
-                  <span className="stat-value text-glow-teal">OPC PRIVATE LIMITED</span>
+                  <span className="stat-label">DIRECTOR & FOUNDER</span>
+                  <span className="stat-value text-glow-teal">SUDHAANSHU SRIVASTAVAA</span>
+                </div>
+                <div className="stat-line">
+                  <span className="stat-label">ACTIVE DIVISIONS</span>
+                  <span className="stat-value text-glow-indigo">1. NON-IT INFRASTRUCTURE • 2. IT & AI DEPT</span>
                 </div>
                 <div className="stat-line">
                   <span className="stat-label">HEADQUARTERS</span>
-                  <span className="stat-value text-glow-indigo">PUNE, MAHARASHTRA, INDIA</span>
+                  <span className="stat-value text-glow-teal">PUNE, MAHARASHTRA, INDIA</span>
                 </div>
                 <div className="stat-line">
-                  <span className="stat-label">REGISTERED STATUS</span>
-                  <span className="stat-value text-glow-teal">VERIFIED • ACTIVE</span>
+                  <span className="stat-label">REGISTRATION STATUS</span>
+                  <span className="stat-value text-glow-teal">VERIFIED • ACTIVE OPC PVT LTD</span>
                 </div>
                 <div className="stat-bar-holder">
-                  <span className="stat-label">SYSTEM COMPLIANCE & SECURITY</span>
-                  <div className="stat-bar-fill-glow" style={{ width: '100%' }}>100% ISO ALIGNED</div>
+                  <span className="stat-label">ENGINEERING DISCIPLINE & COMPLIANCE</span>
+                  <div className="stat-bar-fill-glow" style={{ width: '100%' }}>100% ISO ALIGNED & SECURE</div>
                 </div>
               </div>
             </div>
@@ -125,18 +156,287 @@ const About = () => {
         </div>
       </section>
 
+      {/* 2. DUAL-DIVISION SHOWCASE: ONE COMPANY, TWO POWERFUL DIVISIONS */}
+      <section className="about-dual-division-section">
+        <div className="about-container-premium">
+          <div className="about-section-head text-center">
+            <span className="section-tag-modern-light">ONE COMPANY • DUAL CAPABILITY</span>
+            <h2 className="section-title-modern-light">Connecting Physical Infrastructure with Next-Gen Digital Intelligence</h2>
+            <p className="section-desc">
+              PAYIVVA TECHNOLOGIES (OPC) PRIVATE LIMITED operates across two powerhouse divisions under a unified vision. Having established excellence in turnkey infrastructure engineering across Maharashtra, we expanded with our high-tech IT Department to power complete industrial and digital transformation.
+            </p>
+          </div>
+
+          <div className="dual-cards-grid">
+
+            {/* Card 1: Non-IT Division */}
+            <div className="dual-division-card card-non-it">
+              <div className="division-badge-row">
+                <span className="division-badge badge-non-it">
+                  <HardHat size={14} /> NON-IT INFRASTRUCTURE DIVISION
+                </span>
+                <span className="division-status-indicator">
+                  <CheckCircle2 size={14} /> Established Core Wing
+                </span>
+              </div>
+
+              <div className="division-header">
+                <div className="division-icon-box icon-box-non-it">
+                  <Factory size={28} />
+                </div>
+                <div className="division-heading-text">
+                  <h3>Infrastructure & Turnkey Engineering</h3>
+                  <span className="division-subheading">Turnkey Industrial Construction • MEP • Safety</span>
+                </div>
+              </div>
+
+              <p className="division-lead-text">
+                <strong>Payivva Technologies (OPC) PVT LTD</strong> is a premier Pune-based infrastructure engineering firm delivering turnkey industrial construction, MEP (Mechanical, Electrical, and Plumbing), fire safety, surveillance, and corporate interior solutions across Maharashtra.
+              </p>
+
+              <div className="division-services-block">
+                <span className="division-services-title">Core Non-IT Engineering Services</span>
+                <div className="division-service-item">
+                  <span className="bullet-dot"></span>
+                  <span>Turnkey Industrial Construction & Pre-Engineered Buildings (PEB)</span>
+                </div>
+                <div className="division-service-item">
+                  <span className="bullet-dot"></span>
+                  <span>MEP (Mechanical, Electrical, Plumbing) Solutions</span>
+                </div>
+                <div className="division-service-item">
+                  <span className="bullet-dot"></span>
+                  <span>Certified Fire Safety, Detection & Hydrant Protection Systems</span>
+                </div>
+                <div className="division-service-item">
+                  <span className="bullet-dot"></span>
+                  <span>Enterprise CCTV, Access Control & Surveillance Networks</span>
+                </div>
+                <div className="division-service-item">
+                  <span className="bullet-dot"></span>
+                  <span>Corporate Interiors & Executive Workspace Architecture</span>
+                </div>
+              </div>
+
+              <div className="division-links-wrapper">
+                <a
+                  href="https://www.payivvatechnologies.in/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="division-primary-btn btn-non-it-portal"
+                >
+                  Visit Official Infrastructure Website <ExternalLink size={16} />
+                </a>
+
+                <div className="division-social-row">
+                  <span className="division-social-label">Follow Non-IT Wing:</span>
+                  <a
+                    href="https://www.instagram.com/payivva_technologies_opcpvtltd/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="division-social-link social-link-instagram"
+                  >
+                    <InstagramIcon size={15} /> Instagram
+                  </a>
+                  <a
+                    href="https://www.facebook.com/payivvatechnologiespvtltd/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="division-social-link social-link-facebook"
+                  >
+                    <FacebookIcon size={15} /> Facebook
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 2: IT Department */}
+            <div className="dual-division-card card-it">
+              <div className="division-badge-row">
+                <span className="division-badge badge-it">
+                  <Cpu size={14} /> NEWLY EXPANDED IT DEPARTMENT
+                </span>
+                <span className="division-status-indicator">
+                  <Sparkles size={14} style={{ color: '#007cc3' }} /> Current Website Portal
+                </span>
+              </div>
+
+              <div className="division-header">
+                <div className="division-icon-box icon-box-it">
+                  <Code2 size={28} />
+                </div>
+                <div className="division-heading-text">
+                  <h3>Full-Stack IT, Software & AI Department</h3>
+                  <span className="division-subheading">Web & App Dev • Custom Software • Digital Marketing • Generative AI & ML</span>
+                </div>
+              </div>
+
+              <p className="division-lead-text">
+                To empower modern enterprises across every digital touchpoint, we launched our dedicated <strong>IT Department</strong> alongside our established Non-IT infrastructure foundation. From high-speed web platforms, mobile apps, and custom software systems to data-driven digital marketing and autonomous Generative AI agent networks, we deliver end-to-end digital excellence under one corporate roof.
+              </p>
+
+              <div className="division-services-block">
+                <span className="division-services-title">Full Spectrum of IT & Digital Services</span>
+                <div className="division-service-item">
+                  <span className="bullet-dot"></span>
+                  <span><strong>Website Development:</strong> Ultra-fast, responsive web platforms (React, Next.js, Vite) with 99+ Lighthouse performance & technical SEO.</span>
+                </div>
+                <div className="division-service-item">
+                  <span className="bullet-dot"></span>
+                  <span><strong>Mobile App Development:</strong> Fluid native iOS, Android & cross-platform Flutter mobile applications.</span>
+                </div>
+                <div className="division-service-item">
+                  <span className="bullet-dot"></span>
+                  <span><strong>Custom Software Development:</strong> Scalable enterprise architectures, microservices, cloud systems & secure API layers.</span>
+                </div>
+                <div className="division-service-item">
+                  <span className="bullet-dot"></span>
+                  <span><strong>Digital Marketing & Growth:</strong> Performance marketing, Google Ads, technical SEO audits, corporate branding & high-intent lead generation.</span>
+                </div>
+                <div className="division-service-item">
+                  <span className="bullet-dot"></span>
+                  <span><strong>Generative AI & Autonomous LLMs:</strong> Secure private RAG networks, fine-tuned domain LLMs (LoRA/QLoRA) & automated agent workflows.</span>
+                </div>
+                <div className="division-service-item">
+                  <span className="bullet-dot"></span>
+                  <span><strong>Machine Learning & Computer Vision:</strong> Predictive data analytics, intelligent OCR pipelines & sub-15ms edge inference.</span>
+                </div>
+              </div>
+
+              <div className="division-links-wrapper">
+                <Link to="/services" className="division-primary-btn btn-it-portal">
+                  Explore All IT & AI Services <ArrowRight size={16} />
+                </Link>
+
+                <div className="division-social-row">
+                  <span className="division-social-label">Need Web, Marketing or AI?</span>
+                  <Link to="/contact" className="division-social-link" style={{ background: '#f0f9ff', color: '#007cc3', border: '1px solid #bae6fd' }}>
+                    <Mail size={14} /> Talk to IT Specialists
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Convergence Synergy Box */}
+          <div className="synergy-bridge-box">
+            <div className="synergy-bridge-content">
+              <div>
+                <span className="synergy-tag">
+                  <Sparkles size={14} /> DUAL-FORCE ADVANTAGE
+                </span>
+                <h3 className="synergy-title">
+                  Why Physical Infrastructure & Digital Intelligence Belong Together
+                </h3>
+                <p className="synergy-desc">
+                  In modern Industry 4.0, physical facilities and digital software cannot exist in separate silos. A smart factory or corporate headquarters requires precision physical construction, MEP, fire safety, and surveillance, paired directly with high-performance web platforms, automated custom software, digital outreach, and sovereign AI models. <strong>PAYIVVA</strong> delivers both under single-source corporate accountability.
+                </p>
+              </div>
+
+              <div className="synergy-pills-col">
+                <div className="synergy-pill">
+                  <CheckCircle2 size={18} style={{ color: '#38bdf8', flexShrink: 0 }} />
+                  <span>Single-Source Corporate Accountability</span>
+                </div>
+                <div className="synergy-pill">
+                  <CheckCircle2 size={18} style={{ color: '#38bdf8', flexShrink: 0 }} />
+                  <span>Turnkey Physical Build to Complete Digital & AI Ecosystem</span>
+                </div>
+                <div className="synergy-pill">
+                  <CheckCircle2 size={18} style={{ color: '#38bdf8', flexShrink: 0 }} />
+                  <span>Unified Leadership & Uncompromised Quality</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 3. ABOUT DIRECTOR: EXECUTIVE KEYNOTE & LEADERSHIP */}
+      <section className="about-director-section">
+        <div className="about-container-premium">
+          <div className="about-section-head text-center">
+            <span className="section-tag-modern-light">LEADERSHIP & VISION</span>
+            <h2 className="section-title-modern-light">Director's Keynote & Strategic Vision</h2>
+            <p className="section-desc">
+              Unifying physical infrastructure engineering with full-spectrum software development, digital marketing, and autonomous AI under one visionary leadership.
+            </p>
+          </div>
+
+          <div className="director-spotlight-card">
+
+            {/* Director Profile Column */}
+            <div className="director-profile-col">
+              <div className="director-avatar-box">
+                <span className="director-monogram">SS</span>
+              </div>
+              <h3 className="director-name">Sudhaanshu Srivastavaa</h3>
+              <span className="director-role">Director & Founder</span>
+              <span className="director-company">PAYIVVA TECHNOLOGIES (OPC) PVT LTD</span>
+
+              <div className="director-dual-scope-badge">
+                <UserCheck size={14} /> Director
+              </div>
+
+              <div className="director-profile-divider"></div>
+
+              <a
+                href="https://www.linkedin.com/in/sudhaanshu-srivastavaa-a5b16b48/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="director-linkedin-btn"
+              >
+                <LinkedInIcon size={18} /> Connect on LinkedIn <ExternalLink size={14} />
+              </a>
+            </div>
+
+            {/* Director Vision & Quote Column */}
+            <div className="director-quote-col">
+              <div className="director-quote-header">
+                <Quote size={28} className="quote-decor-icon" />
+                <span className="director-quote-tag">DIRECTOR'S STATEMENT • THE EXPANSION TO IT & AI</span>
+              </div>
+
+              <blockquote className="director-quote-text">
+                "Physical infrastructure builds the concrete foundation, industrial plants, and operational home of an enterprise, but modern digital platforms, custom software, digital marketing reach, and <strong>Artificial Intelligence provide its cognitive mind, market reach, and limitless scale</strong>. Having successfully delivered turnkey industrial construction, MEP, fire safety, and corporate spaces across Maharashtra, launching our dedicated IT Department was our natural, high-impact evolution.
+                <br /><br />
+                Today, enterprises no longer want fragmented vendors for their physical and digital needs. They need an integrated partner that can build fast-loading <strong>websites, intuitive mobile apps, custom business software, and targeted digital marketing campaigns, while deploying private, sovereign AI agent networks</strong> that automate complex operations. By uniting the robust discipline of industrial engineering with cutting-edge digital and AI capabilities, Payivva provides businesses with single-source accountability. We don't just build modern physical spaces; we engineer the complete digital ecosystems that power and scale them."
+              </blockquote>
+
+              <div className="director-vision-points">
+                <div className="director-point-item">
+                  <span className="director-point-title">Unified Governance</span>
+                  <span className="director-point-desc">Single-source leadership ensuring non-IT and IT operations align flawlessly.</span>
+                </div>
+                <div className="director-point-item">
+                  <span className="director-point-title">Complete Digital Engine</span>
+                  <span className="director-point-desc">From web & mobile development and digital marketing to custom software and private AI.</span>
+                </div>
+                <div className="director-point-item">
+                  <span className="director-point-title">Engineering Discipline</span>
+                  <span className="director-point-desc">The same rigorous standards from industrial PEB construction to production-grade software code.</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       {/* 2. Official Corporate Registered Address Showcase */}
       <section className="about-address-section-premium">
         <div className="about-container-premium">
           <div className="address-showcase-card">
-            
+
             <div className="address-info-col">
               <span className="section-tag-modern-light">CORPORATE HEADQUARTERS</span>
               <h2 className="address-title">Registered Office Address</h2>
               <p className="address-sub">
                 Official registered office address of <strong>PAYIVVA TECHNOLOGIES (OPC) PRIVATE LIMITED</strong>:
               </p>
-              
+
               <div className="address-details-box">
                 <div className="address-detail-item">
                   <Building2 size={20} className="addr-icon" />
@@ -181,9 +481,9 @@ const About = () => {
                   <span className="chip"><CheckCircle2 size={13} style={{ color: '#10b981' }} /> Registered OPC Entity</span>
                   <span className="chip"><CheckCircle2 size={13} style={{ color: '#10b981' }} /> Pune, Maharashtra 411028</span>
                 </div>
-                <a 
-                  href="https://maps.google.com/?q=Handewadi+Pune+Maharashtra+411028" 
-                  target="_blank" 
+                <a
+                  href="https://maps.google.com/?q=Handewadi+Pune+Maharashtra+411028"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-secondary map-directions-btn"
                 >
@@ -196,24 +496,24 @@ const About = () => {
         </div>
       </section>
 
-      {/* 3. Company Snapshot Section */}
+      {/* 5. Company Snapshot Section */}
       <section className="about-snapshot-section-premium">
         <div className="about-container-premium">
           <div className="about-snapshot-grid">
             <div className="obsidian-card-premium snapshot-card">
               <div className="snapshot-icon"><BadgeCheck size={20} /></div>
-              <h3>What We Do</h3>
-              <p>We engineer custom enterprise software systems, Machine Learning inference engines, Generative AI agent networks, and high-performance digital platforms.</p>
+              <h3>Dual-Front Engineering</h3>
+              <p>We deliver turnkey physical industrial infrastructure & MEP (Non-IT) alongside custom enterprise software, machine learning engines, and sovereign AI agent networks (IT Department).</p>
             </div>
             <div className="obsidian-card-premium snapshot-card">
               <div className="snapshot-icon"><Building2 size={20} /></div>
-              <h3>Corporate Entity</h3>
-              <p>A flagship technology division of <strong>PAYIVVA TECHNOLOGIES (OPC) PRIVATE LIMITED</strong>, registered under the Ministry of Corporate Affairs, Pune.</p>
+              <h3>Unified Corporate Entity</h3>
+              <p>One parent corporate entity — <strong>PAYIVVA TECHNOLOGIES (OPC) PRIVATE LIMITED</strong>, registered with the Ministry of Corporate Affairs, Pune, Maharashtra.</p>
             </div>
             <div className="obsidian-card-premium snapshot-card">
               <div className="snapshot-icon"><Shield size={20} /></div>
-              <h3>Engineering Discipline</h3>
-              <p>Product-first mindset, lean architecture, strict zero-trust data security, and verifiable ROI on every technology deployment.</p>
+              <h3>Cross-Discipline Rigor</h3>
+              <p>Uncompromising execution from physical PEB structural standards to sub-15ms AI inference pipelines, with zero vendor lock-in and single-source accountability.</p>
             </div>
           </div>
         </div>
@@ -338,7 +638,7 @@ const About = () => {
       <section className="about-impact-section-premium">
         <div className="about-container-premium">
           <div className="impact-grid-card">
-            
+
             <div className="impact-header-row text-center">
               <span className="section-tag-modern-light">MEASURABLE IMPACT</span>
               <h2 className="section-title-modern-light">Enterprise Benchmarks & Compliance</h2>

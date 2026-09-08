@@ -1,7 +1,7 @@
 import {
   Shield, Code2, Cpu, BarChart, Globe, Clock, ArrowRight,
   Sparkles, Target, BadgeCheck, MapPin, Building2, Phone, Mail, CheckCircle2,
-  Quote, UserCheck, ExternalLink, Factory
+  Quote, UserCheck, ExternalLink, Factory, HardHat
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './styles/About.css';
@@ -146,14 +146,64 @@ const About = () => {
       <section className="about-dual-division-section">
         <div className="about-container-premium">
           <div className="about-section-head text-center">
-            <span className="section-tag-modern-light">AI-LED DIGITAL ENGINEERING</span>
-            <h2 className="section-title-modern-light">Building Software and AI Systems for Modern Businesses</h2>
+            <span className="section-tag-modern-light">ONE COMPANY • DUAL CAPABILITY</span>
+            <h2 className="section-title-modern-light">Connecting Infrastructure Engineering with Digital Intelligence</h2>
             <p className="section-desc">
-              PAYIVVA TECHNOLOGIES (OPC) PRIVATE LIMITED helps businesses turn complex technology goals into reliable digital products, intelligent automation, and measurable growth systems.
+              PAYIVVA TECHNOLOGIES (OPC) PRIVATE LIMITED operates across two complementary divisions under one corporate vision: infrastructure engineering for physical environments and a dedicated IT department for software, AI, cloud, and digital transformation.
             </p>
           </div>
 
           <div className="dual-cards-grid">
+
+            {/* Non-IT infrastructure capability card */}
+            <div className="dual-division-card card-non-it">
+              <div className="division-badge-row">
+                <span className="division-badge badge-non-it">
+                  <Factory size={14} /> NON-IT INFRASTRUCTURE DIVISION
+                </span>
+                <span className="division-status-indicator">
+                  <Building2 size={14} style={{ color: '#007cc3' }} /> Established Division
+                </span>
+              </div>
+
+              <div className="division-header">
+                <div className="division-icon-box icon-box-non-it">
+                  <HardHat size={28} />
+                </div>
+                <div className="division-heading-text">
+                  <h3>Infrastructure, Safety & Built Environment</h3>
+                  <span className="division-subheading">Industrial Construction • MEP • Fire Safety • Security Systems</span>
+                </div>
+              </div>
+
+              <p className="division-lead-text">
+                Our established Non-IT division delivers physical infrastructure and facility solutions for industrial and commercial environments across Maharashtra.
+              </p>
+
+              <div className="division-services-block">
+                <span className="division-services-title">Core Infrastructure Services</span>
+                <div className="division-service-item"><span className="bullet-dot"></span><span>Turnkey Industrial Construction & Pre-Engineered Buildings (PEB)</span></div>
+                <div className="division-service-item"><span className="bullet-dot"></span><span>MEP (Mechanical, Electrical, Plumbing) Solutions</span></div>
+                <div className="division-service-item"><span className="bullet-dot"></span><span>Certified Fire Safety, Detection & Hydrant Protection Systems</span></div>
+                <div className="division-service-item"><span className="bullet-dot"></span><span>Enterprise CCTV, Access Control & Surveillance Networks</span></div>
+                <div className="division-service-item"><span className="bullet-dot"></span><span>Corporate Interiors & Executive Workspace Architecture</span></div>
+              </div>
+
+              <div className="division-links-wrapper">
+                <a href="https://www.payivvatechnologies.in/" target="_blank" rel="noopener noreferrer" className="division-primary-btn btn-non-it-portal">
+                  Visit Official Infrastructure Website <ExternalLink size={16} />
+                </a>
+                <div className="division-social-row">
+                  <span className="division-social-label">Follow Infrastructure Division:</span>
+                  <a href="https://www.instagram.com/payivva_technologies_opcpvtltd/" target="_blank" rel="noopener noreferrer" className="division-social-link social-link-instagram">
+                    Instagram
+                  </a>
+                  <a href="https://www.facebook.com/payivvatechnologiespvtltd/" target="_blank" rel="noopener noreferrer" className="division-social-link social-link-facebook">
+                    Facebook
+                  </a>
+                </div>
+              </div>
+            </div>
 
             {/* IT and AI capability card */}
             <div className="dual-division-card card-it">

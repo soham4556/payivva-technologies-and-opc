@@ -56,6 +56,38 @@ const INDUSTRY_SEO = {
   },
 };
 
+const PAGE_KEYWORDS = {
+  '/': 'Payivva Technologies, AI and software development company, enterprise AI solutions, custom software engineering, digital transformation',
+  '/about': 'Payivva Technologies, AI technology company India, enterprise software engineering team, digital transformation partner',
+  '/services': 'AI and software development services, AI consulting, machine learning, generative AI, custom software, cloud solutions',
+  '/contact': 'contact AI software development company, technology consulting India, PAYIVVA Technologies',
+  '/careers': 'technology careers Pune, AI jobs Pune, software engineering careers India, PAYIVVA careers',
+  '/blog': 'enterprise AI insights, software engineering insights, machine learning deployment, cloud-native engineering',
+  '/resources/case-studies': 'AI software development case studies, enterprise AI project examples, technology transformation case studies',
+  '/resources/documentation': 'enterprise software architecture documentation, AI implementation documentation, cloud architecture guide',
+  '/services/ai-consulting-strategy': 'AI consulting company India, AI strategy consulting services, AI readiness assessment, enterprise AI roadmap',
+  '/services/machine-learning-solutions': 'machine learning consulting company India, custom machine learning solutions, MLOps consulting, predictive analytics',
+  '/services/computer-vision-nlp': 'computer vision development company India, NLP development company India, OCR automation, document intelligence',
+  '/services/generative-ai-llm': 'generative AI development company India, enterprise generative AI, custom LLM development, RAG application development',
+  '/services/software-development': 'enterprise software development company India, custom software engineering services, API development, product engineering',
+  '/services/app-development': 'mobile app development company Pune, enterprise mobile app development India, cross-platform app development',
+  '/services/website-development': 'high-performance website development company India, SEO-ready website development, React web platforms',
+  '/services/digital-marketing': 'technical SEO and digital marketing company Pune, B2B SEO services India, technical SEO audit, demand generation',
+  '/security': 'software security and compliance practices, secure software development, cloud security controls, AI data governance',
+  '/privacy': 'PAYIVVA privacy policy, software data privacy India',
+  '/terms': 'PAYIVVA terms of service, software services agreement',
+  '/legal': 'PAYIVVA legal information, technology company legal terms',
+};
+
+const INDUSTRY_KEYWORDS = {
+  'manufacturing-industrial-iot': 'industrial IoT solutions company India, Industry 4.0 solutions, predictive maintenance software, AI manufacturing solutions',
+  'cybersecurity-cloud-systems': 'enterprise cybersecurity solutions India, cloud security consulting, zero trust architecture, cloud compliance',
+  'logistics-supply-chain': 'AI solutions for logistics and supply chain, supply chain analytics, logistics optimization, demand forecasting',
+  'ecommerce-retail': 'ecommerce software development company India, retail AI solutions, ecommerce platform engineering, retail analytics',
+  'finance-fintech': 'fintech software development company India, financial services AI, fintech API development, risk analytics software',
+  'healthcare-biotech': 'healthcare AI software development company, healthcare machine learning, biotech data platforms, secure healthcare software',
+};
+
 function baseJsonLd({ breadcrumbs, services, faqs } = {}) {
   const crumbs = breadcrumbs?.map((c) => ({ name: c.name, item: absoluteUrl(c.path) })) || [];
   const serviceNames = (services || []).map((s) => s.name).filter(Boolean);
@@ -77,13 +109,13 @@ function baseJsonLd({ breadcrumbs, services, faqs } = {}) {
   ].filter(Boolean);
 }
 
-export function getSeoForLocation({ pathname }) {
+function resolveSeoForLocation({ pathname }) {
   const path = pathname || '/';
 
   // Normalize trailing slashes to avoid duplicate canonicals.
   if (path.length > 1 && path.endsWith('/')) {
     const normalized = path.replace(/\/+$/, '');
-    return getSeoForLocation({ pathname: normalized });
+    return resolveSeoForLocation({ pathname: normalized });
   }
 
   if (path === '/404') {
@@ -152,9 +184,9 @@ export function getSeoForLocation({ pathname }) {
     ];
 
     return {
-      title: 'AI Development Company in Pune',
+      title: 'AI and Software Development Company',
       description:
-        'Payivva Technologies is a Pune-based digital engineering partner delivering AI consulting, machine learning, computer vision & NLP, generative AI/LLM systems, software development, web/app development, and digital marketing.',
+        'PAYIVVA is an AI and software development company delivering custom software, machine learning, GenAI, cloud, web, mobile, and digital growth systems for businesses worldwide.',
       keywords: DEFAULT_KEYWORDS,
       canonical: '/',
       robots: 'index,follow',
@@ -390,7 +422,7 @@ export function getSeoForLocation({ pathname }) {
         },
       },
       '/services/software-development': {
-        title: 'Custom Software Engineering Services',
+        title: 'Enterprise Software Development Company India',
         description: 'PAYIVVA designs and engineers secure software products, APIs, platforms, and integrations for growing and enterprise businesses.',
         service: {
           name: 'Software Development',
@@ -512,4 +544,16 @@ export function getSeoForLocation({ pathname }) {
     og: { url: path },
     jsonLd: baseJsonLd({ breadcrumbs }),
   };
+}
+
+export function getSeoForLocation({ pathname }) {
+  const rawPath = pathname || '/';
+  const path = rawPath.length > 1 ? rawPath.replace(/\/+$/, '') : rawPath;
+  const seo = resolveSeoForLocation({ pathname: path });
+  const industrySlug = path.startsWith('/industries/') ? path.split('/')[2] : null;
+  const keywords = industrySlug
+    ? INDUSTRY_KEYWORDS[industrySlug]
+    : PAGE_KEYWORDS[path];
+
+  return keywords ? { ...seo, keywords } : seo;
 }

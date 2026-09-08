@@ -10,7 +10,7 @@ const Machine_Learning_Solutions = () => {
         <div className="srv-hero-grid">
           <div>
             <span className="srv-badge">PREDICTIVE ENGINES</span>
-            <h1 className="srv-title">Deploy Advanced <span>Machine Learning Models</span></h1>
+            <h1 className="srv-title">Production-Ready <span>Machine Learning Solutions</span></h1>
             <p className="srv-desc">
               Convert high-frequency data streams into real-time business decisions. We design, optimize, and deploy neural predictive engines engineered for high scalability and sub-millisecond inference speeds.
             </p>

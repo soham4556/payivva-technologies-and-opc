@@ -10,7 +10,7 @@ const Website_Development = () => {
         <div className="srv-hero-grid">
           <div>
             <span className="srv-badge">ELITE WEB</span>
-            <h1 className="srv-title">High-Performance <span>Custom Web Development</span></h1>
+            <h1 className="srv-title">High-Performance <span>Web Platforms for B2B Growth</span></h1>
             <p className="srv-desc">
               We design and engineer lightning-fast custom web platforms. By replacing heavy pre-made templates with optimized React systems and vanilla CSS code bases, we ensure elite SEO structures and flawless displays.
             </p>

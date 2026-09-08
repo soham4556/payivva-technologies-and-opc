@@ -162,7 +162,7 @@ const Home = () => {
               <span>ENTERPRISE AGENTIC AI PLATFORM</span>
             </div>
             <h1 className="hero-title">
-              Revolutionize Your Business with <span className="glow-text">Cutting-Edge AI</span> Solutions.
+              AI and Software Engineering for <span className="glow-text">Modern Businesses</span>
             </h1>
             <p className="hero-desc">
               Empowering global brands by engineering high-performance AI consulting, machine learning systems, and deep visual/semantic automation architectures to secure exponential pipeline growth.

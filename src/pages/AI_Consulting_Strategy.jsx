@@ -11,7 +11,7 @@ const AI_Consulting_Strategy = () => {
         <div className="srv-hero-grid">
           <div>
             <span className="srv-badge">AI ARCHITECTURE</span>
-            <h1 className="srv-title">Transform Your Enterprise with <span>Bespoke AI Strategy</span></h1>
+            <h1 className="srv-title">AI Consulting and <span>Strategy for Enterprise Transformation</span></h1>
             <p className="srv-desc">
               AI transformation is not one-size-fits-all. We audit your existing data structures and construct rigorous, compliance-first, and ROI-aligned roadmaps that scale your competitive advantage. Our deep expertise bridges the gap between C-suite objectives and production deployment, preparing you to lead the market with custom systems built for growth.
             </p>

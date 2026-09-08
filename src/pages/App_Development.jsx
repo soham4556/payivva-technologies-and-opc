@@ -10,7 +10,7 @@ const App_Development = () => {
         <div className="srv-hero-grid">
           <div>
             <span className="srv-badge">MOBILE SYSTEMS</span>
-            <h1 className="srv-title">Crafting Premium <span>iOS & Android Apps</span></h1>
+            <h1 className="srv-title">Mobile Applications Built for <span>Real Business Workflows</span></h1>
             <p className="srv-desc">
               We design and engineer high-performance mobile applications. By leveraging native frameworks, customized UI renderers, and robust offline databases, we build mobile software that retains customers.
             </p>

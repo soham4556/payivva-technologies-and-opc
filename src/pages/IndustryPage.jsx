@@ -148,7 +148,7 @@ const IndustryPage = () => {
             </div>
             <div className="industry-hero-visual">
               <div className="industry-hero-img-placeholder">
-                <img src={industry.image} alt={industry.title} loading="lazy" />
+                <img src={industry.image} alt={industry.title} loading="eager" fetchPriority="high" decoding="async" />
               </div>
             </div>
           </div>

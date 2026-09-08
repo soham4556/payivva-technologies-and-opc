@@ -1,6 +1,8 @@
 import { absoluteUrl, SITE } from './siteConfig';
 import {
   breadcrumbSchema,
+  blogSchema,
+  collectionPageSchema,
   faqSchema,
   localBusinessSchema,
   organizationSchema,
@@ -8,6 +10,7 @@ import {
   websiteSchema,
 } from './schema';
 import { getIndustryBySlug } from '../data/industries';
+import { SERVICE_FAQS } from './faqContent';
 
 const DEFAULT_KEYWORDS = [
   'Payivva Technologies',
@@ -25,6 +28,33 @@ const DEFAULT_KEYWORDS = [
   'technical SEO',
   'Pune',
 ].join(', ');
+
+const INDUSTRY_SEO = {
+  'manufacturing-industrial-iot': {
+    title: 'Industrial IoT Solutions Company India',
+    description: 'Connect factory data, AI, edge computing, and analytics to improve visibility, maintenance, quality, and production decisions.',
+  },
+  'cybersecurity-cloud-systems': {
+    title: 'Enterprise Cybersecurity Solutions India',
+    description: 'Strengthen cloud and enterprise environments with security architecture, monitoring, access controls, automation, and governance.',
+  },
+  'logistics-supply-chain': {
+    title: 'AI Solutions for Logistics and Supply Chain',
+    description: 'Use AI, software, IoT, and analytics to improve supply chain visibility, forecasting, routing, warehouse, and logistics workflows.',
+  },
+  'ecommerce-retail': {
+    title: 'E-commerce Software Development Company India',
+    description: 'Build scalable commerce platforms, integrations, personalization, analytics, and automation for retail and e-commerce teams.',
+  },
+  'finance-fintech': {
+    title: 'FinTech Software Development Company India',
+    description: 'PAYIVVA engineers secure fintech platforms, APIs, analytics, and automation for financial products and operational teams.',
+  },
+  'healthcare-biotech': {
+    title: 'Healthcare AI Software Development',
+    description: 'Build secure AI and software systems for healthcare and biotech workflows, analytics, research, and operational automation.',
+  },
+};
 
 function baseJsonLd({ breadcrumbs, services, faqs } = {}) {
   const crumbs = breadcrumbs?.map((c) => ({ name: c.name, item: absoluteUrl(c.path) })) || [];
@@ -122,7 +152,7 @@ export function getSeoForLocation({ pathname }) {
     ];
 
     return {
-      title: 'AI, Software & Growth Systems',
+      title: 'AI Development Company in Pune',
       description:
         'Payivva Technologies is a Pune-based digital engineering partner delivering AI consulting, machine learning, computer vision & NLP, generative AI/LLM systems, software development, web/app development, and digital marketing.',
       keywords: DEFAULT_KEYWORDS,
@@ -143,14 +173,14 @@ export function getSeoForLocation({ pathname }) {
       { name: 'About', path: '/about' },
     ];
     return {
-      title: 'About',
+      title: 'About PAYIVVA',
       description:
         'Learn about Payivva Technologies, a Pune-based digital engineering company building AI systems, software products, and conversion-led growth infrastructure.',
       keywords: DEFAULT_KEYWORDS,
       canonical: '/about',
       robots: 'index,follow',
       og: { url: '/about' },
-      jsonLd: baseJsonLd({ breadcrumbs }),
+      jsonLd: [...baseJsonLd({ breadcrumbs }), blogSchema()],
     };
   }
 
@@ -210,7 +240,7 @@ export function getSeoForLocation({ pathname }) {
       },
     ];
     return {
-      title: 'Services',
+      title: 'AI and Software Development Services',
       description:
         'Explore Payivva Technologies services: AI consulting & strategy, machine learning solutions, computer vision & NLP, generative AI/LLM, software development, app development, website development, and digital marketing.',
       keywords: DEFAULT_KEYWORDS,
@@ -227,7 +257,7 @@ export function getSeoForLocation({ pathname }) {
       { name: 'Contact', path: '/contact' },
     ];
     return {
-      title: 'Contact',
+      title: 'Contact PAYIVVA Technologies',
       description:
         'Contact Payivva Technologies to discuss AI consulting, machine learning, computer vision & NLP, generative AI/LLM, software development, web/app development, or digital marketing.',
       keywords: DEFAULT_KEYWORDS,
@@ -244,7 +274,7 @@ export function getSeoForLocation({ pathname }) {
       { name: 'Careers', path: '/careers' },
     ];
     return {
-      title: 'Careers',
+      title: 'Technology Careers in Pune',
       description:
         'Join Payivva Technologies. Explore roles across engineering, SEO, growth, and product systems.',
       keywords: DEFAULT_KEYWORDS,
@@ -261,14 +291,14 @@ export function getSeoForLocation({ pathname }) {
       { name: 'Blog', path: '/blog' },
     ];
     return {
-      title: 'Tech Insights',
+      title: 'AI, Cloud and Software Engineering Insights',
       description:
         'PAYIVVA Tech Insights: system architectures, machine learning, delivery notes, and engineering learnings for modern teams.',
       keywords: DEFAULT_KEYWORDS,
       canonical: '/blog',
       robots: 'index,follow',
       og: { url: '/blog' },
-      jsonLd: baseJsonLd({ breadcrumbs }),
+      jsonLd: [...baseJsonLd({ breadcrumbs }), blogSchema()],
     };
   }
 
@@ -279,14 +309,18 @@ export function getSeoForLocation({ pathname }) {
       { name: 'Case Studies', path: '/resources/case-studies' },
     ];
     return {
-      title: 'Case Studies',
+      title: 'AI and Software Development Case Studies',
       description:
         'Selected delivery stories across AI systems, software engineering, and growth programs with measurable business outcomes.',
       keywords: DEFAULT_KEYWORDS,
       canonical: '/resources/case-studies',
       robots: 'index,follow',
       og: { url: '/resources/case-studies' },
-      jsonLd: baseJsonLd({ breadcrumbs }),
+      jsonLd: [...baseJsonLd({ breadcrumbs }), collectionPageSchema({
+        name: 'AI and Software Development Case Studies',
+        description: 'PAYIVVA project stories across AI, software, cloud, and digital growth systems.',
+        path: '/resources/case-studies',
+      })],
     };
   }
 
@@ -297,14 +331,18 @@ export function getSeoForLocation({ pathname }) {
       { name: 'Documentation', path: '/resources/documentation' },
     ];
     return {
-      title: 'Documentation',
+      title: 'Enterprise Technology Documentation',
       description:
         'A guide to how PAYIVVA structures delivery, environments, handoff, and execution quality.',
       keywords: DEFAULT_KEYWORDS,
       canonical: '/resources/documentation',
       robots: 'index,follow',
       og: { url: '/resources/documentation' },
-      jsonLd: baseJsonLd({ breadcrumbs }),
+      jsonLd: [...baseJsonLd({ breadcrumbs }), collectionPageSchema({
+        name: 'Enterprise Technology Documentation',
+        description: 'PAYIVVA guidance on architecture, delivery, environments, security, and technical handoff.',
+        path: '/resources/documentation',
+      })],
     };
   }
 
@@ -312,8 +350,8 @@ export function getSeoForLocation({ pathname }) {
   if (path.startsWith('/services/')) {
     const titleMap = {
       '/services/ai-consulting-strategy': {
-        title: 'AI Consulting & Strategy',
-        description: 'Enterprise AI strategy, maturity audits, compliance-first roadmaps, and ROI-aligned execution.',
+        title: 'AI Consulting Company in India',
+        description: 'PAYIVVA helps enterprises assess AI readiness, define practical roadmaps, and move from strategy to secure production delivery.',
         service: {
           name: 'AI Consulting & Strategy',
           serviceType: 'AI Consulting',
@@ -322,8 +360,8 @@ export function getSeoForLocation({ pathname }) {
         },
       },
       '/services/machine-learning-solutions': {
-        title: 'Machine Learning Solutions',
-        description: 'Deploy production-grade machine learning models for forecasting, automation, and decision systems.',
+        title: 'Machine Learning Consulting Company India',
+        description: 'Build, deploy, and monitor production machine learning systems for forecasting, automation, classification, and business decisions.',
         service: {
           name: 'Machine Learning Solutions',
           serviceType: 'Machine Learning',
@@ -342,8 +380,8 @@ export function getSeoForLocation({ pathname }) {
         },
       },
       '/services/generative-ai-llm': {
-        title: 'Generative AI & LLM',
-        description: 'Private LLM systems, RAG, and agentic workflows built with governance and security guardrails.',
+        title: 'Generative AI Development Company India',
+        description: 'PAYIVVA builds secure enterprise GenAI, RAG, LLM, and knowledge automation systems connected to real business workflows.',
         service: {
           name: 'Generative AI & LLM',
           serviceType: 'Generative AI',
@@ -352,8 +390,8 @@ export function getSeoForLocation({ pathname }) {
         },
       },
       '/services/software-development': {
-        title: 'Software Development',
-        description: 'Bespoke enterprise software development: scalable systems, APIs, security, and reliability.',
+        title: 'Custom Software Engineering Services',
+        description: 'PAYIVVA designs and engineers secure software products, APIs, platforms, and integrations for growing and enterprise businesses.',
         service: {
           name: 'Software Development',
           serviceType: 'Software Development',
@@ -362,8 +400,8 @@ export function getSeoForLocation({ pathname }) {
         },
       },
       '/services/app-development': {
-        title: 'App Development',
-        description: 'Mobile app development for iOS and Android with premium UX and performance discipline.',
+        title: 'Mobile App Development Company Pune',
+        description: 'Build secure, scalable mobile applications for customers, employees, and field teams with PAYIVVA product engineers.',
         service: {
           name: 'App Development',
           serviceType: 'App Development',
@@ -372,8 +410,8 @@ export function getSeoForLocation({ pathname }) {
         },
       },
       '/services/website-development': {
-        title: 'Website Development',
-        description: 'High-performance website development engineered for speed, SEO, accessibility, and conversion.',
+        title: 'High-Performance Website Development India',
+        description: 'PAYIVVA creates fast, accessible, SEO-ready web platforms designed for business growth, content performance, and conversion.',
         service: {
           name: 'Website Development',
           serviceType: 'Website Development',
@@ -382,8 +420,8 @@ export function getSeoForLocation({ pathname }) {
         },
       },
       '/services/digital-marketing': {
-        title: 'Digital Marketing',
-        description: 'Performance marketing, technical SEO, and growth systems engineered for measurable pipeline.',
+        title: 'Technical SEO and Digital Marketing Pune',
+        description: 'Grow qualified B2B demand through technical SEO, content strategy, analytics, conversion optimization, and performance marketing.',
         service: {
           name: 'Digital Marketing',
           serviceType: 'Digital Marketing',
@@ -407,7 +445,7 @@ export function getSeoForLocation({ pathname }) {
         canonical: path,
         robots: 'index,follow',
         og: { url: path },
-        jsonLd: baseJsonLd({ breadcrumbs, services: [entry.service] }),
+        jsonLd: baseJsonLd({ breadcrumbs, services: [entry.service], faqs: SERVICE_FAQS[path] }),
       };
     }
   }
@@ -422,9 +460,10 @@ export function getSeoForLocation({ pathname }) {
         { name: 'Industries', path: `/industries/${slug}` },
         { name: industry.tabTitle || industry.title, path: `/industries/${slug}` },
       ];
-      const description = industry.heroDesc || industry.overview || `Industry solutions for ${industry.title}.`;
+      const seoEntry = INDUSTRY_SEO[slug];
+      const description = seoEntry?.description || industry.heroDesc || industry.overview || `Industry solutions for ${industry.title}.`;
       return {
-        title: industry.title,
+        title: seoEntry?.title || industry.title,
         description,
         keywords: DEFAULT_KEYWORDS,
         canonical: `/industries/${slug}`,
@@ -443,7 +482,7 @@ export function getSeoForLocation({ pathname }) {
     const titleMap = {
       '/privacy': 'Privacy Policy',
       '/terms': 'Terms of Service',
-      '/security': 'Security Standards',
+      '/security': 'Software Security and Compliance',
       '/legal': 'Legal',
     };
     const name = titleMap[path] || 'Legal';
@@ -469,7 +508,7 @@ export function getSeoForLocation({ pathname }) {
       'Payivva Technologies builds AI systems, software products, and growth infrastructure for modern teams.',
     keywords: DEFAULT_KEYWORDS,
     canonical: path,
-    robots: 'index,follow',
+    robots: 'noindex,follow',
     og: { url: path },
     jsonLd: baseJsonLd({ breadcrumbs }),
   };

@@ -4,6 +4,8 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import RouteSeo from './components/RouteSeo';
+import ServiceFaqs from './components/ServiceFaqs';
+import ResourceLinks from './components/ResourceLinks';
 import './App.css';
 
 // Lazy load page views for performance optimization
@@ -63,7 +65,8 @@ const PageLoader = () => (
 );
 
 function AppContent() {
-  const isAdminRoute = useLocation().pathname.startsWith('/admin');
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith('/admin');
   return (
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'var(--bg-primary)' }}>
 
@@ -117,6 +120,8 @@ function AppContent() {
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
+          {!isAdminRoute && <ServiceFaqs pathname={location.pathname} />}
+          {!isAdminRoute && <ResourceLinks pathname={location.pathname} />}
         </main>
 
         {/* Global Footer */}

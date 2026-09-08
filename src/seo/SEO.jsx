@@ -41,6 +41,9 @@ export default function SEO({
   const twitterTitle = twitter.title || ogTitle;
   const twitterDescription = twitter.description || ogDescription;
   const twitterImage = twitter.image ? normalizeCanonical(twitter.image) : ogImage;
+  const robotsContent = robots.includes('noindex')
+    ? robots
+    : `${robots},max-image-preview:large,max-snippet:-1,max-video-preview:-1`;
 
   const jsonLdNodes = Array.isArray(jsonLd)
     ? jsonLd.map((obj, idx) => (
@@ -55,23 +58,28 @@ export default function SEO({
       {finalDescription ? <meta name="description" content={finalDescription} /> : null}
       {keywords ? <meta name="keywords" content={keywords} /> : null}
       {author ? <meta name="author" content={author} /> : null}
-      {robots ? <meta name="robots" content={robots} /> : null}
+      {robots ? <meta name="robots" content={robotsContent} /> : null}
       {themeColor ? <meta name="theme-color" content={themeColor} /> : null}
+      <meta name="googlebot" content={robotsContent} />
       {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
 
       {/* Open Graph */}
       <meta property="og:type" content={ogType} />
+      <meta property="og:site_name" content={SITE.name} />
       {ogUrl ? <meta property="og:url" content={ogUrl} /> : null}
       <meta property="og:title" content={ogTitle} />
       {ogDescription ? <meta property="og:description" content={ogDescription} /> : null}
       {ogImage ? <meta property="og:image" content={ogImage} /> : null}
+      <meta property="og:image:alt" content={`${SITE.name} - ${ogTitle}`} />
       <meta property="og:locale" content={ogLocale} />
 
       {/* Twitter */}
       <meta name="twitter:card" content={twitterCard} />
+      {SITE.social.twitter ? <meta name="twitter:site" content="@payivva" /> : null}
       <meta name="twitter:title" content={twitterTitle} />
       {twitterDescription ? <meta name="twitter:description" content={twitterDescription} /> : null}
       {twitterImage ? <meta name="twitter:image" content={twitterImage} /> : null}
+      <meta name="twitter:image:alt" content={`${SITE.name} - ${twitterTitle}`} />
 
       {/* JSON-LD: allow single object or array */}
       {jsonLdNodes}

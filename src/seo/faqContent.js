@@ -1,0 +1,58 @@
+export const SERVICE_FAQS = {
+  '/services/ai-consulting-strategy': [
+    { question: 'How does an AI readiness assessment work?', answer: 'PAYIVVA reviews business goals, data readiness, existing systems, risks, and priority use cases before recommending an implementation roadmap.' },
+    { question: 'What should an enterprise include in an AI roadmap?', answer: 'A practical roadmap connects prioritized use cases with data requirements, architecture, governance, delivery phases, and measurable decision criteria.' },
+    { question: 'How do you prioritize AI use cases?', answer: 'Use cases are compared by business value, data availability, technical feasibility, risk, adoption effort, and the ability to validate an outcome.' },
+    { question: 'How is sensitive data handled during AI consulting?', answer: 'Data access, retention, isolation, and processing boundaries are defined with the client before any system or model implementation begins.' },
+    { question: 'Can PAYIVVA support implementation after strategy?', answer: 'Yes. The strategy can transition into software, machine learning, generative AI, cloud, and security implementation work where the scope is agreed.' },
+  ],
+  '/services/machine-learning-solutions': [
+    { question: 'What data is needed for a machine learning project?', answer: 'Requirements depend on the use case, target decision, data quality, labels, history, latency, and acceptable error conditions. PAYIVVA defines these during discovery.' },
+    { question: 'How do you validate machine learning models?', answer: 'Models are evaluated against agreed business and technical measures using appropriate holdout data, error analysis, robustness checks, and review of operational constraints.' },
+    { question: 'How are machine learning models deployed?', answer: 'Deployment may use APIs, batch pipelines, edge inference, or embedded workflows depending on latency, data location, availability, and integration requirements.' },
+    { question: 'How is model drift monitored?', answer: 'Production monitoring can track input changes, prediction behavior, data quality, service health, and agreed performance signals for retraining decisions.' },
+    { question: 'Can PAYIVVA integrate ML with existing software?', answer: 'Yes. Models can be exposed through APIs or pipelines and integrated with existing applications, data platforms, and operational workflows.' },
+  ],
+  '/services/computer-vision-nlp': [
+    { question: 'Which computer vision problems can PAYIVVA support?', answer: 'Possible use cases include inspection, detection, classification, OCR, document extraction, and workflow alerts, subject to suitable data and operating conditions.' },
+    { question: 'Can NLP systems process internal documents?', answer: 'Yes. Document workflows can include extraction, classification, search, summarization, and routing with access controls defined around the source data.' },
+    { question: 'What data is required for OCR or vision systems?', answer: 'The required examples depend on image quality, variation, target classes, document formats, and the error tolerance of the workflow.' },
+    { question: 'How are vision and NLP systems integrated?', answer: 'They can connect to APIs, storage, queues, databases, and business applications through an agreed processing pipeline.' },
+    { question: 'How is accuracy evaluated?', answer: 'Evaluation uses task-specific measures and representative test data, with error categories reviewed against the workflow’s operational requirements.' },
+  ],
+  '/services/generative-ai-llm': [
+    { question: 'What is the difference between RAG and fine-tuning?', answer: 'RAG retrieves relevant information at runtime, while fine-tuning changes model behavior using examples. The right approach depends on freshness, control, data, and task requirements.' },
+    { question: 'How can company data be protected in an LLM system?', answer: 'Protection can include access controls, data isolation, redaction, encryption, provider configuration, logging boundaries, and retrieval permissions.' },
+    { question: 'Which language models can be used?', answer: 'Model selection depends on capability, deployment constraints, data handling, latency, cost, and evaluation results rather than one fixed provider.' },
+    { question: 'How do you evaluate hallucinations?', answer: 'Evaluation combines representative test questions, groundedness checks, retrieval quality, refusal behavior, human review, and monitoring of production feedback.' },
+    { question: 'Can an LLM connect to internal systems?', answer: 'Yes. Secure tool and API connections can allow an approved model workflow to retrieve data or initiate actions within defined permissions.' },
+  ],
+  '/services/software-development': [
+    { question: 'When should a company choose custom software?', answer: 'Custom software is useful when existing products cannot meet important workflow, integration, ownership, security, or scale requirements.' },
+    { question: 'How are legacy systems integrated?', answer: 'Integration may use APIs, adapters, event streams, scheduled data exchange, or a staged modernization plan based on the system constraints.' },
+    { question: 'What is included in software discovery?', answer: 'Discovery can define users, workflows, requirements, architecture options, risks, integrations, delivery phases, and a practical first release.' },
+    { question: 'How do you manage software security?', answer: 'Security is addressed through access control, secure development practices, environment separation, dependency review, testing, monitoring, and agreed client controls.' },
+    { question: 'Can PAYIVVA maintain the platform after launch?', answer: 'Post-launch support, monitoring, improvements, and maintenance can be included when they are part of the agreed delivery scope.' },
+  ],
+  '/services/app-development': [
+    { question: 'Should an enterprise app be native or cross-platform?', answer: 'The decision depends on device capabilities, performance, team constraints, release strategy, integrations, and the required user experience.' },
+    { question: 'How are mobile apps connected to enterprise APIs?', answer: 'Mobile applications can use authenticated APIs with defined contracts, permissions, error handling, observability, and versioning.' },
+    { question: 'How is offline usage handled?', answer: 'Offline behavior is designed around the workflow, including local state, synchronization rules, conflict handling, and the sensitivity of stored data.' },
+    { question: 'What mobile testing is performed?', answer: 'Testing can cover devices, operating systems, accessibility, performance, connectivity changes, security, integrations, and release workflows.' },
+    { question: 'What support follows app launch?', answer: 'Support may include release monitoring, defect resolution, platform updates, analytics review, and planned product improvements.' },
+  ],
+  '/services/website-development': [
+    { question: 'What makes a website high performance?', answer: 'Performance depends on efficient assets, responsive layouts, fast rendering, stable layout, good accessibility, optimized code, and a suitable delivery architecture.' },
+    { question: 'How is technical SEO handled?', answer: 'PAYIVVA can address information architecture, metadata, canonicals, structured data, crawlability, semantic HTML, internal links, and performance foundations.' },
+    { question: 'Can the website integrate with APIs?', answer: 'Yes. Websites can connect to APIs, forms, CRMs, search, analytics, authentication, and other systems according to the required workflow.' },
+    { question: 'How is accessibility tested?', answer: 'Accessibility review can cover semantic structure, keyboard operation, focus behavior, contrast, labels, responsive behavior, and assistive technology considerations.' },
+    { question: 'How are content updates managed?', answer: 'Content workflows can use a suitable CMS, structured data source, or a controlled development process depending on the site’s publishing needs.' },
+  ],
+  '/services/digital-marketing': [
+    { question: 'What does a technical SEO engagement include?', answer: 'A technical engagement can review crawlability, indexation, metadata, canonicals, structured data, site architecture, internal links, performance, and measurement.' },
+    { question: 'How are B2B keywords selected?', answer: 'Keywords are selected by buyer intent, service fit, industry relevance, competition, geography, conversion value, and the evidence available in search data.' },
+    { question: 'How long does SEO take to show signals?', answer: 'Timing depends on technical health, competition, content quality, site history, authority, and publishing consistency. Early signals and qualified conversions should be monitored separately.' },
+    { question: 'How are leads attributed?', answer: 'Attribution can combine analytics events, form tracking, source data, CRM stages, and assisted-conversion reporting with clear privacy controls.' },
+    { question: 'Can SEO work with an existing website?', answer: 'Yes. An existing site can be audited and improved while preserving valuable URLs, functionality, brand design, and established search equity.' },
+  ],
+};

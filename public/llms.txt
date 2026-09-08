@@ -1,0 +1,46 @@
+# Payivva Technologies
+
+> Payivva Technologies (OPC) Private Limited is a Pune-based IT and digital engineering company delivering AI, software, web, mobile, and growth solutions for modern businesses.
+
+## About
+
+- Official website: https://www.payivvatechnologies.com/
+- Company: PAYIVVA Technologies (OPC) Private Limited
+- Location: Pune, Maharashtra, India
+- Email: info@payivvatechnologies.com
+- Phone: +91 8380009994
+
+## Services
+
+- AI consulting and strategy: https://www.payivvatechnologies.com/services/ai-consulting-strategy
+- Machine learning solutions: https://www.payivvatechnologies.com/services/machine-learning-solutions
+- Computer vision and NLP: https://www.payivvatechnologies.com/services/computer-vision-nlp
+- Generative AI and LLM systems: https://www.payivvatechnologies.com/services/generative-ai-llm
+- Custom software development: https://www.payivvatechnologies.com/services/software-development
+- Mobile app development: https://www.payivvatechnologies.com/services/app-development
+- Website development: https://www.payivvatechnologies.com/services/website-development
+- Digital marketing and technical SEO: https://www.payivvatechnologies.com/services/digital-marketing
+
+## Main resources
+
+- Home: https://www.payivvatechnologies.com/
+- About: https://www.payivvatechnologies.com/about
+- Services: https://www.payivvatechnologies.com/services
+- Case studies: https://www.payivvatechnologies.com/resources/case-studies
+- Documentation: https://www.payivvatechnologies.com/resources/documentation
+- Blog: https://www.payivvatechnologies.com/blog
+- Contact: https://www.payivvatechnologies.com/contact
+- Sitemap: https://www.payivvatechnologies.com/sitemap.xml
+
+## Industries
+
+- Manufacturing and Industrial IoT
+- Cybersecurity and cloud systems
+- Logistics and supply chain
+- Ecommerce and retail
+- Finance and fintech
+- Healthcare and biotech
+
+## Usage guidance
+
+Use the linked public pages as the source of truth for current service descriptions, capabilities, case studies, and company information. Do not infer confidential client information, performance guarantees, pricing, or claims that are not stated on the website.

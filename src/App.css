@@ -1,1 +1,116 @@
+.service-faq-section {
+	margin: 5rem auto 0;
+	padding: 4rem 0 1rem;
+}
+
+.service-faq-header {
+	max-width: 760px;
+	margin-bottom: 2rem;
+}
+
+.service-faq-header h2 {
+	margin: 0.75rem 0;
+	color: var(--text-primary);
+	font-family: var(--font-headings);
+	font-size: clamp(1.8rem, 4vw, 2.7rem);
+}
+
+.service-faq-header p {
+	max-width: 640px;
+	color: var(--text-secondary);
+	line-height: 1.7;
+}
+
+.service-faq-list {
+	display: grid;
+	gap: 0.75rem;
+	max-width: 920px;
+}
+
+.service-faq-item {
+	border: 1px solid rgba(148, 163, 184, 0.2);
+	border-radius: 10px;
+	background: rgba(15, 23, 42, 0.45);
+	overflow: hidden;
+}
+
+.service-faq-item summary {
+	cursor: pointer;
+	padding: 1.1rem 1.25rem;
+	color: var(--text-primary);
+	font-weight: 600;
+	list-style: none;
+}
+
+.service-faq-item summary::-webkit-details-marker {
+	display: none;
+}
+
+.service-faq-item summary::after {
+	content: '+';
+	float: right;
+	color: var(--color-teal);
+	font-size: 1.25rem;
+}
+
+.service-faq-item[open] summary::after {
+	content: '-';
+}
+
+.service-faq-item p {
+	margin: 0;
+	padding: 0 1.25rem 1.2rem;
+	color: var(--text-secondary);
+	line-height: 1.7;
+}
+
+.resource-links-section {
+	padding: 3rem 0 1rem;
+}
+
+.resource-links-kicker {
+	margin: 0 0 1rem;
+	color: var(--color-teal);
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+}
+
+.resource-links-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 1rem;
+}
+
+.resource-link-card {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	min-height: 64px;
+	padding: 1rem 1.1rem;
+	border: 1px solid rgba(148, 163, 184, 0.2);
+	border-radius: 10px;
+	color: var(--text-primary);
+	background: rgba(15, 23, 42, 0.35);
+	text-decoration: none;
+	transition: border-color 180ms ease, transform 180ms ease;
+}
+
+.resource-link-card:hover,
+.resource-link-card:focus-visible {
+	border-color: var(--color-teal);
+	transform: translateY(-2px);
+}
+
+.resource-link-card svg {
+	flex: 0 0 auto;
+	color: var(--color-teal);
+}
+
+@media (max-width: 720px) {
+	.resource-links-grid {
+		grid-template-columns: 1fr;
+	}
+}
 /* App-specific local styles (Overridden by index.css design system) */

@@ -10,7 +10,7 @@ const Digital_Marketing = () => {
         <div className="srv-hero-grid">
           <div>
             <span className="srv-badge">PERFORMANCE GROW</span>
-            <h1 className="srv-title">Data-Driven <span>Digital Marketing Solutions</span></h1>
+            <h1 className="srv-title">Digital Growth Systems for <span>Technology Companies</span></h1>
             <p className="srv-desc">
               Stop burning budgets on generic views. We deploy technical SEO hierarchies, cost-attribution setups, and optimized paid loops built specifically to capture enterprise client interest.
             </p>

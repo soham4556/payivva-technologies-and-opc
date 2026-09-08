@@ -1,7 +1,7 @@
 import {
-  Shield, Code2, Cpu, Database, BarChart, Layers, Globe, Zap, Clock, ArrowRight,
-  Sparkles, Users, Target, BadgeCheck, MapPin, Building2, Phone, Mail, CheckCircle2,
-  ExternalLink, HardHat, Factory, Flame, Camera, Compass, Quote, UserCheck, Briefcase
+  Shield, Code2, Cpu, BarChart, Globe, Clock, ArrowRight,
+  Sparkles, Target, BadgeCheck, MapPin, Building2, Phone, Mail, CheckCircle2,
+  Quote, UserCheck, ExternalLink, Factory
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './styles/About.css';
@@ -11,20 +11,6 @@ const LinkedInIcon = ({ size = 18 }) => (
     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
     <rect width="4" height="12" x="2" y="9" />
     <circle cx="4" cy="4" r="2" />
-  </svg>
-);
-
-const InstagramIcon = ({ size = 18 }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-  </svg>
-);
-
-const FacebookIcon = ({ size = 18 }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
   </svg>
 );
 
@@ -160,101 +146,20 @@ const About = () => {
       <section className="about-dual-division-section">
         <div className="about-container-premium">
           <div className="about-section-head text-center">
-            <span className="section-tag-modern-light">ONE COMPANY • DUAL CAPABILITY</span>
-            <h2 className="section-title-modern-light">Connecting Physical Infrastructure with Next-Gen Digital Intelligence</h2>
+            <span className="section-tag-modern-light">AI-LED DIGITAL ENGINEERING</span>
+            <h2 className="section-title-modern-light">Building Software and AI Systems for Modern Businesses</h2>
             <p className="section-desc">
-              PAYIVVA TECHNOLOGIES (OPC) PRIVATE LIMITED operates across two powerhouse divisions under a unified vision. Having established excellence in turnkey infrastructure engineering across Maharashtra, we expanded with our high-tech IT Department to power complete industrial and digital transformation.
+              PAYIVVA TECHNOLOGIES (OPC) PRIVATE LIMITED helps businesses turn complex technology goals into reliable digital products, intelligent automation, and measurable growth systems.
             </p>
           </div>
 
           <div className="dual-cards-grid">
 
-            {/* Card 1: Non-IT Division */}
-            <div className="dual-division-card card-non-it">
-              <div className="division-badge-row">
-                <span className="division-badge badge-non-it">
-                  <HardHat size={14} /> NON-IT INFRASTRUCTURE DIVISION
-                </span>
-                <span className="division-status-indicator">
-                  <CheckCircle2 size={14} /> Established Core Wing
-                </span>
-              </div>
-
-              <div className="division-header">
-                <div className="division-icon-box icon-box-non-it">
-                  <Factory size={28} />
-                </div>
-                <div className="division-heading-text">
-                  <h3>Infrastructure & Turnkey Engineering</h3>
-                  <span className="division-subheading">Turnkey Industrial Construction • MEP • Safety</span>
-                </div>
-              </div>
-
-              <p className="division-lead-text">
-                <strong>Payivva Technologies (OPC) PVT LTD</strong> is a premier Pune-based infrastructure engineering firm delivering turnkey industrial construction, MEP (Mechanical, Electrical, and Plumbing), fire safety, surveillance, and corporate interior solutions across Maharashtra.
-              </p>
-
-              <div className="division-services-block">
-                <span className="division-services-title">Core Non-IT Engineering Services</span>
-                <div className="division-service-item">
-                  <span className="bullet-dot"></span>
-                  <span>Turnkey Industrial Construction & Pre-Engineered Buildings (PEB)</span>
-                </div>
-                <div className="division-service-item">
-                  <span className="bullet-dot"></span>
-                  <span>MEP (Mechanical, Electrical, Plumbing) Solutions</span>
-                </div>
-                <div className="division-service-item">
-                  <span className="bullet-dot"></span>
-                  <span>Certified Fire Safety, Detection & Hydrant Protection Systems</span>
-                </div>
-                <div className="division-service-item">
-                  <span className="bullet-dot"></span>
-                  <span>Enterprise CCTV, Access Control & Surveillance Networks</span>
-                </div>
-                <div className="division-service-item">
-                  <span className="bullet-dot"></span>
-                  <span>Corporate Interiors & Executive Workspace Architecture</span>
-                </div>
-              </div>
-
-              <div className="division-links-wrapper">
-                <a
-                  href="https://www.payivvatechnologies.in/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="division-primary-btn btn-non-it-portal"
-                >
-                  Visit Official Infrastructure Website <ExternalLink size={16} />
-                </a>
-
-                <div className="division-social-row">
-                  <span className="division-social-label">Follow Non-IT Wing:</span>
-                  <a
-                    href="https://www.instagram.com/payivva_technologies_opcpvtltd/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="division-social-link social-link-instagram"
-                  >
-                    <InstagramIcon size={15} /> Instagram
-                  </a>
-                  <a
-                    href="https://www.facebook.com/payivvatechnologiespvtltd/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="division-social-link social-link-facebook"
-                  >
-                    <FacebookIcon size={15} /> Facebook
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Card 2: IT Department */}
+            {/* IT and AI capability card */}
             <div className="dual-division-card card-it">
               <div className="division-badge-row">
                 <span className="division-badge badge-it">
-                  <Cpu size={14} /> NEWLY EXPANDED IT DEPARTMENT
+                  <Cpu size={14} /> AI AND SOFTWARE ENGINEERING
                 </span>
                 <span className="division-status-indicator">
                   <Sparkles size={14} style={{ color: '#007cc3' }} /> Current Website Portal
@@ -272,7 +177,7 @@ const About = () => {
               </div>
 
               <p className="division-lead-text">
-                To empower modern enterprises across every digital touchpoint, we launched our dedicated <strong>IT Department</strong> alongside our established Non-IT infrastructure foundation. From high-speed web platforms, mobile apps, and custom software systems to data-driven digital marketing and autonomous Generative AI agent networks, we deliver end-to-end digital excellence under one corporate roof.
+                We help modern enterprises improve every digital touchpoint through high-speed web platforms, mobile apps, custom software systems, data-driven marketing, and autonomous Generative AI workflows.
               </p>
 
               <div className="division-services-block">
@@ -317,38 +222,6 @@ const About = () => {
               </div>
             </div>
 
-          </div>
-
-          {/* Convergence Synergy Box */}
-          <div className="synergy-bridge-box">
-            <div className="synergy-bridge-content">
-              <div>
-                <span className="synergy-tag">
-                  <Sparkles size={14} /> DUAL-FORCE ADVANTAGE
-                </span>
-                <h3 className="synergy-title">
-                  Why Physical Infrastructure & Digital Intelligence Belong Together
-                </h3>
-                <p className="synergy-desc">
-                  In modern Industry 4.0, physical facilities and digital software cannot exist in separate silos. A smart factory or corporate headquarters requires precision physical construction, MEP, fire safety, and surveillance, paired directly with high-performance web platforms, automated custom software, digital outreach, and sovereign AI models. <strong>PAYIVVA</strong> delivers both under single-source corporate accountability.
-                </p>
-              </div>
-
-              <div className="synergy-pills-col">
-                <div className="synergy-pill">
-                  <CheckCircle2 size={18} style={{ color: '#38bdf8', flexShrink: 0 }} />
-                  <span>Single-Source Corporate Accountability</span>
-                </div>
-                <div className="synergy-pill">
-                  <CheckCircle2 size={18} style={{ color: '#38bdf8', flexShrink: 0 }} />
-                  <span>Turnkey Physical Build to Complete Digital & AI Ecosystem</span>
-                </div>
-                <div className="synergy-pill">
-                  <CheckCircle2 size={18} style={{ color: '#38bdf8', flexShrink: 0 }} />
-                  <span>Unified Leadership & Uncompromised Quality</span>
-                </div>
-              </div>
-            </div>
           </div>
 
         </div>

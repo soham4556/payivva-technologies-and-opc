@@ -69,6 +69,37 @@ export function websiteSchema() {
   });
 }
 
+export function blogSchema() {
+  return stripUndefined({
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: 'PAYIVVA Tech Insights',
+    description: 'Engineering insights on AI, machine learning, cloud, software, IoT, cybersecurity, and digital transformation.',
+    url: absoluteUrl('/blog'),
+    publisher: {
+      '@type': 'Organization',
+      name: SITE.name,
+      url: SITE.url,
+    },
+    inLanguage: SITE.language,
+  });
+}
+
+export function collectionPageSchema({ name, description, path }) {
+  return stripUndefined({
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name,
+    description,
+    url: absoluteUrl(path),
+    isPartOf: {
+      '@type': 'WebSite',
+      name: SITE.name,
+      url: SITE.url,
+    },
+  });
+}
+
 export function breadcrumbSchema(items) {
   // items: [{ name, item }] where item is absolute URL
   return stripUndefined({

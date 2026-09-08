@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
@@ -83,6 +83,7 @@ function AppContent() {
             <Routes>
               {/* Primary Core Routes */}
               <Route path="/" element={<Home />} />
+              <Route path="/site" element={<Navigate to="/" replace />} />
               <Route path="/about" element={<About />} />
               <Route path="/services" element={<Services />} />
               <Route path="/careers" element={<Careers />} />

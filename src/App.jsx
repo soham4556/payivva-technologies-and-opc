@@ -33,7 +33,6 @@ const AppDevelopment = lazy(() => import('./pages/App_Development'));
 const WebsiteDevelopment = lazy(() => import('./pages/Website_Development'));
 const DigitalMarketing = lazy(() => import('./pages/Digital_Marketing'));
 const IndustryPage = lazy(() => import('./pages/IndustryPage'));
-const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Sleek dark glowing loading spinner for lazy fallback
 const PageLoader = () => (
@@ -114,11 +113,8 @@ function AppContent() {
               {/* Industry Detail Routes */}
               <Route path="/industries/:slug" element={<IndustryPage />} />
 
-              {/* Explicit 404 route (useful for crawlers/tools) */}
-              <Route path="/404" element={<NotFound />} />
-
-              {/* Catch-all */}
-              <Route path="*" element={<NotFound />} />
+              {/* Unknown routes return visitors to the homepage. */}
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </Suspense>
           {!isAdminRoute && <ServiceFaqs pathname={location.pathname} />}

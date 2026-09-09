@@ -1,3 +1,20 @@
+.skip-to-content {
+	position: fixed;
+	top: 0.75rem;
+	left: 0.75rem;
+	z-index: 1000;
+	padding: 0.7rem 1rem;
+	border-radius: 6px;
+	color: #ffffff;
+	background: #0f172a;
+	transform: translateY(-150%);
+	transition: transform 160ms ease;
+}
+
+.skip-to-content:focus {
+	transform: translateY(0);
+}
+
 .service-faq-section {
 	margin: 5rem auto 0;
 	padding: 4rem 0 1rem;

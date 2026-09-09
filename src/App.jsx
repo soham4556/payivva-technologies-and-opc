@@ -69,6 +69,8 @@ function AppContent() {
   return (
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'var(--bg-primary)' }}>
 
+        <a className="skip-to-content" href="#main">Skip to main content</a>
+
         {/* Route-level SEO (title, meta, canonical, JSON-LD) */}
         <RouteSeo />
         

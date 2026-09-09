@@ -210,7 +210,7 @@ const Home = () => {
 
               {/* Central Glowing AI Graphic Spotlight */}
               <div className="showcase-graphic-box">
-                <img src="/project_img/gen_ai_llm_one.png" alt="PAYIVVA Agentic AI Platform" className="hero-glowing-graphic" />
+                <img src="/project_img/gen_ai_llm_one.png" alt="PAYIVVA Agentic AI Platform" className="hero-glowing-graphic" width="1024" height="1024" loading="eager" fetchPriority="high" decoding="async" />
                 <div className="graphic-ambient-glow"></div>
                 
                 {/* Live Core Overlay Chip */}

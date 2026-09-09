@@ -6,6 +6,7 @@ import ScrollToTop from './components/ScrollToTop';
 import RouteSeo from './components/RouteSeo';
 import ServiceFaqs from './components/ServiceFaqs';
 import ResourceLinks from './components/ResourceLinks';
+import CookieBanner from './components/CookieBanner';
 import './App.css';
 
 // Lazy load page views for performance optimization
@@ -75,6 +76,7 @@ function AppContent() {
         <RouteSeo />
         
         {/* Navigation Shell */}
+        {!isAdminRoute && <CookieBanner />}
         {!isAdminRoute && <Navbar />}
 
         {/* Dynamic Route Container */}
